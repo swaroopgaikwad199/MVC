@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Label Designer";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+
+<script type="text/javascript" src="~/Content/designer/js/grid.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/designer.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/designer_propertyInspector.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/designer_toolbar.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/designer_labelInspector.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/labelControls/LabelSize.js"></script>
+
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/tools/rectangle.js"></script>
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/tools/text.js"></script>
+
+<script language="javascript" type="text/javascript" src="~/Content/designer/js/tools/twoD.js"></script>
+
+<script>
+			var canvasDesigner = null;
+            $(document).ready(function() {
+                canvasDesigner = new com.logicpartners.labelDesigner('labelDesigner', 6, 4);
+				canvasDesigner.labelInspector.addTool(new com.logicpartners.labelControl.size(canvasDesigner));
+				canvasDesigner.labelInspector.addTool(new com.logicpartners.labelControl.generatezpl(canvasDesigner));
+				canvasDesigner.toolbar.addTool(new com.logicpartners.designerTools.text());
+				canvasDesigner.toolbar.addTool(new com.logicpartners.designerTools.rectangle());
+				canvasDesigner.toolbar.addTool(new com.logicpartners.designerTools.barcode());
+				canvasDesigner.toolbar.addTool(new com.logicpartners.designerTools.image());
+				canvasDesigner.toolbar.addTool(new com.logicpartners.designerTools.twoD());
+                //canvasDesigner.addRectangle(50, 50, 300, 50);
+                //canvasDesigner.addRectangle(100, 100, 50, 50);
+
+            });
+            $(function () {
+                loadLabels();
+            });
+            
+</script>
+<script type="text/javascript" src="~/Content/designer/js/griddemo.js"></script>
+<h2> @TnT.LangResource.GlobalRes.LblLytDsgIndex </h2>
+<link rel="stylesheet" href="~/Content/designer/css/designer.css">
+<div id="canvasArea">
+    <canvas id="labelDesigner" tabindex="1" width="800" height="800" style="margin-left: 100px; margin-top: 50px; border: 1px solid #000000;"></canvas>
+
+</div>
+
+<button style="display:none;" id="showProgressBar" class="myBtn" type="button" data-toggle="modal" data-target="#modal-progress">test </button>
+<div class="modal fade" id="modal-progress">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@TnT.LangResource.GlobalRes.LblLytDsgZPLDesignerNewDesgn </h4>
+            </div>
+            <div class="modal-body">
+                <div id="CRefresh">
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="float:right">@TnT.LangResource.GlobalRes.JobsClosingBtnClose</button>
+
+                <button type="submit" onclick="validate();" class="btn btn-info">@TnT.LangResource.GlobalRes.cmnBtnConfirm</button>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function validate()
+    {
+        location.reload();
+    }
+
+    $(document).ready(function(){
+        $(".orientationCls option[value='portrait']").attr("selected", "selected");
+        $(".dpiCls option[value='203']").attr("selected", "selected");
+    });
+
+</script>

@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"203","Orientation":"portrait"},{"x":77,"y":63,"type":"label_text","name":"Textbox 1","text":"TEST LABEL","textType":"LabelText","fontSize":42,"fontType":"Arial","width":249.7646484375,"height":60}]}

@@ -1,0 +1,159 @@
+﻿@model TnT.Models.Job.LineLocation
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.LineLocationDelete  @Model.LocationCode
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","LineLocation")' class="btn btn-danger btn-icon icon-left">
+       @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+
+
+</h2>
+
+<h3>@TnT.LangResource.GlobalRes.LineLocationDeleteSure</h3>
+<div>
+    
+    <hr />
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocationCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayNameFor(model => model.LocationCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DivisionCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.DivisionCode)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PlantCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.PlantCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LineCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.LineCode)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LineIP, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.LineIP)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ServerName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.ServerName)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DBName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.DBName)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SQLUsername, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.SQLUsername)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SQLPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.SQLPassword)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReadGLN, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DisplayFor(model => model.ReadGLN)
+                      
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GLNExtension, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DisplayFor(model => model.GLNExtension)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.IsActive)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+
+                    <input type="submit" value="@TnT.LangResource.GlobalRes.LineLocationDelete" class="btn btn-info btn-default" /> 
+                    </div>
+
+                </div>
+                }
+            
+        </div>
+    </div>

@@ -1,0 +1,317 @@
+﻿@model TnT.Models.Reports.Jobs.RptUIDsViewModel
+@{
+    ViewBag.Title = "RptUIDChina";
+
+}
+
+
+
+<div class="container" id="rptLoaded">
+
+    @if (Model.GoodUID.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>
+    }
+    else
+    {
+        <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+        <style>
+            .scrollprint {
+                overflow-y: inherit;
+                max-height: none;
+            }
+
+            .tbFont {
+                font-size: 9px;
+            }
+
+            .tdWidth {
+                width: 30%;
+            }
+
+            .tdWidthBig {
+                width: 40%;
+            }
+
+            .tblWidth {
+                width: 100%;
+            }
+
+            .table1 {
+                width: 100%;
+                max-width: 100%;
+                background-color: transparent;
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+                .table1 > thead > tr > th, .table1 > tbody > tr > th, .table > tfoot > tr > th, .table1 > thead > tr > td, .table > tbody > tr > td, .table1 > tfoot > tr > td {
+                    padding: 2px;
+                    line-height: 1.42857143;
+                    vertical-align: middle;
+                }
+        </style>
+
+        <script>
+            $("#btnPrintRPT").show();
+        </script>
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>China UID List</b></h4>
+            @Html.HiddenFor(model => model.job.JID)
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px; font-size:14px; font-family: 'Courier New';">
+
+            <table class="tblWidth  @ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-4 tdWidthBig" style="border-top:none"><label>Date :</label><b> @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt")</b></td>
+                    <td style="border-top:none"></td>
+                    <td style="border-top:none"></td>
+
+                </tr>
+                <tr>
+                    <td class="col-md-4 tdWidthBig" style="border-top:none"><label>Customer :</label><b>@Html.DisplayFor(model => model.Customer)</b></td>
+                    <td style="border-top:none"></td>
+                    <td style="border-top:none"></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4" style="border-top:none"><label>Product Name :</label> <b>@Html.DisplayFor(model => model.product.Name)</b></td>
+                    <td class="col-md-5" style="border-top:none"><label>Product Code :</label><b> @Html.DisplayFor(model => model.product.ProductCode)</b></td>
+                    <td class="col-md-6" style="border-top:none"><label>WT No :</label><b></b></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4" style="border-top:none"><label>Invoice no :</label><b> </b></td>
+                    <td class="col-md-5" style="border-top:none"><label>Invoice Date :</label><b></b></td>
+                    <td class="col-md-6" style="border-top:none"></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4" style="border-top:none"><label>Job Name :</label> <b>@Html.DisplayFor(model => model.job.JobName)</b></td>
+                    <td class="col-md-5" style="border-top:none"><label>Batch No :</label><b> @Html.DisplayFor(model => model.job.BatchNo)</b></td>
+                    <td class="col-md-5" style="border-top:none"><label>Batch Qnt :</label><b> @Html.DisplayFor(model => model.job.Quantity)</b></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 2px; font-size:14px; font-family: 'Courier New';padding-bottom: 2px;">
+            <table class="tblWidth @ViewBag.tbFont">
+
+                <tr>
+                    <td class="col-md-4"><label>Qty to be Printed and Verified :</label> <b>@Html.DisplayFor(model => model.job.Quantity)</b></td>
+                    <td class="col-md-4"><label>Operator Name :</label> <b>@Html.DisplayFor(model => model.OperatorName)</b></td>
+
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>Good Count :</label> <b>@Html.DisplayFor(model => model.GoodUID.Count)</b></td>
+                    <td class="col-md-4"><label>Bad Count :</label> <b>@Html.DisplayFor(model => model.BadUID.Count)</b></td>
+
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>GOOD UIDs</b></h4>
+
+        </div>
+        <div class="row @ViewBag.tbFont scroll1 @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+
+            @if (Model.GoodUID != null)
+                {
+                <table class="table1 tblsspace  @ViewBag.tbFont" style="text-align: center; font-family: courier; font-size: 14px;">
+                    @for (int i = 0; i < Model.GoodUID.Count; i++)
+                    {
+                        <tr class="pgbreak">
+                            <td style="border-right:1px solid black;">@Model.GoodUID[i]</td>
+                            @if (i + 1 < Model.GoodUID.Count)
+                        {
+                                <td style="border-right:1px solid black;">@Model.GoodUID[i + 1]</td>
+                            }
+                            else
+                            {
+                                <td style="border-right:1px solid black;"></td>
+                            }
+                            @if (i + 2 < Model.GoodUID.Count)
+                        {
+                                <td style="border-right:1px solid black;">@Model.GoodUID[i + 2]</td>
+                            }
+                            else
+                            {
+                                <td style="border-right:1px solid black;"></td>
+                            }
+                            @if (i + 3 < Model.GoodUID.Count)
+                        {
+                                <td>@Model.GoodUID[i + 3]</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        </tr>
+                        i = i + 3;
+                    }
+
+
+                </table>
+            }
+
+
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>BAD UIDs</b></h4>
+
+        </div>
+        <div class="row @ViewBag.tbFont scroll1 @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+
+
+
+            @if (Model.BadUID.Count>0)
+            {
+                <table class="table1 tblsspace  @ViewBag.tbFont" style="text-align: center; font-family: courier; font-size: 14px;">
+
+                    @for (int j = 0; j < Model.BadUID.Count; j++)
+                    {
+                        <tr class="pgbreak">
+                            <td style="border-right:1px solid black;">@Model.BadUID[j]</td>
+                            @if (j + 1 < Model.BadUID.Count)
+                            {
+                                <td style="border-right:1px solid black;">@Model.BadUID[j + 1]</td>
+                            }
+                            else
+                            {
+                                <td style="border-right:1px solid black;"></td>
+                            }
+                            @if (j + 2 < Model.BadUID.Count)
+                            {
+                                <td style="border-right:1px solid black;">@Model.BadUID[j + 2]</td>
+                            }
+                            else
+                            {
+                                <td style="border-right:1px solid black;"></td>
+                            }
+                            @if (j + 3 < Model.BadUID.Count)
+                            {
+                                <td>@Model.BadUID[j + 3]</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        </tr>
+                        j = j + 3;
+                    }
+
+
+                </table>
+            }
+            else
+            {
+                <b style="margin-left:10px;">NA</b>
+            }
+            </div>
+            <div style="border: 1px solid;margin: 10px;padding-top: 9px; font-family: 'Courier New'; font-size:14px;">
+                <table style="width:100%;" class="@ViewBag.tbFont">
+                    <tr class="pgbreak">
+                        <td style="width:50%; padding-left:10px;padding-bottom:5px;">
+                            Generated By: @Model.UserName
+
+                        </td>
+                        <td style="padding-left:35%;padding-bottom:5px;">
+                            @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                        </td>
+                    </tr>
+                </table>
+            </div>
+                if (ViewBag.scrollprint == null)
+                {
+
+                    <br />
+
+                    <div style="text-align:center;">
+                        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                            @TnT.LangResource.GlobalRes.cmnBtnClose
+                            <i class="entypo-cancel"></i>
+                        </button>
+                        @Html.ActionLink("Generate Pdf", "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFUidListChina" })
+                    </div>
+
+                }
+            }
+        </div>
+
+
+        <script>
+    $(document).on("click", "#btnGenaratePDFUidListChina", function (e) {
+
+        e.preventDefault();
+        var lvl ="MOC"
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var level;
+
+        if (lvl != "Select") {
+            if (currentLvl == lvl) {
+                level = $("#Packinglevel").val().trim();
+            }
+            else {
+                level = 'MOC';
+            }
+        }
+        else {
+            level = 'MOC';
+        }
+        debugger;
+        var newUrl = "@Url.Action("genePDFUidListChina", "Reports")?JID=" + $("#job_JID").val() + "&Level=" + level;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+    $("#Packinglevel").change(function () {
+        var existingLVL = $("#Packinglevel").val();
+        $(".loading").show();
+        var currentLvl = $("#lblDecklvl").html().trim();
+        var lvl = $("#Packinglevel").val().trim();
+
+        if (lvl != "Select") {
+            if (currentLvl != lvl) {
+                var jobId = $("#job_JID").val();
+                $.ajax({
+
+                    url: 'getUIDListChina',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JID": jobId, "lvl": lvl },
+                    success: function (data) {
+                        $(".loading").hide();
+                        if (data == "No Data") {
+                            data = '<h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>';
+                            $("#btnPrintRPT").hide();
+                            $('#rptLoaded').html(data);
+                        }
+                        else {
+                            $("#btnPrintRPT").show();
+                            $('#rptLoaded').html(data);
+                        }
+                        $('#Packinglevel option[value=' + existingLVL + ']').attr('selected', 'selected');
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            }
+
+        }
+
+    });
+
+    $(document).ready(function () {
+        $("#Packinglevel").val('MOC');
+
+    });
+        </script>
+
+

@@ -1,0 +1,40 @@
+﻿@model TnT.Models.ImportXml.ModelViewXmlUIDList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+
+<div>
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("CreateXmlUIDList", "ImportXml")' class="btn btn-info btn-icon icon-left">
+       Create XML For UID List
+        <i class="fa fa-server"></i>
+    </a>
+    <h2>South Korea Xml Import For Serial Number Series</h2>
+    @using (Html.BeginForm("Index", "ImportXml", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="row">
+            <div class="form-group">
+                
+                @Html.Label("Select File:", htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKSelectFile, @data_original_title = "Field Information" })
+                <div class="col-sm-5">
+                    <input type="file" name="postedFile" />
+                </div>
+
+
+            </div>
+        </div>
+
+            <input type="submit" value="Upload" class="btn btn-info btn-default" />
+    }
+  
+   
+
+
+</div>
+
+
+
+

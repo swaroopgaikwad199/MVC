@@ -1,0 +1,190 @@
+﻿@model IEnumerable<TnT.Models.SettingsNUtility.RestoreDb>
+
+@{
+    ViewBag.Title = "VerifyRestoreDb";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.SettingVrifyRestoreDbs</h2>
+
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+
+                <td>
+                    <div class="btn-group">
+
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" id="@item.ReqID" onclick="verify(@item.ReqID)">
+                            @TnT.LangResource.GlobalRes.JobCreateAdditionalBatchQnty
+                        </button>
+
+                    </div>
+                </td>
+            </tr>
+        }
+
+</table>
+<div class="modal fade" id="modal-progress">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border: 2px solid #F44336;">
+            <div class="modal-body" id="prgModalBody" style="height: 250px">
+
+                <div id="modal-progres" class="col-md-12" style="text-align: left;margin-top: 13px;color: #000;font-size: 20px;">
+                    <div class="panel-body">
+                        <h3 style="text-align:center;"><label for="a" id="txtStatus1">@TnT.LangResource.GlobalRes.SettingDbResotrinProcess</label>  </h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5><span id="PBStatus">  </span>  </h5>
+                                <div class="progress progress-striped active" style="border: 1px solid #ccc;">
+                                    <div class="progress-bar progress-bar-danger" id="progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        <span class="sr-only">@TnT.LangResource.GlobalRes.JobBatchManager40PerComp</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row text-center">
+                            <h6> @TnT.LangResource.GlobalRes.MsgDataBaseBackupWait</h6>
+                        </div>
+                    </div>
+                    <div id="SuccesMsg">
+                        <div class="row text-center" style="padding-left:15px">
+                            <h2><span id="SMsg"></span></h2>
+                        </div>
+                        <div class="row text-center" style="padding-left:15px; padding-top:10px">
+                            <input id="BtnClose" type="button" value="@TnT.LangResource.GlobalRes.cmnBtnClose" class="btn btn-info btn-default" style="width:150px; height:30px;" />
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<button style="display:none;" id="showProgressBar" class="myBtn" type="button" data-toggle="modal" data-target="#modal-progress">test </button>
+<script src="~/scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+    var reqid;
+    function verify(ReqID) {
+        debugger;
+           $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+                $("#showDigitalBx").trigger("click");
+        reqid = ReqID;
+
+    }
+
+    function postData() {
+
+        $('#prgModalBody').css("height", "250px");
+        $('.panel-body').show();
+        $("#showProgressBar").trigger("click");
+        $("#SuccesMsg").hide();
+        $.ajax({
+            url: 'VerifyRestoreDB',
+            type: "POST",
+            dataType: 'json',
+            data: { "reqid": reqid },
+            success: function (data) {
+                if (data == true) {
+
+                }
+                else {
+                    $('#SMsg').html("@TnT.LangResource.GlobalRes.toastrDatabaseConnectionLost");
+                    $('.panel-body').hide();
+                    $('#prgModalBody').css("height", "158px");
+                    $('#SuccesMsg').show();
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    }
+    var final = "";
+    (function () {
+
+        updatePB(0, 0);
+        var progressNotifier = $.connection.progressHub;
+
+        progressNotifier.client.sendMessageToPage = function (message, count, batchProg) {
+
+            UpdateProgress(message, count, batchProg);
+        };
+
+        $.connection.hub.start().done(function () {
+
+            progressNotifier.server.GetCountAndMessage2();
+
+        });
+    }());
+
+    function UpdateProgress(message, count, batchProg) {
+
+        // get status div
+        var status = $("#PBStatus");
+        // set message
+        status.html(message);
+        // get progress bar
+        //if (count > 0) {
+        //    $('.progress').show();
+        //}
+
+        updatePB(count, batchProg);
+        //$('.progress-bar').css('width', count + '%').attr('aria-valuenow', count);
+        //$('.progress-bar').html(count + '%');
+
+    }
+
+    function updatePB(DVal, MVal) {
+
+        var nVal = DVal;
+        var kVal = MVal;
+
+        if (nVal <= 100) {
+
+            $('#progressbar').removeAttr('style');
+            $('#progressbar').css("width", nVal + "%");
+        }
+
+        if (nVal == 100) {
+            debugger;
+            $('#SMsg').html("@TnT.LangResource.GlobalRes.SettingDbResoreSuccessfuly");
+            $('.panel-body').hide();
+            $('#prgModalBody').css("height", "158px");
+            $('#SuccesMsg').show();
+        }
+
+    }
+
+    $('#BtnClose').click(function () {
+        $("#showProgressBar").trigger("click");
+    });
+</script>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5dfa14d7-7569-486e-9b42-74ae13d9f90b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="file:///E:/RFX/WSDL/MessagingService-DotNet.wsdl" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ApiCore.xsd" MetadataType="Schema" ID="1c3330de-5e68-4b1e-bbdb-4b18a31baaa0" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/ApiCore.xsd" />
+    <MetadataFile FileName="MessagingService.xsd" MetadataType="Schema" ID="08a68a1a-5dad-46b2-adee-ae14a7bae1d5" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/MessagingService.xsd" />
+    <MetadataFile FileName="xmlmime.xsd" MetadataType="Schema" ID="564fbbf8-579e-45bd-85d7-4fabd71da783" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/xmlmime.xsd" />
+    <MetadataFile FileName="xml.xsd" MetadataType="Schema" ID="e6ea17ea-7ec5-4f7a-a73b-554caedff05d" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/xml.xsd" />
+    <MetadataFile FileName="Core.xsd" MetadataType="Schema" ID="2777acdc-ad8c-416d-ae1a-bd87bc052251" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/Core.xsd" />
+    <MetadataFile FileName="MessagingService.wsdl" MetadataType="Wsdl" ID="21ab5d74-b76a-4464-a573-b09dde55e7a9" SourceId="1" SourceUrl="file:///E:/RFX/WSDL/MessagingService-DotNet.wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TnT.Models.SettingsNUtility.Roles>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<h2>
+    @TnT.LangResource.GlobalRes.RolesIndex
+
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("CreateVM","Roles")' class="btn btn-info btn-icon icon-left">
+      @TnT.LangResource.GlobalRes.RolesIndexBtnCreate
+        <i class="fa fa-server"></i>
+    </a>
+
+
+</h2>
+
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Roles_Name)
+            </th>
+
+            <th>@TnT.LangResource.GlobalRes.JobsIndexAction</th>
+            <th>@TnT.LangResource.GlobalRes.RolesIndexIsActive</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles_Name)
+                </td>
+
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                            @TnT.LangResource.GlobalRes.RolesIndexAction <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexEdit" href='@Url.Action("Edit","Roles",  new {id = item.ID})'> <i class="entypo-pencil"></i> @TnT.LangResource.GlobalRes.SOMIndexEdit</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    @*@Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+                </td>
+                <td>
+                    @if (User.roles != item.ID)
+                    {
+                        if (item.IsActive)
+                        {
+                            @Html.ActionLink("Active", "Activation", new { id = item.ID })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Deactivate", "Activation", new { id = item.ID })
+                        }
+                    }
+               
+
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

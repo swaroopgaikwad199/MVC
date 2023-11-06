@@ -1,0 +1,122 @@
+﻿@model TnT.Models.Reports.Products.ProductDetailsViewModel
+
+<style>
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border: 1px solid #bbb;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 2px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #bbb;
+    }
+      .pgbreak {
+                page-break-inside: avoid;
+            }
+       .scrollprint {
+            overflow-y: inherit;
+            max-height: none;
+        }
+       .scrollPCTable {
+    overflow-y: auto;
+    max-height: 500px;
+}
+        .tbFont {
+                font-size: 9px;
+            }
+
+</style>
+<link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+<div class="container" id="rptLoaded" >
+    <div class="row" style="border: 1px solid; margin:10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptProductDetailsReport</b></h4>
+    </div>
+
+    <div class="row scrollPCTable @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px; padding-left:1px;font-family: 'Courier New';">
+        <table class="table table-bordered @ViewBag.tbFont" style="text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                    <td style="text-align: left;">@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.JobsProductCode</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnDeck</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnProductGTIN</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.JobsMRP</td>
+                </tr>
+            <tbody>   
+				@{
+                    int counter = 0;
+                }
+                @foreach (var item in Model.Products)
+                {
+                    var availablelvls = Model.ProductDetails.Where(p => p.PAID == item.PAID);
+                    int Lvlcount = availablelvls.Count() + 1;
+                    int index = Model.Products.FindIndex(p => p.PAID == item.PAID);
+                    if (index == 0) { index = 1; }
+					counter++;
+                    if (availablelvls.Count() != 0)
+                    {
+                        <tr>
+                            <td rowspan="@Lvlcount">@counter</td>
+                            <td rowspan="@Lvlcount" style="text-align: left;">@item.Name</td>
+                            <td rowspan="@Lvlcount" >@item.ProductCode</td>
+                        </tr>
+                        foreach (var lvl in availablelvls)
+                        {
+                            <tr class="pgbreak">
+                                <td> @lvl.PackageTypeCode </td>
+                                <td>@lvl.GTIN </td>
+                                <td> @Convert.ToInt32(lvl.MRP)</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                     @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="padding-left:35%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+
+@if (ViewBag.scrollprint == null)
+{
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFProductDetails" })
+    </div>
+}
+</div>	
+
+
+<script>
+    $(document).on("click", "#btnGenaratePDFProductDetails", function (e) {
+
+        e.preventDefault();
+     
+        var newUrl = "@Url.Action("genePDFProductDetails", "Reports")";
+ 
+        window.location.href = newUrl;
+
+    });
+</script>

@@ -1,0 +1,192 @@
+﻿@model TnT.Models.Reports.Jobs.RptSummaryViewModel
+@*Report Summary *@
+<div class="container" id="rptLoaded">
+    @if (Model.JobInfo.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>
+    }
+    else
+    {
+        <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+        <style>
+            /*@@media print {*/
+            .scrollprint {
+                overflow-y: inherit;
+                max-height: none;
+            }
+            /*}*/
+            .tbFont {
+                font-size: 9px;
+            }
+
+            .tdWidth {
+                width: 30%;
+            }
+
+            .tdWidthBig {
+                width: 40%;
+            }
+
+            .tblWidth {
+                width: 100%;
+            }
+
+            .pgbreak {
+                page-break-inside: avoid;
+            }
+        </style>
+        <script>
+            $("#btnPrintRPT").show();
+        </script>
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center; padding-bottom:5px;">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptBatchSummary</b></h4>
+        </div>
+        foreach (var jb in Model.JobInfo)
+        {
+            <div class="row pgbreak  @ViewBag.tbFont rptBox @ViewBag.rptPdfBox " style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+
+                <table style="width: 100%;" class="@ViewBag.tbFont">
+                    <tr>
+                        <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.ReportsJobsBatchesPONumber:</label><b> @jb.Job.JobName</b></td>
+                        <td><label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo:</label><b>  @jb.Job.BatchNo</b> <br /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName  :</label><b>  @jb.jb.JD_ProdName</b></td>
+                        <td><label>@TnT.LangResource.GlobalRes.RptcmnProductGTIN :</label><b>  @jb.GTIN</b><br /></td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4" style="width:40%"><label>@TnT.LangResource.GlobalRes.RptcmnMFGDate :</label><b>  @jb.Job.MfgDate.ToString("dd/MM/yyyy")</b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.JobsProductCode:</label><b> @jb.jb.JD_ProdCode </b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.JobsBatchQuantity :</label><b>  @jb.Job.Quantity</b></td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4" style="width:40%"><label>@TnT.LangResource.GlobalRes.RptcmnGoodItems :</label><b>  @jb.GoodCount</b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.RptcmnEXPDate :</label><b> @jb.Job.ExpDate.ToString("dd/MM/yyyy")</b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.RptcmnTotalItems :</label><b>  @{ var tot = jb.GoodCount + jb.BadCount;  } @tot</b></td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4" style="width:40%"><label>@TnT.LangResource.GlobalRes.ProductDescription :</label><b>  @jb.product.Description</b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.RptcmnBadItems :</label><b> @jb.BadCount</b></td>
+                        <td style="width:30%"><label>@TnT.LangResource.GlobalRes.RptcmnDeck:</label> <label id="lblDecklvl"><b> @jb.DECK</b></label></td>
+                    </tr>
+                </table>
+            </div>
+
+                            }
+                            <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+                                <table style="width:100%;" class="@ViewBag.tbFont">
+                                    <tr>
+                                        <td style="width:50%; padding-left:10px;">
+                                            @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.Username
+
+                                        </td>
+                                        <td style="padding-left:35%">
+                                            @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            if (ViewBag.scrollprint == null)
+                            {
+                                <div style="text-align:center;padding-top: 2%;">
+                                    @Html.DropDownListFor(x => x.Packinglevel, Model.Packaginlevels)
+                                </div>
+                                <br />
+
+                                <div style="text-align:center">
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                                        @TnT.LangResource.GlobalRes.cmnBtnClose
+                                        <i class="entypo-cancel"></i>
+                                    </button>
+                                    @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFSummary" })
+                                </div>
+                                }
+                            }
+</div>
+
+
+
+<script>
+    $("#Packinglevel").change(function () {
+        var existingLVL = $("#Packinglevel").val();
+        $(".loading").show();
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var lvl = $("#Packinglevel").val().trim();
+
+        var FromDate = $('#JobFromCreatedDate').datepicker().val();
+        var ToDate = $('#JobToCreatedDate').datepicker().val();
+        
+        if (lvl != "Select") {
+            if (currentLvl != lvl) {
+                var jobId = $("#job_JID").val();
+                $.ajax({
+
+                    url: 'getSummaryReportAccLvl',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "FromDate": FromDate, "ToDate": ToDate, "Level": lvl },
+                    success: function (data) {
+                        $(".loading").hide();
+                        if (data == "No Data") {
+                            data = '<h3 style="text-align:center; padding-bottom: 50px;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>';
+                            @*$('#modal-msg').html('@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble ');
+                            $("#showMSGBx").trigger("click");*@
+                            $("#btnPrintRPT").hide();
+                            $('#rptLoaded').html(data);
+                        }
+                        else {
+                            $("#btnPrintRPT").show();
+                            $('#rptLoaded').html(data);
+                        }
+                        $('#Packinglevel option[value=' + existingLVL + ']').attr('selected', 'selected');
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+            }
+
+        }
+
+    });
+
+    $(document).on("click", "#btnGenaratePDFSummary", function (e) {
+
+        e.preventDefault();
+        var lvl = $("#Packinglevel").val().trim();
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var level;
+
+        if (lvl != "Select") {
+            if (currentLvl == lvl) {
+                level = $("#Packinglevel").val().trim();
+            }
+            else {
+                level = 'MOC';
+            }
+        }
+        else {
+            level = 'MOC';
+        }
+
+        var FromDate = $('#JobFromCreatedDate').datepicker().val();
+        var ToDate = $('#JobToCreatedDate').datepicker().val();
+
+        var newUrl = "@Url.Action("genePDFSummary", "Reports")?FromDate=" + FromDate + "&ToDate=" + ToDate + "&Level=" + level;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+    $(document).ready(function () {
+        $("#Packinglevel").val('MOC');
+    });
+</script>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Transfer";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.TRacerTransfer</h2>
+<hr />
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.Label(@TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.DropDownList("JID", new SelectList(ViewBag.Jobs, "JID", "BatchNo"), TnT.LangResource.GlobalRes.JobCreateDrpType, new { @class = "form-control", @validate = "true" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-blue" > @TnT.LangResource.GlobalRes.TRacerTransfer</button>
+}

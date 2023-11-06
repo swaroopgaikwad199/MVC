@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TnT.Models.AdditionBatchQty.AdditionBatchQty>
+
+@{
+    ViewBag.Title = "VerifyAdditionBatchQty";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+
+    @if (User.permissions.Contains("Create Additional Batch Quantity"))
+    {
+        <a style="float: right; margin-right: 5px;" href='@Url.Action("CreateAdditionBatchQty", "Jobs")' class="btn btn-info btn-icon icon-left">
+            @TnT.LangResource.GlobalRes.JobVerifyAddBatchQtyReq
+            <i class="fa fa-server"></i>
+        </a>
+
+    }
+</h2>
+<div style="margin-top:10px">
+    <table class="table table-bordered datatable" id="table-1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.jb.JobName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrentBatchQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequiredBatchQty)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.LineCode)
+                </th>
+                @if (User.permissions.Contains("Verify Additional Batch Quantity"))
+                {
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jb.JobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentBatchQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredBatchQty)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LineCode)
+                </td>
+                @if (User.permissions.Contains("Verify Additional Batch Quantity"))
+                {
+                    <td>
+                        <div class="btn-group">
+
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" id="@item.JID" onclick="verify(@item.JID)">
+                               @TnT.LangResource.GlobalRes.JobCreateAdditionalBatchQnty
+                            </button>
+
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+<script>
+    var jobid;
+    function verify(jid) {
+
+        $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+        $("#showDigitalBx").trigger("click");
+        jobid = jid;
+
+    }
+    function postData() {
+        $(".loading").show();
+        var jid = jobid;
+        $.ajax({
+            url: 'ExtraUidRequest',
+            type: "POST",
+            dataType: 'json',
+            data: { "jid": jid },
+            success: function (data) {
+                debugger;
+               toastr.warning(data);
+                $(".loading").hide();
+                location.reload();
+            }
+        });
+
+    }
+</script>

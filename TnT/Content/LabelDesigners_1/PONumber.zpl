@@ -1,0 +1,10 @@
+^XA
+^CFd0,10,18
+^PR12
+^LRY
+^MD30
+^PW1830
+^LL1220
+^PON
+^FO246,228^A0N,58,57^FH^FD{{LabelText||PONumber}}^FS^PQ1
+^XZ

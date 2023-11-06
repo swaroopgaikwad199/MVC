@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"203","Orientation":"portrait"},{"x":27,"y":23,"type":"label_text","name":"Textbox 1","text":"adsfa sdsadf sadf sadf sadf sadf sadf sadf sadf sadfasdfsadf ","textType":"LabelText","fontSize":14,"fontType":"Arial","width":400,"height":37,"lineSpacing":24}]}

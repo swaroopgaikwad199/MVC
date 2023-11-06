@@ -1,0 +1,209 @@
+﻿@model TnT.Models.EPCIS.M_EPCISReceiver
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.cmnDetailsOf @Model.CompanyName
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("EPCISReceiver","EPCIS")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+
+
+
+</h2>
+
+<div>
+  
+    <hr />
+    <div class="dl-horizontal">
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisCompanyName, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.CompanyName)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisCountry, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.M_Country.CountryName)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisStateOrRegion, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.M_State.StateName)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisCity, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.City)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Street1, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisStreet1, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.Street1)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Street2, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisStreet1, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.Street2)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.street3, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisStreet1, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.street3)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.site, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisSite, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.site)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.latitude, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisLatitude, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.latitude)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.logitude, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisLongitude, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.logitude)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisPostalCode, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.PostalCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GLN, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisGLN, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.GLN)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.Label("Extension GLN", htmlAttributes: new { @class = "control -label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisCountryCode, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.Extension)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.countryCode, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEpcisCountryCode, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.countryCode)
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.IsActive)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display:none">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="PostalCode">@Html.DisplayNameFor(model => model.CreatedBy)</label>
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="PostalCode">@Html.DisplayNameFor(model => model.ModifiedBy)</label>
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="row" style="display:none">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="PostalCode">@Html.DisplayNameFor(model => model.CreatedOn)</label>
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.CreatedOn)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="PostalCode">@Html.DisplayNameFor(model => model.LastModified)</label>
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.LastModified)
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        </div>
+
+
+
+
+
+      
+
+    
+    </div>

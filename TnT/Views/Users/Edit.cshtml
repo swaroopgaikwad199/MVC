@@ -1,0 +1,264 @@
+﻿@model TnT.Models.Account.Users
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.UsersEdit
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","Users")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+
+
+
+</h2>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @id = "frmUser" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="frmUsr">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.UserName)
+        @Html.HiddenFor(model => model.UserName1)
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.UserName1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @required = "true"} })
+                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.OldPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipUserPassword, @data_original_title = "Field Information" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @required = "true", @onchange = "updateELEM(this);", @maxlength = "16" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipUserConfirmPassword, @data_original_title = "Field Information" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @required = "true", @onchange = "updateELEM(this);", @maxlength = "16" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnSubmit" class="btn btn-info" value="@TnT.LangResource.GlobalRes.UsersChangePassword" onclick="return Validate()" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<script>
+    $("#Email").blur(function () {
+        var customerEmail = $("#Email").val();
+
+        if (!isValidEmailAddress(customerEmail)) {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreatevalidemail");
+            $("#Email").val("");
+            $("#Email").css("border", "red 1px solid");
+        } else {
+            $("#Email").css("border", "green 1px solid");
+        }
+
+    });
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    };
+    var exUser = "";
+    exUser = $('#UserName').val();
+    $("#btnSubmit").click(function () {
+        var EmailId = $("#EmailId").val();
+        var Password = $("#Password").val();
+        var ConfirmPassword = $("#ConfirmPassword").val();
+        //var EmailId = $("#Email").val();
+        var msgPOST = "";
+
+        if (Password == "") {
+            showMessage("Password", "@TnT.LangResource.GlobalRes.showMessageSetPasswordProvidePassword");
+            msgPOST += "@TnT.LangResource.GlobalRes.showMessageSetPasswordProvidePassword";
+        } else {
+            clearColor("Password");
+        }
+        if (ConfirmPassword == "") {
+            showMessage("ConfirmPassword", "@TnT.LangResource.GlobalRes.showMessageSetPasswordConfirmPassword")
+            msgPOST += "@TnT.LangResource.GlobalRes.showMessageSetPasswordConfirmPassword";
+        } else {
+            clearColor("ConfirmPassword");
+        }
+        if (EmailId == "") {
+            showMessage("EmailId", "@TnT.LangResource.GlobalRes.ToolTipEPCISEmailId");
+            msgPOST += "@TnT.LangResource.GlobalRes.ToolTipEPCISEmailId";
+        } else {
+            if (!isValidEmailAddress(EmailId)) {
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreatevalidemail");
+                $("#EmailId").val("");
+                $("#EmailId").css("border", "red 1px solid");
+            } else {
+                $("#EmailId").css("border", "green 1px solid");
+            }
+            //clearColor("EmailId");
+        }
+
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+    $("#Password").change(function () {
+        var Password = $("#Password").val();
+        var pwdmax = '@ViewData["maxpwd"]';
+        var pwdmin = '@ViewData["minpwd"]';
+        var passMSG = "";
+
+        //validate letter
+        if (!(Password.match(/[a-z]/))) {
+            passMSG += "@TnT.LangResource.GlobalRes.passMessageSetPasswordValidateLetter.";
+        }
+
+        //validate capital letter
+        if (!(Password.match(/[A-Z]/))) {
+            passMSG += "@TnT.LangResource.GlobalRes.passMessageSetPasswordCapitalLetter.";
+        }
+
+        //validate number
+        if (!(Password.match(/\d/))) {
+            passMSG += "@TnT.LangResource.GlobalRes.passMessageSetPasswordCapitalNumber.";
+        }
+
+        //validate number
+        if (!(Password.match(/[^\w\s]/))) {
+            passMSG += "@TnT.LangResource.GlobalRes.passMessageSetPasswordSpetialCharacter.";
+        }
+
+        if (Password.length < pwdmin || Password.length > pwdmax) {
+            passMSG += "@TnT.LangResource.GlobalRes.passMessageSetPasswordNeedsMin " + pwdmin + " @TnT.LangResource.GlobalRes.passMessageSetPasswordcharacters.";
+        }
+
+
+        if (passMSG != "") {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrSetPasswordNeedscombination1 " + pwdmin + " @TnT.LangResource.GlobalRes.toastrSetPasswordNeedscombination2.");
+            $("#Password").val('');
+            $("#Password").focus();
+            $("#Password").css("border", "red 1px solid");
+            return false;
+        }
+
+    });
+    $("#ConfirmPassword").change(function () {
+        var Password = $("#Password").val();
+        var ConfirmPassword = $("#ConfirmPassword").val();
+        if (Password != ConfirmPassword) {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrUsersCreatePwsNotMatcging.");
+            $("#ConfirmPassword").val("");
+            $("#ConfirmPassword").css("border", "red 1px solid");
+            return false;
+        }
+    });
+
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function updateELEM(obj) {
+        if (obj.value != "") {
+            $("#" + obj.id).css("border", "green 1px solid");
+        }
+    }
+    function formSubmit() {
+        document.getElementById("frmUser").submit();
+
+    }
+
+    $('#UserName').change(function () {
+        var UserName = $('#UserName').val();
+        if (exUser != UserName) {
+
+            $.ajax({
+                url: '../IsUserExisting',
+                type: "POST",
+                dataType: 'json',
+                data: { "UserID": UserName },
+                success: function (data) {
+                    if (data == true) {
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrUsersCreateAlredyExist.");
+                        $("#UserName").css("border", "red 1px solid");
+                        $("#UserName").val("");
+
+
+                    } else {
+                        $("#UserName").css("border", "green 1px solid");
+
+
+                    }
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        } else {
+            $("#UserName").css("border", "green 1px solid");
+        }
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#frmUsr input[type=password]').val("");
+    });
+</script>
+
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("Password").value;
+        var confirmPassword = document.getElementById("ConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("@TnT.LangResource.GlobalRes.toastrSettingChgPwdnotMatch.");
+            return false;
+        }
+        return true;
+    }
+</script>

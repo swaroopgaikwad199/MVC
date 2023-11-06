@@ -1,0 +1,3552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmnBtnLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="cmnMenuItemBatchMaster" xml:space="preserve">
+    <value>Batch Master</value>
+  </data>
+  <data name="cmnMenuItemBatchMasterSubItemBatches" xml:space="preserve">
+    <value>Batches</value>
+  </data>
+  <data name="cmnMenuItemBatchMasterSubItemCloseBatch" xml:space="preserve">
+    <value>Close Batch</value>
+  </data>
+  <data name="cmnMenuItemBatchMasterSubItemManageBatches" xml:space="preserve">
+    <value>Manage Batches</value>
+  </data>
+  <data name="cmnMenuItemBatchMasterSubItemVerifyBatch" xml:space="preserve">
+    <value>Verify Batch</value>
+  </data>
+  <data name="cmnMenuItemBatchMasterSubItemViewDecomBatches" xml:space="preserve">
+    <value>View Decommisioned Batches</value>
+  </data>
+  <data name="cmnMenuItemDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="cmnMenuItemDAVA" xml:space="preserve">
+    <value>DAVA</value>
+  </data>
+  <data name="cmnMenuItemDAVAGenrt" xml:space="preserve">
+    <value>Generate DAVA </value>
+  </data>
+  <data name="cmnMenuItemDAVAViewRegen" xml:space="preserve">
+    <value>View &amp; Regenerate DAVA</value>
+  </data>
+  <data name="cmnMenuItemLineExecution" xml:space="preserve">
+    <value>Line Execution</value>
+  </data>
+  <data name="cmnMenuItemProductMaster" xml:space="preserve">
+    <value>Product Master</value>
+  </data>
+  <data name="cmnMenuItemProductMasterSubItemImportProducts" xml:space="preserve">
+    <value>Import Products</value>
+  </data>
+  <data name="cmnMenuItemProductMasterSubItemProducts" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="cmnMenuItemProductMasterSubItemVerifyProducts" xml:space="preserve">
+    <value>Verify Product</value>
+  </data>
+  <data name="cmnMenuItemRpts" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="cmnMenuItemRptsAuditTrls" xml:space="preserve">
+    <value>Audit Trails</value>
+  </data>
+  <data name="cmnMenuItemRptsBatchs" xml:space="preserve">
+    <value>Batch Reports</value>
+  </data>
+  <data name="cmnMenuItemRptsProds" xml:space="preserve">
+    <value>Product Details</value>
+  </data>
+  <data name="cmnMenuItemSetNUtil" xml:space="preserve">
+    <value>Settings &amp; Utilities</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemCoInfo" xml:space="preserve">
+    <value>Company Info</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemDbBackup" xml:space="preserve">
+    <value>Database Backup</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemLblLytDsg" xml:space="preserve">
+    <value>Label Layout Designer</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemLineLoc" xml:space="preserve">
+    <value>Line Location</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemMngRoles" xml:space="preserve">
+    <value>Manage Roles</value>
+  </data>
+  <data name="cmnMenuItemSetNUtilSubItemMngUsers" xml:space="preserve">
+    <value>Manage Users</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServ" xml:space="preserve">
+    <value>Tracelink Services</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServGenerateFiles" xml:space="preserve">
+    <value>Generate Files</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServImprtUids" xml:space="preserve">
+    <value>Import UIDs</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServProdOrdrXML" xml:space="preserve">
+    <value>Production Order XML</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServSendFiles" xml:space="preserve">
+    <value>Send Files</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServSOMDetls" xml:space="preserve">
+    <value>SOM Details</value>
+  </data>
+  <data name="cmnWizardAggregationInfo" xml:space="preserve">
+    <value>Aggregation Info</value>
+  </data>
+  <data name="cmnWizardBatchSettings" xml:space="preserve">
+    <value>Batch Settings</value>
+  </data>
+  <data name="cmnWizardProductInfo" xml:space="preserve">
+    <value>Product Info</value>
+  </data>
+  <data name="cmnWizardSaveBatch" xml:space="preserve">
+    <value>Save Batch</value>
+  </data>
+  <data name="cmnWizardSaveProduct" xml:space="preserve">
+    <value>Save Product</value>
+  </data>
+  <data name="cmnWizardVerification" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="DAVAIndexGenerateDavaFile" xml:space="preserve">
+    <value>Generate Dava file</value>
+  </data>
+  <data name="DAVAIndexSelectOption" xml:space="preserve">
+    <value>Select Option to Generate DAVA Export File</value>
+  </data>
+  <data name="DAVAIndexSelectOptionActualBatchQuantity" xml:space="preserve">
+    <value>Actual Batch Quantity</value>
+  </data>
+  <data name="DAVAIndexSelectOptionAllBatches" xml:space="preserve">
+    <value>All Batches</value>
+  </data>
+  <data name="DAVAIndexSelectOptionBatch" xml:space="preserve">
+    <value>Batch</value>
+  </data>
+  <data name="DAVAIndexSelectOptionBatchNo" xml:space="preserve">
+    <value>Batch No</value>
+  </data>
+  <data name="DAVAIndexSelectOptionBatchType" xml:space="preserve">
+    <value>Batch Type</value>
+  </data>
+  <data name="DAVAIndexSelectOptionDAVAExport" xml:space="preserve">
+    <value>DAVA Export XML File For Batch</value>
+  </data>
+  <data name="DAVAIndexSelectOptionExemptedCountryCode" xml:space="preserve">
+    <value>Exempted Country Code</value>
+  </data>
+  <data name="DAVAIndexSelectOptionExemptedFromBarcoding" xml:space="preserve">
+    <value>Exempted From Barcoding</value>
+  </data>
+  <data name="DAVAIndexSelectOptionExportedBatchQuantity" xml:space="preserve">
+    <value>Exported Batch Quantity</value>
+  </data>
+  <data name="DAVAIndexSelectOptionProduct" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="DAVAIndexSelectOptionProductionDetails" xml:space="preserve">
+    <value>Production Details</value>
+  </data>
+  <data name="DAVAIndexSelectOptionRemainingBatchQuantity" xml:space="preserve">
+    <value>Remaining Batch Quantity</value>
+  </data>
+  <data name="DAVAIndexSelectOptionSingleBatch" xml:space="preserve">
+    <value>Single Batch</value>
+  </data>
+  <data name="DAVAIndexSelectOptionTertiaryPacksExempted" xml:space="preserve">
+    <value>Tertiary Packs Exempted</value>
+  </data>
+  <data name="DAVARegenerateFileContent" xml:space="preserve">
+    <value>File Content</value>
+  </data>
+  <data name="DAVARegenerateRegenerateDava" xml:space="preserve">
+    <value>Regenerate Dava file</value>
+  </data>
+  <data name="DAVARegenerateSelectfile" xml:space="preserve">
+    <value>Select file for XML File Regeneration :</value>
+  </data>
+  <data name="HomeLiveExecution" xml:space="preserve">
+    <value>Current Execution Status</value>
+  </data>
+  <data name="HomeLiveExecutionBatch" xml:space="preserve">
+    <value>Batch Number</value>
+  </data>
+  <data name="HomeLiveExecutionNotReadyforSerialization" xml:space="preserve">
+    <value>Not Ready for Serialization</value>
+  </data>
+  <data name="HomeLiveExecutionPoNumber" xml:space="preserve">
+    <value>PO Number :</value>
+  </data>
+  <data name="HomeLiveExecutionProduct" xml:space="preserve">
+    <value>Product:</value>
+  </data>
+  <data name="HomeLiveExecutionQuantity" xml:space="preserve">
+    <value>Quantity:</value>
+  </data>
+  <data name="HomeLiveExecutionReadyforSerialization" xml:space="preserve">
+    <value>Ready for Serialization</value>
+  </data>
+  <data name="HomeLiveExecutionSerializationinprogress" xml:space="preserve">
+    <value>Serialization in progress</value>
+  </data>
+  <data name="HomeLiveExecutionStatus" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="ImporterTracelink" xml:space="preserve">
+    <value>Trace Link</value>
+  </data>
+  <data name="ImporterTracelinkCustomer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="ImporterTracelinkGTIN" xml:space="preserve">
+    <value>GTIN</value>
+  </data>
+  <data name="ImporterTracelinkQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="ImporterTracelinkRequest" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="JobsAcceptedQty" xml:space="preserve">
+    <value>Accepted Qty</value>
+  </data>
+  <data name="JobsAutomaticBatchClosure" xml:space="preserve">
+    <value>Batch Completion Alert</value>
+  </data>
+  <data name="JobsBatchLotNo" xml:space="preserve">
+    <value>Batch / Lot No</value>
+  </data>
+  <data name="JobsBatchManager" xml:space="preserve">
+    <value>Batch Manager</value>
+  </data>
+  <data name="JobsBatchManagerBatchName" xml:space="preserve">
+    <value>Batch Name</value>
+  </data>
+  <data name="JobsBatchManagerBatchNo" xml:space="preserve">
+    <value>Batch No</value>
+  </data>
+  <data name="JobsBatchManagerProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="JobsBatchManagerSelectLine" xml:space="preserve">
+    <value>Select Line :</value>
+  </data>
+  <data name="JobsBatchQty" xml:space="preserve">
+    <value>Batch Qty</value>
+  </data>
+  <data name="JobsBatchQuantity" xml:space="preserve">
+    <value>Batch Quantity</value>
+  </data>
+  <data name="JobsBundlingQTY" xml:space="preserve">
+    <value>Bundling QTY</value>
+  </data>
+  <data name="JobsCloseBatch" xml:space="preserve">
+    <value>Close Batch</value>
+  </data>
+  <data name="JobsCloseBatchBtnCloseBatch" xml:space="preserve">
+    <value>Close Batch</value>
+  </data>
+  <data name="JobsCloseBatchBtnConfirmTransfer" xml:space="preserve">
+    <value>Confirm Transfer</value>
+  </data>
+  <data name="JobsClosing" xml:space="preserve">
+    <value>Close Batches</value>
+  </data>
+  <data name="JobsClosingBtnClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="JobsCreate" xml:space="preserve">
+    <value>Create Batch</value>
+  </data>
+  <data name="JobsCustomerId" xml:space="preserve">
+    <value>Customer Id</value>
+  </data>
+  <data name="JobsDecommisioned" xml:space="preserve">
+    <value>Details of Batch :</value>
+  </data>
+  <data name="JobsDecommisionedBtnDecommission" xml:space="preserve">
+    <value>Decommission</value>
+  </data>
+  <data name="JobsDetails" xml:space="preserve">
+    <value>Details of</value>
+  </data>
+  <data name="JobsEdit" xml:space="preserve">
+    <value>Edit Batch</value>
+  </data>
+  <data name="JobsExpDateformat" xml:space="preserve">
+    <value>Exp Date format</value>
+  </data>
+  <data name="JobsExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="JobsFGCode" xml:space="preserve">
+    <value>FG Code</value>
+  </data>
+  <data name="JobsForExport" xml:space="preserve">
+    <value>For Export</value>
+  </data>
+  <data name="JobsGTIN" xml:space="preserve">
+    <value>GTIN</value>
+  </data>
+  <data name="JobsIndex" xml:space="preserve">
+    <value>Batches</value>
+  </data>
+  <data name="JobsIndexAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="JobsIndexCreateDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="JobsIndexlLotNo" xml:space="preserve">
+    <value>Batch/Lot No</value>
+  </data>
+  <data name="JobsIndexPONumber" xml:space="preserve">
+    <value>PO Number</value>
+  </data>
+  <data name="JobsManufacturingDate" xml:space="preserve">
+    <value>Manufacturing Date</value>
+  </data>
+  <data name="JobsMRP" xml:space="preserve">
+    <value>MRP</value>
+  </data>
+  <data name="JobsPackagingLevel" xml:space="preserve">
+    <value>Packaging Level</value>
+  </data>
+  <data name="JobsPCMAP" xml:space="preserve">
+    <value>PC MAP</value>
+  </data>
+  <data name="JobsPONumber" xml:space="preserve">
+    <value>PO Number</value>
+  </data>
+  <data name="JobsPrimaryPCMap" xml:space="preserve">
+    <value>Primary PC Map Count</value>
+  </data>
+  <data name="JobsPrintwithUIDSRNO" xml:space="preserve">
+    <value>Print with UID/SRNO</value>
+  </data>
+  <data name="JobsProductCode" xml:space="preserve">
+    <value>Product Code</value>
+  </data>
+  <data name="JobsProductionLine" xml:space="preserve">
+    <value>Production Line</value>
+  </data>
+  <data name="JobsProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="JobsRejectedQty" xml:space="preserve">
+    <value>Rejected Qty</value>
+  </data>
+  <data name="JobsSurplusUID" xml:space="preserve">
+    <value>Surplus UID</value>
+  </data>
+  <data name="JobsType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="JobsUIDstoPrint" xml:space="preserve">
+    <value>UIDs to Print</value>
+  </data>
+  <data name="JobsUseExpiryDay" xml:space="preserve">
+    <value>Use Expiry Day ?</value>
+  </data>
+  <data name="JobsVerification" xml:space="preserve">
+    <value>Verify Batch</value>
+  </data>
+  <data name="JobsVerificationBtnVerify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="LblLytDsgIndex" xml:space="preserve">
+    <value>Label Layout Designer</value>
+  </data>
+  <data name="LblLytDsgIndexBtnDownload" xml:space="preserve">
+    <value>Download Layout</value>
+  </data>
+  <data name="LblLytDsgIndexBtnPreview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="LblLytDsgIndexBtnSaveAs" xml:space="preserve">
+    <value>SaveAs</value>
+  </data>
+  <data name="LblLytDsgIndexLayoutRecipe" xml:space="preserve">
+    <value>Layout Recipe</value>
+  </data>
+  <data name="LineLocationCreate" xml:space="preserve">
+    <value>Create Line Location</value>
+  </data>
+  <data name="LineLocationDBName" xml:space="preserve">
+    <value>DataBase Name</value>
+  </data>
+  <data name="LineLocationDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LineLocationDeleteSure" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="LineLocationDetails" xml:space="preserve">
+    <value>Details of</value>
+  </data>
+  <data name="LineLocationDivisionCode" xml:space="preserve">
+    <value>Division Code</value>
+  </data>
+  <data name="LineLocationEdit" xml:space="preserve">
+    <value>Edit Line Location</value>
+  </data>
+  <data name="LineLocationID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="LineLocationIndex" xml:space="preserve">
+    <value>Line Location Master</value>
+  </data>
+  <data name="LineLocationIndexBtnCreate" xml:space="preserve">
+    <value>Create LineLocation</value>
+  </data>
+  <data name="LineLocationIsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="LineLocationLineCode" xml:space="preserve">
+    <value>Line Code</value>
+  </data>
+  <data name="LineLocationLineIp" xml:space="preserve">
+    <value>Line IP</value>
+  </data>
+  <data name="LineLocationLineName" xml:space="preserve">
+    <value>Line Name</value>
+  </data>
+  <data name="LineLocationLocationCode" xml:space="preserve">
+    <value>Location Code</value>
+  </data>
+  <data name="LineLocationPlantCode" xml:space="preserve">
+    <value>Plant Code</value>
+  </data>
+  <data name="LineLocationServerName" xml:space="preserve">
+    <value>Server Name</value>
+  </data>
+  <data name="LineLocationSQLPassword" xml:space="preserve">
+    <value>SQL Password</value>
+  </data>
+  <data name="LineLocationSQLUserName" xml:space="preserve">
+    <value>SQL UserName</value>
+  </data>
+  <data name="ProductBundlingQTY" xml:space="preserve">
+    <value>Bundling QTY</value>
+  </data>
+  <data name="ProductComposition" xml:space="preserve">
+    <value>Composition</value>
+  </data>
+  <data name="ProductCreate" xml:space="preserve">
+    <value>Create Product</value>
+  </data>
+  <data name="ProductDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ProductDoseusage" xml:space="preserve">
+    <value>Dose usage</value>
+  </data>
+  <data name="ProductFGCode" xml:space="preserve">
+    <value>FG Code</value>
+  </data>
+  <data name="ProductGenericName" xml:space="preserve">
+    <value>Generic Name</value>
+  </data>
+  <data name="ProductGTIN" xml:space="preserve">
+    <value>GTIN</value>
+  </data>
+  <data name="ProductImport" xml:space="preserve">
+    <value>Import Products</value>
+  </data>
+  <data name="ProductImportKindly" xml:space="preserve">
+    <value>Kindly provide the product excel file.</value>
+  </data>
+  <data name="ProductImportProductsFile" xml:space="preserve">
+    <value>Products File</value>
+  </data>
+  <data name="ProductIndex" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="ProductIndexBtnCreateProduct" xml:space="preserve">
+    <value>Create Product</value>
+  </data>
+  <data name="ProductInternalMaterialCode" xml:space="preserve">
+    <value>Internal Material Code</value>
+  </data>
+  <data name="ProductIsActive" xml:space="preserve">
+    <value>IsActive</value>
+  </data>
+  <data name="ProductISH" xml:space="preserve">
+    <value>ISH [ Inner Shipper]</value>
+  </data>
+  <data name="ProductIsScheduledDrug" xml:space="preserve">
+    <value>Is Scheduled Drug ?</value>
+  </data>
+  <data name="ProductLabelFilter" xml:space="preserve">
+    <value>Label Filter</value>
+  </data>
+  <data name="ProductLabelName" xml:space="preserve">
+    <value>Label Name</value>
+  </data>
+  <data name="ProductMOC" xml:space="preserve">
+    <value>MOC [ Mono Carton ]</value>
+  </data>
+  <data name="ProductMRP" xml:space="preserve">
+    <value>MRP</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProductNationalDrugCode" xml:space="preserve">
+    <value>National Drug Code</value>
+  </data>
+  <data name="ProductOBX" xml:space="preserve">
+    <value>OBX [ Outer Box ]</value>
+  </data>
+  <data name="ProductOSH" xml:space="preserve">
+    <value>OSH [ Outer Shipper ]</value>
+  </data>
+  <data name="ProductPAL" xml:space="preserve">
+    <value>PAL [ Pallet ]</value>
+  </data>
+  <data name="ProductPCMAP" xml:space="preserve">
+    <value>PC MAP</value>
+  </data>
+  <data name="ProductPPB" xml:space="preserve">
+    <value>PPB [ Primary Pack Box ]</value>
+  </data>
+  <data name="ProductProductCode" xml:space="preserve">
+    <value>Product Code</value>
+  </data>
+  <data name="ProductRemarks" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="ProductType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ProductVerification" xml:space="preserve">
+    <value>Verify Products</value>
+  </data>
+  <data name="ProductVerificationBtnVerify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="ReportsJobsBatchCreatedDate" xml:space="preserve">
+    <value>Batch Created Date</value>
+  </data>
+  <data name="ReportsJobsBatchCreatedDateSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ReportsJobsBatches" xml:space="preserve">
+    <value>Batches</value>
+  </data>
+  <data name="ReportsJobsBatchesBatch" xml:space="preserve">
+    <value>Batch #</value>
+  </data>
+  <data name="ReportsJobsBatchesBatchQty" xml:space="preserve">
+    <value>Batch Qty</value>
+  </data>
+  <data name="ReportsJobsBatchesBatchWithUID" xml:space="preserve">
+    <value>Batch With UID</value>
+  </data>
+  <data name="ReportsJobsBatchesCreated" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="ReportsJobsBatchesPONumber" xml:space="preserve">
+    <value>PO Number</value>
+  </data>
+  <data name="ReportsJobsBatchesReports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsBadUIDList" xml:space="preserve">
+    <value>Bad UID List</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsBatchesRelatedInformation" xml:space="preserve">
+    <value>Batches Related Information</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsBatchwiseSSCC" xml:space="preserve">
+    <value>Batch wise SSCC</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsDecommissionedUID" xml:space="preserve">
+    <value>Decommissioned UID</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsDetailedBatchInformation" xml:space="preserve">
+    <value>Detailed Batch Information</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsDetailwithOperator" xml:space="preserve">
+    <value>Detail with Operator</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsOperatorStatistics" xml:space="preserve">
+    <value>Operator Statistics</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsParentChildRelationship" xml:space="preserve">
+    <value>Parent Child Relationship</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsProductWise" xml:space="preserve">
+    <value>Product Wise</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="ReportsJobsBatchesReportsUIDList" xml:space="preserve">
+    <value>UID List</value>
+  </data>
+  <data name="ReportsJobsFiltersBatchName" xml:space="preserve">
+    <value>Batch Name</value>
+  </data>
+  <data name="ReportsJobsFiltersBatchNumber" xml:space="preserve">
+    <value>Batch Number</value>
+  </data>
+  <data name="ReportsJobsFiltersBatchStatus" xml:space="preserve">
+    <value>Batch Status</value>
+  </data>
+  <data name="ReportsJobsFiltersDivisionCode" xml:space="preserve">
+    <value>Division Code</value>
+  </data>
+  <data name="ReportsJobsFiltersEXPDateWise" xml:space="preserve">
+    <value>EXP Date Wise</value>
+  </data>
+  <data name="ReportsJobsFiltersFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="ReportsJobsFiltersLineCode" xml:space="preserve">
+    <value>Line Code</value>
+  </data>
+  <data name="ReportsJobsFiltersLocationCode" xml:space="preserve">
+    <value>Location Code</value>
+  </data>
+  <data name="ReportsJobsFiltersMFGDateWise" xml:space="preserve">
+    <value>MFG Date Wise</value>
+  </data>
+  <data name="ReportsJobsFiltersPlantCode" xml:space="preserve">
+    <value>Plant Code</value>
+  </data>
+  <data name="ReportsJobsFiltersProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="ReportsJobsFiltersTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="ReportsJobsValues" xml:space="preserve">
+    <value>Values</value>
+  </data>
+  <data name="ReportsJobsValuesBadCount" xml:space="preserve">
+    <value>Bad Count</value>
+  </data>
+  <data name="ReportsJobsValuesBarChart" xml:space="preserve">
+    <value>Bar Chart</value>
+  </data>
+  <data name="ReportsJobsValuesBatchQuantity" xml:space="preserve">
+    <value>Batch Quantity</value>
+  </data>
+  <data name="ReportsJobsValuesBatchStats" xml:space="preserve">
+    <value>Batch Stats</value>
+  </data>
+  <data name="ReportsJobsValuesDecommissioned" xml:space="preserve">
+    <value>Decommissioned</value>
+  </data>
+  <data name="ReportsJobsValuesExpirydate" xml:space="preserve">
+    <value>Expiry date</value>
+  </data>
+  <data name="ReportsJobsValuesGoodCount" xml:space="preserve">
+    <value>Good Count</value>
+  </data>
+  <data name="ReportsJobsValuesGTIN" xml:space="preserve">
+    <value>GTIN</value>
+  </data>
+  <data name="ReportsJobsValuesManufacturingdate" xml:space="preserve">
+    <value>Manufacturing date</value>
+  </data>
+  <data name="ReportsJobsValuesPieChart" xml:space="preserve">
+    <value>Pie Chart</value>
+  </data>
+  <data name="ReportsJobsValuesProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="ReportsJobsValuesTotal" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ReportsTrails" xml:space="preserve">
+    <value>Trails</value>
+  </data>
+  <data name="ReportsTrailsFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="ReportsTrailsLineTrails" xml:space="preserve">
+    <value>Line Trails</value>
+  </data>
+  <data name="ReportsTrailsServerTrails" xml:space="preserve">
+    <value>Server Trails</value>
+  </data>
+  <data name="ReportsTrailsTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="ReportsTrailsViewReport" xml:space="preserve">
+    <value>View Report</value>
+  </data>
+  <data name="RolesActivation" xml:space="preserve">
+    <value>Activate and Deactivate Role</value>
+  </data>
+  <data name="RolesActivationIsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="RolesCreate" xml:space="preserve">
+    <value>Create Role</value>
+  </data>
+  <data name="RolesCreatePermissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="RolesEdit" xml:space="preserve">
+    <value>Edit Role</value>
+  </data>
+  <data name="RolesIndex" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolesIndexAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="RolesIndexBtnCreate" xml:space="preserve">
+    <value>Create Role</value>
+  </data>
+  <data name="RolesIndexIsActive" xml:space="preserve">
+    <value>Is Active ?</value>
+  </data>
+  <data name="RolesIndexName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SettingsDataBaseBackup" xml:space="preserve">
+    <value>DataBase BackUp</value>
+  </data>
+  <data name="SettingsIndexCompanyInfo" xml:space="preserve">
+    <value>Company Details</value>
+  </data>
+  <data name="SettingsIndexCompanyInfoAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="SettingsIndexCompanyInfoCompanyName" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="SOMCreate" xml:space="preserve">
+    <value>Create SOM Details</value>
+  </data>
+  <data name="SOMDetailsBusinessId" xml:space="preserve">
+    <value>Business Id</value>
+  </data>
+  <data name="SOMDetailsBusinessName" xml:space="preserve">
+    <value>Business Name</value>
+  </data>
+  <data name="SOMDetailsCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="SOMDetailsCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="SOMDetailsDetailsof" xml:space="preserve">
+    <value>Details of</value>
+  </data>
+  <data name="SOMDetailsGLN" xml:space="preserve">
+    <value>GLN</value>
+  </data>
+  <data name="SOMDetailsPostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="SOMDetailsReceiverDetails" xml:space="preserve">
+    <value>Receiver Details</value>
+  </data>
+  <data name="SOMDetailsStateOrRegion" xml:space="preserve">
+    <value>State Or Region</value>
+  </data>
+  <data name="SOMDetailsStreet" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="SOMEdit" xml:space="preserve">
+    <value>Edit SOM Details</value>
+  </data>
+  <data name="SOMEditBusinessId" xml:space="preserve">
+    <value>Business Id</value>
+  </data>
+  <data name="SOMEditBusinessName" xml:space="preserve">
+    <value>Business Name</value>
+  </data>
+  <data name="SOMEditCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="SOMEditCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="SOMEditGLN" xml:space="preserve">
+    <value>GLN</value>
+  </data>
+  <data name="SOMEditReceiverDetails" xml:space="preserve">
+    <value>Receiver Details</value>
+  </data>
+  <data name="SOMEditSenderDetails" xml:space="preserve">
+    <value>Sender Details</value>
+  </data>
+  <data name="SOMEditStateOrRegion" xml:space="preserve">
+    <value>State Or Region</value>
+  </data>
+  <data name="SOMEditStreet1" xml:space="preserve">
+    <value>Street1</value>
+  </data>
+  <data name="SOMIndex" xml:space="preserve">
+    <value>SOM Details</value>
+  </data>
+  <data name="SOMIndexAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="SOMIndexBusinessId" xml:space="preserve">
+    <value>Businesss Id</value>
+  </data>
+  <data name="SOMIndexBusinessName" xml:space="preserve">
+    <value>Business Name</value>
+  </data>
+  <data name="SOMIndexCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="SOMIndexCreateNew" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="SOMIndexEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="SOMIndexView" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="TracelinkExportFiles" xml:space="preserve">
+    <value>Generate Files</value>
+  </data>
+  <data name="TracelinkExportFilesBatchNo" xml:space="preserve">
+    <value>Batch No</value>
+  </data>
+  <data name="TracelinkExportFilesFileType" xml:space="preserve">
+    <value>File Type</value>
+  </data>
+  <data name="TracelinkExportFilesSOMDetails" xml:space="preserve">
+    <value>SOM Details</value>
+  </data>
+  <data name="TracelinkProductXml" xml:space="preserve">
+    <value>Generate Product Detail File</value>
+  </data>
+  <data name="TracelinkProductXmlBatchNo" xml:space="preserve">
+    <value>Batch No</value>
+  </data>
+  <data name="TracelinkProductXmlCompanyName" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="TracelinkProductXmlCurrencyCode" xml:space="preserve">
+    <value>Currency Code</value>
+  </data>
+  <data name="TracelinkProductXmlProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="TracelinkProductXmlTargetMarketExemption" xml:space="preserve">
+    <value>TargetMarketExemption</value>
+  </data>
+  <data name="TracelinkProductXmlTargetMarketExemptionDate" xml:space="preserve">
+    <value>TargetMarketExemption Date</value>
+  </data>
+  <data name="TracelinkProductXmlTargetMarketExemptionReference" xml:space="preserve">
+    <value>TargetMarketExemption Reference</value>
+  </data>
+  <data name="TracelinkUploadFiles" xml:space="preserve">
+    <value>Upload Files</value>
+  </data>
+  <data name="TracelinkUploadFilesDispositionFile" xml:space="preserve">
+    <value>Disposition File</value>
+  </data>
+  <data name="TracelinkUploadFilesDispositionUpdateFile" xml:space="preserve">
+    <value>Disposition Update File</value>
+  </data>
+  <data name="TracelinkUploadFilesSOMFile" xml:space="preserve">
+    <value>SOM File</value>
+  </data>
+  <data name="UsersActivation" xml:space="preserve">
+    <value>Activate and Deactivate User</value>
+  </data>
+  <data name="UsersActivationIsActive" xml:space="preserve">
+    <value>Is Active ?</value>
+  </data>
+  <data name="UsersConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="UsersCreate" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="UsersCreateSelectRole" xml:space="preserve">
+    <value>Select Role</value>
+  </data>
+  <data name="UsersEdit" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="UsersIndex" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="UsersIndexActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="UsersIndexBtnCreate" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="UsersIndexBtnPasswordExp" xml:space="preserve">
+    <value>Password Expiry Setting</value>
+  </data>
+  <data name="UsersIndexCreatedDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="UsersIndexIsActive" xml:space="preserve">
+    <value>Is Active ?</value>
+  </data>
+  <data name="UsersIndexRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="UsersIndexUserId" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="UsersPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UsersUserId" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="UsersUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="AccountLicenseID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="AccountLicenseNo" xml:space="preserve">
+    <value>License No</value>
+  </data>
+  <data name="cmnMenuItemGenerateEPCIS" xml:space="preserve">
+    <value>Generate EPCIS</value>
+  </data>
+  <data name="cmnMenuItemRptsUser" xml:space="preserve">
+    <value>User Report</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServRequestReport" xml:space="preserve">
+    <value>Tracelink Request Report</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServSerialNumReport" xml:space="preserve">
+    <value>Tracelink Serial Number Report</value>
+  </data>
+  <data name="cmnMenuItemTracelinkServUnusedSerialNumReport" xml:space="preserve">
+    <value>Tracelink Unused Serial Number Report</value>
+  </data>
+  <data name="JobsPPNCountryCode" xml:space="preserve">
+    <value>PPN Country Code</value>
+  </data>
+  <data name="JobsPPNPostalCode" xml:space="preserve">
+    <value>PPN Postal Code</value>
+  </data>
+  <data name="ProductDoseageForm" xml:space="preserve">
+    <value>Dosage Form</value>
+  </data>
+  <data name="UserRemark" xml:space="preserve">
+    <value>Remark</value>
+  </data>
+  <data name="UsersRembMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="SettingsIAC_CIN" xml:space="preserve">
+    <value>PPN IAC_CIN</value>
+  </data>
+  <data name="SettingsLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="SettingsLicenseAgency" xml:space="preserve">
+    <value>License Agency</value>
+  </data>
+  <data name="SettingsLicenseState" xml:space="preserve">
+    <value>License State</value>
+  </data>
+  <data name="cmnWizardAggregationLevels" xml:space="preserve">
+    <value>Aggregation Levels</value>
+  </data>
+  <data name="cmnWizardBtnNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="cmnWizardBtnPrevious" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="M_VendorAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="M_VendorCompanyName" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="M_VendorContactNo" xml:space="preserve">
+    <value>Contact No</value>
+  </data>
+  <data name="M_VendorContactPerson" xml:space="preserve">
+    <value>Contact Person</value>
+  </data>
+  <data name="M_VendorEmail" xml:space="preserve">
+    <value>Email Id</value>
+  </data>
+  <data name="M_VendorKey" xml:space="preserve">
+    <value>API Key</value>
+  </data>
+  <data name="NotifyViewJob" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="NotifyViewVendor" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="ProductPPN" xml:space="preserve">
+    <value>PPN</value>
+  </data>
+  <data name="SettingsCompanyCode" xml:space="preserve">
+    <value>Company Code</value>
+  </data>
+  <data name="SettingsLogo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="SOMDeliveryCompleteFlag" xml:space="preserve">
+    <value>Delivery Complete Flag</value>
+  </data>
+  <data name="SOMDeliveryNumber" xml:space="preserve">
+    <value>Delivery Number</value>
+  </data>
+  <data name="SOMFromBusinessPartyLookupId" xml:space="preserve">
+    <value>From Business Party Lookup Id</value>
+  </data>
+  <data name="SOMIsSerialized" xml:space="preserve">
+    <value>Is Serialized ?</value>
+  </data>
+  <data name="SOMSalesDistributionType" xml:space="preserve">
+    <value>Sales Distribution Type</value>
+  </data>
+  <data name="SOMShipFromLocationLookupId" xml:space="preserve">
+    <value>Ship From Location Lookup Id</value>
+  </data>
+  <data name="SOMToBusinessPartyLookupId" xml:space="preserve">
+    <value>To Business Party LookupId</value>
+  </data>
+  <data name="SOMTransactionDate" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="SOMTransactionIdentifier" xml:space="preserve">
+    <value>Transaction Identifier</value>
+  </data>
+  <data name="cmnBtnBackToList" xml:space="preserve">
+    <value>Back To List</value>
+  </data>
+  <data name="cmnBtnConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="cmnBtnPreview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="cmnBtnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="cmnBtnUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="cmnBtnUpload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="cmnBtnVerify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="JobsAutoDate" xml:space="preserve">
+    <value>Auto Date</value>
+  </data>
+  <data name="JobsDecommissionedBatches" xml:space="preserve">
+    <value>Decommissioned Batches</value>
+  </data>
+  <data name="JobsUIDProvider" xml:space="preserve">
+    <value>UID Provider</value>
+  </data>
+  <data name="ProductEditProduct" xml:space="preserve">
+    <value>Edit Product :</value>
+  </data>
+  <data name="ProductImportDownloadSampleExcelFile" xml:space="preserve">
+    <value>Download Sample Excel File</value>
+  </data>
+  <data name="SettingsEditCompanyInfo" xml:space="preserve">
+    <value>Edit Company Info</value>
+  </data>
+  <data name="UserChangeUserRole" xml:space="preserve">
+    <value>Change user role.</value>
+  </data>
+  <data name="UsersChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="UsersEditAppSetting" xml:space="preserve">
+    <value>Edit Application Settings</value>
+  </data>
+  <data name="UsersIndexChangeRole" xml:space="preserve">
+    <value>Change Role</value>
+  </data>
+  <data name="UsersPasswordExpiryDays" xml:space="preserve">
+    <value>Password Expiry Days</value>
+  </data>
+  <data name="UsersSynUser" xml:space="preserve">
+    <value>Sync Active Directory Users</value>
+  </data>
+  <data name="cmnBtnClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="cmnBtnGenerate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="cmnBtnPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="DavaIndexPleaseScan" xml:space="preserve">
+    <value>Please Scan SSCC code here</value>
+  </data>
+  <data name="DAVAIndexSelectOptionExemptionCode" xml:space="preserve">
+    <value>Exemption Code</value>
+  </data>
+  <data name="DAVAIndexSelectOptionsHomogenousTertiary" xml:space="preserve">
+    <value>Homogenous Tertiary</value>
+  </data>
+  <data name="DAVAIndexSelectOptionsPartialBatch" xml:space="preserve">
+    <value>Partial Batch</value>
+  </data>
+  <data name="DAVAIndexSelectOptionWholeBatch" xml:space="preserve">
+    <value>Whole Batch</value>
+  </data>
+  <data name="EPCISIndexGenerateEpcis" xml:space="preserve">
+    <value>Generate EPCIS</value>
+  </data>
+  <data name="EPCISIndexGenerateEpcisFile" xml:space="preserve">
+    <value>Generate EPICS File</value>
+  </data>
+  <data name="EPCISIndexSelectBatch" xml:space="preserve">
+    <value>Select Batch</value>
+  </data>
+  <data name="LineLocationGLNExtension" xml:space="preserve">
+    <value>GLN Extension</value>
+  </data>
+  <data name="LineLocationReadGLN" xml:space="preserve">
+    <value>Read GLN</value>
+  </data>
+  <data name="M_VendorAPIURL" xml:space="preserve">
+    <value>API Url</value>
+  </data>
+  <data name="M_VendorProvider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="M_VendorProvidingSSCC" xml:space="preserve">
+    <value>Is Providing SSCC ?</value>
+  </data>
+  <data name="ReportsJobsFilters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="ReportsTrailsLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="RptAutoBatchClose" xml:space="preserve">
+    <value>Auto Batch Close</value>
+  </data>
+  <data name="RptBatchSummary" xml:space="preserve">
+    <value>Batch Summary</value>
+  </data>
+  <data name="RptcmnBadItems" xml:space="preserve">
+    <value>Bad Items</value>
+  </data>
+  <data name="RptcmnCreatedBy" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="RptcmnDeck" xml:space="preserve">
+    <value>Deck</value>
+  </data>
+  <data name="RptcmnEXPDate" xml:space="preserve">
+    <value>EXP Date</value>
+  </data>
+  <data name="RptcmnGoodItems" xml:space="preserve">
+    <value>Good Items</value>
+  </data>
+  <data name="RptcmnGTINTertiary" xml:space="preserve">
+    <value>GTIN Tertiary</value>
+  </data>
+  <data name="RptcmnMFGDate" xml:space="preserve">
+    <value>MFG Date</value>
+  </data>
+  <data name="RptcmnNotVerified" xml:space="preserve">
+    <value>Not Verified</value>
+  </data>
+  <data name="RptcmnProductGTIN" xml:space="preserve">
+    <value>Product GTIN</value>
+  </data>
+  <data name="RptcmnQty" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="RptcmnSrNo" xml:space="preserve">
+    <value>Sr. No</value>
+  </data>
+  <data name="RptcmnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="RptcmnTotalItems" xml:space="preserve">
+    <value>Total Items</value>
+  </data>
+  <data name="RptcmnVerifiedBy" xml:space="preserve">
+    <value>Verified By</value>
+  </data>
+  <data name="RptDetailBatchReport" xml:space="preserve">
+    <value>Detail Batch Report</value>
+  </data>
+  <data name="RptProductWise" xml:space="preserve">
+    <value>Product Wise Report</value>
+  </data>
+  <data name="TracelinkProductXmlCountryName" xml:space="preserve">
+    <value>Country Name</value>
+  </data>
+  <data name="UserReportActiveUsers" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+  <data name="UserReportDeActiveUser" xml:space="preserve">
+    <value>Deactive Users</value>
+  </data>
+  <data name="cmnEndTime" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="cmnStartTime" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="RptAuditTrail" xml:space="preserve">
+    <value>Audit Trail Report</value>
+  </data>
+  <data name="RptAuditTrailMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="RptAuditTrailServerSideTrail" xml:space="preserve">
+    <value>Server Side Trail</value>
+  </data>
+  <data name="RptAuditTrailTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="RptAuditTrailUserType" xml:space="preserve">
+    <value>User Type</value>
+  </data>
+  <data name="RptAudtTrilLineSideTrail" xml:space="preserve">
+    <value>Line Side Trail</value>
+  </data>
+  <data name="RptAvailableSerialNumber" xml:space="preserve">
+    <value>Available Serial Number</value>
+  </data>
+  <data name="RptBadUIDList" xml:space="preserve">
+    <value>Bad UID List</value>
+  </data>
+  <data name="RptBadUIDList2D" xml:space="preserve">
+    <value>2D</value>
+  </data>
+  <data name="RptBadUIDListEXP" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="RptBadUIDListGrade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="RptBadUIDListLine1" xml:space="preserve">
+    <value>Line1</value>
+  </data>
+  <data name="RptBadUIDListLine10" xml:space="preserve">
+    <value>Line10</value>
+  </data>
+  <data name="RptBadUIDListLine2" xml:space="preserve">
+    <value>Line2</value>
+  </data>
+  <data name="RptBadUIDListLine3" xml:space="preserve">
+    <value>Line3</value>
+  </data>
+  <data name="RptBadUIDListLine4" xml:space="preserve">
+    <value>Line4</value>
+  </data>
+  <data name="RptBadUIDListLine5" xml:space="preserve">
+    <value>Line5</value>
+  </data>
+  <data name="RptBadUIDListLine6" xml:space="preserve">
+    <value>Line6</value>
+  </data>
+  <data name="RptBadUIDListLine7" xml:space="preserve">
+    <value>Line7</value>
+  </data>
+  <data name="RptBadUIDListLine8" xml:space="preserve">
+    <value>Line8</value>
+  </data>
+  <data name="RptBadUIDListLine9" xml:space="preserve">
+    <value>Line9</value>
+  </data>
+  <data name="RptBadUIDListLOT" xml:space="preserve">
+    <value>LOT</value>
+  </data>
+  <data name="RptBadUIDListMFG" xml:space="preserve">
+    <value>MFG</value>
+  </data>
+  <data name="RptBadUIDListUID" xml:space="preserve">
+    <value>UID</value>
+  </data>
+  <data name="RptBatchDtlWOpr" xml:space="preserve">
+    <value>Batch Details With Operator</value>
+  </data>
+  <data name="RptBatchSSCCReport" xml:space="preserve">
+    <value>Batch SSCC Report</value>
+  </data>
+  <data name="RptcmnChallengeTest" xml:space="preserve">
+    <value>Challenge Test</value>
+  </data>
+  <data name="RptcmnCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="RptcmnCustomerName" xml:space="preserve">
+    <value>Customer Name</value>
+  </data>
+  <data name="RptcmnDecommissioned" xml:space="preserve">
+    <value>Decommissioned</value>
+  </data>
+  <data name="RptcmnGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="RptcmnOperator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="RptcmnPackagingDate" xml:space="preserve">
+    <value>Packaging Date</value>
+  </data>
+  <data name="RptcmnPerofRejection" xml:space="preserve">
+    <value>% of Rejection</value>
+  </data>
+  <data name="RptcmnQASample" xml:space="preserve">
+    <value>QA Sample</value>
+  </data>
+  <data name="RptcmnReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="RptcmnRejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="RptcmnRequestedOn" xml:space="preserve">
+    <value>Requested On</value>
+  </data>
+  <data name="RptcmnSerialNumber" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="RptcmnSSCC" xml:space="preserve">
+    <value>SSCC</value>
+  </data>
+  <data name="RptcmnSSCCVerification" xml:space="preserve">
+    <value>SSCC Verification</value>
+  </data>
+  <data name="RptcmnSurplusQty" xml:space="preserve">
+    <value>Surplus Qty</value>
+  </data>
+  <data name="RptcmnTotal" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="RptcmnTotalCartons" xml:space="preserve">
+    <value>Total Cartons</value>
+  </data>
+  <data name="RptDecommissionedUIDList" xml:space="preserve">
+    <value>Decommissioned UID List</value>
+  </data>
+  <data name="RptDetailBatchInformation" xml:space="preserve">
+    <value>Detail Batch Information</value>
+  </data>
+  <data name="RptGTINWiseAvailableTracelinkSerialNumber" xml:space="preserve">
+    <value>GTIN Wise Available Tracelink Serial Number</value>
+  </data>
+  <data name="RptOprStats" xml:space="preserve">
+    <value>Operator Statistics</value>
+  </data>
+  <data name="RptPCRelationships" xml:space="preserve">
+    <value>Parent-Child Relationships</value>
+  </data>
+  <data name="RptProductDetailsReport" xml:space="preserve">
+    <value>Product Details Report</value>
+  </data>
+  <data name="RptTracelinkRequestReport" xml:space="preserve">
+    <value>Tracelink Request Report</value>
+  </data>
+  <data name="RptUserDeactivatedDate" xml:space="preserve">
+    <value>Deactivated Date</value>
+  </data>
+  <data name="RptUserReport" xml:space="preserve">
+    <value>User Report</value>
+  </data>
+  <data name="RptUserRoleName" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="cmnBtnLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="SetPasswordChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="SetPasswordConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="SetPasswordKindlysetpassword" xml:space="preserve">
+    <value>Kindly set a new password.</value>
+  </data>
+  <data name="SetPasswordNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="HomeIndexLanguage" xml:space="preserve">
+    <value>Language :</value>
+  </data>
+  <data name="HomeIndexWelcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="LblLytDsgIndexFileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="LblLytDsgIndexSaveAsFileName" xml:space="preserve">
+    <value>Save As File Name</value>
+  </data>
+  <data name="RptJobBad" xml:space="preserve">
+    <value>Bad</value>
+  </data>
+  <data name="RptJobBatchStats" xml:space="preserve">
+    <value>Batch Stats</value>
+  </data>
+  <data name="RptJobDecomm" xml:space="preserve">
+    <value>Decomm</value>
+  </data>
+  <data name="RptJobFilterSelectBatch" xml:space="preserve">
+    <value>Select Batch</value>
+  </data>
+  <data name="RptJobFilterSelectDivision" xml:space="preserve">
+    <value>Select Division</value>
+  </data>
+  <data name="RptJobFilterSelectLine" xml:space="preserve">
+    <value>Select Line</value>
+  </data>
+  <data name="RptJobFilterSelectLocation" xml:space="preserve">
+    <value>Select Location</value>
+  </data>
+  <data name="RptJobFilterSelectPlant" xml:space="preserve">
+    <value>Select Plant</value>
+  </data>
+  <data name="RptJobFilterSelectProduct" xml:space="preserve">
+    <value>Select Product</value>
+  </data>
+  <data name="RptJobFilterSelectStatus" xml:space="preserve">
+    <value>Select Status</value>
+  </data>
+  <data name="showMsgCustomerCreateCompanyName" xml:space="preserve">
+    <value>Please Provide Company Name</value>
+  </data>
+  <data name="showMessageSetPasswordConfirmPassword" xml:space="preserve">
+    <value>Please Provide Confirm Password</value>
+  </data>
+  <data name="showMessageSetPasswordProvidePassword" xml:space="preserve">
+    <value>Please Provide Password</value>
+  </data>
+  <data name="toastrScriptInvalidBatchQuantity" xml:space="preserve">
+    <value>Invalid Batch Quantity.</value>
+  </data>
+  <data name="toastrSetPasswordConfirmPasswordnotmatching" xml:space="preserve">
+    <value>Password and Confirm Password not matching.</value>
+  </data>
+  <data name="toastrSetPasswordNeedscombination" xml:space="preserve">
+    <value>Password Needs combination of 8 letters with Small Letters, Capital Letters, Number and Special Charector.</value>
+  </data>
+  <data name="cmnDetailsOf" xml:space="preserve">
+    <value>Details Of</value>
+  </data>
+  <data name="CreateCustomer" xml:space="preserve">
+    <value>Create Customer</value>
+  </data>
+  <data name="CreateCustomerMaster" xml:space="preserve">
+    <value>Customer Master</value>
+  </data>
+  <data name="DAVAViewGenerateDAVAViewModel" xml:space="preserve">
+    <value>GenerateDAVAViewModel</value>
+  </data>
+  <data name="EditCustomer" xml:space="preserve">
+    <value>Edit Customer</value>
+  </data>
+  <data name="MsgCloseBatchNoBatchesavailable" xml:space="preserve">
+    <value>No Batches available to close !</value>
+  </data>
+  <data name="M_CustomerBizLocGLN" xml:space="preserve">
+    <value>BizLocGLN</value>
+  </data>
+  <data name="M_CustomerBizLocGLN_Ext" xml:space="preserve">
+    <value>BizLocGLN_Ext</value>
+  </data>
+  <data name="M_CustomerCompanyCode" xml:space="preserve">
+    <value>Company Code</value>
+  </data>
+  <data name="M_CustomerCreatedBy" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="M_CustomerCreatedOn" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="M_CustomerIsDeleted" xml:space="preserve">
+    <value>Is Deleted</value>
+  </data>
+  <data name="M_CustomerIsSSCC" xml:space="preserve">
+    <value>Is SSCC</value>
+  </data>
+  <data name="M_CustomerLastModified" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="M_CustomerModifiedBy" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="M_CustomerProviderId" xml:space="preserve">
+    <value>Provider Id</value>
+  </data>
+  <data name="M_CustomerReceiverId" xml:space="preserve">
+    <value>Receiver Id</value>
+  </data>
+  <data name="M_CustomerSenderId" xml:space="preserve">
+    <value>Sender Id</value>
+  </data>
+  <data name="M_CustomerSFTPAddress" xml:space="preserve">
+    <value>SFTP Address</value>
+  </data>
+  <data name="M_CustomerSFTPPassword" xml:space="preserve">
+    <value>SFTP Password</value>
+  </data>
+  <data name="M_CustomerSFTPPort" xml:space="preserve">
+    <value>SFTP Port</value>
+  </data>
+  <data name="M_CustomerSFTPUser" xml:space="preserve">
+    <value>SFTP User</value>
+  </data>
+  <data name="M_CustomerStreetLine1" xml:space="preserve">
+    <value>Street Line1</value>
+  </data>
+  <data name="M_CustomerStreetLine2" xml:space="preserve">
+    <value>Street Line2</value>
+  </data>
+  <data name="showMsgCustomerCreateAddress" xml:space="preserve">
+    <value>Please Provide Address</value>
+  </data>
+  <data name="showMsgCustomerCreateContactNumber" xml:space="preserve">
+    <value>Please Provide Contact Number</value>
+  </data>
+  <data name="showMsgCustomerCreateContactPerson" xml:space="preserve">
+    <value>Please Provide Contact Person</value>
+  </data>
+  <data name="showMsgCustomerCreateCountry" xml:space="preserve">
+    <value>Please Provide Country</value>
+  </data>
+  <data name="showMsgCustomerCreateEmail" xml:space="preserve">
+    <value>Please Provide Email Id</value>
+  </data>
+  <data name="showMsgCustomerCreateLicenseAgency" xml:space="preserve">
+    <value>Please Provide LicenseAgency</value>
+  </data>
+  <data name="showMsgCustomerCreateState" xml:space="preserve">
+    <value>Please Provide State</value>
+  </data>
+  <data name="toastrBatchManagerbatchtransfer" xml:space="preserve">
+    <value>Only one batch can be transfer.</value>
+  </data>
+  <data name="toastrCreateJobBatchName" xml:space="preserve">
+    <value>PO Number / Batch Name already exists.</value>
+  </data>
+  <data name="toastrCreateJobBatchQuantity" xml:space="preserve">
+    <value>Batch Quantity needs to less than 10,00,000.</value>
+  </data>
+  <data name="toastrCreateJobPCMap" xml:space="preserve">
+    <value>Primary PC Map Count must be greater than 0.</value>
+  </data>
+  <data name="toastrCreateJobSurplusUID" xml:space="preserve">
+    <value>Surplus UID quantity should be less than or equal to Batch Qunatity</value>
+  </data>
+  <data name="toastrCustomerCreatevalidemail" xml:space="preserve">
+    <value>Please enter valid email</value>
+  </data>
+  <data name="toastrDavaSSCCNumber" xml:space="preserve">
+    <value>Please Provide SSCC Number</value>
+  </data>
+  <data name="toastrEpcisIndexSelectJob" xml:space="preserve">
+    <value>Please Select Job</value>
+  </data>
+  <data name="toastrtracelinkInvalidGTIN" xml:space="preserve">
+    <value>Invalid GTIN. It should be 14 Digit</value>
+  </data>
+  <data name="toastrCreateJobBatchName1" xml:space="preserve">
+    <value>PO Number / Batch Name already existssdf.</value>
+  </data>
+  <data name="toastrCreateLineCode" xml:space="preserve">
+    <value>Please Provide Line Code</value>
+  </data>
+  <data name="toastrCreateLineDataBaseName" xml:space="preserve">
+    <value>Please Provide DataBase Name</value>
+  </data>
+  <data name="toastrCreateLineDivisionCode" xml:space="preserve">
+    <value>Please Provide Division Code</value>
+  </data>
+  <data name="toastrCreateLineID" xml:space="preserve">
+    <value>Please Provide ID</value>
+  </data>
+  <data name="toastrCreateLineIP" xml:space="preserve">
+    <value>Please Provide LineIP</value>
+  </data>
+  <data name="toastrCreateLineLocationCode" xml:space="preserve">
+    <value>Please Provide Location Code</value>
+  </data>
+  <data name="toastrCreateLinePlantCode" xml:space="preserve">
+    <value>Please Provide Plant Code</value>
+  </data>
+  <data name="toastrCreateLineSQLPassword" xml:space="preserve">
+    <value>Please Provide SQLPassword</value>
+  </data>
+  <data name="toastrCreateLineSQLUsername" xml:space="preserve">
+    <value>Please Provide SQLUsername</value>
+  </data>
+  <data name="toastrCreateProductCheckSum" xml:space="preserve">
+    <value>. Correct Check Sum:</value>
+  </data>
+  <data name="toastrCreateProductDuplicateGTIN" xml:space="preserve">
+    <value>Duplicate GTIN not allowed</value>
+  </data>
+  <data name="toastrCreateProductentercorrect" xml:space="preserve">
+    <value>Please enter correct value for</value>
+  </data>
+  <data name="toastrCreateProductInvalidGTIN" xml:space="preserve">
+    <value>Invalid GTIN. Please provide valid GTIN for</value>
+  </data>
+  <data name="toastrCreateProductInvalidProduct" xml:space="preserve">
+    <value>Invalid product code provided, in Product Info step. Please correct it.</value>
+  </data>
+  <data name="toastrVerifyJobprovideremark" xml:space="preserve">
+    <value>Please provide remark</value>
+  </data>
+  <data name="LblLytSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="JobCreateDrpCode" xml:space="preserve">
+    <value>Select Code</value>
+  </data>
+  <data name="JobCreateDrpFormat" xml:space="preserve">
+    <value>Select Format</value>
+  </data>
+  <data name="JobCreateDrpLabel" xml:space="preserve">
+    <value>Select Label</value>
+  </data>
+  <data name="JobCreateDrpType" xml:space="preserve">
+    <value>Select Type</value>
+  </data>
+  <data name="JobCreateMsgSelectedpackaging" xml:space="preserve">
+    <value>Selected packaging levels not matching with product levels.</value>
+  </data>
+  <data name="toastrProductCreate3charecters" xml:space="preserve">
+    <value>Required minimum 3 charecters.</value>
+  </data>
+  <data name="toastrProductCreateAggregationlevel" xml:space="preserve">
+    <value>Aggregation level cannot be set single level</value>
+  </data>
+  <data name="toastrProductCreateInvalidBundling" xml:space="preserve">
+    <value>Invalid Bundling Quantity. Bundling Quantity needs in proportion of PC MAP</value>
+  </data>
+  <data name="toastrProductCreateInvalidPPN" xml:space="preserve">
+    <value>Invalid PPN. PPN should be 12 Digit</value>
+  </data>
+  <data name="toastrProductCreateInvalidproductCode" xml:space="preserve">
+    <value>Invalid product code provided.</value>
+  </data>
+  <data name="toastrProductCreateInvalidvalue" xml:space="preserve">
+    <value>Invalid value for</value>
+  </data>
+  <data name="toastrProductCreatePalreadyexists" xml:space="preserve">
+    <value>Product already exists with provided details.</value>
+  </data>
+  <data name="toastrProductCreateSelectaggregation" xml:space="preserve">
+    <value>Please select aggregation levels</value>
+  </data>
+  <data name="RptTrailLine" xml:space="preserve">
+    <value>Line side Trail</value>
+  </data>
+  <data name="RptTrailServer" xml:space="preserve">
+    <value>Server Side Trail</value>
+  </data>
+  <data name="MsgDataBaseBackupInProcess" xml:space="preserve">
+    <value>Database backup in process</value>
+  </data>
+  <data name="MsgDataBaseBackupWait" xml:space="preserve">
+    <value>Kindly wait for the process to complete</value>
+  </data>
+  <data name="ProviderCreate" xml:space="preserve">
+    <value>Create Provider</value>
+  </data>
+  <data name="ProviderMasterCreate" xml:space="preserve">
+    <value>Provider Master</value>
+  </data>
+  <data name="toastrCreateRoleAlreadyExist" xml:space="preserve">
+    <value>Roles name already exists</value>
+  </data>
+  <data name="toastrDatabaseBackupComplete" xml:space="preserve">
+    <value>Database backup completed successfully</value>
+  </data>
+  <data name="toastrDatabaseConnectionLost" xml:space="preserve">
+    <value>Database Connection Lost</value>
+  </data>
+  <data name="toastrProviderCreatePName" xml:space="preserve">
+    <value>Please Provide Provider Name</value>
+  </data>
+  <data name="toastrRoleCreateRName" xml:space="preserve">
+    <value>Please Provide Role Name</value>
+  </data>
+  <data name="toastrRoleCreateSelectPermission" xml:space="preserve">
+    <value>Please Select Permissions</value>
+  </data>
+  <data name="toastrSettingComanyAddress" xml:space="preserve">
+    <value>Please provide Company Address</value>
+  </data>
+  <data name="toastrSettingCompanyCode" xml:space="preserve">
+    <value>Please provide Company Code</value>
+  </data>
+  <data name="toastrSettingProvideLineCode" xml:space="preserve">
+    <value>Please provide LineCode</value>
+  </data>
+  <data name="toastrSettingSelectCountry" xml:space="preserve">
+    <value>Please Select Country</value>
+  </data>
+  <data name="toastrSettingSelectLogo" xml:space="preserve">
+    <value>Please Select Logo, in PNG format</value>
+  </data>
+  <data name="toastrSettingSelectState" xml:space="preserve">
+    <value>Please Select State Or Region</value>
+  </data>
+  <data name="toastrSOMFromBusinessPartyLookupId" xml:space="preserve">
+    <value>Please Provide FromBusinessPartyLookupIdsdf</value>
+  </data>
+  <data name="toastrSOMInvalidBusinessName" xml:space="preserve">
+    <value>Invalid Business Name</value>
+  </data>
+  <data name="toastrSOMInvalidBusinessParty" xml:space="preserve">
+    <value>Invalid From Business Party Lookup Id</value>
+  </data>
+  <data name="toastrSOMInvalidDeliveryNumber" xml:space="preserve">
+    <value>Invalid Delivery Number</value>
+  </data>
+  <data name="toastrSOMInvalidLocationLookupId" xml:space="preserve">
+    <value>Invalid Ship From Location Lookup Id</value>
+  </data>
+  <data name="toastrSOMInvalidSalesDistribution" xml:space="preserve">
+    <value>Invalid Sales Distribution Type</value>
+  </data>
+  <data name="toastrSOMInvalidTransactionIdentifier" xml:space="preserve">
+    <value>Invalid Transaction Identifier</value>
+  </data>
+  <data name="toastrSOMProvideBusinessName" xml:space="preserve">
+    <value>Please Provide BusinessName For Sender</value>
+  </data>
+  <data name="toastrSOMProvideDeliveryNumber" xml:space="preserve">
+    <value>Please Provide DeliveryNumbersdf</value>
+  </data>
+  <data name="toastrSOMProvideTransactionDate" xml:space="preserve">
+    <value>Please Provide TransactionDatesdf</value>
+  </data>
+  <data name="toastrSOMSalesDistributionType" xml:space="preserve">
+    <value>Please Provide SalesDistributionType</value>
+  </data>
+  <data name="toastrSOMShipFromLocationLookupId" xml:space="preserve">
+    <value>Please Provide ShipFromLocationLookupId</value>
+  </data>
+  <data name="toastrSOMToBusinessPartyLookupId" xml:space="preserve">
+    <value>Please Provide ToBusinessPartyLookupId</value>
+  </data>
+  <data name="toastrSOMTransactionIdentifier" xml:space="preserve">
+    <value>Please Provide TransactionIdentifier</value>
+  </data>
+  <data name="toastrTracelinkCustomerId" xml:space="preserve">
+    <value>Please Provide Customer Id</value>
+  </data>
+  <data name="toastrTracelinkGTIN" xml:space="preserve">
+    <value>Please Provide GTIN</value>
+  </data>
+  <data name="toastrTracelinkQuantity" xml:space="preserve">
+    <value>Please Provide Quantity</value>
+  </data>
+  <data name="AddModelErrorAccountdeactive" xml:space="preserve">
+    <value>The account has been deactivated. Kindly contact administrator.</value>
+  </data>
+  <data name="AddModelErrorAccountInvalidlogin" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="AddModelErrorAccountUseractive" xml:space="preserve">
+    <value>User not active.</value>
+  </data>
+  <data name="AddModuleErrorContactAdministrator" xml:space="preserve">
+    <value>Please Contact Administrator. Account has been Deactivated.</value>
+  </data>
+  <data name="TempDataAccountContInvalidUser" xml:space="preserve">
+    <value>Invalid User</value>
+  </data>
+  <data name="TempDataAccountdifferentpassword" xml:space="preserve">
+    <value>Kindly use a different password ! This passowrd was used previously.</value>
+  </data>
+  <data name="TempDataAccountPasswordreset" xml:space="preserve">
+    <value>Password reset successfully</value>
+  </data>
+  <data name="TempDataCustomerCreate" xml:space="preserve">
+    <value>customer successfully created.</value>
+  </data>
+  <data name="TempDataCustomerDeleted" xml:space="preserve">
+    <value>customer successfully deleted.</value>
+  </data>
+  <data name="TempDataCustomerUpdated" xml:space="preserve">
+    <value>customer successfully updated.</value>
+  </data>
+  <data name="TrailAccountdeactivated" xml:space="preserve">
+    <value>The user account has been deactivated.</value>
+  </data>
+  <data name="TrailAccountFirstTime" xml:space="preserve">
+    <value>Logged in first time. Password reset attempting</value>
+  </data>
+  <data name="TrailAccountinvalidcredentials" xml:space="preserve">
+    <value>tried to Log In but failed. invalid credentials.</value>
+  </data>
+  <data name="TrailAccountLoggedIn" xml:space="preserve">
+    <value>Logged In.</value>
+  </data>
+  <data name="TrailAccountLoggedOut" xml:space="preserve">
+    <value>Logged Out.</value>
+  </data>
+  <data name="TrailAccountPasswordExpired" xml:space="preserve">
+    <value>Logged in but password is expired. Password reset attempting</value>
+  </data>
+  <data name="TrailAccountResetpassword" xml:space="preserve">
+    <value>Reset the password for user :</value>
+  </data>
+  <data name="TrailAccounttryingtoLogIn" xml:space="preserve">
+    <value>is trying to Log In inspite of account is deactivated.</value>
+  </data>
+  <data name="TrailCustomerCreated" xml:space="preserve">
+    <value>created  customer :</value>
+  </data>
+  <data name="TrailCustomerDeleted" xml:space="preserve">
+    <value>deleted customer:</value>
+  </data>
+  <data name="TrailCustomerUpdated" xml:space="preserve">
+    <value>updated  customer :</value>
+  </data>
+  <data name="AddModelErroJobInvalidPCmap" xml:space="preserve">
+    <value>Invalid PC map count !  Kindly correct it.</value>
+  </data>
+  <data name="AddModelErrorJobkindlyprovide" xml:space="preserve">
+    <value>kindly provide remark.</value>
+  </data>
+  <data name="AddModuleErrorJobInvalidBundelQty" xml:space="preserve">
+    <value>Invalid Bundel Qty ! Kindly correct it.</value>
+  </data>
+  <data name="DAVAStatusAlreadyBatchExported" xml:space="preserve">
+    <value>Already batch has exported !</value>
+  </data>
+  <data name="DAVAStatusFailure" xml:space="preserve">
+    <value>Failure occured !</value>
+  </data>
+  <data name="DAVAStatusNoBatchesAvailable" xml:space="preserve">
+    <value>No batches available for DAVA file creation !</value>
+  </data>
+  <data name="DAVAStatusNoProductionDataAvailable" xml:space="preserve">
+    <value>No production data available for DAVA file creation !</value>
+  </data>
+  <data name="DAVAStatusNoProductsAvailable" xml:space="preserve">
+    <value>No products available for DAVA file export or product DAVA file has been generated !</value>
+  </data>
+  <data name="DAVAStatusNoSSCCsAvailable" xml:space="preserve">
+    <value>No SSCC's for DAVA file creation !</value>
+  </data>
+  <data name="DAVAStatusSuccess" xml:space="preserve">
+    <value>DAVA file created successfully.</value>
+  </data>
+  <data name="MsgbufferJobIncompletebatch" xml:space="preserve">
+    <value>Incomplete batch. Do you want to close the batch?</value>
+  </data>
+  <data name="MsgJobManagerselectbatch" xml:space="preserve">
+    <value>Please select batch.</value>
+  </data>
+  <data name="MsgJobManagerselectline" xml:space="preserve">
+    <value>Please select line to continue.</value>
+  </data>
+  <data name="TempDataDavaInvalid" xml:space="preserve">
+    <value>Invalid</value>
+  </data>
+  <data name="TempDataDavaInvalidcountry" xml:space="preserve">
+    <value>Invalid country code</value>
+  </data>
+  <data name="TempDataDavaInvalidinput" xml:space="preserve">
+    <value>Invalid input</value>
+  </data>
+  <data name="TempDataDavaNobatch" xml:space="preserve">
+    <value>No batch provided !</value>
+  </data>
+  <data name="TempDataDavaNoData" xml:space="preserve">
+    <value>No Data Found</value>
+  </data>
+  <data name="TempDataDavaNotexist" xml:space="preserve">
+    <value>Not exist</value>
+  </data>
+  <data name="TempDataDavaRegeneratedsuccessfully" xml:space="preserve">
+    <value>Regenerated successfully !</value>
+  </data>
+  <data name="TempDataDavaselectXML" xml:space="preserve">
+    <value>Please select XML file to regenerate.</value>
+  </data>
+  <data name="TempDatadecommissionedsuccessfully" xml:space="preserve">
+    <value>batch decommissioned successfully</value>
+  </data>
+  <data name="TempDataEPCISselectjob" xml:space="preserve">
+    <value>Please select job</value>
+  </data>
+  <data name="TempDataImporterDataimported" xml:space="preserve">
+    <value>Data imported successfully.</value>
+  </data>
+  <data name="TempDataImporterError" xml:space="preserve">
+    <value>Error occcured ! Details :</value>
+  </data>
+  <data name="TempDataImporterservererrors" xml:space="preserve">
+    <value>Tracelink server errors :</value>
+  </data>
+  <data name="TempDataImporterUnablestore" xml:space="preserve">
+    <value>Unable to store received data !</value>
+  </data>
+  <data name="TempDataJobBatch" xml:space="preserve">
+    <value>Batch:</value>
+  </data>
+  <data name="TempDataJobcreatedsuccessfully" xml:space="preserve">
+    <value>batch created successfully</value>
+  </data>
+  <data name="TempDataJobforline" xml:space="preserve">
+    <value>. For line :</value>
+  </data>
+  <data name="TempDataJobLinedetailsnotprovided" xml:space="preserve">
+    <value>Line details not provided. Kindly contact administrator.</value>
+  </data>
+  <data name="TempDataJobNobatch" xml:space="preserve">
+    <value>No batches or line location not available.</value>
+  </data>
+  <data name="TempDataJobNoconnectionstringavailableforline" xml:space="preserve">
+    <value>No connection string available for the line.</value>
+  </data>
+  <data name="TempDataJobPreviousbatchexists" xml:space="preserve">
+    <value>Previous batch exists on line, please take line clearance to continue.</value>
+  </data>
+  <data name="TempDataJobproblemcreatingpackagingdetails" xml:space="preserve">
+    <value>batch created successfully. But problem in creating packaging details data.</value>
+  </data>
+  <data name="TempDataJobsuccessfullyallocated" xml:space="preserve">
+    <value>successfully allocated to line</value>
+  </data>
+  <data name="TempDataJobSuccessfullyverified" xml:space="preserve">
+    <value>batch successfully verified. For line :</value>
+  </data>
+  <data name="TempDataJobtakelineclearance" xml:space="preserve">
+    <value>Previous batch exists on line, please take line clearance to continue.</value>
+  </data>
+  <data name="TempDataJobtransferedglobal" xml:space="preserve">
+    <value>and transfered to global server.</value>
+  </data>
+  <data name="TempDataJobtransferedglobalfailed" xml:space="preserve">
+    <value>and failure occured to transfer data to global server.</value>
+  </data>
+  <data name="TempDataJobUIDdataunableupdate" xml:space="preserve">
+    <value>batch verified successfully but batch UID data was unable to update:</value>
+  </data>
+  <data name="TempDataJobupdatedsuccessfully" xml:space="preserve">
+    <value>batch updated successfully</value>
+  </data>
+  <data name="TempDataJobverifiedbatch" xml:space="preserve">
+    <value>verified the batch :</value>
+  </data>
+  <data name="TempDataJonNoconnectionrepectiveline" xml:space="preserve">
+    <value>No connection with respective line. Please check connection setting.</value>
+  </data>
+  <data name="TrailErrorOccured" xml:space="preserve">
+    <value>Error Occured !</value>
+  </data>
+  <data name="TrailHomeRequestedLiveLines" xml:space="preserve">
+    <value>Requested to view Live Lines</value>
+  </data>
+  <data name="TrailJobBatchTransfers" xml:space="preserve">
+    <value>Requested to view Batch Transfers</value>
+  </data>
+  <data name="TrailJobClosed" xml:space="preserve">
+    <value>Closed the Batch :</value>
+  </data>
+  <data name="TrailJobclosedsuccessfully" xml:space="preserve">
+    <value>batch closed successfully.</value>
+  </data>
+  <data name="TrailJobcreatedbatch" xml:space="preserve">
+    <value>created a batch :</value>
+  </data>
+  <data name="TrailJobDECOMMISSIONEDBATCH" xml:space="preserve">
+    <value>USER HAS DECOMMISSIONED BATCH :</value>
+  </data>
+  <data name="TrailJobfailedtotransferLine" xml:space="preserve">
+    <value>Requested to  Batch Transfers but failed to transfer  to Line :</value>
+  </data>
+  <data name="TrailJobprocessingbatch" xml:space="preserve">
+    <value>processing batch</value>
+  </data>
+  <data name="TrailJobprovidedremark" xml:space="preserve">
+    <value>did not provided remark during verifying batch :</value>
+  </data>
+  <data name="TrailJobrequestdetailbatch" xml:space="preserve">
+    <value>requested to view details of batch</value>
+  </data>
+  <data name="TrailJobRequestedclosing" xml:space="preserve">
+    <value>Requested for closing the Batch :</value>
+  </data>
+  <data name="TrailJobREQUESTEDEDITBATCH" xml:space="preserve">
+    <value>REQUESTED TO EDIT BATCH :</value>
+  </data>
+  <data name="TrailJobrequestview" xml:space="preserve">
+    <value>requested to view Line</value>
+  </data>
+  <data name="TrailJobrequestviewbatch" xml:space="preserve">
+    <value>requested to view batches.</value>
+  </data>
+  <data name="TrailJobrequestviewBatchdata" xml:space="preserve">
+    <value>requested to view Batch data</value>
+  </data>
+  <data name="TrailJobTranferedbatch" xml:space="preserve">
+    <value>Tranfered batch :</value>
+  </data>
+  <data name="TrailJobVerifyBatch" xml:space="preserve">
+    <value>requested to view batches to verify</value>
+  </data>
+  <data name="TrailJobviewdecommissionedBatch" xml:space="preserve">
+    <value>Requested to view decommissioned Batch :</value>
+  </data>
+  <data name="TrialJobtoverify" xml:space="preserve">
+    <value>to verify.</value>
+  </data>
+  <data name="TrialJobupdatedBatch" xml:space="preserve">
+    <value>updated a Batch :</value>
+  </data>
+  <data name="AddModuleErrorProctuctInvalidMRP" xml:space="preserve">
+    <value>Invalid MRP !  Kindly correct it.</value>
+  </data>
+  <data name="AddModuleErrorProductSelectPackaginglevels" xml:space="preserve">
+    <value>Kindly select packaging levels and provide details.</value>
+  </data>
+  <data name="AddModuleErrorRolesProvidepermission" xml:space="preserve">
+    <value>Kindly provide permissions to the role</value>
+  </data>
+  <data name="AddModuleErrorUserInvalidUser" xml:space="preserve">
+    <value>Invalid user data</value>
+  </data>
+  <data name="MsgErrorProductalreadyexists" xml:space="preserve">
+    <value>Product already exists !</value>
+  </data>
+  <data name="MsgErrorProductdetailsnotprovided" xml:space="preserve">
+    <value>Product details not provided !</value>
+  </data>
+  <data name="MsgErrorProductInvalidcolumns" xml:space="preserve">
+    <value>Invalid columns in excel file !</value>
+  </data>
+  <data name="MsgErrorProductInvalidGTIN" xml:space="preserve">
+    <value>Invalid GTIN !</value>
+  </data>
+  <data name="MsgErrorProductInvalidProduct" xml:space="preserve">
+    <value>Invalid product data !</value>
+  </data>
+  <data name="MsgLblLytDsgFileSaveed" xml:space="preserve">
+    <value>Successfully saved !</value>
+  </data>
+  <data name="MsgLblLytDsgprovideFileName" xml:space="preserve">
+    <value>Please provide File Names !</value>
+  </data>
+  <data name="MsgLblLytFileNameNotSame" xml:space="preserve">
+    <value>File Name cannot be same !</value>
+  </data>
+  <data name="TempDataLineLocationalreadyexist" xml:space="preserve">
+    <value>Line Location already exist</value>
+  </data>
+  <data name="TempDataNofilesfound" xml:space="preserve">
+    <value>No files found.</value>
+  </data>
+  <data name="TempDataProductDeleted" xml:space="preserve">
+    <value>Product deleted successfully.</value>
+  </data>
+  <data name="TempdataProductError" xml:space="preserve">
+    <value>Error Occured ! Details :</value>
+  </data>
+  <data name="TempDataProductimportedoutof" xml:space="preserve">
+    <value>products imported out of</value>
+  </data>
+  <data name="TempDataProductimportedSuccessfully" xml:space="preserve">
+    <value>products imported successfully.</value>
+  </data>
+  <data name="TempDataProductInvalidfileformat" xml:space="preserve">
+    <value>Invalid file format ! kindly provide valid file.</value>
+  </data>
+  <data name="TempDataProductNotavailabletoimport" xml:space="preserve">
+    <value>No products available to import.</value>
+  </data>
+  <data name="TempDataProductsavedsuccessfully" xml:space="preserve">
+    <value>Product saved successfully.</value>
+  </data>
+  <data name="TempDataProductUpdateSuccessfully" xml:space="preserve">
+    <value>Product updated successfully.</value>
+  </data>
+  <data name="TempDataProductverifiedsuccessfully" xml:space="preserve">
+    <value>Product verified successfully.</value>
+  </data>
+  <data name="TempDataProviderDeletedsuccessfully" xml:space="preserve">
+    <value>provider successfully deleted.</value>
+  </data>
+  <data name="TempDataProviderSuccessfullycreated" xml:space="preserve">
+    <value>provider successfully created.</value>
+  </data>
+  <data name="TempDataProvidersuccessfullyupdated" xml:space="preserve">
+    <value>successfully updated.</value>
+  </data>
+  <data name="TempDataReportInvalidUID" xml:space="preserve">
+    <value>Invalid UID</value>
+  </data>
+  <data name="TempDataReportUIDnotfound" xml:space="preserve">
+    <value>UID not found.</value>
+  </data>
+  <data name="TempDataReportViewUserReport" xml:space="preserve">
+    <value>requested to view User Report</value>
+  </data>
+  <data name="TempDataRoleactivatedsuccessfully" xml:space="preserve">
+    <value>Role activated successfully</value>
+  </data>
+  <data name="TempDataRoleCreatedRole" xml:space="preserve">
+    <value>created a new Role</value>
+  </data>
+  <data name="TempDataRoledeactivatedsuccessfully" xml:space="preserve">
+    <value>Role deactivated successfully</value>
+  </data>
+  <data name="TempDataRoleupdatedsuccessfully" xml:space="preserve">
+    <value>role updated successfully.</value>
+  </data>
+  <data name="TempDataTracelinkBatchnotprovided" xml:space="preserve">
+    <value>Batch No not provided.</value>
+  </data>
+  <data name="TempDataTracelinkConnectionProblem" xml:space="preserve">
+    <value>Failure occured ! Connection problem</value>
+  </data>
+  <data name="TempDataTracelinkDetailNotProvided" xml:space="preserve">
+    <value>Detail Not Provided</value>
+  </data>
+  <data name="TempDataTracelinkFailureoccured" xml:space="preserve">
+    <value>Failure occured ! Details :</value>
+  </data>
+  <data name="TempDataTracelinkFilenotprovided" xml:space="preserve">
+    <value>File type not provided.</value>
+  </data>
+  <data name="TempDataTracelinkNoPermmision" xml:space="preserve">
+    <value>Failure occured! No permission</value>
+  </data>
+  <data name="TempDataTracelinkOther" xml:space="preserve">
+    <value>Failure occured !</value>
+  </data>
+  <data name="TempDataTracelinkSelectFile" xml:space="preserve">
+    <value>Please select a file</value>
+  </data>
+  <data name="TempDataTracelinkSOMDetailsnotprovided" xml:space="preserve">
+    <value>SOM Details not provided.</value>
+  </data>
+  <data name="TempDataTracelinkSSHException" xml:space="preserve">
+    <value>Failure occured ! SSH problem</value>
+  </data>
+  <data name="TempDataTracelinkSuccessfullyuploaded" xml:space="preserve">
+    <value>Successfully uploaded</value>
+  </data>
+  <data name="TempDataUseractivatedsuccessfully" xml:space="preserve">
+    <value>User Successfully  activated </value>
+  </data>
+  <data name="TempDataUsercreatedsuccessfully" xml:space="preserve">
+    <value>user created successfully</value>
+  </data>
+  <data name="TempDataUserdeactivatedsuccessfully" xml:space="preserve">
+    <value>User Successfully deactivated </value>
+  </data>
+  <data name="TempDataUserNoUseravailabletosync" xml:space="preserve">
+    <value>No User available to sync</value>
+  </data>
+  <data name="TempDataUserPasswordreset" xml:space="preserve">
+    <value>Password reset successfully</value>
+  </data>
+  <data name="TempDataUserPasswordresetsuccessfullyfor" xml:space="preserve">
+    <value>Password reset successfully for :</value>
+  </data>
+  <data name="TempDataUserResetpassworduser" xml:space="preserve">
+    <value>Reset the password for user :</value>
+  </data>
+  <data name="TempDataUserRolechanged" xml:space="preserve">
+    <value>Role changed successfully.</value>
+  </data>
+  <data name="TempDataUsersyncedsuccessfully" xml:space="preserve">
+    <value>User synced successfully. Out of</value>
+  </data>
+  <data name="TempDataUserusedifferentpassword" xml:space="preserve">
+    <value>Kindly use a different password ! This passowrd was used previously.</value>
+  </data>
+  <data name="TempDataVendoeSuccessmailsent" xml:space="preserve">
+    <value>Success mail sent !</value>
+  </data>
+  <data name="TempDataVendorcreatedsuccessfully" xml:space="preserve">
+    <value>vendor created successfully.</value>
+  </data>
+  <data name="TempDataVendorcreatedvendornamed" xml:space="preserve">
+    <value>created vendor named :</value>
+  </data>
+  <data name="TempDataVendordeletedsuccessfully" xml:space="preserve">
+    <value>vendor deleted successfully.</value>
+  </data>
+  <data name="TempDataVendorNotifiedviaemail" xml:space="preserve">
+    <value>Notified via email.</value>
+  </data>
+  <data name="TempDataVendorSomethingwentworng" xml:space="preserve">
+    <value>Something went worng !</value>
+  </data>
+  <data name="TempDataVendorupdatedsuccessfully" xml:space="preserve">
+    <value>vendor updated successfully.</value>
+  </data>
+  <data name="TrailDataReportrequestedtoview" xml:space="preserve">
+    <value>requested to view</value>
+  </data>
+  <data name="TrailLblLytDsgViewLabelLayout" xml:space="preserve">
+    <value>Requested to view Label Layout Designer</value>
+  </data>
+  <data name="TrailLineLocationsuccessfullycreated" xml:space="preserve">
+    <value>successfully created.</value>
+  </data>
+  <data name="TrailLineLocationsuccessfullydeleted" xml:space="preserve">
+    <value>successfully deleted.</value>
+  </data>
+  <data name="TrailLineLocationsuccessfullyupdated" xml:space="preserve">
+    <value>successfully updated.</value>
+  </data>
+  <data name="TrailLineLocationViewDetail" xml:space="preserve">
+    <value>Requested to view details of Line :</value>
+  </data>
+  <data name="TrailLineLocationViewLine" xml:space="preserve">
+    <value>Requested to view LineLocation</value>
+  </data>
+  <data name="TrailProductcreatedproduct" xml:space="preserve">
+    <value>created a product as</value>
+  </data>
+  <data name="TrailProductEditProduct" xml:space="preserve">
+    <value>Requested to Edit product :</value>
+  </data>
+  <data name="TrailProductforverification" xml:space="preserve">
+    <value>for verification.</value>
+  </data>
+  <data name="TrailProductImportAlreadyExist" xml:space="preserve">
+    <value>already exists !</value>
+  </data>
+  <data name="TrailProductRequestViewProduct" xml:space="preserve">
+    <value>Requested to view product :</value>
+  </data>
+  <data name="TrailProductUpdatedproduct" xml:space="preserve">
+    <value>Updated a product</value>
+  </data>
+  <data name="TrailProductverifiedproduct" xml:space="preserve">
+    <value>verified a product :</value>
+  </data>
+  <data name="TrailProductVerofiedProduct" xml:space="preserve">
+    <value>Requested to view Products which are not verified.</value>
+  </data>
+  <data name="TrailProductViewDetail" xml:space="preserve">
+    <value>Requested to view details of product :</value>
+  </data>
+  <data name="TrailProductViewImport" xml:space="preserve">
+    <value>Requested to view Import Product</value>
+  </data>
+  <data name="TrailProductViewProduct" xml:space="preserve">
+    <value>Requested to view products</value>
+  </data>
+  <data name="TrailProvidercreatedprovider" xml:space="preserve">
+    <value>created a provider:</value>
+  </data>
+  <data name="TrailProviderdeleted" xml:space="preserve">
+    <value>deleted  provider :</value>
+  </data>
+  <data name="TrailProvidersView" xml:space="preserve">
+    <value>requested to view provider :</value>
+  </data>
+  <data name="TrailProviderupdatedprovider" xml:space="preserve">
+    <value>updated a provider:</value>
+  </data>
+  <data name="TrailReportand" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="TrailReportandDivisionCode" xml:space="preserve">
+    <value>and Division Code :</value>
+  </data>
+  <data name="TrailReportAndfor" xml:space="preserve">
+    <value>. And for</value>
+  </data>
+  <data name="TrailReportandPlantCode" xml:space="preserve">
+    <value>and Plant Code :</value>
+  </data>
+  <data name="TrailReportLineCode" xml:space="preserve">
+    <value>requested to view Line Codes as per Location Code :</value>
+  </data>
+  <data name="TrailReportPCReport" xml:space="preserve">
+    <value>requested to view Parent Child Relationship Report for Job name</value>
+  </data>
+  <data name="TrailReporttill" xml:space="preserve">
+    <value>till</value>
+  </data>
+  <data name="TrailReportTracelinkviewProductDetails" xml:space="preserve">
+    <value>requested to view Product Details Report</value>
+  </data>
+  <data name="TrailReportUserReport" xml:space="preserve">
+    <value>User Report</value>
+  </data>
+  <data name="TrailReportviewAuditTrail" xml:space="preserve">
+    <value>requested to view Audit Trail Report as on</value>
+  </data>
+  <data name="TrailReportviewbatchcreatedDate" xml:space="preserve">
+    <value>requested to view Batches ( Created Date wise)  as on</value>
+  </data>
+  <data name="TrailReportviewbatchExp" xml:space="preserve">
+    <value>requested to view Batches ( Exp Date wise)  as on</value>
+  </data>
+  <data name="TrailReportviewBatchMfg" xml:space="preserve">
+    <value>requested to view Batches ( Mfg Date wise)  as on</value>
+  </data>
+  <data name="TrailReportviewDecommissionedUID" xml:space="preserve">
+    <value>requested to view Decommissioned UID's Report for Job name</value>
+  </data>
+  <data name="TrailReportViewDetailed" xml:space="preserve">
+    <value>requested to view Detailed Report as on</value>
+  </data>
+  <data name="TrailReportviewDetailedJobInfo" xml:space="preserve">
+    <value>requested to view Detailed Job Information Report for Job name</value>
+  </data>
+  <data name="TrailReportviewDetailwithOperator" xml:space="preserve">
+    <value>requested to view Detailed With Operator Report as on</value>
+  </data>
+  <data name="TrailReportviewOperatorStatistics" xml:space="preserve">
+    <value>requested to view Operator Statistics Report as on</value>
+  </data>
+  <data name="TrailReportviewPlantCode" xml:space="preserve">
+    <value>requested to view Plant Codes as per Location Code :</value>
+  </data>
+  <data name="TrailReportviewProductDetails" xml:space="preserve">
+    <value>requested to view Product Details Report as on</value>
+  </data>
+  <data name="TrailReportViewProductWise" xml:space="preserve">
+    <value>requested to view Product Wise Report as on</value>
+  </data>
+  <data name="TrailReportviewSummary" xml:space="preserve">
+    <value>requested to view Summary Report as on</value>
+  </data>
+  <data name="TrailReportviewTracelinkRequest" xml:space="preserve">
+    <value>requested to view Tracelink Request Report</value>
+  </data>
+  <data name="TrailReportviewTracelinkSerailNumber" xml:space="preserve">
+    <value>requested to view Tracelink Serail Number Report</value>
+  </data>
+  <data name="TrailReportviewTracelinkUnusedSerialNumber" xml:space="preserve">
+    <value>requested to view Tracelink Unused Serial Number Report</value>
+  </data>
+  <data name="TrailReportviewUID" xml:space="preserve">
+    <value>requested to view UID's Report for batch name</value>
+  </data>
+  <data name="TrailReporViewBadUIDList" xml:space="preserve">
+    <value>requested to view Bad UID list Report for Job name</value>
+  </data>
+  <data name="TrailReporviewDivisionCode" xml:space="preserve">
+    <value>requested to view Division Codes as per Location Code :</value>
+  </data>
+  <data name="TrailRoleActivatedrole" xml:space="preserve">
+    <value>Activated rolesdf</value>
+  </data>
+  <data name="TrailRoleCreatesuccessfully" xml:space="preserve">
+    <value>role created successfully.</value>
+  </data>
+  <data name="TrailRoleDeactivated" xml:space="preserve">
+    <value>Deactivated role</value>
+  </data>
+  <data name="TrailRolesViewDetail" xml:space="preserve">
+    <value>requested to view Roles Details for</value>
+  </data>
+  <data name="TrailRolesViewRoles" xml:space="preserve">
+    <value>requested to view Roles</value>
+  </data>
+  <data name="TrailRoleupdatedRole" xml:space="preserve">
+    <value>updated Role</value>
+  </data>
+  <data name="TrailRoleupdatepermissionrole" xml:space="preserve">
+    <value>updated the permission for Role :</value>
+  </data>
+  <data name="TrailSettingscreatedAppSettings" xml:space="preserve">
+    <value>created App Settings :</value>
+  </data>
+  <data name="TrailSettingsDatabaseBackUpSuccessfully" xml:space="preserve">
+    <value>Database BackUp Taken Successfully By User :</value>
+  </data>
+  <data name="TrailSettingsDBConnectionLost" xml:space="preserve">
+    <value>Database Connection Lost</value>
+  </data>
+  <data name="TrailSettingsEditAppSettings" xml:space="preserve">
+    <value>Edit App Settings  :</value>
+  </data>
+  <data name="TrailSettingsEditSettings" xml:space="preserve">
+    <value>requested to Edit Settings</value>
+  </data>
+  <data name="TrailSettingsRequestEditAppSettings" xml:space="preserve">
+    <value>requested to Edit App Settings</value>
+  </data>
+  <data name="TrailSettingsupdatedCompanySettings" xml:space="preserve">
+    <value>updated Company Settings</value>
+  </data>
+  <data name="TrailSettingsViewCompanySettings" xml:space="preserve">
+    <value>Requested to view Company Settings</value>
+  </data>
+  <data name="TrailSettingsviewDataBaseBackup" xml:space="preserve">
+    <value>Requested to view DataBase Backup</value>
+  </data>
+  <data name="TrailSomSuccessfullyadded" xml:space="preserve">
+    <value>Successfully added</value>
+  </data>
+  <data name="TrailSomSuccessfullydeleted" xml:space="preserve">
+    <value>Successfully deleted</value>
+  </data>
+  <data name="TrailSomSuccessfullyupdated" xml:space="preserve">
+    <value>Successfully updated</value>
+  </data>
+  <data name="TrailUserAlreadyexist" xml:space="preserve">
+    <value>Already name is existing !</value>
+  </data>
+  <data name="TrailUserchangedroleuser" xml:space="preserve">
+    <value>changed the role of user :</value>
+  </data>
+  <data name="TrailUsercreateduser" xml:space="preserve">
+    <value>created user :</value>
+  </data>
+  <data name="TrailUsersuccessfullyactivated" xml:space="preserve">
+    <value>successfully activated User :</value>
+  </data>
+  <data name="TrailUsersuccessfullydeactivated" xml:space="preserve">
+    <value>successfully deactivated user :</value>
+  </data>
+  <data name="TrailUserViewUsers" xml:space="preserve">
+    <value>Requested to view users.</value>
+  </data>
+  <data name="ProductDrpSelectCountry" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="cmnMenuItemEPCISReceiver" xml:space="preserve">
+    <value>EPCIS Receiver</value>
+  </data>
+  <data name="EPCISReceiverIndex" xml:space="preserve">
+    <value>EPCIS Receiver</value>
+  </data>
+  <data name="EPCISReceiverStreet2" xml:space="preserve">
+    <value>Street2</value>
+  </data>
+  <data name="EPCISRecevierDrpState" xml:space="preserve">
+    <value>Select State or Region</value>
+  </data>
+  <data name="toastrEPCISCreateCity" xml:space="preserve">
+    <value>Please Provide City</value>
+  </data>
+  <data name="toastrEPCISCreateGLN" xml:space="preserve">
+    <value>Please Provide GLN</value>
+  </data>
+  <data name="toastrEPCISCreatePostalCode" xml:space="preserve">
+    <value>Please Provide Postal Code</value>
+  </data>
+  <data name="toastrEPCSCreateStreet1" xml:space="preserve">
+    <value>Please Provide Street1</value>
+  </data>
+  <data name="toastrEPCSCreateStreet2" xml:space="preserve">
+    <value>Please Provide Street2</value>
+  </data>
+  <data name="EpcisReceiveModifiedby" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="EPCISReceivercountryCode" xml:space="preserve">
+    <value>Country Code</value>
+  </data>
+  <data name="EpcisReceiverCreatedOn" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="EpcisReceiverlatitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="EpcisReceiverlongitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="EpcisReceiverModifiedOn" xml:space="preserve">
+    <value>Modified On</value>
+  </data>
+  <data name="EpcisReceiversite" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="EpcisReceiverstreet3" xml:space="preserve">
+    <value>Street3</value>
+  </data>
+  <data name="EPCISReveicerEditReceiver" xml:space="preserve">
+    <value>Edit EPCIS Receiver</value>
+  </data>
+  <data name="EpcisTransporterAddress" xml:space="preserve">
+    <value>Transporter/Agency Address</value>
+  </data>
+  <data name="EpcisTransporterContactNo" xml:space="preserve">
+    <value>Transporter/Agency Contact Number</value>
+  </data>
+  <data name="EpcisTransporterIndex" xml:space="preserve">
+    <value>Transpoter Details</value>
+  </data>
+  <data name="EpcisTransporterName" xml:space="preserve">
+    <value>Transporter/Agency Name</value>
+  </data>
+  <data name="EpicsReceiverCreatedby" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="TempDataEPCISReceiverCreated" xml:space="preserve">
+    <value>EPCIS Receiver created successfully</value>
+  </data>
+  <data name="TempDataEPCISReceiverUpdated" xml:space="preserve">
+    <value>Updated successfully</value>
+  </data>
+  <data name="toastrEPCISReceiverCompNameAlreadyExist" xml:space="preserve">
+    <value>Company Name already exist</value>
+  </data>
+  <data name="toastrEPPCISReceivercountryCode" xml:space="preserve">
+    <value>Please provide Country Code</value>
+  </data>
+  <data name="TrailEPCISReceiverCreated" xml:space="preserve">
+    <value>Created EPCIS Receiversdf</value>
+  </data>
+  <data name="showMsgEpcisTransporterName" xml:space="preserve">
+    <value>Please Provide Transporter/Agency Name</value>
+  </data>
+  <data name="TempDataEpcisTransporterCreatedSuccessfully" xml:space="preserve">
+    <value>Transporter created successfully</value>
+  </data>
+  <data name="TrailEpcisTransporterCreate" xml:space="preserve">
+    <value>Created Transporter</value>
+  </data>
+  <data name="toastrEPCISReceiverTranspoterNameAlreadyExist" xml:space="preserve">
+    <value>Transpoter/Agency name already exist.</value>
+  </data>
+  <data name="EPCISBatchWiseEPCISEventGeneration" xml:space="preserve">
+    <value>Batch Wise EPCIS Event Generation</value>
+  </data>
+  <data name="EPCISBizStep" xml:space="preserve">
+    <value>BizStep</value>
+  </data>
+  <data name="EPCISCouldnotfindReadGLNorGLNExtension" xml:space="preserve">
+    <value>Could not find Read GLN or GLN Extension.</value>
+  </data>
+  <data name="EPCISDispositionEvent" xml:space="preserve">
+    <value>Disposition Event</value>
+  </data>
+  <data name="EPCISEventAddedSuccessfully" xml:space="preserve">
+    <value>EPCIS Event Saved Successfully.</value>
+  </data>
+  <data name="EPCISSelectBizStep" xml:space="preserve">
+    <value>Please Select BizStep</value>
+  </data>
+  <data name="EPCISSelectDispositionEvent" xml:space="preserve">
+    <value>Please Select Disposition Event</value>
+  </data>
+  <data name="ErrorMsgProductImporterInvalidProduct" xml:space="preserve">
+    <value>Invalid data for Product :</value>
+  </data>
+  <data name="ErrorMsgProductImporterProductAlreadyExist" xml:space="preserve">
+    <value>Product already exist :</value>
+  </data>
+  <data name="toastrProductCreateAggregationlevelcannotbesetS" xml:space="preserve">
+    <value>Aggregation level cannot be set MOC-PAL</value>
+  </data>
+  <data name="toastrProductCreateInvalidproduct" xml:space="preserve">
+    <value>Invalid product code provided, in Product Info step. Please correct it.</value>
+  </data>
+  <data name="toastrProductCreateselectlabel" xml:space="preserve">
+    <value>Please select label.</value>
+  </data>
+  <data name="toastrProductEditProductalreadyexists" xml:space="preserve">
+    <value>Product already exists with provided details.</value>
+  </data>
+  <data name="toastrProductEditRequiredminimum3charecters" xml:space="preserve">
+    <value>Required minimum 3 charecters.</value>
+  </data>
+  <data name="EPCISDriverName" xml:space="preserve">
+    <value>Driver Name</value>
+  </data>
+  <data name="EPCISPleaseSelectReceiver" xml:space="preserve">
+    <value>Please Select Receiver</value>
+  </data>
+  <data name="EPCISPleaseSelectTransporter" xml:space="preserve">
+    <value>Please Select Transporter</value>
+  </data>
+  <data name="EPCISReceiver" xml:space="preserve">
+    <value>Receiver</value>
+  </data>
+  <data name="EPCISShipment" xml:space="preserve">
+    <value>Shipment</value>
+  </data>
+  <data name="EPCISTransporter" xml:space="preserve">
+    <value>Transporter</value>
+  </data>
+  <data name="toastrEPCISPleaseEnterDriverContactNumber" xml:space="preserve">
+    <value>Please Enter Driver Contact Number</value>
+  </data>
+  <data name="toastrEPCISPleaseEnterDriverName" xml:space="preserve">
+    <value>Please Enter Driver Name</value>
+  </data>
+  <data name="toastrEPCISPleaseEnterVehicleNumber" xml:space="preserve">
+    <value>Please Enter Vehicle Number</value>
+  </data>
+  <data name="EPCISDriverContactNo" xml:space="preserve">
+    <value>Driver Contact Number</value>
+  </data>
+  <data name="EPCISVehicleNumber" xml:space="preserve">
+    <value>Vehicle Number</value>
+  </data>
+  <data name="TrailProducycreatedproduct" xml:space="preserve">
+    <value>created a product assdf</value>
+  </data>
+  <data name="ProductFeacn" xml:space="preserve">
+    <value>FEACN</value>
+  </data>
+  <data name="toastrProductCreateInvalidFeach" xml:space="preserve">
+    <value>Invalid FEACN. FEACN should be 10 Digit</value>
+  </data>
+  <data name="EPCISTransaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="toastrEPCISPleaseEnterDocumentTypeDetails" xml:space="preserve">
+    <value>Please Enter Document Type Details</value>
+  </data>
+  <data name="toastrEPCISPleaseSelectDifferentDocumentType" xml:space="preserve">
+    <value>Please Select Different Document Type</value>
+  </data>
+  <data name="toastrEPCISPleaseSelectDocumentType" xml:space="preserve">
+    <value>Please Select Document Type</value>
+  </data>
+  <data name="cmnMenuItemEpcisTransporterMaster" xml:space="preserve">
+    <value>Transporter Master</value>
+  </data>
+  <data name="cmnMenuItemEPCSearch" xml:space="preserve">
+    <value>EPC Search</value>
+  </data>
+  <data name="RptUid" xml:space="preserve">
+    <value>UID</value>
+  </data>
+  <data name="RptUidSearchBy" xml:space="preserve">
+    <value>Search By</value>
+  </data>
+  <data name="RptUidSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="RptUidUIDORSSCCDETAILS" xml:space="preserve">
+    <value>UID OR SSCC DETAILS</value>
+  </data>
+  <data name="RptUidValBatchDetail" xml:space="preserve">
+    <value>Batch Details</value>
+  </data>
+  <data name="RptUidValBPRCode" xml:space="preserve">
+    <value>PO Number</value>
+  </data>
+  <data name="RptUidValCaseNo" xml:space="preserve">
+    <value>Case No</value>
+  </data>
+  <data name="RptUidValChildCodes" xml:space="preserve">
+    <value>Child Codes</value>
+  </data>
+  <data name="RptUidValFailureReason" xml:space="preserve">
+    <value>Failure Reason</value>
+  </data>
+  <data name="RptUidValInspectionSet" xml:space="preserve">
+    <value>Inspection Set</value>
+  </data>
+  <data name="RptUidValJobWithUID" xml:space="preserve">
+    <value>Batch With UID</value>
+  </data>
+  <data name="RptUidValPackagingType" xml:space="preserve">
+    <value>Packaging Type</value>
+  </data>
+  <data name="RptUidValPackingDate" xml:space="preserve">
+    <value>Packing Date</value>
+  </data>
+  <data name="RptUidValParentCode" xml:space="preserve">
+    <value>Parent Code</value>
+  </data>
+  <data name="RptUidValProductSSCCDetails" xml:space="preserve">
+    <value>Product SSCC Details</value>
+  </data>
+  <data name="RptUidValProductUIDDetails" xml:space="preserve">
+    <value>Product UID Details</value>
+  </data>
+  <data name="RptUidValSSCCVerifedStatus" xml:space="preserve">
+    <value>SSCC Verifed Status</value>
+  </data>
+  <data name="RptUidValUIDCode" xml:space="preserve">
+    <value>UID Code</value>
+  </data>
+  <data name="RptUidValUIDDetails" xml:space="preserve">
+    <value>UID Details</value>
+  </data>
+  <data name="toastrChangePwdInvalidPwd" xml:space="preserve">
+    <value>Invalid password. Please try again</value>
+  </data>
+  <data name="toastrChangePwdProvideOldPwd" xml:space="preserve">
+    <value>Please Provide Old Password</value>
+  </data>
+  <data name="toastrChangePwdValidatePwd" xml:space="preserve">
+    <value>Password Needs combination of 8 letters with Small Letters, Capital Letters, Number and Special Charecter.</value>
+  </data>
+  <data name="DavaGenerated" xml:space="preserve">
+    <value>Generated</value>
+  </data>
+  <data name="DavaGenerationType" xml:space="preserve">
+    <value>Dava Generation type</value>
+  </data>
+  <data name="DavaNotGenerated" xml:space="preserve">
+    <value>Not Generated</value>
+  </data>
+  <data name="DavaPartialGenerated" xml:space="preserve">
+    <value>Partial Batch Generated</value>
+  </data>
+  <data name="DavaStatusRpt" xml:space="preserve">
+    <value>Dava Generation Status Report</value>
+  </data>
+  <data name="RptDetailedJobInfoNoRead" xml:space="preserve">
+    <value>No Read</value>
+  </data>
+  <data name="TrailActionBatchActivity" xml:space="preserve">
+    <value>Batch Activities</value>
+  </data>
+  <data name="TrailActionLabelActivity" xml:space="preserve">
+    <value>Label Designer Activity</value>
+  </data>
+  <data name="TrailActionProductActivity" xml:space="preserve">
+    <value>Product Activities</value>
+  </data>
+  <data name="TrailActionRoleActivity" xml:space="preserve">
+    <value>User Role Activities</value>
+  </data>
+  <data name="TrailActionTraceLinkModule" xml:space="preserve">
+    <value>Third Party UID Activities</value>
+  </data>
+  <data name="TrailInfoDavaActivity" xml:space="preserve">
+    <value>Dava Activities</value>
+  </data>
+  <data name="TrailInfoEPCISActivity" xml:space="preserve">
+    <value>EPCIS Activities</value>
+  </data>
+  <data name="TrailInfoLineActivity" xml:space="preserve">
+    <value>Line Setting Activites</value>
+  </data>
+  <data name="TrailInfoSettingActivity" xml:space="preserve">
+    <value>Setting Activities</value>
+  </data>
+  <data name="TrailLoginActivity" xml:space="preserve">
+    <value>Login Activity</value>
+  </data>
+  <data name="TrailLogoutActivity" xml:space="preserve">
+    <value>Logout Activity</value>
+  </data>
+  <data name="TrailReportActivity" xml:space="preserve">
+    <value>Report Activities</value>
+  </data>
+  <data name="TrailActionSKoreaActivity" xml:space="preserve">
+    <value>South Korea Compliance</value>
+  </data>
+  <data name="AuthorizedNo" xml:space="preserve">
+    <value>Authorized Number</value>
+  </data>
+  <data name="PackageSpecification" xml:space="preserve">
+    <value>Package Specification</value>
+  </data>
+  <data name="PackUnit" xml:space="preserve">
+    <value>Package Unit</value>
+  </data>
+  <data name="ResProdCode" xml:space="preserve">
+    <value>Res Product Code</value>
+  </data>
+  <data name="SubType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="SubTypeNumber" xml:space="preserve">
+    <value>Sub-Type Number</value>
+  </data>
+  <data name="SubTypeSpecification" xml:space="preserve">
+    <value>Type Specification</value>
+  </data>
+  <data name="Workshop" xml:space="preserve">
+    <value>Workshop</value>
+  </data>
+  <data name="RptcmnJobType" xml:space="preserve">
+    <value>Batch Type</value>
+  </data>
+  <data name="TrailReportJobWiseSSCC" xml:space="preserve">
+    <value>requested to view Batch Wise SSCC  Report for batch name</value>
+  </data>
+  <data name="M_CustomerSToCorpID" xml:space="preserve">
+    <value>ToCorpID</value>
+  </data>
+  <data name="EPCISShipmentEventAddedSuccessfully" xml:space="preserve">
+    <value>Epcis Shipment Event Added Successfully</value>
+  </data>
+  <data name="EPCISTransEventAddedSuccessfully" xml:space="preserve">
+    <value>Epcis Transaction Event Added Successfully</value>
+  </data>
+  <data name="ToolTipProductType" xml:space="preserve">
+    <value>It shows a country for which the product is packed.</value>
+  </data>
+  <data name="ToolTipProductInternalMaterialCode" xml:space="preserve">
+    <value>(Optional) This field is required when TraceLink integration is used &amp; XML file is generated. Instead of internal material code, product code can be entered.</value>
+  </data>
+  <data name="ToolTipProductActive" xml:space="preserve">
+    <value>This field clarifies the product is active or not</value>
+  </data>
+  <data name="ToolTipProductCode" xml:space="preserve">
+    <value>Product code should have 12 digits (As per GS1 standard - Manufacturer Code + Product Number)</value>
+  </data>
+  <data name="ToolTipProductComposition" xml:space="preserve">
+    <value>Composition should have minimum 3 &amp; maximum 500 characters. a-z A-Z 0-9 /&amp;;:-._`%()!*+,=&lt;&gt; characters can be used.</value>
+  </data>
+  <data name="ToolTipProductDescription" xml:space="preserve">
+    <value>(Optional) Please enter carefully, description is reflected in various reports.</value>
+  </data>
+  <data name="ToolTipProductDosageForm" xml:space="preserve">
+    <value>It's a form in which the product is marketed for use</value>
+  </data>
+  <data name="ToolTipProductDoseUsage" xml:space="preserve">
+    <value>Dose/Usage should have minimum 3 &amp; maximum 100 characters. a-z A-Z 0-9 /&amp;;:-._`%()!*+,=&lt;&gt; characters can be used.</value>
+  </data>
+  <data name="ToolTipProductFeacn" xml:space="preserve">
+    <value>FEACN stands for Foreign Economic Activity Commodity Nomenclature (Russia). It’s a 10 digits code. The first 4 digits are encoded in 2D barcode as well as in tertiary barcode.</value>
+  </data>
+  <data name="ToolTipProductFGCode" xml:space="preserve">
+    <value>It's a finished good code. It is internally generated by manufacturer.</value>
+  </data>
+  <data name="ToolTipProductGenericName" xml:space="preserve">
+    <value>Generic Name should have minimum 3 &amp; maximum 200 characters. a-z A-Z 0-9 /&amp;;:-._`%()!*+,=&lt;&gt; characters can be used.</value>
+  </data>
+  <data name="ToolTipProductIsSchedule" xml:space="preserve">
+    <value>This field clarifies the product is shedule drug or not as per drug classification</value>
+  </data>
+  <data name="ToolTipProductName" xml:space="preserve">
+    <value>Product Name should have minimum 3 &amp; maximum 50 characters. a-z A-Z 0-9 /&amp;;:-._`%()!*+,=&lt;&gt; characters can be used.</value>
+  </data>
+  <data name="ToolTipProductNDC" xml:space="preserve">
+    <value>(Optional) NDC is a unique 10-digit numeric identifier used in the United States for drugs intended for human use.</value>
+  </data>
+  <data name="ToolTipProductRemark" xml:space="preserve">
+    <value>(Optional) Remarks should have minimum 3 &amp; maximum 100 characters. a-z A-Z 0-9 /&amp;;:-._`%()!*+,=&lt;&gt; characters can be used.</value>
+  </data>
+  <data name="ToolTipProductSDC" xml:space="preserve">
+    <value>Saudi Drug Code (SDC) is a registration code, given by the Drug Sector to each registered drug in the Saudi market. SDC format: SFDA18V111</value>
+  </data>
+  <data name="ToolTipBatchCustomerId" xml:space="preserve">
+    <value>It’s an Customer ID for whom the batch is manufactured/marketed</value>
+  </data>
+  <data name="ToolTipBatchExpDateformat" xml:space="preserve">
+    <value>System will print the expiry date on product in this selected format</value>
+  </data>
+  <data name="ToolTipBatchFGCode" xml:space="preserve">
+    <value>It's a finished good code. It is internally generated by manufacturer.</value>
+  </data>
+  <data name="ToolTipBatchPackagingLvl" xml:space="preserve">
+    <value>It's a packaging hierarchy to pack the product</value>
+  </data>
+  <data name="ToolTipBatchPONumber" xml:space="preserve">
+    <value>PO No./BPR Code/Batch Name is an unique identification name/number assigned to a particular quantity or lot. PO Number should have minimum 1 &amp; maximum 20 characters.</value>
+  </data>
+  <data name="ToolTipBatchPrimaryPCMAP" xml:space="preserve">
+    <value>It shows number of primary unit packed in one secondary unit. Such as 2 Blister's pack in 1 Carton</value>
+  </data>
+  <data name="ToolTipBatchProductLine" xml:space="preserve">
+    <value>Shows a list of connected production lines</value>
+  </data>
+  <data name="ToolTipBatchQty" xml:space="preserve">
+    <value>It is the standard quantity of an item that is produced in each production run. As per batch quantity is inserted, good cartons can be printed.</value>
+  </data>
+  <data name="ToolTipImportProductUpload" xml:space="preserve">
+    <value>Select the excel file of product details</value>
+  </data>
+  <data name="ToolTipProductAuthorizedNo" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductBundlingQty" xml:space="preserve">
+    <value>It shows the quantity packed in one bundle. Numeric allowed range is 1 to 9999999. Use this field when bundling machine is available otherwise use 1 number as default</value>
+  </data>
+  <data name="ToolTipProductExpDateFormat" xml:space="preserve">
+    <value>System will print the expiry date on product in this selected format</value>
+  </data>
+  <data name="ToolTipProductGTIN" xml:space="preserve">
+    <value>The GTIN is the GS1 identification key used to uniquely identify trade items worldwide. First digit in GTIN always indicate packaging level. The next 12 digits are product code and the last digit is a check digit</value>
+  </data>
+  <data name="ToolTipProductLabelFilter" xml:space="preserve">
+    <value>It shows the sequence of application identifiers &amp; data to be printed in 2D and Human Readable format</value>
+  </data>
+  <data name="ToolTipProductLabelName" xml:space="preserve">
+    <value>It shows existing labels list</value>
+  </data>
+  <data name="ToolTipProductMRP" xml:space="preserve">
+    <value>(Optional) It's a maximum retail price. Numeric allowed range is 0.50 to 9999999.99</value>
+  </data>
+  <data name="ToolTipProductPackageSpec" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductPackUnit" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductPCMAP" xml:space="preserve">
+    <value>This term is used for Parent-Child mapping, it shows how many units (child) are packed in next level pack (parent).</value>
+  </data>
+  <data name="ToolTipProductPPN" xml:space="preserve">
+    <value>Please enter 12 digit PPN number</value>
+  </data>
+  <data name="ToolTipProductResProduct" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductSubType" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductSubTypeNo" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductSubTypeSpec" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipProductUseExpDay" xml:space="preserve">
+    <value>System will encode the day in 2D code. For example, if yyMMdd.</value>
+  </data>
+  <data name="ToolTipProductWorkshop" xml:space="preserve">
+    <value>This field appears when XML file is generated.</value>
+  </data>
+  <data name="ToolTipBatchSurplusUID" xml:space="preserve">
+    <value>(Optional) It shows excess amount of UID assigned for batch</value>
+  </data>
+  <data name="ToopTipBatchLotNo" xml:space="preserve">
+    <value>Please enter Lot Number</value>
+  </data>
+  <data name="ToolTipBatchAutoDate" xml:space="preserve">
+    <value>Please check the checkbox if Manufacturing Date and Expiry Date has to be Default</value>
+  </data>
+  <data name="ToolTipBatchAutomaticBatchClosure" xml:space="preserve">
+    <value>User will get alert on batch quantity reach at line level application.</value>
+  </data>
+  <data name="ToolTipBatchExpiryDate" xml:space="preserve">
+    <value>Must be greater than manufacturing date</value>
+  </data>
+  <data name="ToolTipBatchForExport" xml:space="preserve">
+    <value>It shows this batch/lot/consignment contains drugs/devices for export purposes</value>
+  </data>
+  <data name="ToolTipBatchManufacturingDate" xml:space="preserve">
+    <value>Please enter Manufacturing Date for the Batch</value>
+  </data>
+  <data name="ToolTipBatchNo" xml:space="preserve">
+    <value>Batch/Lot No. should have maximum 20 characters, a-z A-Z 0-9 characters can be used.</value>
+  </data>
+  <data name="ToolTipBatchPPNCountry" xml:space="preserve">
+    <value>It's a recipient's country code. The Country &amp; Postal code's combination is used in tertiary/ship to code.</value>
+  </data>
+  <data name="ToolTipBatchPPNPostal" xml:space="preserve">
+    <value>It's a recipient's postal code. The Country &amp; Postal code's combination is used in tertiary/ship to code.</value>
+  </data>
+  <data name="ToolTipBatchPrintwithUID" xml:space="preserve">
+    <value>System will print the UID by default in human readable format</value>
+  </data>
+  <data name="ToolTipBatchProductName" xml:space="preserve">
+    <value>It shows Product Name of the selected FG Code.</value>
+  </data>
+  <data name="TooTipBatchProductCode" xml:space="preserve">
+    <value>It shows Product Code of the selected FG Code.</value>
+  </data>
+  <data name="ToolTipBatchManagerSearch" xml:space="preserve">
+    <value>It can be used to search product/batch details</value>
+  </data>
+  <data name="ToolTipBatchManagerSelectLine" xml:space="preserve">
+    <value>It shows physical location or line name assigned  for packing lines</value>
+  </data>
+  <data name="ToolTipCompAddress" xml:space="preserve">
+    <value>Please enter Company Address</value>
+  </data>
+  <data name="ToolTipCompCity" xml:space="preserve">
+    <value>Please enter City in which Company is Located</value>
+  </data>
+  <data name="ToolTipCompCode" xml:space="preserve">
+    <value>Please enter Company Code</value>
+  </data>
+  <data name="ToolTipCompCompanyName" xml:space="preserve">
+    <value>Please enter Company Name</value>
+  </data>
+  <data name="ToolTipCompCountry" xml:space="preserve">
+    <value>Please select Country in which company is loacted</value>
+  </data>
+  <data name="ToolTipCompGLN" xml:space="preserve">
+    <value>Please enter GLN </value>
+  </data>
+  <data name="ToolTipCompLicense" xml:space="preserve">
+    <value>Please enter License </value>
+  </data>
+  <data name="ToolTipCompLicenseAgency" xml:space="preserve">
+    <value>Please enter name of the License Agency in which Company is Located</value>
+  </data>
+  <data name="ToolTipCompLicenseState" xml:space="preserve">
+    <value>Please enter State of the License in which company is Located</value>
+  </data>
+  <data name="ToolTipCompLineCode" xml:space="preserve">
+    <value>Please enter Line Code</value>
+  </data>
+  <data name="ToolTipCompPlantCode" xml:space="preserve">
+    <value>Please enter Plant Code</value>
+  </data>
+  <data name="ToolTipCompPostalCode" xml:space="preserve">
+    <value>Please enter Postal Code in which company is Located</value>
+  </data>
+  <data name="ToolTipCompPPN" xml:space="preserve">
+    <value>Please enter PPN IAC_CIN</value>
+  </data>
+  <data name="ToolTipCompRemark" xml:space="preserve">
+    <value>Please enter Remark</value>
+  </data>
+  <data name="ToolTipCompState" xml:space="preserve">
+    <value>Please select State or Region in which Company is located</value>
+  </data>
+  <data name="ToolTipCompStreet" xml:space="preserve">
+    <value>Please enter name of street where Company is located</value>
+  </data>
+  <data name="ToolTipRoleActive" xml:space="preserve">
+    <value>Please check checkbox if Role has to be Active</value>
+  </data>
+  <data name="ToolTipRoleName" xml:space="preserve">
+    <value>Please enter Role Name</value>
+  </data>
+  <data name="ToolTipRolePermission" xml:space="preserve">
+    <value>Please enter Permission for the Role</value>
+  </data>
+  <data name="ToolTipUserConfirmPassword" xml:space="preserve">
+    <value>Please enter Confirm password must be same as Password</value>
+  </data>
+  <data name="ToolTipUserCreate" xml:space="preserve">
+    <value>Please select Role for which the User has to be Created</value>
+  </data>
+  <data name="ToolTipUserID" xml:space="preserve">
+    <value>Please enter User Id</value>
+  </data>
+  <data name="ToolTipUserName" xml:space="preserve">
+    <value>Please enter User Name</value>
+  </data>
+  <data name="ToolTipUserPassword" xml:space="preserve">
+    <value>Please enter maximum 16 digits and Minimum 8 digits Password with atlease 1 small letter,Capital letter,Number and Special Symbol</value>
+  </data>
+  <data name="ChinaSelectFile" xml:space="preserve">
+    <value>Select File :</value>
+  </data>
+  <data name="ToolTipChinaGenerateXML" xml:space="preserve">
+    <value>Please select PO Number for which Xml has to be Generated</value>
+  </data>
+  <data name="ToolTipChinaImportUIDDeck" xml:space="preserve">
+    <value>Please select Deck of Product for which UID has to be imported</value>
+  </data>
+  <data name="ToolTipChinaImportUIDProductName" xml:space="preserve">
+    <value>Please select Product Name for which UID has to be imported</value>
+  </data>
+  <data name="ToolTipChinaImportUIDSelectFile" xml:space="preserve">
+    <value>Please select File from which UID has to be imported </value>
+  </data>
+  <data name="ToolTipExportBatchNo" xml:space="preserve">
+    <value>Please select Batch No for which XML has to be Generated</value>
+  </data>
+  <data name="ToolTipExportFileType" xml:space="preserve">
+    <value>Please select File Type of XML to be Generated</value>
+  </data>
+  <data name="ToolTipLineCode" xml:space="preserve">
+    <value>Please enter Line Code</value>
+  </data>
+  <data name="ToolTipLineDatabaseName" xml:space="preserve">
+    <value>Please enter Line DataBase Name</value>
+  </data>
+  <data name="ToolTipLineDivisionCode" xml:space="preserve">
+    <value>Please enter Division Code</value>
+  </data>
+  <data name="ToolTipLineID" xml:space="preserve">
+    <value>Please enter Line Id</value>
+  </data>
+  <data name="ToolTipLineIP" xml:space="preserve">
+    <value>Please enter Line IP</value>
+  </data>
+  <data name="ToolTipLineLocationCode" xml:space="preserve">
+    <value>Please enter Location Code</value>
+  </data>
+  <data name="ToolTipLineName" xml:space="preserve">
+    <value>Please enter Line Name</value>
+  </data>
+  <data name="ToolTipLinePlantCode" xml:space="preserve">
+    <value>Please enter Plant Code</value>
+  </data>
+  <data name="ToolTipLineServerName" xml:space="preserve">
+    <value>Please enter Server Name</value>
+  </data>
+  <data name="ToolTipLineSqlPassword" xml:space="preserve">
+    <value>Please enter Line SQL Password</value>
+  </data>
+  <data name="ToolTipLineSqlUserName" xml:space="preserve">
+    <value>Please enter Line SQL Username</value>
+  </data>
+  <data name="ToolTipProductXmlBatchNo" xml:space="preserve">
+    <value>Please select Batch No for whose Product XML has to generated</value>
+  </data>
+  <data name="ToolTipProductXMLCountryName" xml:space="preserve">
+    <value>Please select Country Name</value>
+  </data>
+  <data name="ToolTipProductXMLCurrencyCode" xml:space="preserve">
+    <value>Please enter Currency Code</value>
+  </data>
+  <data name="ToolTipProductXMLProductName" xml:space="preserve">
+    <value>Please select the Product Name of the Batch for which the XML has to be Generated</value>
+  </data>
+  <data name="ToolTipProductXMLTargetMarketExemptionDate" xml:space="preserve">
+    <value>Please select Date for Target Market Exemption Date</value>
+  </data>
+  <data name="ToolTipProductXMLTargetMarketExemptionReference" xml:space="preserve">
+    <value>Please enter Target Market Exemption Reference</value>
+  </data>
+  <data name="ToolTipProductXMLTargetMarketExep" xml:space="preserve">
+    <value>Please select true or false for Target Market Exemption</value>
+  </data>
+  <data name="ToolTipProductXMLUnitPrice" xml:space="preserve">
+    <value>Please enter Unit Price</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListBatchName" xml:space="preserve">
+    <value>Please select Batch Name for which the XML of UID List has to be Created</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListCommandId" xml:space="preserve">
+    <value>Please enter Command Id feild in XML </value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListDeck" xml:space="preserve">
+    <value>Please select Deck for which the XML of UID List has to be Created</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListDeviceID" xml:space="preserve">
+    <value>Please enter Device Id feild in XML</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListNoOfRec" xml:space="preserve">
+    <value>Please enter Number of Records per XML file</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListReaderId" xml:space="preserve">
+    <value>Please enter Reader ID feild in XML</value>
+  </data>
+  <data name="ToolTipSKCreateXMLUIDListUOM" xml:space="preserve">
+    <value>Please enter UOM feild in XML</value>
+  </data>
+  <data name="ToolTipSKSelectFile" xml:space="preserve">
+    <value>Please select XML file with Serial number Series of South Korea Batch</value>
+  </data>
+  <data name="ToolTipSomBusinessLookUpId" xml:space="preserve">
+    <value>Please enter From Business Party Lookup Id</value>
+  </data>
+  <data name="ToolTipSomBusinessName" xml:space="preserve">
+    <value>Please enter Business Name</value>
+  </data>
+  <data name="ToolTipSomCountry" xml:space="preserve">
+    <value>Please select Country</value>
+  </data>
+  <data name="ToolTipSomDeliveryCompleteFlag" xml:space="preserve">
+    <value>Please  check the check box Delivery Complete Flag </value>
+  </data>
+  <data name="ToolTipSomDeliveryNumber" xml:space="preserve">
+    <value>Please enter Delivery Number</value>
+  </data>
+  <data name="ToolTipSomIsSerialized" xml:space="preserve">
+    <value>Please check checkbox for Is Serialized?</value>
+  </data>
+  <data name="ToolTipSomLocationLookUpId" xml:space="preserve">
+    <value>Please enter Ship From Location Lookup Id</value>
+  </data>
+  <data name="ToolTipSomSalesDistribution" xml:space="preserve">
+    <value>Please enter Sales Distribution Type</value>
+  </data>
+  <data name="ToolTipSomToBusinessPartyLookupId" xml:space="preserve">
+    <value>Please enter Business Party Lookup Id</value>
+  </data>
+  <data name="ToolTipSomTransactionDate" xml:space="preserve">
+    <value>Please select Transaction Date</value>
+  </data>
+  <data name="ToolTipSomTransactionIdentifier" xml:space="preserve">
+    <value>Please enter Transaction Identifier</value>
+  </data>
+  <data name="ToolTipTracelinkCustomer" xml:space="preserve">
+    <value>Please select Customer form which UID has to be imported</value>
+  </data>
+  <data name="ToolTipTracelinkGTIN" xml:space="preserve">
+    <value>Please select GTIN for which UID has to be imported</value>
+  </data>
+  <data name="ToolTipTracelinkQuantity" xml:space="preserve">
+    <value>Please select Number of which UID has to be imported</value>
+  </data>
+  <data name="ToolTipUserActive" xml:space="preserve">
+    <value>Please check the checkbox if User has to be Active</value>
+  </data>
+  <data name="ToolTipUserChangeRole" xml:space="preserve">
+    <value>Please select role to change the role of the User</value>
+  </data>
+  <data name="ToolTipUserPasswordExp" xml:space="preserve">
+    <value>Please enter number of days after which Password should expire</value>
+  </data>
+  <data name="ToolTipDAVAActualBatchQty" xml:space="preserve">
+    <value>The Following feild shows the Actual Batch Quantity for the selected Batch No</value>
+  </data>
+  <data name="ToolTipDAVAAllBatch" xml:space="preserve">
+    <value>Please check the radio button if All Batch DAVA File has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVABatch" xml:space="preserve">
+    <value>Please check the radio button if Batch DAVA File has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVABatchNo" xml:space="preserve">
+    <value>Please select Batch No for which DAVA File has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVABatchType" xml:space="preserve">
+    <value>Consists the Batch Type for which the Batch No was selected</value>
+  </data>
+  <data name="ToolTipDAVAExemptCode" xml:space="preserve">
+    <value>Please select the Country for Exemption Code if Exempted From Barcoding check box is checked</value>
+  </data>
+  <data name="ToolTipDAVAExemptForBarcode" xml:space="preserve">
+    <value>The Exempted From Barcoding check box is checked for non DGFT Batch</value>
+  </data>
+  <data name="ToolTipDAVAExportedBatchQy" xml:space="preserve">
+    <value>The Following feild shows the Exported Batch Quantity for the selected Batch No</value>
+  </data>
+  <data name="ToolTipDavaFileContent" xml:space="preserve">
+    <value>Below Contains the Contents of the above  selected File </value>
+  </data>
+  <data name="ToolTipDavaFileGeneration" xml:space="preserve">
+    <value>Please Select file for XML File Regeneration :</value>
+  </data>
+  <data name="ToolTipDAVAPartialBatch" xml:space="preserve">
+    <value>Please check the Partial Batch radio button if Dava file has to be Generated for above selected Partail Batch</value>
+  </data>
+  <data name="ToolTipDAVAProduct" xml:space="preserve">
+    <value>Please check the radio button if Product DAVA File has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVAProductionDetails" xml:space="preserve">
+    <value>Please check the Production Details radio button  if DAVA file has to Generated</value>
+  </data>
+  <data name="ToolTipDAVARemainingBatchQty" xml:space="preserve">
+    <value>The Following feild shows the Remaining Batch Quantity for the selected Batch No</value>
+  </data>
+  <data name="ToolTipDAVAScanSSCC" xml:space="preserve">
+    <value>Please enter SSCC code for which the Dava file has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVASingleBatch" xml:space="preserve">
+    <value>Please check the radio button if Single Batch DAVA File has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVATertiaryPacks" xml:space="preserve">
+    <value>Please check the  Tertiary Packs Exempted radio button if DAVA file has to be Generated</value>
+  </data>
+  <data name="ToolTipDAVAWholeBatch" xml:space="preserve">
+    <value>Please check the Whole Batch radio button if above selected Whole Batch Dava has to be Generated</value>
+  </data>
+  <data name="ToolTipEPCISEmailId" xml:space="preserve">
+    <value>Please enter Email Id</value>
+  </data>
+  <data name="ToolTipEPCISIndexSelectBatch" xml:space="preserve">
+    <value>Please Select Batch for which EPCIS XML has to be Generated</value>
+  </data>
+  <data name="ToolTipEPCISTransporterAgencyAddress" xml:space="preserve">
+    <value>Please enter Transporter/Agency Address</value>
+  </data>
+  <data name="ToolTipEPCISTransporterAgencyContactNumber" xml:space="preserve">
+    <value>Please enter Transporter/Agency Contact Number</value>
+  </data>
+  <data name="ToolTipEPCISTransporterAgencyName" xml:space="preserve">
+    <value>Please enter Transporter/Agency Name</value>
+  </data>
+  <data name="ToolTipShipmentBizStep" xml:space="preserve">
+    <value>Please select Biz Step for shipment</value>
+  </data>
+  <data name="ToolTipShipmentDispositionEvent" xml:space="preserve">
+    <value>Please select Disposition Even for shipment</value>
+  </data>
+  <data name="ToolTipShipmentDriverContactNumber" xml:space="preserve">
+    <value>Please enter Contact Number of Driver </value>
+  </data>
+  <data name="ToolTipShipmentDriverName" xml:space="preserve">
+    <value>Please enter Driver Name</value>
+  </data>
+  <data name="ToolTipShipmentPartialBatch" xml:space="preserve">
+    <value>Please check radio button if Partial Batch Shipment has to be done</value>
+  </data>
+  <data name="ToolTipShipmentReceiver" xml:space="preserve">
+    <value>Please select Receiver for shipment</value>
+  </data>
+  <data name="ToolTipShipmentSelectBatch" xml:space="preserve">
+    <value>Please select Batch for which Shipment has to be Done</value>
+  </data>
+  <data name="ToolTipShipmentTransporter" xml:space="preserve">
+    <value>Please select Transporter for shipment</value>
+  </data>
+  <data name="ToolTipShipmentVehicleNumber" xml:space="preserve">
+    <value>Please enter Vehicle Number</value>
+  </data>
+  <data name="ToolTipShipmentWholeBatch" xml:space="preserve">
+    <value>Please check radio button if Whole Batch Shipment has to be done</value>
+  </data>
+  <data name="ToolTipTransactionBizStep" xml:space="preserve">
+    <value>Please select Biz Step for Transaction</value>
+  </data>
+  <data name="ToolTipTransactionDispositionEvent" xml:space="preserve">
+    <value>Please select Disposition Even for Transaction</value>
+  </data>
+  <data name="ToolTipTransactionDocumentDetail" xml:space="preserve">
+    <value>Please enter Document Details for the selected Document</value>
+  </data>
+  <data name="ToolTipTransactionDocumtentType" xml:space="preserve">
+    <value>Please select the required  Document type for the Transaction</value>
+  </data>
+  <data name="ToolTipTransactionSelectBatch" xml:space="preserve">
+    <value>Please select Batch for which Transaction has to be Done</value>
+  </data>
+  <data name="ToolTipTransactiontPartialBatch" xml:space="preserve">
+    <value>Please check radio button if Partial Batch Transaction has to be done</value>
+  </data>
+  <data name="ToolTipTransactionWholeBatch" xml:space="preserve">
+    <value>Please check radio button if Whole Batch Transaction has to be done</value>
+  </data>
+  <data name="ToolTipEpcisCity" xml:space="preserve">
+    <value>Please enter City in which Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisCompanyName" xml:space="preserve">
+    <value>Please enter Company Name</value>
+  </data>
+  <data name="ToolTipEpcisCountry" xml:space="preserve">
+    <value>Please select the Country in which Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisCountryCode" xml:space="preserve">
+    <value>Please enter Country Code in which the Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisGLN" xml:space="preserve">
+    <value>Please enter GLN </value>
+  </data>
+  <data name="ToolTipEpcisLatitude" xml:space="preserve">
+    <value>Please enter Latitude of the location in which the Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisLongitude" xml:space="preserve">
+    <value>Please enter Longitude of the Location in which the Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisPostalCode" xml:space="preserve">
+    <value>Please enter Postal Code of the Location in which Company is located</value>
+  </data>
+  <data name="ToolTipEpcisSite" xml:space="preserve">
+    <value>Please enter Site</value>
+  </data>
+  <data name="ToolTipEpcisStateOrRegion" xml:space="preserve">
+    <value>Please select State Or Region in which Company is Located</value>
+  </data>
+  <data name="ToolTipEpcisStreet1" xml:space="preserve">
+    <value>Please enter Street Name on which Company is Located</value>
+  </data>
+  <data name="ToolTipReportBatchName" xml:space="preserve">
+    <value>Please select Batch Name</value>
+  </data>
+  <data name="ToolTipReportBatchNumber" xml:space="preserve">
+    <value>Please select Batch Number</value>
+  </data>
+  <data name="ToolTipReportBatchStatus" xml:space="preserve">
+    <value>Please select Batch Status</value>
+  </data>
+  <data name="ToolTipReportDivisionCode" xml:space="preserve">
+    <value>Please select Division Code</value>
+  </data>
+  <data name="ToolTipReportEXPDateWise" xml:space="preserve">
+    <value>Please check the radio button if you have to view the Report according to Expiry Date</value>
+  </data>
+  <data name="ToolTipReportEXPFrom" xml:space="preserve">
+    <value>Please select From Expiry Date to view Report</value>
+  </data>
+  <data name="ToolTipReportExpTo" xml:space="preserve">
+    <value>Please select To Expiry Date to view Report</value>
+  </data>
+  <data name="ToolTipReportLineCode" xml:space="preserve">
+    <value>Please select Line Code</value>
+  </data>
+  <data name="ToolTipReportLocationCode" xml:space="preserve">
+    <value>Please select Location Code</value>
+  </data>
+  <data name="ToolTipReportMFGDateWise" xml:space="preserve">
+    <value>Please check the radio button if you have to view the Report according to Manufacturing Date</value>
+  </data>
+  <data name="ToolTipReportMFGFrom" xml:space="preserve">
+    <value>Please select From Manufacturing Date to view Report</value>
+  </data>
+  <data name="ToolTipReportMFGTo" xml:space="preserve">
+    <value>Please select To Manufacturing Date to view Report</value>
+  </data>
+  <data name="ToolTipReportPlantCode" xml:space="preserve">
+    <value>Please select Plant Code</value>
+  </data>
+  <data name="ToolTipReportProductName" xml:space="preserve">
+    <value>Plase select Product Name</value>
+  </data>
+  <data name="ToolTipTrailActivity" xml:space="preserve">
+    <value>Please select Activity for which you would like to View Trail Report</value>
+  </data>
+  <data name="ToolTipTrailFrom" xml:space="preserve">
+    <value>Please select From Date from which you like to View Trail Report</value>
+  </data>
+  <data name="ToolTipTrailLine" xml:space="preserve">
+    <value>Please check radio button if you want to view Line Trail</value>
+  </data>
+  <data name="ToolTipTrailLineCode" xml:space="preserve">
+    <value>Please select Line for which you would like to view Line Trail Report</value>
+  </data>
+  <data name="ToolTipTrailServer" xml:space="preserve">
+    <value>Please check radio button if you want to view Server Trail</value>
+  </data>
+  <data name="ToolTipTrailTo" xml:space="preserve">
+    <value>Please select To Date to which you like to View Trail Report</value>
+  </data>
+  <data name="ToolTipTrailUserName" xml:space="preserve">
+    <value>Please select Username for which you would like to View Trail Report</value>
+  </data>
+  <data name="ToolTipUserReportActive" xml:space="preserve">
+    <value>Please check the radio button if you would line to View Active User Report</value>
+  </data>
+  <data name="ToolTipUserReportDeactive" xml:space="preserve">
+    <value>Please check the radio button if you would line to View Deactive User Report</value>
+  </data>
+  <data name="TrailActionChinaActivity" xml:space="preserve">
+    <value>China Compliance</value>
+  </data>
+  <data name="toastrImportUIDselectDeck" xml:space="preserve">
+    <value>Please select Deck</value>
+  </data>
+  <data name="toastrImportUIDselectPONumber" xml:space="preserve">
+    <value>Please select PO Number</value>
+  </data>
+  <data name="toastrImportUIDselectProductName" xml:space="preserve">
+    <value>Please select Product Name</value>
+  </data>
+  <data name="TempDataRFXLImportError" xml:space="preserve">
+    <value>Tracelink server errors :</value>
+  </data>
+  <data name="ToolTipBatchUIDProvider" xml:space="preserve">
+    <value>It shows the UID provider’s name</value>
+  </data>
+</root>

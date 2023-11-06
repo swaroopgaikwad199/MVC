@@ -1,0 +1,159 @@
+﻿@model TnT.Models.AdditionBatchQty.AdditionBatchQty
+
+@{
+    ViewBag.Title = "CreateAdditionBatchQty";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<h2>
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("VerifyAdditionBatchQty", "Jobs")' class="btn btn-info btn-icon icon-left">
+       @TnT.LangResource.GlobalRes.JobCreateAdditionalBatchQnty
+        <i class="fa fa-server"></i>
+    </a>
+</h2>
+@using (Html.BeginForm("CreateAdditionBatchQty", "Jobs", FormMethod.Post, new { @id = "frmExtraUidRequest" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" style="margin-top:6%">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.JobsBatchManagerBatchName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipAdditionBatchQuantityBatchName, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.JID, new SelectList(ViewBag.job, "JID", "JobName"), TnT.LangResource.GlobalRes.JobCreateDrpType, new { @class = "form-control col-md-8", @validate = "true", @id = "drpJid", style = "width:350px" })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.JobCreateAdditionalBatchQtyOriginalBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipAdditionBatchQuantityCurrentBatchQuantity, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.Editor("OriginalBatchQty", new { htmlAttributes = new { @class = "form-control", @maxlength = "10", style = "width:350px", @id = "originalQty", @disabled = "true" } })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.JobCreateAdditionalBatchQtyCurrentBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipAdditionBatchQuantityCurrentBatchQuantity, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CurrentBatchQty, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", style = "width:350px", @id = "currQty", @disabled = "true" } })
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.JobCreateAdditionalBatchExtraQnty, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipAdditionBatchQuantityExtraBatchQuantity, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.RequiredBatchQty, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", style = "width:350px" } })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <input type="button" id="btnSubmit" value="@TnT.LangResource.GlobalRes.btnJobCreateAdditionalBatchQtyCreReq" class="btn btn-info btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("#drpJid").change(function () {
+        var jid = $("#drpJid").val();
+        $.ajax({
+            url: 'GetbatchQty',
+            type: "POST",
+            dataType: 'json',
+            data: { "jid": jid },
+            success: function (data) {
+                debugger;
+                if (data == "False") {
+                    $("#btnSubmit").attr("disabled", "disabled");
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrJobCreateAdditionBatchQtyforBatchName " + $("#drpJid option:selected").text());
+                }
+                else {
+                    $("#btnSubmit").removeAttr("disabled");
+                    $("#currQty").val(data[0]);
+                    $("#originalQty").val(data[1]);
+                }
+            }
+        });
+    });
+    $(document).ready(function () {
+
+        var jid = $("#drpJid").val();
+        $.ajax({
+            url: 'GetbatchQty',
+            type: "POST",
+            dataType: 'json',
+            data: { "jid": jid },
+            success: function (data) {
+
+                debugger;
+
+            }
+        });
+
+    });
+
+    $("#btnSubmit").click(function () {
+        debugger;
+        var msgPOST = "";
+        var drpJid = $("#drpJid").val();
+        var Quantity = $("#RequiredBatchQty").val();
+
+
+        if (drpJid == "") {
+            showMessage("drpJid", "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch");
+            msgPOST += "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch";
+        } else {
+            clearColor("drpJid");
+        }
+
+        if (Quantity == "") {
+            showMessage("RequiredBatchQty", "@TnT.LangResource.GlobalRes.ShwMsgJobCreateAddBatchQtyEntreQty");
+            msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgJobCreateAddBatchQtyEntreQty";
+        } else {
+            clearColor("Quantity");
+        }
+        if (msgPOST == "") {
+
+            $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+            $("#showDigitalBx").trigger("click");
+
+        }
+
+    });
+
+    function postData() {
+
+
+
+        formSubmit();
+
+
+    }
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+
+    function formSubmit() {
+        document.getElementById("frmExtraUidRequest").submit();
+
+    }
+</script>

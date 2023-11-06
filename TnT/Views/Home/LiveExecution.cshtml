@@ -1,0 +1,298 @@
+﻿@model IEnumerable<TnT.Models.Home.LiveLinesViewModel>
+
+@{
+    ViewBag.Title = "Live Status";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.HomeLiveExecution</h2>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table style="margin-left:40px" width="100%">
+            <tr>
+                <td>
+                    <div class="glossySmall statusYellow  hvr-bounce-in">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @TnT.LangResource.GlobalRes.HomeLiveExecutionReadyforSerialization
+                </td>
+                <td>
+                    <div class="glossySmall statusGreen">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @TnT.LangResource.GlobalRes.HomeLiveExecutionSerializationinprogress
+                </td>
+                <td>
+                    <div class="glossySmall statusRed">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @TnT.LangResource.GlobalRes.HomeLiveExecutionNotReadyforSerialization
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr />
+<br />
+
+
+
+
+
+@*@Html.ActionLink("Test", "LiveLineExecution", new { LineLocId = "PTPL-SPD-EP10-demoline" })*@
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-default panel-shadow" data-collapsed="0">
+            <!-- to apply shadow add class "panel-shadow" -->
+            <!-- panel body -->
+            <div class="panel-body">
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-6">
+                            <div class="panel panel-primary  hvr-bounce-in" id="charts_env">
+
+                                <div class="panel-heading">
+                                    <div class="panel-title">@item.LineName</div>
+
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#line-dashboard-@item.LineId" data-toggle="tab">@TnT.LangResource.GlobalRes.HomeLiveExeStats</a></li>
+                                            <li class=""><a href="#line-chart-@item.LineId" data-toggle="tab">@TnT.LangResource.GlobalRes.HomeLiveExeLineChart</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane text-center" id="line-chart-@item.LineId">
+                                            <div id="LCDiv_@item.LineId" style="min-height: 207px;">
+                                            
+                                                <a onclick='getLineChartData("@item.LineId")'>@TnT.LangResource.GlobalRes.HomeLiveExeViewChart </a>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="tab-pane active " id="line-dashboard-@item.LineId">
+                                            <div class="tile-stats tile-gray" style="padding: 5px;background: #fff;border: 2px double #000;min-height: 207px;">
+
+                                                @if (item.Status == 404)
+                                                {
+
+                                                <table class="table">
+                                                    <thead>
+                                                    <th colspan="2" style="text-align:center;color:red "><strong>@Html.DisplayFor(modelItem => item.LineName) </strong></th>
+                                                    </thead>
+
+                                                    <tr>
+                                                        <th><strong style="color:red">@TnT.LangResource.GlobalRes.HomeLiveExecutionErrorDetails</strong></th>
+                                                        <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                                    </tr>
+
+                                                </table>
+                                                }
+                                                else
+                                                {
+
+                                                <div class="col-sm-2">
+                                                    @if (item.Status == 1)
+                                                        {
+                                                        <div class="glossy statusGreen">&nbsp;</div>
+
+                                                        }
+                                                    @if (item.Status == 2)
+                                                        {
+                                                        <div class="glossy statusYellow">&nbsp;</div>
+                                                        }
+                                                    @if (item.Status == 3)
+                                                        {
+                                                        <div class="glossy statusRed">&nbsp;</div>
+
+                                                        }
+                                                    @if (item.Status == 103)
+                                                        {
+                                                        <div class="glossy statusRed">&nbsp;</div>
+
+                                                        }
+                                                </div>
+
+
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-12">
+
+                                                        <table class="table">
+                                                            <thead>
+                                                            <th colspan="2" style="text-align:center;"><strong>@Html.DisplayFor(modelItem => item.LineName) </strong></th>
+
+                                                            </thead>
+
+                                                            <tr>
+                                                                <td><strong>@Html.DisplayNameFor(modelItem => modelItem.ProductName)</strong></td>
+                                                                <td colspan="3">@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>@Html.DisplayNameFor(modelItem => modelItem.OrderName)</strong></td>
+                                                                <td colspan="3">@Html.DisplayFor(modelItem => item.OrderName)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>@Html.DisplayNameFor(modelItem => modelItem.BatchNo)</strong></td>
+                                                                <td>@Html.DisplayFor(modelItem => item.BatchNo)</td>
+                                                                <td><strong>@Html.DisplayNameFor(modelItem => modelItem.Size)</strong></td>
+                                                                <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <strong>@Html.DisplayNameFor(modelItem => modelItem.Status)</strong>
+                                                        <table class="table">
+                                                            <tr>
+                                                                @if (item.printingDetails != null)
+                                                                    {
+                                                                        var data = (from u in item.printingDetails select new { PackagingTypeCode = u.PackagingTypeCode, TotalPrintedQty = u.TotalPrintedQty }).OrderByDescending(x => x.TotalPrintedQty);
+                                                                        foreach (var lvl in data)
+                                                                        {
+                                                                            string lvlCOde = lvl.PackagingTypeCode;
+
+                                                                    <th><strong>@Html.DisplayFor(lvlItem => lvl.PackagingTypeCode) </strong>   </th>
+                                                                        }
+                                                                    }
+                                                            </tr>
+                                                            <tr>
+                                                                @if (item.printingDetails != null)
+                                                                    {
+                                                                        var data = (from u in item.printingDetails select new { PackagingTypeCode = u.PackagingTypeCode, TotalPrintedQty = u.TotalPrintedQty }).OrderByDescending(x => x.TotalPrintedQty);
+                                                                        foreach (var lvl in data)
+                                                                        {
+
+                                                                    <td>@Html.DisplayFor(modelItem => lvl.TotalPrintedQty)</td>
+
+                                                                        }
+                                                                    }
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                }
+
+                                            </div>
+
+                                            @*    </div>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+
+
+            <style>
+                .glossy {
+                    height: 50px;
+                    width: 50px;
+                    margin-top: 45px;
+                    -webkit-border-radius: 25px;
+                    -moz-border-radius: 25px;
+                    border-radius: 25px;
+                    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, .2);
+                }
+
+                .glossySmall {
+                    height: 25px;
+                    width: 25px;
+                    margin-top: 10px;
+                    -webkit-border-radius: 25px;
+                    -moz-border-radius: 25px;
+                    border-radius: 25px;
+                    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, .2);
+                    font-weight: bolder;
+                }
+
+
+                .statusGreen {
+                    border: 1px solid #90CC53;
+                    background: #90CC53;
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#90CC53), color-stop(100%,#EDFFA1));
+                    background: -webkit-linear-gradient(top, #90CC53 31%,#EDFFA1 100%) background: -moz-linear-gradient(top, #90CC53 31%, #EDFFA1 100%);
+                    background: -o-linear-gradient(top, #90CC53 31%,#EDFFA1 100%);
+                    background: -ms-linear-gradient(top, #90CC53 31%,#EDFFA1 100%);
+                    background: linear-gradient(to bottom, #90CC53 31%,#EDFFA1 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#90CC53', endColorstr='#EDFFA1',GradientType=0 );
+                }
+
+                .statusRed {
+                    border: 1px solid rgb(236, 86, 86);
+                    background: rgb(236, 86, 86);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,rgb(236, 86, 86)), color-stop(100%,#fff));
+                    background: -webkit-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%) background: -moz-linear-gradient(top, rgb(236, 86, 86) 31%, #fff 100%);
+                    background: -o-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%);
+                    background: -ms-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%);
+                    background: linear-gradient(to bottom, rgb(236, 86, 86) 31%,#fff 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(236, 86, 86)', endColorstr='#fff',GradientType=0 );
+                }
+
+                .statusYellow {
+                    border: 1px solid #fad839;
+                    background: #fad839;
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#fad839), color-stop(97%,#fff));
+                    background: -webkit-linear-gradient(top, #fad839 31%,#fff 97%) background: -moz-linear-gradient(top, #fad839 31%, #fff 97%);
+                    background: -o-linear-gradient(top, #fad839 31%,#fff 97%);
+                    background: -ms-linear-gradient(top, #fad839 31%,#fff 97%);
+                    background: linear-gradient(to bottom, #fad839 10%,#fff 97%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fad839', endColorstr='#fff',GradientType=0 );
+                }
+            </style>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    $(window).load(function () {
+        //debugger;
+        // Animate loader off screen
+        $(".loading").show();
+        $(".loading").fadeOut("slow");
+    });
+
+    setTimeout(function () {
+        window.location.reload(1);
+    }, 20000);  @*@Url.Action("","",new { LineLocId ="" })*@
+
+
+
+
+    function getLineChartData(lineId) {
+       
+        $('#LCDiv_' + lineId).html(' <img style="margin-top:10%" src="@Url.Content("~/Content/assets/images/loader-1.gif")" />');
+        var lineurl = '@Url.Action("getLineChartData", "Home", new { LineLocId = "js-id" })'.replace("js-id", encodeURIComponent(lineId));
+        $.ajax({
+            url: lineurl,
+            type: 'GET',
+            cache: false,
+        }).done(function (result) {
+            $('#LCDiv_' + lineId).html(result);
+        });
+    }
+
+</script>

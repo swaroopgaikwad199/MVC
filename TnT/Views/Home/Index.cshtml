@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<div class="row" style="padding-left:20px; padding-top:15px;">
+    <b> @TnT.LangResource.GlobalRes.HomeIndexMonth</b>
+    <select name="month" id="month">
+        <option value="">@TnT.LangResource.GlobalRes.HomeIndexSelectMonth</option>
+        <option value="01">@TnT.LangResource.GlobalRes.HomeIndexMonthJan</option>
+        <option value="02">@TnT.LangResource.GlobalRes.HomeIndexMonthFeb</option>
+        <option value="03">@TnT.LangResource.GlobalRes.HomeIndexMonthMar</option>
+        <option value="04">@TnT.LangResource.GlobalRes.HomeIndexMonthApr</option>
+        <option value="05">@TnT.LangResource.GlobalRes.HomeIndexMonthMay</option>
+        <option value="06">@TnT.LangResource.GlobalRes.HomeIndexMonthJune</option>
+        <option value="07">@TnT.LangResource.GlobalRes.HomeIndexMonthJuly</option>
+        <option value="08">@TnT.LangResource.GlobalRes.HomeIndexMonthAug</option>
+        <option value="09">@TnT.LangResource.GlobalRes.HomeIndexMonthSep</option>
+        <option value="10">@TnT.LangResource.GlobalRes.HomeIndexMonthOct</option>
+        <option value="11">@TnT.LangResource.GlobalRes.HomeIndexMonthNov</option>
+        <option value="12">@TnT.LangResource.GlobalRes.HomeIndexMonthDec</option>
+    </select>
+
+    <b>@TnT.LangResource.GlobalRes.HomeIndexYear</b>
+    <select id="year" name="year">
+
+    </select>
+</div>
+<div class="row" style="margin-top:20px;">
+    <div class="col-lg-6 hvr-bubble-float-bottom" style="text-align:center">
+        @*<br />
+            <br />
+            <br />*@
+        @*<h2>PACKi TRACKnTRACE Manager </h2>*@
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body" style="height:300px">
+                <span style="float:left; font-weight:bold;"> @TnT.LangResource.GlobalRes.HomeIndexMonthwiseProNBatchCnt</span>
+                <div id="chart4" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 hvr-bubble-float-bottom" style="text-align:center">
+        @*<br />
+            <br />
+            <br />*@
+        @*<h2>PACKi TRACKnTRACE Manager </h2>*@
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body" style="height:300px">
+                <span style="float:left; font-weight:bold;"> @TnT.LangResource.GlobalRes.HomeIndexLinewiseBatchSummCnt</span>
+                <div id="chart8" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 hvr-bubble-float-bottom" style="text-align:center">
+        @*<br />
+            <br />
+            <br />*@
+        @*<h2>PACKi TRACKnTRACE Manager </h2>*@
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body" style="height:320px">
+                <span style="float:left; font-weight:bold;">@TnT.LangResource.GlobalRes.HomeIndexBatchAnalysis</span>
+                <div id="chart6" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6  hvr-bubble-float-bottom" style="text-align:center">
+        @*<br />
+            <br />
+            <br />*@
+        @*<h2>PACKi TRACKnTRACE Manager </h2>*@
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body" style="height:320px">
+                <span style="float:left; font-weight:bold;">@TnT.LangResource.GlobalRes.HomeIndexOperatotwiseBatchSummCnt</span>
+                <div id="chart3" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Content/assets/js/icheck/icheck.min.js"></script>
+<script src="~/Content/assets/js/neon-charts.js"></script>
+<script src="~/Content/assets/js/DashBoard.js"></script>
+<style>
+    #chart8 > svg {
+        height: 300px !important;
+    }
+</style>
+
+<style>
+    #chart3 > svg {
+        height: 300px !important;
+        overflow: inherit !important;
+    }
+
+         
+</style>
+
+<script>
+  
+</script>

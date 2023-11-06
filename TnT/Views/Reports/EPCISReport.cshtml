@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TnT.Models.EPCIS.EpcisEventDetails>
+
+@{
+    ViewBag.Title = "EPCISReport";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/assets/js/vertical-timeline/css/component.css">
+<style>
+    .cbp_tmtimeline > li .cbp_tmlabel:after {
+    border-right-color:#6cbfee !important;
+    }
+
+    .cbp_tmtimeline:before {
+    background: #ccc !important;
+    width: 5px;
+    margin-left: -6px;
+}
+
+    .cbp_tmtimeline > li .cbp_tmlabel {
+   
+    margin-left: 23%;
+   
+}
+</style>
+<h2>@TnT.LangResource.GlobalRes.RptEPCISTimelineReport</h2>
+<h3 style="text-align:center;">@TnT.LangResource.GlobalRes.RptEPCISReportShwResultEPC <b> @Model.First().EpcList </b></h3>
+<ul class="cbp_tmtimeline">
+    @{
+        int i = 0;
+        string[] lstepcis;
+    }
+    @foreach (var item in Model)
+    {
+        lstepcis = item.EpcList.Split(',');
+
+        <li>
+            <time class="cbp_tmtime" datetime="@Html.DisplayFor(modelItem => item.RecordTime) T @Html.DisplayFor(modelItem => item.EventTimeZoneOffset)"><span>@Html.DisplayFor(modelItem => item.BizStep)</span><span>@Html.DisplayFor(modelItem => item.RecordTime) @Html.DisplayFor(modelItem => item.EventTimeZoneOffset)</span></time>
+            <div class="cbp_tmicon bg-success">
+                
+                @if (i == 0 && item.BizStep == "commissioning")
+                {
+                    <i class="entypo-print"></i>
+                }
+
+                @if (i == 1 && item.BizStep == "commissioning")
+                {
+                    <i class="entypo-camera"></i>
+                }
+
+            </div>
+            
+            <div class="cbp_tmlabel" style="border:1px solid #ccc;">
+                <strong>@TnT.LangResource.GlobalRes.SOMIndexAction:</strong> @Html.DisplayFor(modelItem => item.Action) <br />
+               <strong>@TnT.LangResource.GlobalRes.RptEPCISReportEPC:</strong>
+                  @for(int j=0;j<lstepcis.Count();j++)
+                  {
+                    @lstepcis[j]<br />
+                  }
+
+            
+</div>
+        </li>
+        i++;
+    }
+
+</ul>
+
+

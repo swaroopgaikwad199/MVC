@@ -1,0 +1,430 @@
+﻿@model TnT.Models.Russia.RussiaViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<h2>@TnT.LangResource.GlobalRes.RussiaFileGeneration</h2>
+@using (Html.BeginForm("GenerateFile", "Russia", FormMethod.Post, new { @id = "frmRussia" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label(@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkCustomer, @data_original_title = "Field Information" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.JID, new SelectList(ViewBag.job, "JID", "BatchNo"), @TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, new { @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.JID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(@TnT.LangResource.GlobalRes.TracelinkExportFilesFileType, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFGCode, @data_original_title = "Field Information" })
+            <div class="col-md-5">
+
+                <select class="form-control required" name="FileType" id="FileType" validate="true">
+                    <option value="">@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectFileType</option>
+                    <option value="213">213</option>
+                    <option value="321">321</option>
+                    <option value="331">331</option>
+                    <option value="332">332</option>
+                    <option value="911">911</option>
+                    <option value="914">914</option>
+                    <option value="915">915</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.FileType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.subject_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.subject_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.subject_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group" id="DivSSCC">
+
+            @Html.Label(@TnT.LangResource.GlobalRes.RptcmnSSCC, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFGCode, @data_original_title = "Field Information" })
+            <div class="col-md-5">
+
+                <select class="form-control required" name="SSCC" id="SSCC" validate="true"></select>
+            </div>
+        </div>
+        <div id="Div321">
+            <div class="form-group">
+            @Html.LabelFor(model => model.packing_id, htmlAttributes: new { @class = "control-label control-label col-md-2 popover-default" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.packing_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.packing_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.control_id, htmlAttributes: new { @class = "control-label control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.control_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.control_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.series_number, htmlAttributes: new { @class = "control-label control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.series_number, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.series_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        <div  id="Div331">
+            <div class="form-group">
+                @Html.LabelFor(model => model.seller_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.seller_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.seller_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.receiver_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.receiver_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.receiver_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.custom_receiver_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.custom_receiver_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.custom_receiver_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.contract_type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.contract_type, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.contract_type, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.doc_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.doc_num, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.doc_num, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.doc_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.doc_date, new { htmlAttributes = new { @class = "form-control datepicker", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.doc_date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            </div>
+
+        <div  id="Div332">
+            <div class="form-group">
+                @Html.LabelFor(model => model.seller_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.seller_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.seller_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.shipper_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.shipper_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.shipper_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.custom_receiver_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.custom_receiver_id, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.custom_receiver_id, "", new { @class = "text-danger" })
+                </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contract_type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.contract_type, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.contract_type, "", new { @class = "text-danger" })
+                </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.doc_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.doc_num, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.doc_num, "", new { @class = "text-danger" })
+                </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.doc_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.doc_date, new { htmlAttributes = new { @class = "form-control datepicker", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.doc_date, "", new { @class = "text-danger" })
+                </div>
+                </div>
+
+
+            </div>
+        <div class="form-group" id="Div213">
+            @Html.LabelFor(model => model.operation_type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.operation_type, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.operation_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="button" value="@TnT.LangResource.GlobalRes.TracelinkExportFiles" class="btn btn-info btn-default" id="btnSubmit" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+    $("#FileType").change(function () {
+
+        var FileType = $("#FileType").val();
+        debugger;
+        if (FileType == "914" || FileType == "911") {
+            $("#DivSSCC").show();
+            var JID = $("#JID").val();
+            $("#SSCC").html('');
+            if (JID != "") {
+                $.ajax({
+                    url: 'GetSSCC',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JID": JID },
+                    success: function (data) {
+                        $("#SSCC").css("border", "green 1px  #ebebeb");
+                        debugger;
+                        strSel = "<option value=''>@TnT.LangResource.GlobalRes.RussiaIndexSelectSscc</option>";
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                        }
+                        $("#SSCC").html(strSel);
+                    }
+                });
+            }
+            else {
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob");
+            }
+        }
+        else {
+            $("#DivSSCC").hide();
+        }
+
+        if (FileType == "321") {
+            $("#Div321").show();
+        }
+        else {
+            $("#Div321").hide();
+        }
+
+        if (FileType == "331") {
+            $("#Div331").show();
+        }
+        else {
+            $("#Div331").hide();
+        }
+
+        if (FileType == "332") {
+            $("#Div332").show();
+        }
+        else {
+            $("#Div332").hide();
+        }
+
+        if (FileType == "213") {
+            $("#Div213").show();
+        }
+        else {
+            $("#Div213").hide();
+        }
+    });
+
+
+
+    $(document).ready(function () {
+        $("#DivSSCC").hide();
+        $("#Div213").hide();
+        $("#Div321").hide();
+        $("#Div331").hide();
+        $("#Div332").hide();
+        $("#Div911").hide();
+        $("#Div914").hide();
+        $("#Div915").hide();
+        $("#btnSubmit").click(function () {
+            var JID = $("#JID").val();
+            var FileType = $("#FileType").val();
+            var SSCC = $("#SSCC").val();
+            var subject_id = $("#subject_id").val();
+            var operation_date = $("operation_date").val();
+            var packing_id = $("#packing_id").val();
+            var control_id = $("#control_id").val();
+            var series_number = $("#series_number").val();
+            var receiver_id = $("#receiver_id").val();
+            var custom_receiver_id = $("#custom_receiver_id").val();
+            var contract_type = $("#contract_type").val();
+            var doc_num = $("#doc_num").val();
+            var doc_date = $("#doc_date").val();
+            var shipper_id = $("#shipper_id").val();
+            var operation_type = $("#operation_type").val();
+            var msgPOST = "";
+
+            debugger;
+            if (JID == "") {
+                showMessage("JID", "@TnT.LangResource.GlobalRes.toastrRussiaSelectBatchNo");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrRussiaSelectBatchNo";
+            } else {
+                clearColor("JID");
+            }
+
+
+            if (subject_id == "") {
+                showMessage("subject_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSubId");
+                msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSubId";
+            } else {
+                clearColor("subject_id");
+            }
+
+            if (operation_date == "") {
+                showMessage("operation_date", "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectOprtionDte");
+                msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectOprtionDte";
+            } else {
+                clearColor("operation_date");
+            }
+
+
+            if (FileType == "") {
+                showMessage("FileType", "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectFileType");
+                msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectFileType";
+            }
+            else {
+                clearColor("FileType");
+                if (FileType == "914" || FileType == "911") {
+
+                    if (SSCC == "") {
+                        showMessage("SSCC", "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectsscc");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaSelectsscc";
+                    } else {
+                        clearColor("SSCC");
+                    }
+                }
+
+                if (FileType == "321") {
+                    if (packing_id == "") {
+                        showMessage("packing_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterPackgingid");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterPackgingid";
+                    } else {
+                        clearColor("packing_id");
+                    }
+                    if (control_id == "") {
+                        showMessage("control_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterCtrlid");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterCtrlid";
+                    } else {
+                        clearColor("control_id");
+                    }
+                    if (series_number == "") {
+                        showMessage("series_number", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSerisNo");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSerisNo";
+                    } else {
+                        clearColor("series_number");
+                    }
+                }
+
+                if (FileType == "331" || FileType == "332") {
+                    if (seller_id == "") {
+                        showMessage("seller_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSellerid");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEnterSellerid";
+                    } else {
+                        clearColor("seller_id");
+                    }
+                    if (custom_receiver_id == "") {
+                        showMessage("custom_receiver_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrCustReceiverId");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrCustReceiverId";
+                    } else {
+                        clearColor("custom_receiver_id");
+                    }
+                    if (contract_type == "") {
+                        showMessage("contract_type", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrContractType");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrContractType";
+                    } else {
+                        clearColor("contract_type");
+                    }
+
+                    if (doc_num == "") {
+                        showMessage("doc_num", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrDocNum");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrDocNum";
+                    } else {
+                        clearColor("doc_num");
+                    }
+
+                    if (doc_date == "") {
+                        showMessage("doc_date", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrDocDate");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrDocDate";
+                    } else {
+                        clearColor("doc_date");
+                    }
+                }
+
+                if (FileType == "331") {
+                    if (receiver_id == "") {
+                        showMessage("receiver_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrReceivrId");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrReceivrId";
+                    } else {
+                        clearColor("receiver_id");
+                    }
+                }
+
+                if (FileType == "332") {
+
+                    if (shipper_id == "") {
+                        showMessage("shipper_id", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrShipperId");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrShipperId";
+                    } else {
+                        clearColor("shipper_id");
+                    }
+                }
+
+                if (FileType == "213") {
+
+                    if (operation_type == "") {
+                        showMessage("operation_type", "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrOrientationType");
+                        msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRussiaEntrOrientationType";
+                    } else {
+                        clearColor("operation_type");
+                    }
+                }
+
+            }
+
+            if (msgPOST == "") {
+                formSubmit();
+            }
+        });
+
+        function showMessage(elementID, msg) {
+            toastr.warning(msg);
+            $("#" + elementID).val("");
+            $("#" + elementID).css("border", "red 1px solid");
+            return false;
+        }
+        function clearColor(elementID) {
+            $("#" + elementID).css("border", "green 1px solid");
+        }
+    });
+
+    function formSubmit() {
+        document.getElementById("frmRussia").submit();
+    }
+</script>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TnT.Models.Job.Job>
+
+@{
+    ViewBag.Title = "Jobs";
+    if (User == null)
+    {
+        FormsAuthentication.SignOut();
+        Response.Redirect("~/");
+    }
+    else
+    {
+        //if (User.roles == 5)
+        //{
+        Layout = "~/Views/Home/_Layout.cshtml";
+        //}
+        //else if (User.roles == 8)
+        //{
+        //    Layout = "~/Views/QAHome/_Layout.cshtml";
+        //}
+        //else
+        //{
+        //    FormsAuthentication.SignOut();
+        //}
+    }
+
+
+}
+
+
+<h2>
+    @TnT.LangResource.GlobalRes.cmnMenuItemBatchMasterSubItemVerifyBatch
+  
+</h2>
+
+@if (Model.Count() == 0)
+{
+    <br />
+    <br />
+    <br />
+    <h3 style="color:forestgreen">@TnT.LangResource.GlobalRes.JobVerificationNoBatchAvailable</h3>
+}
+else
+{
+    <table class="table table-bordered datatable" id="table-1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BatchNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobStatus)
+                </th>
+                <th>
+                    @TnT.LangResource.GlobalRes.SOMIndexAction
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem=> item.JobStatus)
+                </td>
+
+                <td>
+
+                    <a href='@Url.Action("Verify","Jobs", new {JobId = item.JID})' class="btn btn-red btn-icon">@TnT.LangResource.GlobalRes.JobsVerificationBtnVerify <i class="entypo-check"></i></a>
+               
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+
+

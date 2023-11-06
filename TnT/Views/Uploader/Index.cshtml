@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <a href="~/">DEMO Upload for POST METHOD CALL</a>
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <form name="form1" method="post" action="/api/Receiver" enctype="multipart/form-data">
+            <div>
+                <label>
+                    @TnT.LangResource.GlobalRes.UploaderIndexBrwsFile
+                </label>
+                <input name="myFile123" type="file" />
+            </div>
+            <br /><br />
+            <div>
+                <label>
+                   @TnT.LangResource.GlobalRes.UploaderIndexSerKey
+                </label>
+                <input name="Key" type="text" />
+            </div>
+            <br /><br />
+            <div>
+                <label>
+                    @TnT.LangResource.GlobalRes.UploaderIndexJobId
+                </label>
+                <input name="JobId" type="text" />
+            </div>
+            <br />
+            <br />
+            <div>
+                <label>
+                    @TnT.LangResource.GlobalRes.JobsBatchManagerBatchNo
+                </label>
+                <input name="BatchNo" type="text" />
+            </div>
+            <br />
+            <br />
+            <div>
+                <input type="submit" value="Upload" />
+            </div>
+
+
+
+
+        </form>
+    </div>
+</body>
+</html>

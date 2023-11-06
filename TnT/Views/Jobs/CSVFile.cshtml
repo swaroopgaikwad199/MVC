@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "CSVFile";
+    Layout = "~/Views/Home/_Layout.cshtml";
+
+}
+
+<div style="border: 4px solid #636161; border-radius: 9px; ">
+    @using (Html.BeginForm("CSVFile", "Jobs", FormMethod.Post, new { @class = "f1", @id = "frmJob" }))
+    {
+    <div class="form-horizontal">
+        <fieldset>
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        @Html.Label("JobName", htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = "Job Name", @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("JID", new SelectList(ViewBag.JobName, "JID", "JobName"), "Select JobName", new { @class = "form-control", @validate = "true", @id = "JobName" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("BatchNo", htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @*@Html.DropDownList("BatchNo", new SelectList(ViewBag.BatchNo, "JID", "BatchNo"), "Select JobName", new { @class = "form-control", @validate = "true", @id = "JID" })*@
+                            @Html.TextBox("PONumber", "PONumber", new { @class = "form-control", @validate = "true", @id = "PONO", @disabled = "true" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-orange">Download</button>
+                </div>
+            </div>
+            
+        </fieldset>
+        
+    </div>
+        
+
+
+    }
+
+</div>
+
+
+<script type="text/javascript">
+    $("#JobName").change(function () {
+        debugger;
+        var JID = $("#JobName option:selected").val();
+        var JobName = $("#JobName option:selected").text();
+
+        $.ajax({
+            url: '@Url.Action("getPoNumber", "Jobs")',
+            type: "POST",
+            dataType: 'json',
+            data: { "JID": JID, "JobName": JobName },
+            success: function (data) {
+                debugger;
+                $("#PONO").html(data);
+                $('#PONO').val(data);
+            }
+        });
+    });
+</script>

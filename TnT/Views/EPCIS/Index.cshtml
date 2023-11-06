@@ -1,0 +1,86 @@
+﻿@model TnT.Models.EPCIS.M_EPCIS
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.EPCISIndexGenerateEpcisFile</h2>
+@using (Html.BeginForm("GenerateEPCIS", "EPCIS", FormMethod.Post, new { @id = "frmEPCIS" }))
+{
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label("EPCIS Version", htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.EPCISIndexVersion, @data_original_title = "Field Information" })
+
+                <div class="col-md-8">
+                    <select class="form-control required" data-val="true" data-val-required="EPCIS Version is required." id="ddversion" name="EpcisVersion">
+                        <option value="">@TnT.LangResource.GlobalRes.EPCISIndexSelectVersion </option>
+                        <option value="1.1">1.1</option>
+                        <option value="1.2">1.2</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISIndexSelectBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISIndexSelectBatch, @data_original_title = "Field Information" })
+
+                <div class="col-md-8">
+                    @Html.DropDownListFor(M => M.JobId, new SelectList(ViewBag.Jobs, "JID", "JobName"), @TnT.LangResource.GlobalRes.EPCISIndexSelectBatch, new { @class = "form-control", @validate = "true" })
+
+                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:25px">
+        <div class="col-md-2">
+            </div>
+            <div class="col-md-6">
+                <input type="button" class="btn btn-info" value="@TnT.LangResource.GlobalRes.EPCISIndexGenerateEpcis" id="btnSubmit">
+            </div>
+        </div>
+
+}
+
+<script>
+    $("#btnSubmit").click(function () {
+        var JobId = $("#JobId").val();
+        var ddversion = $("#ddversion").val();
+        var msgPOST = "";
+        if (JobId == "") {
+            showMessage("JobId", "@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob");
+            msgPOST += "@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob";
+        } else {
+            clearColor("JobId");
+        }
+
+        if (ddversion == "") {
+            showMessage("ddversion", "@TnT.LangResource.GlobalRes.EPCISIndexPlsSelectVersion");
+            msgPOST += "@TnT.LangResource.GlobalRes.EPCISIndexPlsSelectVersion";
+        } else {
+            clearColor("ddversion");
+        }
+
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function formSubmit() {
+        document.getElementById("frmEPCIS").submit();
+    }
+</script>

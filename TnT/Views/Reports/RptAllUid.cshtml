@@ -1,0 +1,223 @@
+﻿@model TnT.Models.Reports.Jobs.RptUIDsViewModel
+
+<div class="container" id="rptLoaded">
+
+    @if (Model.packagingDetails.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>
+    }
+    else
+    {
+        <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+        <style>
+            .scrollprint {
+                overflow-y: inherit;
+                max-height: none;
+            }
+
+            .tbFont {
+                font-size: 9px;
+            }
+
+            .tdWidth {
+                width: 30%;
+            }
+
+            .tdWidthBig {
+                width: 40%;
+            }
+
+            .tblWidth {
+                width: 100%;
+            }
+
+            .table1 {
+                width: 100%;
+                max-width: 100%;
+                background-color: transparent;
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+                .table1 > thead > tr > th, .table1 > tbody > tr > th, .table > tfoot > tr > th, .table1 > thead > tr > td, .table > tbody > tr > td, .table1 > tfoot > tr > td {
+                    padding: 2px;
+                    line-height: 1.42857143;
+                    vertical-align: middle;
+                  
+                }
+        </style>
+
+        <script>
+            $("#btnPrintRPT").show();
+        </script>
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>UID List</b></h4>
+            @Html.HiddenFor(model => model.job.JID)
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px; font-size:14px; font-family: 'Courier New';">
+            <table class="tblWidth  @ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-4 tdWidthBig"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName:</label><b> @Html.DisplayFor(model => model.jbDetails.JD_ProdName)</b></td>
+                    <td class="col-md-5 tdWidth"><label>@TnT.LangResource.GlobalRes.JobsProductCode:</label><b> @Html.DisplayFor(model => model.jbDetails.JD_ProdCode)</b></td>
+                    <td class="col-md-6 tdWidthBig"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesGTIN:</label> <b>@Html.DisplayFor(model => model.jbDetails.JD_GTIN)</b></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo:</label> <b>@Html.DisplayFor(model => model.job.BatchNo)</b></td>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.JobsBatchQty:</label><b> @Html.DisplayFor(model => model.job.Quantity)</b></td>
+                    <td class="col-md-6"><label>@TnT.LangResource.GlobalRes.RptcmnJobType:</label><b> @Html.DisplayFor(model => model.Jobtype)</b></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label><b> @Html.DisplayFor(model => model.job.MfgDate)</b></td>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label><b> @Html.DisplayFor(model => model.job.ExpDate)</b></td>
+                    <td class="col-md-6"><label>@TnT.LangResource.GlobalRes.RptcmnDeck:</label><label id="lblDecklvl"><b> @Html.DisplayFor(model => model.jbDetails.JD_Deckcode)</b> </label></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 2px; font-size:14px; font-family: 'Courier New';padding-bottom: 2px;">
+            <table class="@ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLocationCode : @Html.DisplayFor(m => m.LineDetails.LocationCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode : @Html.DisplayFor(m => m.LineDetails.DivisionCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode : @Html.DisplayFor(m => m.LineDetails.PlantCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLineCode : @Html.DisplayFor(m => m.LineDetails.LineCode)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row @ViewBag.tbFont scroll1 @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+
+            @if (Model.packagingDetails != null)
+                {
+                <table class="table1 tblsspace  @ViewBag.tbFont" style="text-align: center; font-family: courier; font-size: 14px;">
+                    @for (int i = 0; i < Model.packagingDetails.Count; i++)
+                    {
+                        <tr class="pgbreak">
+                            <td style="border-right:1px solid black;">@Model.packagingDetails[i].Code</td>
+                            @if (i + 1 < Model.packagingDetails.Count)
+                        {
+                                <td style="border-right:1px solid black;">@Model.packagingDetails[i + 1].Code</td>
+                            }
+                            @if (i + 2 < Model.packagingDetails.Count)
+                        {
+                                <td style="border-right:1px solid black;">@Model.packagingDetails[i + 2].Code</td>
+                            }
+                            else
+                            {
+                                <td style="border-right:1px solid black;"></td>
+                            }
+                            @if (i + 3 < Model.packagingDetails.Count)
+                        {
+                                <td>@Model.packagingDetails[i + 3].Code</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        </tr>
+                        i = i + 3;
+                    }
+
+
+                </table>
+            }
+
+
+        </div>
+        
+        
+        <div style="border: 1px solid;margin: 10px;padding-top: 9px; font-family: 'Courier New'; font-size:14px;">
+            <table style="width:100%;" class="@ViewBag.tbFont">
+                <tr class="pgbreak">
+                    <td style="width:50%; padding-left:10px;">
+                        Generated By: @Model.UserName
+
+                    </td>
+                    <td style="padding-left:35%">
+                        @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                    </td>
+                </tr>
+            </table>
+        </div>
+        if (ViewBag.scrollprint == null)
+        {
+
+            <br />
+
+            <div style="text-align:center;">
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                    @TnT.LangResource.GlobalRes.cmnBtnClose
+                    <i class="entypo-cancel"></i>
+                </button>
+                @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFUidListAll" })
+            </div>
+
+        }
+    }
+</div>
+
+
+<script>
+    $(document).on("click", "#btnGenaratePDFUidListAll", function (e) {
+
+        e.preventDefault();
+       
+        var level = "MOC";
+
+        debugger;
+        var newUrl = "@Url.Action("genePDFUidListAll", "Reports")?JID=" + $("#job_JID").val() + "&Level=" + level;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+    $("#Packinglevel").change(function () {
+        var existingLVL = $("#Packinglevel").val();
+        $(".loading").show();
+        var currentLvl = $("#lblDecklvl").html().trim();
+        var lvl = $("#Packinglevel").val().trim();
+
+        if (lvl != "Select") {
+            if (currentLvl != lvl) {
+                var jobId = $("#job_JID").val();
+                $.ajax({
+
+                    url: 'getUIDListChina',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JID": jobId, "lvl": lvl },
+                    success: function (data) {
+                        $(".loading").hide();
+                        if (data == "No Data") {
+                            data = '<h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>';
+                            $("#btnPrintRPT").hide();
+                            $('#rptLoaded').html(data);
+                        }
+                        else {
+                            $("#btnPrintRPT").show();
+                            $('#rptLoaded').html(data);
+                        }
+                        $('#Packinglevel option[value=' + existingLVL + ']').attr('selected', 'selected');
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            }
+
+        }
+
+    });
+
+    $(document).ready(function () {
+        $("#Packinglevel").val('MOC');
+
+    });
+</script>

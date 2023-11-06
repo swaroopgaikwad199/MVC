@@ -1,0 +1,232 @@
+﻿@model IEnumerable<TnT.Models.SettingsNUtility.Settings>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2 style="font-weight:bold;" class="hvr-bounce-to-right">
+    @TnT.LangResource.GlobalRes.SettingsIndexCompanyInfo
+   <br />
+    <br />
+   
+    </h2>
+
+
+<div class="form-horizontal">
+  
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.CompanyName) :</label>
+                
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+              
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.Address) :</label>
+               
+                    @Html.DisplayFor(modelItem => item.Address)
+                
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.CompanyCode) :</label>
+
+                @Html.DisplayFor(modelItem => item.CompanyCode)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.District) :</label>
+
+                @Html.DisplayFor(modelItem => item.District)
+
+            </div>
+        </div>
+        <div class="col-lg-6" style="display:none">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.LineCode) :</label>
+
+                @Html.DisplayFor(modelItem => item.LineCode)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.Remarks) :</label>
+
+                @Html.DisplayFor(modelItem => item.Remarks)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.PlantCode) :</label>
+
+                @Html.DisplayFor(modelItem => item.PlantCode)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.IAC_CIN) :</label>
+
+                @Html.DisplayFor(modelItem => item.IAC_CIN)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.GLN) :</label>
+
+                @Html.DisplayFor(modelItem => item.GLN)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.Street) :</label>
+
+                @Html.DisplayFor(modelItem => item.Street)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.Country) :</label>
+                
+                @Html.DisplayFor(modelItem => item.M_Country.CountryName)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.StateOrRegion) :</label>
+
+                @Html.DisplayFor(modelItem => item.M_State.StateName)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.City) :</label>
+
+                @Html.DisplayFor(modelItem => item.City)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.PostalCode) :</label>
+
+                @Html.DisplayFor(modelItem => item.PostalCode)
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.License) :</label>
+
+                @Html.DisplayFor(modelItem => item.License)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-lg-3">@Html.DisplayNameFor(model => model.LicenseState) :</label>
+
+                <span class="Lstate"> @Html.DisplayFor(modelItem => item.LicenseState)</span>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <label class="col-lg-3 ">@Html.DisplayNameFor(model => model.LicenseAgency) :</label>
+
+                @Html.DisplayFor(modelItem => item.LicenseAgency)
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+             
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+               
+                <a style="margin-left:16px;" href='@Url.Action("Edit", "Settings", new { id = item.id })' class="btn btn-info btn-icon icon-left">
+                    @TnT.LangResource.GlobalRes.SOMIndexEdit
+                    <i class="fa fa-server"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+}
+    </div>
+  
+
+<script>
+ $(document).ready(function () {
+     $.ajax({
+         url: '@Url.Action("getdata", "Settings")',
+         type: "POST",
+         dataType: 'json',
+         success: function (data) {
+
+             if (data != null) {
+                 debugger;
+                 $(".Lstate").html(data[0].StateName);
+             }
+         },
+         error: function (data) {
+
+             toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+         }
+     });
+            });
+
+
+</script>

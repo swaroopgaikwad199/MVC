@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:a="http://xmlns.rfxcel.com/traceability/api/3" xmlns:t="http://xmlns.rfxcel.com/traceability/3" xmlns:ms="http://xmlns.rfxcel.com/traceability/messagingService/3" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.rfxcel.com/traceability/messagingService/3" version="3.1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="Core.xsd" namespace="http://xmlns.rfxcel.com/traceability/3" />
+  <xs:import schemaLocation="ApiCore.xsd" namespace="http://xmlns.rfxcel.com/traceability/api/3" />
+  <xs:annotation>
+    <xs:documentation>
+            rfXcel Messaging Service Data Types
+            Copyright 2015 rfXcel Corporation. All rights reserved.
+        </xs:documentation>
+  </xs:annotation>
+  <xs:element name="docCont" type="t:DocumentContainerType" />
+  <xs:element name="testService">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiRequestType">
+          <xs:sequence>
+            <xs:element name="testName" type="t:EnumMemberType" />
+            <xs:element minOccurs="0" name="paramList" type="t:NameValueListType" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="testServiceResponse">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiResponseType" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="processMessages">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiRequestType">
+          <xs:sequence>
+            <xs:element name="msgEnvelopeList" type="a:EnvelopeListType" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="processMessagesResponse">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiResponseType" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMessages">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiRequestType">
+          <xs:sequence>
+            <xs:element name="msgInfo" type="a:MessageInfoType" />
+            <xs:element minOccurs="0" name="selCriteriaList" type="t:NameValueListType" />
+            <xs:element minOccurs="0" name="selOperator" type="t:EnumMemberType" />
+            <xs:element name="msgCount" type="xs:int" />
+            <xs:element minOccurs="0" name="changeMsgStatus" type="xs:boolean" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMessagesResponse">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="a:ApiResponseType">
+          <xs:sequence>
+            <xs:element name="msgEnvelopeList" type="a:EnvelopeListType" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

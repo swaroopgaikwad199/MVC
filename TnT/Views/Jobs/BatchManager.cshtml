@@ -1,0 +1,351 @@
+﻿@model IEnumerable<TnT.Models.Job.JobTransferViewModel>
+
+@{
+    ViewBag.Title = "BatchaManager";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.JobsBatchManager</h2>
+
+
+<br />
+
+<div class="row">
+    <div id="result">
+
+    </div>
+    <div class="col-md-6">
+        <div class="row" style="margin-bottom: 10px;">
+
+            <div class="form-group">
+                 @Html.Label(@TnT.LangResource.GlobalRes.JobBatchManagerSrch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchManagerSearch, @data_original_title = "Field Information" })
+                <div class="col-md-6">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch.." class="form-control">
+                </div>
+            </div>
+        </div>
+        <table class="dataTable" id="table1">
+            <thead>
+                <tr>
+                    <th>@TnT.LangResource.GlobalRes.JobsBatchManagerBatchName</th>
+                    <th>@TnT.LangResource.GlobalRes.JobsBatchManagerProductName</th>
+                    <th>@TnT.LangResource.GlobalRes.JobsBatchManagerBatchNo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.JobName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BatchNo)</td>
+                        <td>@Html.HiddenFor(modelItem => item.JID)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="~/scripts/jquery.signalR-2.2.1.min.js"></script>
+    @using (Html.BeginForm("BatchManager", "Jobs", FormMethod.Post, new { @id = "frmBatchtransfer" }))
+    {
+        <script src="~/signalr/hubs"></script>
+        @Html.AntiForgeryToken()
+
+        <div id="result">
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="form-group">
+                   @Html.Label(@TnT.LangResource.GlobalRes.JobsBatchManagerSelectLine, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchManagerSelectLine, @data_original_title = "Field Information" })
+                      
+                    <div class="col-md-6">
+                        @Html.DropDownList("LineLocation", new SelectList(ViewBag.LineCode, "ID", "ID"), TnT.LangResource.GlobalRes.RptJobFilterSelectLine, new { @onchange = "CheckLine(this.value);", @class = "form-control", @validate = "true" })
+                    </div>
+                </div>
+
+            </div>
+            <table class="dataTable" name="tblTransfer" id="table2">
+                <thead>
+                    <tr>
+                        <th>@TnT.LangResource.GlobalRes.JobsBatchManagerBatchName</th>
+                        <th>@TnT.LangResource.GlobalRes.JobsBatchManagerProductName</th>
+                        <th>@TnT.LangResource.GlobalRes.JobsBatchManagerBatchNo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="row" style="margin-top:10px;">
+                <button type="button" data-loading-text="Transfering..." class="btn btn-red" onclick="validate();">
+                    @TnT.LangResource.GlobalRes.JobsCloseBatchBtnConfirmTransfer
+                </button>
+            </div>
+        </div>
+
+        <script>
+
+            var final = "";
+            (function () {
+                updatePB(0, 0);
+                var progressNotifier = $.connection.progressHub;
+
+                progressNotifier.client.sendMessageToPage = function (message, count, batchProg) {
+
+                    UpdateProgress(message, count, batchProg);
+                };
+
+                $.connection.hub.start().done(function () {
+
+                   // progressNotifier.server.GetCountAndMessage2();
+
+                });
+            }());
+
+
+
+            function ReturnData() {
+                $('#divStatus').hide();
+                $('#divResult').show();
+
+            }
+
+            function updatePB(DVal, MVal) {
+                var nVal = DVal;
+                var kVal = MVal;
+
+                if (nVal <= 100) {
+                    $('#progressbar').removeAttr('style');
+                    $('#progressbar').css("width", nVal + "%");
+
+                    $('#Batchprogressbar').removeAttr('style');
+                    $('#Batchprogressbar').css("width", kVal + "%");
+                }
+            }
+            function UpdateProgress(message, count, batchProg) {
+
+                // get status div
+                var status = $("#PBStatus");
+                // set message
+                status.html(message);
+                // get progress bar
+                //if (count > 0) {
+                //    $('.progress').show();
+                //}
+
+                updatePB(count, batchProg);
+                //$('.progress-bar').css('width', count + '%').attr('aria-valuenow', count);
+                //$('.progress-bar').html(count + '%');
+
+            }
+            function validate() {
+                var lineLocation = $('#LineLocation').val();
+                var rowCount = $('#table2 tr').length;
+
+                if (lineLocation == "") {
+                    $('#modal-msg').html("@TnT.LangResource.GlobalRes.MsgJobManagerselectline");
+                    $("#showMSGBx").trigger("click");
+                    return false;
+                }
+
+                if (rowCount == 2) {
+                    var isEmpty = $('#table2 tbody tr td').hasClass("dataTables_empty");
+                    if (isEmpty == true) {
+                        $('#modal-msg').html("@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch");
+                        $("#showMSGBx").trigger("click");
+                        return false;
+                    }
+                }
+                 $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+                $("#showDigitalBx").trigger("click");
+               
+            }
+
+            function postData() {
+                $("#showProgressBar").trigger("click");
+                $("#frmBatchtransfer").submit();
+            }
+        </script>
+    }
+</div>
+
+<button style="display:none;" id="showProgressBar" class="myBtn" type="button" data-toggle="modal" data-target="#modal-progress">test </button>
+
+<div class="modal fade" id="modal-progress">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border: 2px solid #F44336;">
+            <div class="modal-body" style="height: 250px">
+
+                <div id="modal-progres" class="col-md-12" style="text-align: left;margin-top: 13px;color: #000;font-size: 20px;">
+                    <div class="panel-body">
+                        <h5> @TnT.LangResource.GlobalRes.JobBatchManagerOverallPro </h5>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="progress progress-striped active" style="border: 1px solid #ccc;">
+                                    <div class="progress-bar progress-bar-danger" id="progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        <span class="sr-only">@TnT.LangResource.GlobalRes.JobBatchManager40PerComp</span>
+                                    </div>
+                                </div>
+                                <h5><span id="PBStatus">  </span>  </h5>
+                                <div class="progress progress-striped active" style="border: 1px solid #ccc;">
+                                    <div class="progress-bar progress-bar-danger" id="Batchprogressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        <span class="sr-only">@TnT.LangResource.GlobalRes.JobBatchManager40PerComp</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row text-center">
+                            <h6> @TnT.LangResource.GlobalRes.MsgDataBaseBackupWait</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: none;
+    }
+
+    .dataTables_length {
+        display: none;
+    }
+
+    .dataTables_scrollBody {
+        min-height: 280px;
+    }
+</style>
+
+<script>
+
+    function CheckLine(LID) {
+        $(".loading").show();
+      
+        $.ajax({
+            url: '@Url.Action("CheckLine", "Jobs")',
+            type: "POST",
+            dataType: 'json',
+            data: { "LineId": LID },
+            success: function (data) {
+
+                $(".loading").hide();
+                if (data != null) {
+                    var IsActive = data[0];
+                    if (!IsActive) {
+                        debugger;
+                        var emsg = "@TnT.LangResource.GlobalRes.ShwMsgJobBatchManagerUnableToConnect "+" <br/><br/>"+" @TnT.LangResource.GlobalRes.HomeLiveExecutionErrorDetails : ";
+                        $("#LineLocation").val('');
+                        $('#modal-msg').html(data[1]);
+                        $("#showMSGBx").trigger("click");
+                    }
+
+                    //$('#modal-msgBox').modal('show');
+
+
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        var stockTable = $('#table1').dataTable({
+            "bPaginate": false,
+            "sScrollY": "150px",
+            "bFilter": false,
+            "bSort": false
+        });
+        var catalogTable = $('#table2').dataTable({
+            "bPaginate": false,
+            "sScrollY": "180px",
+            "bFilter": false,
+            "bSort": false
+        });
+
+        stockTable.on('click', 'tr', function () {
+
+            var lineLocation = $('#LineLocation').val();
+            if (lineLocation == "") {
+                $('#modal-msg').html("@TnT.LangResource.GlobalRes.MsgJobManagerselectline");
+                $("#showMSGBx").trigger("click");
+                return false;
+            }
+            var $row = $(this);
+            var addRow = stockTable.fnGetData(this);
+            if (catalogTable.fnGetData().length == 0) {
+                catalogTable.fnAddData(addRow);
+                stockTable.fnDeleteRow($row.index());
+            } else {
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrBatchManagerbatchtransfer");
+            }
+
+            //$('#table1').dataTable().fnDestroy();
+            //$('#table1').dataTable();
+        });
+
+
+
+
+
+        catalogTable.on('click', 'tr', function () {
+            var $row = $(this);
+            var addRow = catalogTable.fnGetData(this);
+            stockTable.fnAddData(addRow);
+            catalogTable.fnDeleteRow($row.index());
+        });
+
+
+    });
+</script>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, j, l = 0;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table1");
+        tr = table.getElementsByTagName("tr");
+        debugger;
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (j = 0; j < td.length; j++) {
+
+                if (td[j]) {
+                    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        //tr[i].style.display = "";
+                        l = l + 1;
+                    }
+
+                }
+            }
+            if (l > 0) {
+                tr[i].style.display = "";
+                l = 0;
+            }
+            else {
+                tr[i].style.display = "none";
+                l = 0;
+            }
+        }
+
+    }
+</script>

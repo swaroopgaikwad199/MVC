@@ -1,0 +1,221 @@
+﻿@model TnT.Models.ImportXml.ModelViewXmlUIDList
+
+@{
+    ViewBag.Title = "CreateXmlUIDList";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>CreateXmlUIDList</h2>
+
+@using (Html.BeginForm("CreateXmlUIDList", "ImportXml", FormMethod.Post, new { @id = "FrmUID" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobID, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListBatchName, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.JobID, new SelectList(ViewBag.Job, "JID", "JobName"), "Select Batch Name", new { @class = "form-control", @id = "JID" })
+                @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Deck, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListDeck, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                <select class="form-control required" data-val="true" data-val-number="The field Deck must be a number." data-val-required="The Deck field is required." id="ddDeck" name="Deck" validate="true">
+                    <option value="">Select Deck</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Deck, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iNoofRecPerFile, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListNoOfRec, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iNoofRecPerFile, new { htmlAttributes = new { @class = "form-control NumbersOnly" } })
+                @Html.ValidationMessageFor(model => model.iNoofRecPerFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StrReaderId, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListReaderId, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StrReaderId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StrReaderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StrCommand, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListCommandId, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StrCommand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StrCommand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StrDeviceId, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListDeviceID, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StrDeviceId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StrDeviceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StrUOM, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipSKCreateXMLUIDListUOM, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StrUOM, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StrUOM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-info btn-default" id="btnSubmit" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<script>
+    $("#JID").change(function () {
+
+        JobId = $("#JID").val();
+        $.ajax({
+            url: 'getDeck',
+            type: "POST",
+            dataType: 'json',
+            data: { "JobId": JobId },
+            success: function (data) {
+              
+                strSel = "<option value=''>Select Batch Name</option>";
+                for (i = 0; i < data.length; i++) {
+                    strSel += "<option value='" + data[i].JD_Deckcode + "'>" + data[i].JD_Deckcode + "</option>";
+                }
+                $('#ddDeck').html(strSel);
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+
+        })
+    });
+
+    $(".NumbersOnly").keydown(function (e) {
+        if (event.shiftKey == true) {
+            event.preventDefault();
+        }
+
+        if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+            (event.keyCode >= 96 && event.keyCode <= 105) ||
+            event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+            event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+        } else {
+            event.preventDefault();
+        }
+
+        if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+            event.preventDefault();
+        //if a decimal has been added, disable the "."-button
+
+    });
+
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+
+            var JID = $("#JID").val();
+            var ddDeck = $("#ddDeck").val();
+            var iNoofRecPerFile = $("#iNoofRecPerFile").val();
+            var StrReaderId = $("#StrReaderId").val();
+            var StrCommand = $("#StrCommand").val();
+            var StrDeviceId = $("#StrDeviceId").val();
+            var StrUOM = $("#StrUOM").val();
+
+
+            var msgPOST = "";
+            if (JID == "") {
+
+                showMessage("JID", "Please Provide Batch Name");
+                msgPOST += "Please Provide Batch Name";
+            } else {
+                clearColor("JID");
+            }
+
+            if (ddDeck == "") {
+
+                showMessage("ddDeck", "Please Provide Deck");
+                msgPOST += "Please Provide Deck";
+            } else {
+                clearColor("ddDeck");
+            }
+
+            if (iNoofRecPerFile == "") {
+                showMessage("iNoofRecPerFile", "Please Provide Number of record per file");
+                msgPOST += "Please Provide Number of record per file";
+            } else {
+                clearColor("iNoofRecPerFile");
+            }
+
+            if (StrReaderId == "") {
+                showMessage("StrReaderId", "Please Provide Reader Id")
+                msgPOST += "Please Provide Reader Id";
+            } else {
+                clearColor("StrReaderId");
+            }
+
+            if (StrCommand == "") {
+                showMessage("StrCommand", "Please Provide Command Id")
+                msgPOST += "Please Provide Command Id";
+            } else {
+                clearColor("StrCommand");
+            }
+
+            if (StrDeviceId == "") {
+                showMessage("StrDeviceId", "Please Provide Device Id");
+                msgPOST += "Please Provide Device Id";
+            } else {
+                clearColor("StrDeviceId");
+            }
+
+            if (StrUOM == "") {
+                showMessage("StrUOM", "Please Provide UOM");
+                msgPOST += "Please Provide UOM";
+            } else {
+                clearColor("StrUOM");
+            }
+
+
+
+
+
+
+            if (msgPOST == "") {
+                formSubmit();
+                window.setTimeout(function () { window.location.reload(); }, 1000);
+            }
+        });
+
+        function showMessage(elementID, msg) {
+            toastr.warning(msg);
+            $("#" + elementID).val("");
+            $("#" + elementID).css("border", "red 1px solid");
+            return false;
+        }
+        function clearColor(elementID) {
+            $("#" + elementID).css("border", "green 1px solid");
+        }
+    });
+    function formSubmit() {
+        document.getElementById("FrmUID").submit();
+    }
+</script>

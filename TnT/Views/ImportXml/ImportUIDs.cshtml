@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "ImportUIDs";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Import UIDs</h2>
+
+@using (Html.BeginForm("ImportUIDs", "ImportXml", FormMethod.Post, new { enctype = "multipart/form-data",id="frmUploadFile" }))
+{
+
+    <div class="row">
+        <div class="form-group">
+            @Html.Label(TnT.LangResource.GlobalRes.TracelinkProductXmlProductName + ": ", htmlAttributes: new { @class = "control -label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipChinaImportUIDProductName, @data_original_title = "Field Information" })
+          
+            <div class="col-sm-5">
+                @Html.DropDownList("Product", new SelectList(ViewBag.products,"PAID","Name"), "Please Select Product")
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label(TnT.LangResource.GlobalRes.RptcmnDeck + ": ", htmlAttributes: new { @class = "control -label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipChinaImportUIDDeck, @data_original_title = "Field Information" })
+       
+            <div class="col-sm-5">
+                <select name="Decks" id="Decks">
+                    <option value="">Please Select Deck</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label(TnT.LangResource.GlobalRes.ChinaSelectFile, htmlAttributes: new { @class = "control -label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipChinaImportUIDSelectFile, @data_original_title = "Field Information" })
+        
+            <div class="col-sm-5">
+                <input type="file" name="postedFile" id="filename" />
+            </div>
+        </div>
+    </div>
+
+        <input type="button" value="Upload" class="btn btn-info btn-default" id="btnupload" />
+}
+
+<hr />
+
+<h2>Generate XML</h2>
+
+<br />
+@using (Html.BeginForm("GenerateXML", "ImportXml", FormMethod.Post, new { enctype = "multipart/form-data",id="frmGerateXML" }))
+{
+
+    <div class="row">
+        <div class="form-group">
+            @Html.Label(TnT.LangResource.GlobalRes.HomeLiveExecutionPoNumber, htmlAttributes: new { @class = "control -label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipChinaGenerateXML, @data_original_title = "Field Information" })
+          
+            <div class="col-sm-5">
+                @Html.DropDownList("Job", new SelectList(ViewBag.jobs, "JID", "JobName"), "Please Select Job")
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <input type="button" value="Generate" class="btn btn-info btn-default" id="btnGenerate" />
+}
+
+
+<script>
+    $("#Product").change(function (){
+
+        var paid = $("#Product").val();
+        $('#Decks').html('');
+        $.ajax({
+            url: 'getDecksofProduct',
+            type: "POST",
+            dataType: 'json',
+            data: { "PAID": paid },
+            success: function (data) {
+                strSel = "<option value=''>Please Select Deck</option>";
+                for (i = 0; i < data.length; i++) {
+                    strSel += "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                }
+                $('#Decks').html(strSel);
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+        });
+    });
+
+
+    $("#btnGenerate").click(function () {
+        var jobname = $("#Job").val();
+    
+        var msgPOST = "";
+        if (jobname == "") {
+            showMessage("Job", "@TnT.LangResource.GlobalRes.toastrImportUIDselectPONumber");
+            msgPOST += "@TnT.LangResource.GlobalRes.toastrImportUIDselectPONumber";
+        } else {
+            clearColor("Job");
+        }
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+
+    $("#btnupload").click(function () {
+        var prodname = $("#Product").val();
+        var Decks = $("#Decks").val();
+        var Decks = $("#Decks").val();
+        var msgPOST = "";
+        if (prodname == "") {
+            showMessage("Product", "@TnT.LangResource.GlobalRes.toastrImportUIDselectProductName");
+            msgPOST += "@TnT.LangResource.GlobalRes.toastrImportUIDselectProductName";
+        } else {
+            clearColor("Product");
+        }
+        if (Decks == "") {
+            showMessage("Decks", "@TnT.LangResource.GlobalRes.toastrImportUIDselectDeck");
+            msgPOST += "@TnT.LangResource.GlobalRes.toastrImportUIDselectDeck";
+        } else {
+            clearColor("Decks");
+        }
+      
+        if (msgPOST == "") {
+            formSubmit1();
+        }
+    });
+
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function formSubmit() {
+        document.getElementById("frmGerateXML").submit();
+    }
+    function formSubmit1() {
+        document.getElementById("frmUploadFile").submit();
+    }
+
+</script>

@@ -1,0 +1,76 @@
+﻿@model TnT.Models.Reports.RptUserViewModel
+
+@{
+    ViewBag.Title = "UserStatus";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.cmnMenuItemRptsUser</h2>
+
+<div class="row">
+
+
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align: right;">
+
+            <input type="radio" name="UserStatus" class="trailType" id="RdoActive" value="Active">
+            @Html.Label(@TnT.LangResource.GlobalRes.UserReportActiveUsers, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipUserReportActive, @data_original_title = "Field Information" })
+         
+        </div>
+        <div class="col-md-6">
+            <input type="radio" name="UserStatus" class="trailType" id="RdoDeactive" value="Deactive">
+            @Html.Label(@TnT.LangResource.GlobalRes.UserReportDeActiveUser, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipUserReportDeactive, @data_original_title = "Field Information" })
+       
+        </div>
+
+        <br />
+        <br />
+    </div>
+</div>
+
+
+<div class="row" style="text-align:center; padding-top:10px;">
+    <input type="button" id="btnViewRpt" value="@TnT.LangResource.GlobalRes.ReportsTrailsViewReport" class="btn btn-info" style="margin-left: 4%;" />
+</div>
+
+
+<script>
+    $("#btnViewRpt").click(function () {
+        var Status = $('input[name=UserStatus]:checked').val();
+     
+        if (Status != undefined) {
+            $.ajax({
+                url: 'RptUserDetails',
+                type: "POST",
+                dataType: 'json',
+                data: { "Status": Status },
+                success: function (data) {
+                    $(".loading").hide();
+                    
+                    if (data == "@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData") {
+
+                        $('#modal-msg').html('@TnT.LangResource.GlobalRes.TempDataDavaNoData !');
+                        $("#showMSGBx").trigger("click");
+
+                    } else {
+                        $('#modal-rpt-data').html(data);
+                        $("#showRPTBx").trigger("click");
+                    }
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        }
+        else
+        {
+
+            $('#modal-msg').html('@TnT.LangResource.GlobalRes.ShwMsgRptDavaStatusSelectUsrStatus');
+            $("#showMSGBx").trigger("click");
+        }
+    });
+
+</script>
+

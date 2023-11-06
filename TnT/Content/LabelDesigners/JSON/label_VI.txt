@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"203","Orientation":"portrait"},{"x":131,"y":53,"type":"label_text","name":"Textbox 1","text":"dd-mm-yyyy","textType":"EXTRA_EXPIRY","fontSize":14,"fontType":"Arial","width":76.220703125,"height":20}]}

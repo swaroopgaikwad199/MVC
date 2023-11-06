@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TnT.Models.EPCIS.M_EPCISReceiver>
+
+@{
+    ViewBag.Title = "EPCISReceiver";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<h2>
+    @TnT.LangResource.GlobalRes.EPCISReceiverIndex
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Create","EPCIS")' class="btn btn-info btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.SOMIndexCreateNew
+        <i class="fa fa-server"></i>
+    </a>
+</h2>
+
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+    <th>
+        @Html.DisplayNameFor(model => model.CompanyName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.PostalCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.GLN)
+    </th>
+  
+    <th></th>
+    </thead>
+   
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GLN)
+                </td>
+               
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                            @TnT.LangResource.GlobalRes.JobsIndexAction <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexView" href='@Url.Action("Details","EPCIS",  new {id = item.ID})'> <i class="entypo-doc-text-inv"></i> @TnT.LangResource.GlobalRes.SOMIndexView</a>
+                            </li>
+                            <li>
+                                <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexEdit" href='@Url.Action("Edit","EPCIS",  new {id = item.ID})'> <i class="entypo-pencil"></i> @TnT.LangResource.GlobalRes.SOMIndexEdit</a>
+                            </li>
+                            @*<li>
+                    <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="Delete" href='@Url.Action("Delete","Jobs",  new {id = item.JID})'> <i class="entypo-trash"></i> Delete</a>
+                </li>*@
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+   
+
+</table>

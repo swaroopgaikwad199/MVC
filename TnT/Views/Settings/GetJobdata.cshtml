@@ -1,0 +1,44 @@
+﻿@model TnT.Models.Job.Job
+
+@{
+    ViewBag.Title = "GetJobdata";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.ExporterIndexGetjbdta</h2>
+
+
+@using (Html.BeginForm("GetJobdata", "Settings", FormMethod.Post, new { @class = "f1", @id = "frmJob" }))
+{
+    <div class="form-group">
+        @Html.Label(@TnT.LangResource.GlobalRes.UsersUserName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20" } })
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label(@TnT.LangResource.GlobalRes.UsersPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.DetailInfo, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20" } })
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20" } })
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label(@TnT.LangResource.GlobalRes.JobsPackagingLevel, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20" } })
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-submit">@TnT.LangResource.GlobalRes.btnJobCreateSubmit</button>
+}
+

@@ -1,0 +1,283 @@
+﻿@model TnT.Models.Reports.RptAuditTrailsViewModel
+@{
+    ViewBag.Title = "Trails";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.ReportsTrails</h2>
+
+<div class="row">
+
+   
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align: right;">
+
+            <input type="radio" name="Trails" class="trailType" id="RdoServer" value="Server">
+            @Html.Label(@TnT.LangResource.GlobalRes.ReportsTrailsServerTrails, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailServer, @data_original_title = "Field Information" })
+            
+        </div>
+        <div class="col-md-6">
+            <input type="radio" name="Trails" class="trailType" id="RdoLine" value="Line">
+            @Html.Label(@TnT.LangResource.GlobalRes.ReportsTrailsLineTrails, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailLine, @data_original_title = "Field Information" })
+          
+        </div>
+
+        <br />
+        <br />
+    </div>
+</div>
+<div class="row" id="RptFilterServer"  style="margin-top: 10px; margin-bottom: 10px;display:none">
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align:right">
+            @Html.Label(@TnT.LangResource.GlobalRes.RptTrailsActivity, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailActivity, @data_original_title = "Field Information" })
+           
+            <select class="required" data-val="true" id="ActivityServer" name="Activity" validate="true" >
+                <option value=''>@TnT.LangResource.GlobalRes.RptTrailsSelectActivity</option>
+            </select>
+        </div>
+        <div class="col-md-6 " >
+            @Html.Label(@TnT.LangResource.GlobalRes.UsersUserName, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailUserName, @data_original_title = "Field Information" })
+          
+            @Html.DropDownListFor(M => M.UserName, new SelectList(ViewBag.UserName, "ID", "UserName"), @TnT.LangResource.GlobalRes.RptTrailsSelectUsrName, new { @id = "UserNameServer" })
+        </div>
+        </div>
+    </div>
+<div class="row" id="RptFilterLine" style="margin-top: 10px; margin-bottom: 10px;display:none">
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align:right">
+            @Html.Label(@TnT.LangResource.GlobalRes.RptTrailsActivity, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailActivity, @data_original_title = "Field Information" })
+           
+            <select class="required" data-val="true" id="ActivityLine" name="Activity" validate="true">
+                <option value=''>@TnT.LangResource.GlobalRes.RptTrailsSelectActivity</option>
+            </select>
+        </div>
+        <div class="col-md-6 ">
+            @Html.Label(@TnT.LangResource.GlobalRes.UsersUserName, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailUserName, @data_original_title = "Field Information" })
+            @Html.DropDownListFor(M => M.UserName, new SelectList(ViewBag.UserName, "ID", "UserName"), @TnT.LangResource.GlobalRes.RptTrailsSelectUsrName, new { @id = "UserNameLine" })
+        </div>
+    </div>
+</div>
+<div class="row" id="lineLocationDiv" style="display:none; margin-top: 10px; margin-bottom: 10px;">
+    <div class="col-md-12" style="text-align: center;">
+        @Html.Label(@TnT.LangResource.GlobalRes.ReportsTrailsLine, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailLineCode, @data_original_title = "Field Information" })
+       
+        @Html.DropDownListFor(M => M.lineLocation, new SelectList(ViewBag.LineLocations, "ID", "ID"), @TnT.LangResource.GlobalRes.RptTrailsSelectLneLocation)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 form-group" style="text-align: right;">
+        <div id="errmsg3" style="color:red"></div>
+        @Html.Label(@TnT.LangResource.GlobalRes.ReportsTrailsFrom, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailFrom, @data_original_title = "Field Information" })
+       
+        @Html.Editor("FromDate", new { htmlAttributes = new { @class = "datepicker", @style = "width:30%;", @name = "JexpFrom" } })
+
+    </div>
+    <div class="col-md-6 form-group">
+        @Html.Label(@TnT.LangResource.GlobalRes.ReportsTrailsTo, htmlAttributes: new { @class = "control -label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTrailTo, @data_original_title = "Field Information" })
+       
+        @Html.Editor("ToDate", new { htmlAttributes = new { @class = "datepicker", @style = "width:30%;", @name = "JexpTo" } })
+
+
+    </div>
+</div>
+<div class="row" style="text-align:center; padding-top:10px;">
+    <input type="button" id="btnViewRpt" value="@TnT.LangResource.GlobalRes.ReportsTrailsViewReport" class="btn btn-info" style="margin-left: 4%;" />
+</div>
+
+
+<script>
+    @{
+        var lang = "";
+        HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies["Language"];
+        if (cookie != null)
+        {
+            lang = cookie.Value;
+        }
+        else
+        {
+            lang = "de";
+        }
+    }
+    $(document).ready(function () {
+        //$('.datepicker').datepicker({
+        //    format: "mm/dd/yyyy",
+        //    autoclose: true
+        //});
+        var CurrentDate = new Date();
+        var day = CurrentDate.getDate();
+        var month = CurrentDate.getMonth() + 1;
+        var year = CurrentDate.getFullYear();
+
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+
+        var today = day + "/" + month + "/" + year;
+        $("#FromDate").val(today);
+        $("#ToDate").val(today);
+        $("#RptFilterServer").hide();
+        $("#RptFilterLine").hide();
+    });
+
+
+    $(".trailType").click(function () {
+        var TrailType = $('input[name=Trails]:checked').val();
+        if (TrailType === "Line") {
+            $("#lineLocationDiv").show();
+            $("#RptFilterServer").hide();
+            $("#RptFilterLine").show();
+        } else {
+            $("#lineLocationDiv").hide();
+            $("#RptFilterServer").show();
+            $("#RptFilterLine").hide();
+        }
+
+
+
+        $.ajax({
+            url: 'getActivity',
+            type: "POST",
+            dataType: 'json',
+            data: { "Type": TrailType},
+            success: function (data) {
+                debugger;
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.RptTrailsSelectActivity</option>";
+                if (TrailType === "Server") {
+                    if ('@lang' == "en") {
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i].Activity + "'>" + data[i].Activity + "</option>";
+                        }
+                    }
+                    else {
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i].ActivityGerman + "'>" + data[i].ActivityGerman + "</option>";
+
+                        }
+                    }
+                        $('#ActivityServer').html(strSel);
+                    }
+                
+                else {
+                    if ('@lang' == "en") {
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i].Id + "'>" + data[i].Activity + "</option>";
+                        }
+                    }
+                    else {
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i].Id + "'>" + data[i].ActivityGerman + "</option>";
+                        }
+                    }
+                    $('#ActivityLine').html(strSel);
+                }
+
+
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+
+    $("#btnViewRpt").click(function () {
+
+        $(".loading").show();
+        var activity;
+        var uid;
+        var TrailType = $('input[name=Trails]:checked').val();
+        debugger;
+        if (typeof (TrailType) === "undefined") {
+             $(".loading").hide();
+            toastr.warning("@TnT.LangResource.GlobalRes.RptTrailsSelectAuditTrilTyp");
+            return false;
+        }
+
+        if (TrailType == "Line") {
+            
+            activity = $("#ActivityLine").val();
+            uid = $("#UserNameLine").val();
+            var line = $("#lineLocation").val();
+            if (line == "") {
+                $(".loading").hide();
+                toastr.warning("@TnT.LangResource.GlobalRes.RptTrailsSelectLine");
+                $("#lineLocation").css("border", "1px solid red");
+
+                return false;
+            } else {
+                $("#lineLocation").css("border", "1px solid green");
+
+            }
+        }
+        else
+        {
+            activity = $("#ActivityServer").val();
+            uid = $("#UserNameServer").val();
+        }
+
+        var frmDt = $("#FromDate").datepicker().val();
+
+        var dateF = frmDt;
+        var d = new Date(dateF.split("/").reverse().join("-"));
+        var dd = d.getDate();
+        var mm = d.getMonth() + 1;
+        var yy = d.getFullYear();
+        var t = mm + "/" + dd + "/" + yy;
+
+        var toDt = $("#ToDate").datepicker().val();
+
+        var dateT = toDt;
+        var dt = new Date(toDt.split("/").reverse().join("-"));
+        var ddt = dt.getDate();
+        var mmt = dt.getMonth() + 1;
+        var yyt = dt.getFullYear();
+        var d = mmt + "/" + ddt + "/" + yyt;
+
+        if (frmDt == "" || toDt == "") {
+            $(".loading").hide();
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrRptTrailsProvideDates");
+            return false;
+        }
+
+
+
+
+        if (frmDt != "" && toDt != "") {
+
+
+
+            $.ajax({
+                url: 'getAuditTrailReport',
+                type: "POST",
+                dataType: 'json',
+                data: { "FromDate": frmDt, "ToDate": toDt, "Type": TrailType, "lineLocation": line, "UserId": uid, "Activity": activity },
+                success: function (data) {
+
+
+                    if (data == "@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData") {
+
+                        $('#modal-msg').html('@TnT.LangResource.GlobalRes.TempDataDavaNoData !');
+                        $("#showMSGBx").trigger("click");
+
+                    } else {
+                        $('#modal-rpt-data').html(data);
+                        $("#showRPTBx").trigger("click");
+                    }
+                    $(".loading").hide();
+                },
+                error: function (data) {
+                    $(".loading").hide();
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        } else {
+            $(".loading").hide();
+            $("#errmsg").html("@TnT.LangResource.GlobalRes.toastrRptTrailsSelectDate !");
+        }
+        $(".loading").hide();
+    });
+
+</script>

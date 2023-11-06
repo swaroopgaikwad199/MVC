@@ -1,0 +1,105 @@
+﻿@model TnT.Models.Account.LoginViewModel
+
+<div class="row">
+    <div class="col-lg-offset-1 col-md-10 text-center">
+        <h3>@TnT.LangResource.GlobalRes.SharedLoginAccntFurther</h3>
+        <hr />
+       
+        <label for="lblErrMsg" class="text-danger bold"></label>
+        <div class="login-form">
+
+            <div class="login-content" style="margin-top: -46px;">
+                @using (Html.BeginForm("VerifyLogin", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmVerifyLogin" }))
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(m => m.username, new { value= User.FirstName });
+
+                    <label id="lblErrMsg" class="danger bold"></label>
+                    <div class="form-group">
+                        <h3>@TnT.LangResource.GlobalRes.ShowMsgUserName : @User.FirstName</h3>
+                        @*<div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="entypo-user"></i>
+                            </div>
+                            @Html.TextBox("ausername",null, new { @class = "form-control", @placeholder = TnT.LangResource.GlobalRes.UsersIndexUserId })
+                        </div>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="entypo-key"></i>
+                            </div>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = TnT.LangResource.GlobalRes.UsersPassword })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                               @TnT.LangResource.GlobalRes.UserRemark 
+                            </div>
+                            @Html.TextBox("Remark", null,new  { @class = "form-control", @placeholder = TnT.LangResource.GlobalRes.AddModelErrorJobkindlyprovide, @required="required", @value="" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnVerifyLogin" type="button" class="btn btn-info btn-icon icon-left btn-lg">
+                            <i class="entypo-login"></i>
+                            @TnT.LangResource.GlobalRes.cmnBtnVerify
+                        </button>
+						<button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left btn-lg" id="btnCloseDigital" >
+                                @TnT.LangResource.GlobalRes.cmnBtnClose
+                                <i class="entypo-cancel"></i>
+                            </button>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#btnVerifyLogin').click(function () {
+
+        $("label[for='lblErrMsg']").html("");
+
+
+
+        if ($("#Password").val().length < 1) {
+            $("label[for='lblErrMsg']").html("@TnT.LangResource.GlobalRes.toastrSharedLoginverifyAcc.");
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("VerifyLogin", "Account")',
+            type: 'post',
+            data: $('form#frmVerifyLogin').serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 'True') {
+                    if ($("#Remark").val().length < 2) {
+                        $("label[for='lblErrMsg']").html("@TnT.LangResource.GlobalRes.toastrSharedLoginRemarkProceding.");
+                        return;
+                    }
+                    $("#btnCloseDigital").trigger("click");
+
+                    postData();
+
+                } else {
+                    $("label[for='lblErrMsg']").html("@TnT.LangResource.GlobalRes.toastrSharedLoginInvalidPwd.");
+                }
+            }
+        });
+
+
+    });
+
+    $('#Remark').change(function () {
+        var $Remark = $('#Remark');
+        $Remark.val($.trim($Remark.val()));
+    });
+
+</script>
+

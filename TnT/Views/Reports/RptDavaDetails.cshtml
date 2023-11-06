@@ -1,0 +1,142 @@
+﻿@model TnT.Models.Reports.RptDavaViewModel
+
+
+<style>
+    /*@@media print {*/
+    .scrollprint {
+        overflow-y: inherit;
+        max-height: none;
+    }
+    /*}*/
+    .tbFont {
+        font-size: 9px;
+    }
+
+    .tdWidth {
+        width: 30%;
+    }
+
+    .tdWidthBig {
+        width: 40%;
+    }
+
+    .tblWidth {
+        width: 100%;
+    }
+
+    .rptBadUIDTbl {
+        font-size: 8px;
+    }
+</style>
+
+<link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+<div class="container" id="rptLoaded">
+    <div class="row" style="border: 1px solid; margin:10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;">@TnT.LangResource.GlobalRes.RptJobsDavaReport</h4>
+    </div>
+
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table class="table @ViewBag.tbFont" style="text-align: center;">
+            <tr style="font-weight:bold;">
+                <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                @if (Model.ReportType == "Product")
+                {
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.TracelinkProductXmlProductName</td>
+                }
+                else
+                {
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.JobsBatchManagerBatchName</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.ImporterTracelinkQuantity</td>
+                }
+
+                <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnStatus</td>
+
+            </tr>
+            <tbody>
+
+                @{
+                    if (Model.DavaData.Count > 0)
+                    {
+                        int counter = 0;
+
+                        foreach (var item in Model.DavaData)
+                        {
+                            if (item.Name != null)
+                            {
+                                counter++;
+
+
+                                <tr>
+
+                                    <td>@counter</td>
+                                    <td>@item.Name</td>
+                                    @if (Model.ReportType == "Batch")
+                                    {
+                                        if (item.Status != "Partial")
+                                        {
+                                            <td>@item.Qty</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@item.SSCCDone/@item.Qty</td>
+                                        }
+                                    }
+                                    <td>@item.Status</td>
+
+                                </tr>
+                            }
+
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserNAme
+
+                </td>
+                <td style="padding-left:38%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+    @if (ViewBag.scrollprint == null)
+    {
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFDavaDetails" })
+    </div>
+    }
+</div>
+
+<script>
+    $(document).on("click", "#btnGenaratePDFDavaDetails", function (e) {
+
+        e.preventDefault();
+        var status = "@Model.stat";
+        var rpttye = "@Model.ReportType";
+
+        var newUrl = "@Url.Action("genePDFDavaStatus", "Reports")?rptType=" + rpttye + "&status=" + status;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+</script>

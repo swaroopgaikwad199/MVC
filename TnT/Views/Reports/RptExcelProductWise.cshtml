@@ -1,0 +1,256 @@
+﻿@model TnT.Models.Reports.Jobs.RptProductWiseViewModel
+
+<div class="container" id="rptLoaded">
+
+    @if (Model.Products.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>
+    }
+    else
+    {
+        <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+        <style>
+            /*@@media print {*/
+            .scrollprint {
+                overflow-y: inherit;
+                max-height: none;
+            }
+            /*}*/
+            .tbFont {
+                font-size: 9px;
+            }
+
+            .tdWidth {
+                width: 30%;
+            }
+
+            .tdWidthBig {
+                width: 40%;
+            }
+
+            .tblWidth {
+                width: 100%;
+            }
+
+            .pgbreak {
+                page-break-inside: avoid;
+            }
+        </style>
+
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptProductWise</b></h4>
+        </div>
+
+        foreach (var pro in Model.Products)
+        {
+            @*<div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px; background-color:aliceblue">
+                    <div class="col-md-4">
+                        <label>Product Name:</label> @pro.product.Name <br />
+                        <label>GTIN Tertiary :</label> @pro.GTINtertiary<br />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Product Code:</label>@pro.product.ProductCode <br />
+                        <label>Description :</label>@pro.product.Description<br />
+                    </div>
+                    <div class="col-md-4">
+                        <label>GTIN:</label>@pro.GTIN <br />
+                        <label>Deck:</label><label id="lblDecklvl">@pro.DECK</label><br />
+                    </div>
+                </div>*@
+            <div class="pgbreak" style="border:1px solid black; margin-top:10px;font-family: 'Courier New';">
+                <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox pgbreak" style="border: 1px solid;margin: 10px;padding-top: 9px">
+                    <table class="tblWidth @ViewBag.tbFont">
+                        <tr>
+                            <td class="col-md-5 tdWidthBig"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName :</label><b>@pro.product.Name</b></td>
+
+
+                            <td class="col-md-5 tdWidth"><label>@TnT.LangResource.GlobalRes.JobsProductCode :</label><b>@pro.product.ProductCode</b></td>
+
+
+                            <td class="col-md-5 tdWidth"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesGTIN:</label><b>@pro.jb.GTIN</b></td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnGTINTertiary :</label><b> @pro.GTINtertiary</b><br /></td>
+                            <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.ProductDescription :</label><b>@pro.product.Description</b><br /></td>
+                            <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnDeck:</label><label id="lblDecklvl"><b>@pro.DECK</b></label></td>
+
+                        </tr>
+                        <tr><td><label>Total Batch Count : </label>@pro.totalbatchcnt</td></tr>
+                    </table>
+                </div>
+                <div class="row @ViewBag.tbFont pgbreak scroll1 @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New'; ">
+                    <table class="table @ViewBag.tbFont" style="text-align: center;">
+                        <tr style="font-weight:bold;">
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnMFGDate</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnEXPDate</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnGoodItems</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnBadItems</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsValuesDecommissioned</td>
+                            <td style="text-align: center;">NU</td>
+                            <td style="text-align: center;">@TnT.LangResource.GlobalRes.JobsBatchQty</td>
+                            <td style="text-align: center;">Batch Start Date</td>
+                            <td style="text-align: center;">Batch End Date</td>
+                            @*<th style="text-align: center;">Total</th>*@
+                        </tr>
+                        <tbody>
+                            @foreach (var jb in pro.Jobs)
+                    {
+                                <tr>
+                                    <td>@jb.Job.BatchNo</td>
+                                    <td>@jb.Job.MfgDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@jb.Job.ExpDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@jb.GoodCount</td>
+                                    <td>@jb.BadCount</td>
+                                    <td>@jb.decommisionedCount</td>
+                                    <td>@jb.notVerified</td>
+                                    <td>@jb.Job.Quantity</td>
+                                    <td>@jb.Job.JobStartTime</td>
+                                    <td>@jb.Job.JobEndTime</td>
+
+                                    @*<td>@jb.Total</td>*@
+
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Quantity</b></td>
+                                <td><b>@pro.totalSrn</b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        }
+        <div style="border: 1px solid;margin-top: 10px;padding-top: 9px;font-family: 'Courier New';">
+            <table style="width:100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td style="width:50%; padding-left:10px;">
+                        Generated By: @Model.UserName
+
+                    </td>
+                    <td style="padding-left:35%">
+                        @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                    </td>
+                </tr>
+            </table>
+        </div>
+        if (ViewBag.scrollprint == null)
+        {
+            <div style="text-align:center;padding-top: 2%;">
+                @Html.DropDownListFor(x => x.Packinglevel, Model.Packaginlevels)
+            </div>
+            <br />
+
+            <div style="text-align:center">
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                    @TnT.LangResource.GlobalRes.cmnBtnClose
+                    <i class="entypo-cancel"></i>
+                </button>
+                @Html.ActionLink("Generate Excel", "", "", null, new { @class = "btn btn-blue", @id = "btnGenarateExcelProductWise" })
+            </div>
+        }
+    }
+</div>
+
+
+
+<script>
+    $("#Packinglevel").change(function () {
+        var existingLVL = $("#Packinglevel").val();
+        $(".loading").show();
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var lvl = $("#Packinglevel").val().trim();
+
+        var FromDate = $('#JobFromCreatedDate').datepicker().val();
+        var ToDate = $('#JobToCreatedDate').datepicker().val();
+
+        if (lvl != "Select") {
+            if (currentLvl != lvl) {
+                var jobId = $("#job_JID").val();
+                $.ajax({
+
+                    url: 'getProductWiseReportAccLvl',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "FromDate": FromDate, "ToDate": ToDate, "Level": lvl },
+                    success: function (data) {
+                        $(".loading").hide();
+                        if (data == "No Data") {
+                            data = '<h3 style="text-align:center; padding-bottom: 50px;">No Data Available</h3>';
+                            $("#btnPrintRPT").hide();
+                            $('#rptLoaded').html(data);
+                        }
+                        else {
+                            $("#btnPrintRPT").show();
+                            $('#rptLoaded').html(data);
+                        }
+                        //$("#Packinglevel select").val(existingLVL);
+                        $('#Packinglevel option[value=' + existingLVL + ']').attr('selected', 'selected');
+
+
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            }
+
+        }
+
+    });
+
+    $(document).on("click", "#btnGenarateExcelProductWise", function (e) {
+
+        e.preventDefault();
+        var lvl = $("#Packinglevel").val().trim();
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var level;
+
+        if (lvl != "Select") {
+            if (currentLvl == lvl) {
+                level = $("#Packinglevel").val().trim();
+            }
+            else {
+                level = 'MOC';
+            }
+        }
+        else {
+            level = 'MOC';
+        }
+
+        var FromDate = $('#JobFromCreatedDate').datepicker().val();
+        var ToDate = $('#JobToCreatedDate').datepicker().val();
+
+        var newUrl = "@Url.Action("geneExcelProductWise", "Reports")?FromDate=" + FromDate + "&ToDate=" + ToDate + "&Level=" + level;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+    $(document).ready(function () {
+        $("#Packinglevel").val('MOC');
+    });
+</script>

@@ -1,0 +1,108 @@
+﻿@model TnT.Models.EPCIS.EpcisEventDetails
+
+@{
+    ViewBag.Title = TnT.LangResource.GlobalRes.EPCISBatchWiseEPCISEventGeneration;
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.EPCISBatchWiseEPCISEventGeneration</h2>
+
+@using (Html.BeginForm("GenerateEPCISEvent", "EPCIS", FormMethod.Post, new { @id = "frmEPCIS" }))
+{
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label class="control-label col-md-4" for="JobId">@TnT.LangResource.GlobalRes.EPCISIndexSelectBatch</label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(M => M.JobId, new SelectList(ViewBag.Jobs, "JID", "BatchNo"), TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob, new { @class = "form-control", @validate = "true" })
+                </div>
+                <br /><br />
+                <label class="control-label col-md-4" for="BizStepId">@TnT.LangResource.GlobalRes.EPCISBizStep</label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(M => M.BizStepId, new SelectList(ViewBag.BizStep, "Id", "BizStep"), TnT.LangResource.GlobalRes.EPCISSelectBizStep, new { @class = "form-control", @validate = "true" })
+                </div>
+                <br /><br />
+                <label class="control-label col-md-4" for="Disposition">@TnT.LangResource.GlobalRes.EPCISDispositionEvent</label>
+                <div class="col-md-8">
+                    <select class="form-control required" data-val="true" id="Disposition" name="Disposition" validate="true">
+                        <option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>
+                    </select>
+                </div>
+                <br /><br />
+                <div class="col-md-4">
+                    <input type="button" class="btn btn-info" value="@TnT.LangResource.GlobalRes.cmnBtnSave" id="btnSubmit">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $('#BizStepId').change(function () {
+        BizStepID = $('#BizStepId').val();
+        $('#Disposition').html('');
+        $.ajax({
+            url: 'getBizStepWiseDispositions',
+            type: "POST",
+            dataType: 'json',
+            data: { "BizStepID": BizStepID },
+            success: function (data) {
+                console.log(data);
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>";
+                for (i = 0; i < data.length; i++) {
+                    strSel += "<option value='" + data[i].Disposition + "'>" + data[i].Disposition + "</option>";
+                }
+                $('#Disposition').html(strSel);
+            },
+            error: function (message) {
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>";
+                $('#Disposition').html(strSel);
+            }
+        });
+    });
+
+    $("#btnSubmit").click(function () {
+        var JobId = $("#JobId").val();
+        var BizStepID = $("#BizStepId").val();
+        var Disposition = $("#Disposition").val();
+        var msgPOST = "";
+        if (JobId == "") {
+            showMessage("JobId", "@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob");
+            msgPOST += "@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob";
+        }
+        else {
+            clearColor("JobId");
+        }
+        if (BizStepID == "") {
+            showMessage("BizStepId", "@TnT.LangResource.GlobalRes.EPCISSelectBizStep");
+            msgPOST += "@TnT.LangResource.GlobalRes.EPCISSelectBizStep";
+        }
+        else {
+            clearColor("BizStepId");
+        }
+        if (Disposition == '') {
+            showMessage("Disposition", "@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent");
+            msgPOST += "@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent";
+        }
+        else {
+            clearColor("Disposition");
+        }
+
+
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function formSubmit() {
+        document.getElementById("frmEPCIS").submit();
+    }
+</script>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:a="http://xmlns.rfxcel.com/traceability/api/3" xmlns:t="http://xmlns.rfxcel.com/traceability/3" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.rfxcel.com/traceability/api/3" version="3.1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="Core.xsd" namespace="http://xmlns.rfxcel.com/traceability/3" />
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+            rfXcel Traceability Application Programming Interface (API) - core data types
+            Copyright 2015 rfXcel Corporation. All rights reserved.
+         </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="ApiIoBaseType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:VoidType">
+        <xs:attribute name="contentStructVer" type="t:StructureVersionType" use="required" />
+        <xs:attribute name="createDateTime" type="xs:dateTime" use="required" />
+        <xs:attribute name="requestId" type="t:IdType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApiRequestType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="a:ApiIoBaseType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApiResponseType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="a:ApiIoBaseType">
+        <xs:sequence>
+          <xs:element name="result" type="t:ResultType" />
+        </xs:sequence>
+        <xs:attribute name="responseId" type="t:IdType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MessageInfoType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sysDeploymentId" type="t:QualifiedIdType" />
+      <xs:element minOccurs="0" name="senderInstId" type="t:QualifiedIdType" />
+      <xs:element name="senderId" type="t:TypedQualifiedIdType" />
+      <xs:element minOccurs="0" name="receiverInstId" type="t:QualifiedIdType" />
+      <xs:element name="receiverId" type="t:TypedQualifiedIdType" />
+      <xs:element name="msgFormat" type="t:OptionallyVersionedEnumType" />
+      <xs:element name="msgType" type="t:OptionallyVersionedEnumType" />
+      <xs:element minOccurs="0" name="msgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="corrMsgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="fileName" type="xs:string" />
+      <xs:element minOccurs="0" name="msgHeaderList" type="t:NameValueListType" />
+      <xs:element minOccurs="0" name="msgPriority" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnvelopeHeaderType">
+    <xs:sequence>
+      <xs:element name="msgInfo" type="a:MessageInfoType" />
+      <xs:element minOccurs="0" name="origMsgInfo" type="a:MessageInfoType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnvelopeBodyType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax" />
+  </xs:complexType>
+  <xs:complexType name="EnvelopeType">
+    <xs:sequence>
+      <xs:element name="header" type="a:EnvelopeHeaderType" />
+      <xs:element name="body" type="a:EnvelopeBodyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnvelopeListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="envelope" type="a:EnvelopeType" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

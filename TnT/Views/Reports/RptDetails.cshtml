@@ -1,0 +1,137 @@
+﻿@model TnT.Models.Reports.Jobs.RptDetailViewModel
+
+<div class="container" id="rptLoaded">
+    <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+    <style>
+        /*@@media print {*/
+        .scrollprint {
+            overflow-y: inherit;
+            max-height: none;
+        }
+        /*}*/
+        .tbFont {
+            font-size: 9px;
+        }
+
+        .tdWidth {
+            width: 30%;
+        }
+
+        .tdWidthBig {
+            width: 40%;
+        }
+
+        .tblWidth {
+            width: 100%;
+        }
+
+        .pgbreak {
+            page-break-inside: avoid;
+        }
+    </style>
+
+    <script>
+        $("#btnPrintRPT").show();
+    </script>
+    <div class="row" style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptDetailBatchReport</b></h4>
+
+    </div>
+    @*<div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;     max-height: 450px; overflow-y: auto; ">*@
+        <div class="row tblWidth" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+          
+            <table class="table detailsyle @ViewBag.tbFont tblWidth" style="text-align: center;">
+                    <tr style="font-weight:bold;">
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                        <td style="text-align: left;">@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName</td>
+                        <td style="text-align: left;">@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo </td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnMFGDate</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnEXPDate</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnQty</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptAutoBatchClose</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnCreatedBy</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnVerifiedBy</td>
+                        <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnStatus</td>
+
+                    </tr>
+                <tbody>
+
+                    
+                    @{ int i = 1; }
+                    @foreach (var item in Model.Jobs)
+                    {
+                        <tr class="pgbreak">
+                            <td>@i</td>
+                            <td class="leftAlign" style="text-align: left;">@item.ProductName </td>
+                            <td class="leftAlign" style="text-align: left;">@item.Btachno</td>
+                            @{string edate = @item.MfgDate.ToString("dd/MM/yyyy"); }
+                             @{   string date = edate.Replace('-', '/'); }
+
+                            <td style="font-size:11px">@date</td>
+                            @{string edate1 = @item.ExpDate.ToString("dd/MM/yyyy"); }
+                            @{   string date1 = edate1.Replace('-', '/'); }
+                            <td style="font-size:11px">@date1</td>
+                            <td>@item.Qty</td>
+                            <td>@item.AutoBatchClose</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.VerifiedBy</td>
+                            <td>@item.Status</td>
+                        </tr>
+
+                        i++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    @*</div>*@
+
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                   @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="padding-left:35%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <br />
+    @if (ViewBag.scrollprint == null)
+    {
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFDetail" })
+    </div>
+    }
+</div>
+
+
+<script>
+    $(document).on("click", "#btnGenaratePDFDetail", function (e) {
+
+        e.preventDefault();
+     
+
+        var FromDate = $('#JobFromCreatedDate').datepicker().val();
+        var ToDate = $('#JobToCreatedDate').datepicker().val();
+
+        var newUrl = "@Url.Action("genePDFDetailed", "Reports")?FromDate=" + FromDate + "&ToDate=" + ToDate ;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+</script>

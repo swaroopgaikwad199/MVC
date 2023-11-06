@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"landscape"},{"x":85,"y":79,"type":"twoD","name":"GS1 DataMatrix 1","matrixType":"GS1_DataMatrix","text":"02-17-10-37","width":28,"height":28},{"x":25,"y":204,"type":"Barcode","name":"Barcode 1","text":"(00)32000000003772","barcodeType":"SSCC_Barcode","height":133,"data":"00"}]}

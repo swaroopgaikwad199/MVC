@@ -1,0 +1,188 @@
+﻿@model TnT.Models.SettingsNUtility.RolesViewModel
+
+@{
+    ViewBag.Title = "CreateVM";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.RolesCreate
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "Roles")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+@using (Html.BeginForm("CreateVM", "Roles", FormMethod.Post, new { @id = "frmRoles" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles_Name, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipRoleName, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Roles_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Roles_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div >
+                @Html.LabelFor(model => model.Permissions, htmlAttributes: new { @class = "control -label col-md-2 popover-default", style = "margin-left: 50px;", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipRolePermission, @data_original_title = "Field Information" })
+            </div>
+            @*<label class="control-label col-md-2"> @TnT.LangResource.GlobalRes.RolesCreatePermissions</label>*@
+            <div class="col-md-10" style="margin-left: 164px;margin-top: -27px;">
+                <div>
+                    @if (ViewData.ModelState.IsValidField("NoPermission") == false)
+                    {
+                        <div class="text-danger bold">@TnT.LangResource.GlobalRes.AddModuleErrorRolesProvidepermission.</div>
+                    }
+
+                </div>
+
+                @*@for (int i = 0; i < Model.Permissions.Count(); i++)
+                {
+                    var role = Model.Permissions[i];
+                    @Html.HiddenFor(model => model.Permissions[i].ID)
+                    @Html.HiddenFor(model => model.Permissions[i].Permission)
+                    <div class="col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(model => model.Permissions[i].IsChecked)
+                                @Html.DisplayFor(model => model.Permissions[i].Permission, role.Permission)
+                            </label>
+                        </div>
+                    </div>
+                }*@
+
+                <div class="row">
+                    @{
+                        var modules = Model.Permissions.Where(s => s.Remarks != null).Select(s => s.Remarks).Distinct().OrderBy(o => o);
+
+                        foreach (var module in modules)
+                        {
+                            <div class="col-md-6">
+                                <div class="panel panel-dark">
+                                    <div class="panel-heading">
+                                        <div><span class="col-md-4">@module</span></div>
+                                    </div>
+                                    <div class="panel-body">
+                                        @foreach (var permission in Model.Permissions.Where(s => s.Remarks == module).OrderBy(o => o.Permission))
+                                        {
+                                            var indx = Model.Permissions.IndexOf(permission);
+                                            var role = Model.Permissions[indx];
+
+                                            @Html.HiddenFor(model => model.Permissions[indx].ID)
+                                            @Html.HiddenFor(model => model.Permissions[indx].Permission)
+                                            <div class="col-md-6">
+                                                <div class="checkbox forTestScript">
+                                                    <label>
+                                                        @Html.CheckBoxFor(model => model.Permissions[indx].IsChecked)
+                                                        @Html.DisplayFor(model => model.Permissions[indx].Permission, role.Permission)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnSubmit" value="@TnT.LangResource.GlobalRes.UsersCreate" class="btn btn-info" />
+            </div>
+        </div>
+
+
+
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            var Roles_Name = $("#Roles_Name").val();
+            var count = $("[type='checkbox']:checked").length;
+            var mss = "";
+            if (Roles_Name == "") {
+                mss = "@TnT.LangResource.GlobalRes.toastrRoleCreateRName";
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrRoleCreateRName");
+                $("#Roles_Name").css("border", "red 1px solid");
+                return false;
+            }
+
+            if (count == 0) {
+                mss = "@TnT.LangResource.GlobalRes.toastrRoleCreateSelectPermission";
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrRoleCreateSelectPermission");
+                return false;
+            }
+
+            if (mss == "") {
+                document.getElementById("frmRoles").submit();
+            }
+
+        });
+        $("#Roles_Name").change(function () {
+
+            if ($("#Roles_Name").val() != "") {
+                $("#Roles_Name").css("border", "green 1px solid");
+            }
+            else {
+                $("#Roles_Name").css("border", "red 1px solid");
+            }
+        });
+    });
+</script>
+<script>
+    $('#Roles_Name').change(function () {
+        var Roles_Name = $('#Roles_Name').val();
+
+
+        $.ajax({
+            url: 'IsRoleExisting',
+            type: "POST",
+            dataType: 'json',
+            data: { "RoleName": Roles_Name },
+            success: function (data) {
+
+                if (data == true) {
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateRoleAlreadyExist");
+                    $("#Roles_Name").css("border", "red 1px solid");
+                    $("#Roles_Name").val("");
+
+
+                } else {
+                    if ($("#Roles_Name").val() != "") {
+                        $("#Roles_Name").css("border", "green 1px solid");
+                    }
+                    else {
+                        $("#Roles_Name").css("border", "red 1px solid");
+                    }
+
+
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+</script>

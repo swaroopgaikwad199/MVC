@@ -1,0 +1,150 @@
+﻿@model TnT.Models.Reports.RptAuditTrailsViewModel
+<div class="container" id="rptLoaded">
+    <style>
+        /*@@media print {*/
+        .scrollprint {
+            overflow-y: inherit;
+            max-height: none;
+        }
+        /*}*/
+        .tbFont {
+            font-size: 9px;
+        }
+
+        .tdWidth {
+            width: 30%;
+        }
+
+        .tdWidthBig {
+            width: 40%;
+        }
+
+        .tblWidth {
+            width: 100%;
+        }
+
+        .rptBadUIDTbl {
+            font-size: 8px;
+        }
+        .scrollPCTable {
+    overflow-y: auto;
+    max-height: 500px;
+}
+    </style>
+    <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+    <div class="row " style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div class="row @ViewBag.tbFont" style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            
+                <h4 style="text-align:center;"><b>@Html.DisplayFor(model => model.RptType)</b></h4>
+                <p style="text-align:center;"> <b> @Html.DisplayFor(model => model.FrmDt) -  @Html.DisplayFor(model => model.ToDt)
+            </b>  </p>
+
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;">
+            @if (Model.Activity != "" && Model.Activity != null)
+            {
+              <b>  @Model.Activity;</b>
+            }
+           <b> @TnT.LangResource.GlobalRes.RptAuditTrail</b>
+        </h4>
+    </div>
+    <div class="row @ViewBag.tbFont scrollPCTable @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New'; ">
+        @if (Model.Trails.Count() > 0)
+        {
+            <table class="table @ViewBag.tbFont" style="text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td style="text-align: center; width:4%;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                    <td style="text-align: center; width:10%;">@TnT.LangResource.GlobalRes.UsersUserId</td>
+                    <td style="text-align: center; width:10%;">@TnT.LangResource.GlobalRes.RptAuditTrailUserType</td>
+                    <td style="text-align: center;  width:15%;">@TnT.LangResource.GlobalRes.RptAuditTrailTime</td>
+                    <td style="text-align: center;  width:60%;">@TnT.LangResource.GlobalRes.RptAuditTrailMessage</td>
+                </tr>
+                <tbody>
+
+                    @{ int i = 1;
+                        foreach (var item in Model.Trails)
+                        {
+                            <tr class="pgbreak">
+                                <td>@i</td>
+                                <td style="text-align: center;" class="leftAlign">@item.UserName</td>
+                                <td style="text-align: center;" class="leftAlign">@item.UserType</td>
+                                <td style="text-align: center;" class="leftAlign">@item.Time</td>
+                                @if (Model.RptType == "Line side Trail")
+                                {
+                                    <td class="leftAlign" style="white-space: pre-line; text-align:left;">@item.Reason <br /> @item.Activity</td>
+                                }
+                                else
+                                {
+                                    <td class="leftAlign" style="white-space: pre-line; text-align:left;">@item.Reason</td>
+                                }
+                            </tr>
+
+                            i++;
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+                        }
+                        else
+                        {
+
+                            <h4 style="text-align:center;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h4>
+
+                        }
+
+    </div>
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="padding-left:35%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+@if (ViewBag.scrollprint == null)
+{
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFAudittrail" })
+    </div>
+}
+</div>
+
+
+<script>
+    $(document).on("click", "#btnGenaratePDFAudittrail", function (e) {
+        debugger;
+        e.preventDefault();
+        var fdate = "@Model.FrmDt";
+        var todate = "@Model.ToDt";
+        var uid = "@Model.UID";
+        var linecode = "@Model.lineLocation";
+        var activity = "@Model.Activity";
+        var type = "@Model.Type";
+
+        var newUrl = "@Url.Action("genePDAuditTrail", "Reports")?FromDate=" + fdate + "&ToDate=" + todate + "&Type=" + type + "&lineLocation=" + linecode + "&UserId=" + uid + "&Activity="+activity;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+</script>

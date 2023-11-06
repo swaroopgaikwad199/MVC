@@ -1,0 +1,376 @@
+﻿@model TnT.Models.EPCIS.ShipmentViewModel
+
+@{
+    ViewBag.Title = "Shipment";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.EPCISShipment</h2>
+
+<div class="container col-sm-12">
+    @using (Html.BeginForm("GenerateShipment", "EPCIS", FormMethod.Post, new { @id = "frmShipment" }))
+    {
+        <div class="row">
+            <div class="col-sm-6" style="border:1px solid #000; min-height:650px">
+                <br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISIndexSelectBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentSelectBatch, @data_original_title = "Field Information" })
+                @*<label class="control-label col-md-5" for="JobId"></label>*@
+                <div class="col-md-7">
+                    @Html.DropDownListFor(M => M.JobId, new SelectList(ViewBag.Jobs, "Value", "Text"), TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob, new { @class = "form-control", @validate = "true", @onblur = "checkControlIfBlank('JobId','" + TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob + "')" })
+                </div>
+                <br /><br /><br />
+                <table>
+                    <tr>
+                        <td style="width:350px"></td>
+                        <td class="col-md-8">
+                            @Html.RadioButtonFor(M => M.Action, "WholeBatch", new { @onclick = "batchSection('wholeBatch');", @checked = "checked", @class = "control-label col-md-4", style = "margin-top:2px;" })&nbsp;&nbsp;
+                            @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionWholeBatch, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentWholeBatch, @data_original_title = "Field Information" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="col-md-8">
+                            @*@Html.RadioButtonFor(M => M.IsWholeBatch, false, new { @name="PartialBatch", @onclick = "batchSection('Partial');", @class = "control-label col-md-4" })&nbsp;&nbsp;<label for="IsWholeBatch">@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionsPartialBatch</label>*@
+                            <input type="radio" id="Partial" name="Action" value="Partial" onclick="batchSection('Partial')" class="control-label col-md-4" style="margin-top:2px;" />&nbsp;&nbsp;
+                            @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionsPartialBatch, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentPartialBatch, @data_original_title = "Field Information" })
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISBizStep, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentBizStep, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    @Html.DropDownListFor(M => M.BizStepId, new SelectList(ViewBag.BizStep, "Id", "BizStep"), TnT.LangResource.GlobalRes.EPCISSelectBizStep, new { @class = "form-control", @validate = "true", @onblur = "checkControlIfBlank('BizStepId','" + TnT.LangResource.GlobalRes.EPCISSelectBizStep + "')" })
+                </div>
+                <br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISDispositionEvent, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentDispositionEvent, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    <select class="form-control required" data-val="true" id="Disposition" name="Disposition" validate="true" onblur="checkControlIfBlank('Disposition','@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent')">
+                        <option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>
+                    </select>
+                </div>
+                <br /><br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISReceiver, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentReceiver, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    @Html.DropDownListFor(M => M.ExtensionData1, new SelectList(ViewBag.Receiver, "CompanyName", "CompanyName"), TnT.LangResource.GlobalRes.EPCISPleaseSelectReceiver, new { @class = "form-control", @validate = "true", @onblur = "checkControlIfBlank('ExtensionData1','" + TnT.LangResource.GlobalRes.EPCISPleaseSelectReceiver + "')" })
+                </div>
+                <br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISTransporter, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentTransporter, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    @Html.DropDownListFor(M => M.ExtensionData2, new SelectList(ViewBag.Transporter, "Name", "Name"), TnT.LangResource.GlobalRes.EPCISPleaseSelectTransporter, new { @class = "form-control", @validate = "true", @onblur = "checkControlIfBlank('ExtensionData2','" + TnT.LangResource.GlobalRes.EPCISPleaseSelectTransporter + "')" })
+                </div>
+                <br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISDriverName, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentDriverName, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    @Html.EditorFor(M => M.UserData1, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20", @onblur = "checkControlIfBlank('UserData1','" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDriverName + "')" } })
+                </div>
+                <br /><br />
+                @Html.Label(@TnT.LangResource.GlobalRes.EPCISDriverContactNo, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentDriverContactNumber, @data_original_title = "Field Information" })
+
+                <div class="col-md-7">
+                    @Html.EditorFor(M => M.UserData2, new { htmlAttributes = new { @class = "form-control NumbersOnly", @min = "0", @value = "0", @validate = "true", @maxlength = "10", @onblur = "checkControlIfBlank('UserData2','" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDriverContactNumber + "')" } })
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    @Html.Label(@TnT.LangResource.GlobalRes.EPCISVehicleNumber, htmlAttributes: new { @class = "control -label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipShipmentVehicleNumber, @data_original_title = "Field Information" })
+
+
+                    <div class="col-md-7">
+                        @Html.EditorFor(M => M.UserData3, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20", @onblur = "checkControlIfBlank('UserData3','" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterVehicleNumber + "')" } })
+                    </div>
+                </div>
+                <br /><br /><br />
+                <div class="form-group">
+                    <div class="col-md-6" style="text-align:center">
+                        @Html.Label(@TnT.LangResource.GlobalRes.EPCISShipmentDocType, htmlAttributes: new { @class = "control -label col-md-7 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTransactionDocumtentType, @data_original_title = "Field Information" })
+                    </div>
+                    <div class="col-md-6" style="text-align:center">
+                        @Html.Label(@TnT.LangResource.GlobalRes.EPCISShipmentDocDetail, htmlAttributes: new { @class = "control -label col-md-8 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTransactionDocumentDetail, @data_original_title = "Field Information" })
+                    </div>
+                    </div>
+                    <br /><br />
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(M => M.DocumentType1, new SelectList(ViewBag.BizTransactionList, "Type", "Definition"), TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDocumentType, new { @class = "form-control", @validate = "true", @onchange = "BizTransactionListChange()" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(M => M.DocumentDetail1, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20", @disabled = true, @onblur = "checkControlIfBlank('DocumentDetail1', '" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails + "')" } })
+                    </div>
+                    <br /><br />
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(M => M.DocumentType2, new SelectList(ViewBag.BizTransactionList, "Type", "Definition"), TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDocumentType, new { @class = "form-control", @validate = "true", @disabled = true, @onchange = "ExtensionData1Change()" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(M => M.DocumentDetail2, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20", @disabled = true, @onblur = "checkControlIfBlank('DocumentDetail2', '" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails + "')" } })
+                    </div>
+                    <br /><br />
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(M => M.DocumentType3, new SelectList(ViewBag.BizTransactionList, "Type", "Definition"), TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDocumentType, new { @class = "form-control", @validate = "true", @disabled = true, @onchange = "ExtensionData2Change()" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(M => M.DocumentDetail3, new { htmlAttributes = new { @class = "form-control", @validate = "true", @maxlength = "20", @disabled = true, @onblur = "checkControlIfBlank('DocumentDetail3', '" + TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails + "')" } })
+                    </div>
+                    <br /><br />
+                    <div class="col-md-5">
+                        <input type="button" class="btn btn-info" value="@TnT.LangResource.GlobalRes.cmnBtnSave" id="btnSubmit">
+                    </div>
+                </div>
+
+            <div class="col-sm-6" style="border:1px solid #000; height:250px;min-height: 650px; overflow-y:auto">
+                <div class="row" style="border-left: 1px solid #fff;"><h4 id="XMLPan" style="background-color:#000; color:#fff; text-align:center;padding: 11px;margin: 0;font-weight: bold;font-size: 14px;">@TnT.LangResource.GlobalRes.RptcmnSSCC</h4></div>
+                <table id="tblSSCCs" class="table table-bordered" style="width:100%; display:none;">
+                    <thead>
+                    <th style="text-align: center;font-weight: bold;color: #000;">@TnT.LangResource.GlobalRes.RptcmnSrNo</th>
+                    <th style="text-align: center;font-weight: bold;color: #000;">@TnT.LangResource.GlobalRes.RptcmnSSCC</th>
+                    <th style="text-align: center;font-weight: bold;color: #000;"></th>
+                    </thead>
+                    <tbody id="tblSSCCsBody"></tbody>
+                </table>
+            </div>
+
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    function batchSection(section) {
+        if (section == "wholeBatch") {
+            selPartial = "Whole";
+            $("#Action").val("WholeBatch");
+            var chk = document.querySelectorAll("input[type=checkbox]");
+            for (var i = 0; i < chk.length; i++) {
+                chk[i].disabled = true;
+                chk[i].checked = true;
+            }
+
+        } else if (section == "Partial") {
+            selPartial = "Partial";
+            $("#Action").val("Partial");
+            var chk = document.querySelectorAll("input[type=checkbox]");
+            for (var i = 0; i < chk.length; i++) {
+                chk[i].disabled = false;
+                chk[i].checked = false;
+            }
+        }
+    }
+
+    $("#JobId").change(function () {
+        $("#tblSSCCs").hide();
+        var JbId = $("#JobId").val();
+
+        if (JbId != '') {
+            $(".loading").show();
+            $.ajax({
+                url: 'getSSCCsForShipment',
+                type: "POST",
+                dataType: 'json',
+                data: { "JobId": JbId,"RCCount":2 },
+                success: function (data) {
+                    $(".loading").hide();
+                    if (data != null) {
+                        console.log(data);
+                        document.getElementById("Action").checked = true;
+                        $("#tblSSCCs").show();
+                        $("#tblSSCCsBody").html("");
+                        for (var i = 0; i < data.length; i += 1) {
+                            var chkBx = '<input type="checkbox" name="SSCCs[]" value="' + data[i] + '" checked disabled=true  />';
+                            console.log(chkBx);
+                            $("#tblSSCCs").append("<tr><td style='text-align:center;'>" + (i + 1) + "</td><td style='text-align:center;'>" + data[i] + "</td><td style='text-align:center;'>" + chkBx + "</td></tr>");
+                        }
+                        console.log(data);
+                    } else {
+                        alert("@TnT.LangResource.GlobalRes.TempDataDavaNoData");
+                    }
+
+                },
+                error: function (message) {
+                    $(".loading").hide();
+                    alert("@TnT.LangResource.GlobalRes.TempDataDavaNoData");
+                }
+            });
+        }
+    });
+
+    $('#BizStepId').change(function () {
+        BizStepID = $('#BizStepId').val();
+        $('#Disposition').html('');
+        $.ajax({
+            url: 'getBizStepWiseDispositions',
+            type: "POST",
+            dataType: 'json',
+            data: { "BizStepID": BizStepID },
+            success: function (data) {
+                console.log(data);
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>";
+                for (i = 0; i < data.length; i++) {
+                    strSel += "<option value='" + data[i].Disposition + "'>" + data[i].Disposition + "</option>";
+                }
+                $('#Disposition').html(strSel);
+            },
+            error: function (message) {
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent</option>";
+                $('#Disposition').html(strSel);
+            }
+        });
+    });
+
+  $("#btnSubmit").click(function () {
+        var IsWholeBatch = $("#Action").val();
+        var DocumentType2 = $("#DocumentType2").val();
+        var DocumentType3 = $("#DocumentType3").val();
+        var msgPOST = "";
+
+        msgPOST += checkControlIfBlank("JobId", "@TnT.LangResource.GlobalRes.toastrEpcisIndexSelectJob");
+        msgPOST += checkControlIfBlank("BizStepId", "@TnT.LangResource.GlobalRes.EPCISSelectBizStep");
+        msgPOST += checkControlIfBlank("Disposition", "@TnT.LangResource.GlobalRes.EPCISSelectDispositionEvent");
+        msgPOST += checkControlIfBlank("ExtensionData1", "@TnT.LangResource.GlobalRes.EPCISPleaseSelectReceiver");
+        msgPOST += checkControlIfBlank("ExtensionData2", "@TnT.LangResource.GlobalRes.EPCISPleaseSelectTransporter");
+        msgPOST += checkControlIfBlank("UserData1", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDriverName");
+        msgPOST += checkControlIfBlank("UserData2", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDriverContactNumber");
+        msgPOST += checkControlIfBlank("UserData3", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterVehicleNumber");
+        msgPOST += checkControlIfBlank("DocumentType1", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDocumentType");
+        msgPOST += checkControlIfBlank("DocumentDetail1", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails");
+
+        if (IsWholeBatch == "Partial") {
+            var chk = $("#tblSSCCsBody").find('input[type="checkbox"]:checked').length;
+            if (chk == 0) {
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber";
+            }
+        }
+
+        if (DocumentType2 != "") {
+            msgPOST += checkControlIfBlank("DocumentDetail2", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails");
+        }
+        if (DocumentType3 != "") {
+            msgPOST += checkControlIfBlank("DocumentDetail3", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseEnterDocumentTypeDetails");
+        }
+
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+
+    function checkControlIfBlank(elementID, msg) {
+        var elementValue = $("#" + elementID).val();
+        if (elementValue == "") {
+            showMessage(elementID, msg);
+            return msg;
+        }
+        else {
+            clearColor(elementID);
+            return "";
+        }
+    };
+
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function formSubmit() {
+        document.getElementById("frmShipment").submit();
+    }
+
+    $(document).ready(function () {
+        $(".NumbersOnly").keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    function BizTransactionListChange() {
+        var val = $("#DocumentType1").val();
+        var val1 = $("#DocumentType2").val();
+        var val2 = $("#DocumentType3").val();
+
+        if (val == '') {
+            $("#DocumentType1").css("border", "rgb(235,235,235) 1px solid");
+            $("#DocumentDetail1").prop('disabled', true);
+            $("#DocumentType2").prop('selectedIndex', 0);
+            $("#DocumentType2").trigger('change');
+            $("#DocumentType2").prop('disabled', true);
+            $("#DocumentDetail1").val('');
+            $("#DocumentDetail1").css("border", "rgb(235,235,235) 1px solid");
+        }
+        else if (val == val1 || val == val2) {
+            showMessage("DocumentType1", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDifferentDocumentType");
+            $("#DocumentDetail1").prop('disabled', true);
+            $("#DocumentType2").prop('selectedIndex', 0);
+            $("#DocumentType2").trigger('change');
+            $("#DocumentType2").prop('disabled', true);
+            $("#DocumentDetail1").val('');
+            $("#DocumentDetail1").css("border", "rgb(235,235,235) 1px solid");
+        }
+        else {
+            clearColor("DocumentType1");
+            $('#DocumentDetail1').prop("disabled", false);
+            $('#DocumentType2').prop("disabled", false);
+        }
+    }
+
+    function ExtensionData1Change() {
+        var val = $("#DocumentType2").val();
+
+        if (val == '') {
+            $("#DocumentType2").css("border", "rgb(235,235,235) 1px solid");
+            $("#DocumentDetail2").prop('disabled', true);
+            $("#DocumentType3").prop('selectedIndex', 0);
+            $("#DocumentType3").trigger('change');
+            $("#DocumentType3").prop('disabled', true);
+            $("#DocumentDetail2").val('');
+            $("#DocumentDetail2").css("border", "rgb(235,235,235) 1px solid");
+        }
+        else {
+            if (val == $("#DocumentType1").val() || val == $("#DocumentType3").val()) {
+                showMessage("DocumentType2", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDifferentDocumentType");
+                $("#DocumentDetail2").prop('disabled', true);
+                $("#DocumentType3").prop('selectedIndex', 0);
+                $("#DocumentType3").trigger('change');
+                $("#DocumentType3").prop('disabled', true);
+                $("#DocumentDetail2").val('');
+                $("#DocumentDetail2").css("border", "rgb(235,235,235) 1px solid");
+            }
+            else {
+                clearColor("DocumentType2");
+                $('#DocumentDetail2').prop("disabled", false);
+                $('#DocumentType3').prop("disabled", false);
+            }
+        }
+    }
+
+    function ExtensionData2Change() {
+        var val = $("#DocumentType3").val();
+
+        if (val == '') {
+            $("#DocumentType3").css("border", "rgb(235,235,235) 1px solid");
+            $("#DocumentDetail3").prop('disabled', true);
+            $("#DocumentDetail3").val('');
+            $("#DocumentDetail3").css("border", "rgb(235,235,235) 1px solid");
+        }
+        else {
+            if (val == $("#DocumentType2").val() || val == $("#DocumentType1").val()) {
+                showMessage("DocumentType3", "@TnT.LangResource.GlobalRes.toastrEPCISPleaseSelectDifferentDocumentType");
+                $("#DocumentDetail3").prop('disabled', true);
+                $("#DocumentDetail3").val('');
+                $("#DocumentDetail3").css("border", "rgb(235,235,235) 1px solid");
+            }
+            else {
+                clearColor("DocumentType3");
+                $('#DocumentDetail3').prop("disabled", false);
+            }
+        }
+    }
+</script>

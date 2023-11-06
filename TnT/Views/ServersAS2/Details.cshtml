@@ -1,0 +1,108 @@
+﻿@model TnT.Models.AS2.M_ServersAS2
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.ServerAs2Detailsofserver
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","ServersAS2")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a> 
+</h2>
+
+<div>
+    @*<h4>M_ServersAS2</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostPublicKeyPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostPublicKeyPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelfPublicKeyPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelfPublicKeyPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelfPrivateKeyPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelfPrivateKeyPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelfPrivateKeyPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelfPrivateKeyPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+    <a style="float: left; margin-right: 5px;" href='@Url.Action("Edit/"+Model.Id,"ServersAS2")' class="btn btn-info btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.SOMIndexEdit
+        <i class="fa fa-pencil"></i>
+    </a>
+</p>

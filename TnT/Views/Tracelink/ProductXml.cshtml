@@ -1,0 +1,263 @@
+﻿@model TnT.Models.Tracelink.TLProductDetailViewModel
+
+@{
+    ViewBag.Title = "ProductXml";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.TracelinkProductXml</h2>
+
+<div class="row">
+<div class="col-lg-6">
+    @using (Html.BeginForm("GenerateProdDetails", "Tracelink", FormMethod.Post, new { @id = "FrmProd" } ))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                @*<label class="control-label col-md-4"> Batch No </label>*@
+                @Html.LabelFor(model => model.JID, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXmlBatchNo, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.JID, new SelectList(ViewBag.Batches, "JID", "BatchNo"), TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, new { @class = "form-control", @validate = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4">Product Name</label>*@
+                @Html.LabelFor(model => model.PAID, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLProductName, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @*@Html.DropDownListFor(model => model.PAID, new SelectList(ViewBag.FPCodes, "PAID", "FGCode"), "Select Code", new { @onchange = "Action(this.value);", @class = "form-control required", @validate = "true", @id = "ddProd" })*@
+                    <select class="form-control required" data-val="true" data-val-number="The field FP Code must be a number." data-val-required="The FP Code field is required." id="ddProd" name="PAID" onchange="Action(this.value);" validate="true">
+                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpCode</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.PAID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4"> Country Name </label>*@
+                @Html.LabelFor(model => model.CountryName, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLCountryName, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.CountryName, new SelectList(ViewBag.CountryName, "Value", "Text"), TnT.LangResource.GlobalRes.ProductDrpSelectCountry, new { @class = "form-control", @validate = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4"> TargetMarketExemption </label>*@
+                @Html.LabelFor(model => model.TMrktExemption, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLTargetMarketExep, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.RadioButtonFor(model => model.TMrktExemption, "true", new { @Id = "rdoTrue" })<label for="rdoTrue" style="margin-left:2px; margin-right:10px">True</label>
+      @Html.RadioButtonFor(model => model.TMrktExemption, "false", new { @Id = "rdoFalse" })<label for="rdoFalse" style="margin-left:2px; margin-right:10px">False</label>
+                        @Html.ValidationMessageFor(model => model.TMrktExemption, "", new { @class = "text-danger" })
+</div>
+            </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4"> TargetMarketExemption Reference </label>*@
+                @Html.LabelFor(model => model.TMrktRefNo, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLTargetMarketExemptionReference, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TMrktRefNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "100" } })
+                    @Html.ValidationMessageFor(model => model.TMrktRefNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4">TargetMarketExemption Date</label>*@
+                @Html.LabelFor(model => model.TMrktExemptionDate, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLTargetMarketExemptionDate, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TMrktExemptionDate, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "datepicker", @style = "width: 100%;"} })
+                    @Html.ValidationMessageFor(model => model.TMrktExemptionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            <div class="form-group">
+                @*<label class="control-label col-md-4">Currency Code</label>*@
+                @Html.LabelFor(model => model.currencyCode, new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLCurrencyCode, @data_original_title = "Field Information" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.currencyCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "100" } })
+                    @Html.ValidationMessageFor(model => model.currencyCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label(TnT.LangResource.GlobalRes.TRacelinkProductXmlUnitPrice, new { @class = "control -label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductXMLUnitPrice, @data_original_title = "Field Information",style= "margin-left: 88px;" })
+               
+                <div class="col-md-8" style="margin-left: 176px; margin-top: -22px;">
+                    @Html.EditorFor(model => model.currencyRate, new { htmlAttributes = new { @class = "form-control NumbersOnly", @maxlength = "100" } })
+                    @Html.ValidationMessageFor(model => model.currencyRate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row text-right">
+                <input id="btnSubmit" type="button" value="@TnT.LangResource.GlobalRes.cmnBtnGenerate" class="btn btn-info btn-default" />
+            </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    //var Level = "";
+    //$(document).ready(function () {
+    //    var ddVal = $('#ddProd').val();
+    //    if (ddVal != "") {
+    //        Action(ddVal);
+    //    }
+    //});
+
+    $('#JID').change(function () {
+
+        JobId = $('#JID').val();
+        $('#ddProd').html('');
+        $.ajax({
+            url: 'getTypeWiseProducts',
+            type: "POST",
+            dataType: 'json',
+            data: { "JobId": JobId },
+            success: function (data) {
+
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.JobCreateDrpCode</option>";
+                for (i = 0; i < data.length; i++) {
+                    strSel += "<option value='" + data[i].PAID + "'>" + data[i].Name + "</option>";
+                }
+                $('#ddProd').html(strSel);
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+
+        })
+    });
+
+
+    $(document).ready(function () {
+        var TMrktExemption;
+        $("#btnSubmit").click(function () {
+
+            var ID = $("#JID").val();
+            var ProductName = $("#ddProd").val();
+            var CountryName = $("#CountryName").val();
+            TMrktExemption = TMrktExemption;
+            var TMrktRefNo = $("#TMrktRefNo").val();
+            var TMrktExemptionDate = $("#TMrktExemptionDate").val();
+            var currencyCode = $("#currencyCode").val();
+            var currencyRate = $("#currencyRate").val();
+
+
+            var msgPOST = "";
+            if (ID == "") {
+
+                showMessage("JID", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideBatch");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideBatch";
+            } else {
+                clearColor("JID");
+            }
+
+            if (ProductName == "") {
+
+                showMessage("ddProd", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideProduct");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideProduct";
+            } else {
+                clearColor("ddProd");
+            }
+
+            if (CountryName == "") {
+                showMessage("CountryName", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideCountry");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideCountry";
+            } else {
+                clearColor("CountryName");
+            }
+
+            if (currencyCode == "") {
+                showMessage("currencyCode", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideCurrency")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideCurrency";
+            } else {
+                clearColor("currencyCode");
+            }
+
+            if (currencyRate == "") {
+                showMessage("currencyRate", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideUnitPrc")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideUnitPrc";
+            } else {
+                clearColor("currencyRate");
+            }
+
+            if (TMrktExemption == undefined) {
+                showMessage("TMrktExemption", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptrfl");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptrfl";
+            } else {
+                clearColor("TMrktExemption");
+            }
+            if (TMrktExemption == undefined || TMrktExemption == "true") {
+                if (TMrktRefNo == "") {
+                    showMessage("TMrktRefNo", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptRef");
+                    msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptRef";
+                } else {
+                    clearColor("TMrktRefNo");
+                }
+
+                if (TMrktExemptionDate == "") {
+                    showMessage("TMrktExemptionDate", "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptDates");
+                    msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkProductxmlProvideTargetMarExmptDates";
+                } else {
+                    clearColor("TMrktExemptionDate");
+                }
+            }
+
+
+
+            if (msgPOST == "") {
+                formSubmit();
+                window.setTimeout(function () { window.location.reload(); }, 1000);
+            }
+        });
+        $("#rdoFalse").click(function () {
+
+            TMrktExemption = "false";
+            $("#TMrktExemptionDate").attr("disabled", "disabled");
+            $("#TMrktRefNo").attr("disabled", "disabled");
+            $("#TMrktExemptionDate").css("border", "#ebebeb 1px solid");
+            $("#TMrktRefNo").css("border", "#ebebeb 1px solid");
+
+        });
+
+        $("#rdoTrue").click(function () {
+            TMrktExemption = "true";
+            $("#TMrktExemptionDate").removeAttr("disabled");
+            $("#TMrktRefNo").removeAttr("disabled");
+
+        });
+        function showMessage(elementID, msg) {
+            toastr.warning(msg);
+            $("#" + elementID).val("");
+            $("#" + elementID).css("border", "red 1px solid");
+            return false;
+        }
+        function clearColor(elementID) {
+            $("#" + elementID).css("border", "green 1px solid");
+        }
+
+        $(".NumbersOnly").keydown(function (e) {
+            if (event.shiftKey == true) {
+                event.preventDefault();
+            }
+
+            if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                (event.keyCode >= 96 && event.keyCode <= 105) ||
+                event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+            } else {
+                event.preventDefault();
+            }
+
+            if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                event.preventDefault();
+            //if a decimal has been added, disable the "."-button
+
+        });
+
+
+
+    });
+
+    function formSubmit() {
+        document.getElementById("FrmProd").submit();
+    }
+
+        </script>

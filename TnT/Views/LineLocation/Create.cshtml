@@ -1,0 +1,309 @@
+﻿@model TnT.Models.Job.LineLocation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.LineLocationCreate
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "LineLocation")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+
+<div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger bold">Validation Error Occured. Please check the data.</div>
+    }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+
+
+@using (Html.BeginForm("Create", "LineLocation", FormMethod.Post, new { @id = "frmLineLocation" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        </h4>
+
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.Label(@TnT.LangResource.GlobalRes.LineLocationID, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineID, @data_original_title = "Field Information" })
+                    @*<label class="control-label col-md-3">@TnT.LangResource.GlobalRes.LineLocationID</label>*@
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocationCode, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineLocationCode, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LocationCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LocationCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DivisionCode, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineDivisionCode, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DivisionCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DivisionCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PlantCode, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLinePlantCode, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PlantCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PlantCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LineCode, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineCode, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LineCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LineCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LineIP, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineIP, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LineIP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LineIP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ServerName, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineServerName, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ServerName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ServerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DBName, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineDatabaseName, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DBName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DBName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SQLUsername, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineSqlUserName, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SQLUsername, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SQLUsername, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SQLPassword, htmlAttributes: new { @class = "control-label col-md-3 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipLineSqlPassword, @data_original_title = "Field Information" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SQLPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SQLPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LineName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LineName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LineName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReadGLN, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ReadGLN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ReadGLN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GLNExtension, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.GLNExtension, new { htmlAttributes = new { @class = "form-control NumbersOnly",@maxlength = "1" } })
+                            @Html.ValidationMessageFor(model => model.GLNExtension, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btnSubmit" type="button" value="@TnT.LangResource.GlobalRes.UsersCreate" class="btn btn-info btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            var ID = $("#ID").val();
+            var LocationCode = $("#LocationCode").val();
+            var DivisionCode = $("#DivisionCode").val();
+            var PlantCode = $("#PlantCode").val();
+            var LineCode = $("#LineCode").val();
+            var LineIP = $("#LineIP").val();
+            var DBName = $("#DBName").val();
+            var SQLUsername = $("#SQLUsername").val();
+            var SQLPassword = $("#SQLPassword").val();
+            var ReadGLN = $("#ReadGLN").val();
+            var LineName = $("#LineName").val();
+
+
+            var msgPOST = "";
+            if (ID == "") {
+                showMessage("ID", "@TnT.LangResource.GlobalRes.toastrCreateLineID");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineID";
+            } else {
+                clearColor("ID");
+            }
+
+            if (LocationCode == "") {
+                showMessage("LocationCode", "@TnT.LangResource.GlobalRes.toastrCreateLineLocationCode");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineLocationCode";
+            } else {
+                clearColor("LocationCode");
+            }
+
+            if (DivisionCode == "") {
+                showMessage("DivisionCode", "@TnT.LangResource.GlobalRes.toastrCreateLineDivisionCode");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineDivisionCode";
+            } else {
+                clearColor("DivisionCode");
+            }
+
+            if (PlantCode == "") {
+                showMessage("PlantCode", "@TnT.LangResource.GlobalRes.toastrCreateLinePlantCode");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLinePlantCode";
+            } else {
+                clearColor("PlantCode");
+            }
+
+            if (LineCode == "") {
+                showMessage("LineCode", "@TnT.LangResource.GlobalRes.toastrCreateLineCode");
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineCode";
+            } else {
+                clearColor("LineCode");
+            }
+
+            if (LineIP == "") {
+                showMessage("LineIP", "@TnT.LangResource.GlobalRes.toastrCreateLineIP")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineIP";
+            } else {
+                clearColor("LineIP");
+            }
+
+            if (DBName == "") {
+                showMessage("DBName", "@TnT.LangResource.GlobalRes.toastrCreateLineDataBaseName")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineDataBaseName";
+            } else {
+                clearColor("DBName");
+            }
+
+            if (SQLUsername == "") {
+                showMessage("SQLUsername", "@TnT.LangResource.GlobalRes.toastrCreateLineSQLUsername")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineSQLUsername";
+            } else {
+                clearColor("SQLUsername");
+            }
+
+            if (SQLPassword == "") {
+                showMessage("SQLPassword", "@TnT.LangResource.GlobalRes.toastrCreateLineSQLPassword")
+                msgPOST += "@TnT.LangResource.GlobalRes.toastrCreateLineSQLPassword";
+            } else {
+                clearColor("SQLPassword");
+            }
+            if (ReadGLN == "") {
+                showMessage("ReadGLN", "Please Provide ReadGLN")
+                msgPOST += "Please Provide ReadGLN";
+            } else {
+                clearColor("ReadGLN");
+            }
+            if (LineName == "") {
+                showMessage("LineName", "Please Provide LineName")
+                msgPOST += "Please Provide LineName";
+            } else {
+                clearColor("LineName");
+            }
+            if (msgPOST == "") {
+                formSubmit();
+            }
+
+        });
+
+        function showMessage(elementID, msg) {
+            toastr.warning(msg);
+            $("#" + elementID).val("");
+            $("#" + elementID).css("border", "red 1px solid");
+            return false;
+        }
+        function clearColor(elementID) {
+            $("#" + elementID).css("border", "green 1px solid");
+        }
+    });
+
+    function formSubmit() {
+        document.getElementById("frmLineLocation").submit();
+    }
+</script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

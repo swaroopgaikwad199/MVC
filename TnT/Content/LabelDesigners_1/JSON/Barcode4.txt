@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"portrait"},{"x":200,"y":85,"type":"Barcode","name":"Barcode 1","text":"BARCODE","barcodeType":"Product_Barcode","height":60,"data":"123456798"}]}

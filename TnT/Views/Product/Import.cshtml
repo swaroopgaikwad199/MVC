@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<style>
+    .grid{
+    width:100%;
+    padding-left:20px;
+    padding-top:20px;
+    }
+    td{
+        padding:4px;
+        text-align:center;
+    }
+  
+
+</style>
+<div>
+    <h2>
+        @TnT.LangResource.GlobalRes.ProductImport
+        <a style="float:right;" href='~/Content/assets/SampleProductsImporter.xlsx' class="btn btn-danger btn-icon icon-left">
+            @TnT.LangResource.GlobalRes.ProductImportDownloadSampleExcelFile
+            <i class="fa fa-file-excel-o"></i>
+        </a>
+    </h2>
+   
+            @*<div>
+                    @using (Html.BeginForm("Import", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="field-1" class="col-sm-3 control-label"> @TnT.LangResource.GlobalRes.ProductImportProductsFile </label>
+                                <div class="col-sm-5">
+                                    @Html.TextBox("file", "", new { type = "file", @class = "form-control", @required = "required" })
+                                </div>
+                                @Html.Hidden("FileType", "SOM")
+                                <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-success" />
+                            </div>
+                        </div>
+
+                    }
+                </div>*@
+
+            <div class="row">
+                @using (Html.BeginForm("Import", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row" style="padding-top:20px;">
+
+                        <div class="form-group">
+                            @*<label for="field-1" class="col-sm-3 control-label" style="font-size:16px;text-align:right; padding-top:5px"> @TnT.LangResource.GlobalRes.ProductImportProductsFile </label>*@
+                            @Html.Label(@TnT.LangResource.GlobalRes.ProductImportProductsFile, htmlAttributes: new { @class = "col-sm-3 control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipImportProductUpload, @data_original_title = "Field Information", style = "font-size:16px;text-align:right; padding-top:5px" })
+                            <div class="col-sm-5">
+                                @Html.TextBox("file", "", new { type = "file", @class = "form-control", @required = "required",@id= "uploadField" })
+                            </div>
+                            @Html.Hidden("FileType", "SOM")
+                            <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-info btn-default" onclick="Import()" AutoPostback = false/>
+                        </div>
+
+                    </div>
+                  
+                        if (ViewData.Model != null)
+                        {
+                        <div class="row grid" id="divgrid" style="overflow:auto; width:101%; height:500px">
+
+                            <table class="table table-bordered datatable" id="table-1">
+                                <thead>
+                                    <tr style="font-weight:bold">
+                                        <td></td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportName</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductProductCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductDescription</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductRemarks</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportScheduleDrg</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductDoseusage</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductGenericName</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductComposition</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductFGCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportUseExpDay</td>
+                                        <td>@TnT.LangResource.GlobalRes.JobsExpDateformat</td>
+                                        <td>@TnT.LangResource.GlobalRes.LineLocationPlantCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportSAPProCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductInternalMaterialCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportCountryDrgCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportManufactr</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductDoseageForm</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportStrength</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportContainrSz</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductFeacn</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportSubTypeNo</td>
+                                        <td>@TnT.LangResource.GlobalRes.PackageSpecification</td>
+                                        <td>@TnT.LangResource.GlobalRes.AuthorizedNo</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportSubType</td>
+                                        <td>@TnT.LangResource.GlobalRes.SubTypeSpecification</td>
+                                        <td>@TnT.LangResource.GlobalRes.PackUnit</td>
+                                        <td>@TnT.LangResource.GlobalRes.ResProdCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.Workshop</td>
+                                        <td>@TnT.LangResource.GlobalRes.M_VendorProvider</td>
+                                        <td>@TnT.LangResource.GlobalRes.SaudiDrugCode</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportNHRN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportMOCPPN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductMOC</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportMOCNTIN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportMOCSize</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportMOCBundleQty</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOBXPPN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductOBX</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOBXNTIN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOBXSize</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOBXBundleQty</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportISHPPN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductISH</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportISHNTIN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportISHSize</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportISHBundleQty</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOSHPPN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductOSH</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOSHNTIN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOSHSize</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportOSHBundleQty</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportPALPPN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductPAL</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportPALNTIN</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportPALSize</td>
+                                        <td>@TnT.LangResource.GlobalRes.ProductImportPALBundleQty</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewData.Model)
+                                    {
+
+                                        if (item.ItemArray[50] == "Exist")
+                                        {
+
+                                            <tr style="color:red">
+                                                <td><input name="chk" type="checkbox" disabled="disabled" value="@TnT.LangResource.GlobalRes.ProductImportExist" /></td>
+                                                <td>@item.ItemArray[0]</td>
+                                                <td>@item.ItemArray[1]</td>
+                                                <td>@item.ItemArray[2]</td>
+                                                <td>@item.ItemArray[3]</td>
+                                                <td>@item.ItemArray[4]</td>
+                                                <td>@item.ItemArray[5]</td>
+                                                <td>@item.ItemArray[6]</td>
+                                                <td>@item.ItemArray[7]</td>
+                                                <td>@item.ItemArray[8]</td>
+                                                <td>@item.ItemArray[9]</td>
+                                                <td>@item.ItemArray[10]</td>
+                                                <td>@item.ItemArray[11]</td>
+                                                <td>@item.ItemArray[12]</td>
+                                                <td>@item.ItemArray[13]</td>
+                                                <td>@item.ItemArray[14]</td>
+                                                <td>@item.ItemArray[15]</td>
+                                                <td>@item.ItemArray[16]</td>
+                                                <td>@item.ItemArray[17]</td>
+                                                <td>@item.ItemArray[18]</td>
+                                                <td>@item.ItemArray[19]</td>
+                                                <td>@item.ItemArray[20]</td>
+                                                <td>@item.ItemArray[21]</td>
+                                                <td>@item.ItemArray[22]</td>
+                                                <td>@item.ItemArray[23]</td>
+                                                <td>@item.ItemArray[24]</td>
+                                                <td>@item.ItemArray[25]</td>
+                                                <td>@item.ItemArray[26]</td>
+                                                <td>@item.ItemArray[27]</td>
+                                                <td>@item.ItemArray[28]</td>
+                                                <td>@item.ItemArray[29]</td>
+                                                <td>@item.ItemArray[30]</td>
+                                                <td>@item.ItemArray[31]</td>
+                                                <td>@item.ItemArray[32]</td>
+                                                <td>@item.ItemArray[33]</td>
+                                                <td>@item.ItemArray[34]</td>
+                                                <td>@item.ItemArray[35]</td>
+                                                <td>@item.ItemArray[36]</td>
+                                                <td>@item.ItemArray[37]</td>
+                                                <td>@item.ItemArray[38]</td>
+                                                <td>@item.ItemArray[39]</td>
+                                                <td>@item.ItemArray[40]</td>
+                                                <td>@item.ItemArray[41]</td>
+                                                <td>@item.ItemArray[42]</td>
+                                                <td>@item.ItemArray[43]</td>
+                                                <td>@item.ItemArray[44]</td>
+                                                <td>@item.ItemArray[45]</td>
+                                                <td>@item.ItemArray[46]</td>
+                                                <td>@item.ItemArray[47]</td>
+                                                <td>@item.ItemArray[48]</td>
+                                                <td>@item.ItemArray[49]</td>
+                                                <td>@item.ItemArray[50]</td>
+                                                <td>@item.ItemArray[51]</td>
+                                                <td>@item.ItemArray[52]</td>
+                                                <td>@item.ItemArray[53]</td>
+                                                <td>@item.ItemArray[54]</td>
+                                                <td>@item.ItemArray[55]</td>
+                                                <td>@item.ItemArray[56]</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr style="color:black">
+                                                <td><input name="chk" type="checkbox" checked="checked" value="@TnT.LangResource.GlobalRes.TempDataDavaNotexist" /></td>
+                                                <td>@item.ItemArray[0]</td>
+                                                <td>@item.ItemArray[1]</td>
+                                                <td>@item.ItemArray[2]</td>
+                                                <td>@item.ItemArray[3]</td>
+                                                <td>@item.ItemArray[4]</td>
+                                                <td>@item.ItemArray[5]</td>
+                                                <td>@item.ItemArray[6]</td>
+                                                <td>@item.ItemArray[7]</td>
+                                                <td>@item.ItemArray[8]</td>
+                                                <td>@item.ItemArray[9]</td>
+                                                <td>@item.ItemArray[10]</td>
+                                                <td>@item.ItemArray[11]</td>
+                                                <td>@item.ItemArray[12]</td>
+                                                <td>@item.ItemArray[13]</td>
+                                                <td>@item.ItemArray[14]</td>
+                                                <td>@item.ItemArray[15]</td>
+                                                <td>@item.ItemArray[16]</td>
+                                                <td>@item.ItemArray[17]</td>
+                                                <td>@item.ItemArray[18]</td>
+                                                <td>@item.ItemArray[19]</td>
+                                                <td>@item.ItemArray[20]</td>
+                                                <td>@item.ItemArray[21]</td>
+                                                <td>@item.ItemArray[22]</td>
+                                                <td>@item.ItemArray[23]</td>
+                                                <td>@item.ItemArray[24]</td>
+                                                <td>@item.ItemArray[25]</td>
+                                                <td>@item.ItemArray[26]</td>
+                                                <td>@item.ItemArray[27]</td>
+                                                <td>@item.ItemArray[28]</td>
+                                                <td>@item.ItemArray[29]</td>
+                                                <td>@item.ItemArray[30]</td>
+                                                <td>@item.ItemArray[31]</td>
+                                                <td>@item.ItemArray[32]</td>
+                                                <td>@item.ItemArray[33]</td>
+                                                <td>@item.ItemArray[34]</td>
+                                                <td>@item.ItemArray[35]</td>
+                                                <td>@item.ItemArray[36]</td>
+                                                <td>@item.ItemArray[37]</td>
+                                                <td>@item.ItemArray[38]</td>
+                                                <td>@item.ItemArray[39]</td>
+                                                <td>@item.ItemArray[40]</td>
+                                                <td>@item.ItemArray[41]</td>
+                                                <td>@item.ItemArray[42]</td>
+                                                <td>@item.ItemArray[43]</td>
+                                                <td>@item.ItemArray[44]</td>
+                                                <td>@item.ItemArray[45]</td>
+                                                <td>@item.ItemArray[46]</td>
+                                                <td>@item.ItemArray[47]</td>
+                                                <td>@item.ItemArray[48]</td>
+                                                <td>@item.ItemArray[49]</td>
+                                                <td>@item.ItemArray[50]</td>
+                                                <td>@item.ItemArray[51]</td>
+                                                <td>@item.ItemArray[52]</td>
+                                                <td>@item.ItemArray[53]</td>
+                                                <td>@item.ItemArray[54]</td>
+                                                <td>@item.ItemArray[55]</td>
+                                                <td>@item.ItemArray[56]</td>
+                                                
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row" style="padding-left:25px;padding-top:20px">
+                            <input id="btnsave" type="button" value="@TnT.LangResource.GlobalRes.btnJobCreateSubmit" AutoPostback = false class="btn btn-blue"/>
+                        </div>
+                    }
+                }
+               
+                    </div>
+
+   </div>
+
+<script>
+    $(document).ready(function () {
+ 
+        // ... skipped ...
+        //var table;
+        ////if table exists destroy it
+        //if ($.fn.dataTable.isDataTable('#table-1')) {
+        //    table = $('#table-1').DataTable(); table.destroy();
+        //}
+
+        //table = $('#table-1').DataTable({
+        //    "scrollX": true,
+        //    "scrollY": "200px",
+        //    "paging": false
+        //});
+        //$('#table-1').dataTable({
+        //    "scrollX": true,
+        //    "scrollY": "200px",
+        //    "paging": false
+        //});
+    });
+    $("#btnsave").click(function () {
+    
+        var values = new Array();
+        var data=new Array();
+        $.each($("input[name='chk']:checked").closest("td").siblings("td"),
+         function () {
+            
+             values.push($(this).text());
+            
+         }
+     
+         );
+        var itemlist = [];
+
+        //get cell values, instead of the header text.
+        $("#table-1 tbody tr").each(function () {
+         
+            var tdlist = $(this).find("td");
+            var chkbox = tdlist.find("input[type=checkbox]:checked");
+            if (chkbox.length > 0) {
+
+
+
+                var Item = {
+                    Name: $(tdlist[1]).html(), ProductCode: $(tdlist[2]).html(), Description: $(tdlist[3]).html(),
+                    Remarks: $(tdlist[4]).html(), ScheduledDrug: $(tdlist[5]).html(), DoseUsage: $(tdlist[6]).html(),
+                    GenericName: $(tdlist[7]).html(), Composition: $(tdlist[8]).html(), FGCode: $(tdlist[9]).html(),
+                    UseExpDay: $(tdlist[10]).html(), ExpDateFormat: $(tdlist[11]).html(), PlantCode: $(tdlist[12]).html(), SAPProductCode: $(tdlist[13]).html(),
+                    InternalMaterialCode: $(tdlist[14]).html(), CountryDrugCode: $(tdlist[15]).html(), Manufacturer: $(tdlist[16]).html(),
+                    DosageForm: $(tdlist[17]).html(), Strength: $(tdlist[18]).html(), ContainerSize: $(tdlist[19]).html(),
+                    FEACN: $(tdlist[20]).html(), SubTypeNo: $(tdlist[21]).html(), PackageSpec: $(tdlist[22]).html(),
+                    AuthorizedNo: $(tdlist[23]).html(), SubType: $(tdlist[24]).html(), SubTypeSpec: $(tdlist[25]).html(),
+                    PackUnit: $(tdlist[26]).html(), ResProdCode: $(tdlist[27]).html(), Workshop: $(tdlist[28]).html(),
+                    ProviderId: $(tdlist[29]).html(), SaudiDrugCode: $(tdlist[30]).html(),NHRN:$(tdlist[31]).html(), MOCPPN: $(tdlist[32]).html(),
+                    MonoCarton: $(tdlist[33]).html(), MOCNTIN: $(tdlist[34]).html(), MOCSize: $(tdlist[35]).html(), MOCBundleQty: $(tdlist[36]).html(),
+                    OBXPPN: $(tdlist[37]).html(), OuterBox: $(tdlist[38]).html(), OBXNTIN: $(tdlist[39]).html(), OBXSize: $(tdlist[40]).html(), OBXBundleQty: $(tdlist[41]).html(),
+                    ISHPPN: $(tdlist[42]).html(), InnerShipper: $(tdlist[43]).html(), ISHNTIN: $(tdlist[44]).html(), ISHSize: $(tdlist[45]).html(), ISHBundleQty: $(tdlist[46]).html(),
+                    OSHPPN: $(tdlist[47]).html(), OuterShipper: $(tdlist[48]).html(), OSHNTIN: $(tdlist[49]).html(), OSHSize: $(tdlist[50]).html(), OSHBundleQty: $(tdlist[51]).html(),
+                    PALPPN: $(tdlist[52]).html(), Pallet: $(tdlist[53]).html(), PALNTIN: $(tdlist[54]).html(), PALSize: $(tdlist[55]).html(), PALBundleQty: $(tdlist[56]).html()
+
+                };
+                itemlist.push(Item);
+            }
+        })
+     
+       
+        if (itemlist.length > 0) {
+            $.ajax({
+                url: '@Url.Action("GetData", "Product")', //
+                dataType: "json",
+                data: JSON.stringify({ itemlist: itemlist }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+              
+                    if (result == "@TnT.LangResource.GlobalRes.TempDataProductimportedSuccessfully") {
+                       
+                        $("#table-1 tbody tr").each(function () {
+                            var chk = $(this).find("input[type=checkbox]:checked");
+                            if(chk.is(":checked"))
+                            {
+                                $(this).closest("tr").css("color", "red");
+                                chk.attr("disabled", "disabled");
+                                chk.removeAttr("checked", "checked");
+                            }
+                        })
+                        toastr.warning( ""+result+"");
+                    }
+                    else {
+                        toastr.warning(result);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+                }
+            });
+        }
+        else
+        {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrProductImportNoProToUpld");
+        }
+    });
+   
+
+</script>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:t="http://xmlns.rfxcel.com/traceability/3" xmlns:ms="http://xmlns.rfxcel.com/traceability/messagingService/3" xmlns="http://schemas.xmlsoap.org/wsdl/" name="MessagingService" targetNamespace="http://xmlns.rfxcel.com/traceability/messagingService/3" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>
+        rfXcel Traceability API - Messaging Service
+        Copyright 2015 rfXcel Corporation. All rights reserved.
+    </documentation>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import schemaLocation="Core.xsd" namespace="http://xmlns.rfxcel.com/traceability/3" />
+      <import schemaLocation="MessagingService.xsd" namespace="http://xmlns.rfxcel.com/traceability/messagingService/3" />
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="ExceptionFault">
+    <wsdl:part name="faultInfo" element="t:exception" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_testService">
+    <wsdl:part name="input" element="ms:testService" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_testServiceResponse">
+    <wsdl:part name="output" element="ms:testServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_processMessages">
+    <wsdl:part name="input" element="ms:processMessages" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_processMessagesResponse">
+    <wsdl:part name="output" element="ms:processMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_getMessages">
+    <wsdl:part name="input" element="ms:getMessages" />
+  </wsdl:message>
+  <wsdl:message name="rfxMessagingService_getMessagesResponse">
+    <wsdl:part name="output" element="ms:getMessagesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMessagingService">
+    <wsdl:operation name="testService">
+      <wsdl:input message="ms:rfxMessagingService_testService" />
+      <wsdl:output message="ms:rfxMessagingService_testServiceResponse" />
+      <wsdl:fault name="exceptionFault" message="ms:ExceptionFault" />
+    </wsdl:operation>
+    <wsdl:operation name="processMessages">
+      <wsdl:input message="ms:rfxMessagingService_processMessages" />
+      <wsdl:output message="ms:rfxMessagingService_processMessagesResponse" />
+      <wsdl:fault name="exceptionFault" message="ms:ExceptionFault" />
+    </wsdl:operation>
+    <wsdl:operation name="getMessages">
+      <wsdl:input message="ms:rfxMessagingService_getMessages" />
+      <wsdl:output message="ms:rfxMessagingService_getMessagesResponse" />
+      <wsdl:fault name="exceptionFault" message="ms:ExceptionFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessagingServiceSoapHttp" type="ms:IMessagingService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="testService">
+      <soap:operation soapAction="http://wsop.rfxcel.com/messagingService/3/testService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="exceptionFault">
+        <soap:fault use="literal" name="exceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processMessages">
+      <soap:operation soapAction="http://wsop.rfxcel.com/messagingService/3/processMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="exceptionFault">
+        <soap:fault use="literal" name="exceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMessages">
+      <soap:operation soapAction="http://wsop.rfxcel.com/messagingService/3/getMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="exceptionFault">
+        <soap:fault use="literal" name="exceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessagingService">
+    <wsdl:port name="IMessagingServiceSoapHttpPort" binding="ms:MessagingServiceSoapHttp">
+      <soap:address location="https://rts-propix.track-n-trace.net/rfxcelwss/services/IMessagingServiceSoapHttpPort" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,580 @@
+﻿@model TnT.Models.Reports.Jobs.RptUIDsViewModel
+<style>
+    .rotate {
+        height: 63px;
+        /* Safari */
+        -webkit-transform: rotate(-90deg);
+        /* Firefox */
+        -moz-transform: rotate(-90deg);
+        /* IE */
+        -ms-transform: rotate(-90deg);
+        /* Opera */
+        -o-transform: rotate(-90deg);
+        /* Internet Explorer */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        text-align: center !important;
+        vertical-align: middle !important;
+        padding: 5px !important;
+    }
+
+    }
+</style>
+<div class="container" id="rptLoaded">
+    @if (Model.packagingDetails.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>
+    }
+    else
+    {
+        <script>
+            $("#btnPrintRPT").show();
+        </script>
+        <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+        <style>
+            /*@@media print {*/
+            .scrollprint {
+                overflow-y: inherit;
+                max-height: none;
+            }
+            /*}*/
+            .tbFont {
+                font-size: 9px;
+            }
+
+            .tdWidth {
+                width: 30%;
+            }
+
+            .tdWidthBig {
+                width: 40%;
+            }
+
+            .tblWidth {
+                width: 100%;
+            }
+
+            .rptBadUIDTbl {
+                font-size: 8px;
+            }
+        </style>
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center;;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptBadUIDList</b></h4>
+            @Html.HiddenFor(model => model.job.JID)
+        </div>
+
+        <div class="row  @ViewBag.tbFont rptBox @ViewBag.rptPdfBox " style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+
+            <table class="tblWidth @ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-5 tdWidthBig"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName:</label><b>@Html.DisplayFor(model => model.jbDetails.JD_ProdName)</b></td>
+                    <td class="col-md-5 tdWidth"><label>@TnT.LangResource.GlobalRes.JobsProductCode:</label><b>@Html.DisplayFor(model => model.jbDetails.JD_ProdCode)</b></td>
+                    <td class="col-md-5 tdWidthBig"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesGTIN:</label><b> @Html.DisplayFor(model => model.jbDetails.JD_GTIN)</b></td>
+                </tr>
+                <tr>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo:</label> <b>@Html.DisplayFor(model => model.job.BatchNo)</b></td>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatchQty:</label><b>@Html.DisplayFor(model => model.job.Quantity)</b></td>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnJobType:</label><b>@Html.DisplayFor(model => model.Jobtype)</b></td>
+                </tr>
+                <tr>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label><b>@Html.DisplayFor(model => model.job.MfgDate)</b></td>
+                    <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label><b>@Html.DisplayFor(model => model.job.ExpDate)</b></td>
+                    <td class="col-md-5"> <label>@TnT.LangResource.GlobalRes.RptcmnDeck:</label><b><label id="lblDecklvl"> @Html.DisplayFor(model => model.jbDetails.JD_Deckcode) </label></b></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row  @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 5px; padding-bottom:5px;font-family: 'Courier New';">
+            <table class="@ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLocationCode : @Html.DisplayFor(m => m.LineDetails.LocationCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode : @Html.DisplayFor(m => m.LineDetails.DivisionCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode : @Html.DisplayFor(m => m.LineDetails.PlantCode)</td>
+                    <td class="col-md-3" style="width:300px">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLineCode : @Html.DisplayFor(m => m.LineDetails.LineCode)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row scroll1 @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px; overflow-x: hidden;font-family: 'Courier New';">
+            <table class="table @ViewBag.rptBadUIDTbl @ViewBag.tbFont" style="text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td rowspan="2" style="width:1%">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                    <td rowspan="2" style="width:7%">@TnT.LangResource.GlobalRes.RptcmnCode</td>
+                    @*
+                        <td rowspan="2">Packaging Date</td>*@
+                    <td colspan="19">@TnT.LangResource.GlobalRes.RptcmnReason</td>
+                </tr>
+                <tr>
+
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDList2D</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListGrade</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.ReportsJobsValuesGTIN</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLOT</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListEXP</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListMFG</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListUID</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine1</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine2</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine3</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine4</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine5</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine6</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine7</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine8</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine9</td>
+                    <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.RptBadUIDListLine10</td>
+                    @{
+                        bool isTamper = Convert.ToBoolean(Utilities.getAppSettings("TemperEvidence"));
+                    }
+                    @if (isTamper)
+                    {
+                        <td class="rotate" style="width:1%">@TnT.LangResource.GlobalRes.ReportRptBadUidTamper</td>
+                    }
+                </tr>
+                @{
+                    int i = 1;
+
+                }
+                @foreach (var item in Model.UIDFailReasonsDetails)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td class="leftAlign" style="font-family: courier; font-size: 14px;">@item.Code</td>
+
+
+                        @if (item.FailedIds.Contains("1"))
+                        {
+                            string s = item.status.Where(x => x.feild == "1").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                        @if (item.FailedIds.Contains("2"))
+                        {
+                            string s = item.status.Where(x => x.feild == "2").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.1"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.1").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.2"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.2").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.3"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.3").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.6"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.6").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.4"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.4").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.7"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.7").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.8"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.8").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.9"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.9").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.11"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.11").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.12"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.12").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.13"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.13").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.14"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.14").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.15"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.15").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.16"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.16").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @if (item.FailedIds.Contains("3.17"))
+                        {
+                            string s = item.status.Where(x => x.feild == "3.17").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }
+                            else
+                            {
+                                <td>&#10004;</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                        
+                        @if (isTamper) {
+                        
+                        if (item.FailedIds.Contains("8"))
+                        {
+                            string s = item.status.Where(x => x.feild == "8").Select(x => x.stat).FirstOrDefault().ToString();
+                            if (s == "True")
+                            {
+                                <td> &#10008;</td>
+                            }else if(s=="False")
+                            {
+                                <td>&#10004;</td>
+                                }
+                                else if(s=="SKIP")
+                                {
+                                <td style="font-size:14px;">*</td>
+                            }else{
+							<td style="font-size:14px;">**</td>
+							}
+                            }
+                            else
+                            {
+                            <td>-</td>
+                        }
+                        }
+
+
+                    </tr>
+
+                                i++;
+
+                            }
+
+
+
+
+            </table>
+
+
+        </div>
+
+        <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+            <table style="width:100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td style="width:50%; padding-left:10px;">
+                        @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                    </td>
+                    <td style="padding-left:35%">
+                        @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+                    if (@ViewBag.scrollprint == null)
+                    {
+                        <div style="text-align:center;padding-top: 2%;">
+                            @Html.DropDownListFor(x => x.Packinglevel, Model.Packaginlevels)
+                        </div>
+                        <br />
+                        <div style="text-align:center">
+                            <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                                @TnT.LangResource.GlobalRes.cmnBtnClose
+                                <i class="entypo-cancel"></i>
+                            </button>
+                            @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFBadUidList" })
+                        </div>
+                        }
+
+
+                    }
+</div>
+
+
+
+<script>
+    $("#Packinglevel").change(function () {
+        var existingLVL = $("#Packinglevel").val();
+        $(".loading").show();
+        var currentLvl = $("#lblDecklvl").html().trim();
+        var lvl = $("#Packinglevel").val().trim();
+
+        if (lvl != "Select") {
+            if (currentLvl != lvl) {
+                var jobId = $("#job_JID").val();
+                $.ajax({
+
+                    url: 'getBadUIDList',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JID": jobId, "Level": lvl },
+                    success: function (data) {
+                        $(".loading").hide();
+                        if (data == "@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData") {
+                            data = '<h3 style="text-align:center; padding-bottom: 50px;"> @TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>';
+                            $("#btnPrintRPT").hide();
+                            $('#rptLoaded').html(data);
+                        }
+                        else {
+                            $("#btnPrintRPT").show();
+                            $('#rptLoaded').html(data);
+                        }
+                        $('#Packinglevel option[value=' + existingLVL + ']').attr('selected', 'selected');
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+            }
+
+        }
+
+    });
+
+    $(document).on("click", "#btnGenaratePDFBadUidList", function (e) {
+
+        e.preventDefault();
+        var lvl = $("#Packinglevel").val().trim();
+        var currentLvl = $("#lblDecklvl").text().trim();
+        var level;
+
+        if (lvl != "Select") {
+            if (currentLvl == lvl) {
+                level = $("#Packinglevel").val().trim();
+            }
+            else {
+                level = 'MOC';
+            }
+        }
+        else {
+            level = 'MOC';
+        }
+
+        var newUrl = "@Url.Action("genePDFBadUidList", "Reports")?JID=" + $("#job_JID").val() + "&Level=" + level;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+    $(document).ready(function () {
+        $("#Packinglevel").val('MOC');
+    });
+</script>

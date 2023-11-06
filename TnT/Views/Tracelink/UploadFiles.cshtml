@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "UploadFiles";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.TracelinkUploadFiles</h2>
+<hr />
+<div class="container">
+
+    @*@using (Html.BeginForm("Upload", "Tracelink", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group">
+                <label for="field-1" class="col-sm-3 control-label"> @TnT.LangResource.GlobalRes.TracelinkUploadFilesSOMFile</label>
+                <div class="col-sm-5">
+                    @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
+                </div>
+                @Html.Hidden("FileType", "SOM")
+                <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-success" />
+            </div>
+        </div>
+    }*@
+
+    @using (Html.BeginForm("Upload", "Tracelink", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group">
+                <label for="field-1" class="col-sm-3 control-label"> @TnT.LangResource.GlobalRes.TracelinkUploadFilesDispositionFile </label>
+
+                <div class="col-sm-5">
+                    @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
+                </div>
+                @Html.Hidden("FileType", "Disposition")
+                <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-success" />
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("Upload", "Tracelink", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {  @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group">
+                <label for="field-1" class="col-sm-3 control-label"> @TnT.LangResource.GlobalRes.TracelinkUploadFilesDispositionUpdateFile</label>
+
+                <div class="col-sm-5">
+                    @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
+                </div>
+                @Html.Hidden("FileType", "DispositionUpdate")
+                <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-success" />
+            </div>
+        </div>
+    }
+
+
+
+</div>

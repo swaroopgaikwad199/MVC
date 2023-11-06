@@ -1,0 +1,122 @@
+﻿@model TnT.Models.SettingsNUtility.RestoreDb
+
+@{
+    ViewBag.Title = "RestoreDb";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<div style="margin-top:10px;">
+    <h2>@TnT.LangResource.GlobalRes.SettingsRestoreDb</h2>
+    <hr />
+    <div class="row">
+        <div style="display:inline-block">
+            @Html.Label(@TnT.LangResource.GlobalRes.SettingsRestoreSelectDate, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportMFGFrom, @data_original_title = "Field Information" })
+
+            @Html.Editor(@TnT.LangResource.GlobalRes.SettingsRestoreDbDate, new { htmlAttributes = new { @class = "datepicker", @style = "width:144px;", @name = "mfgFrom", @id = "date" } })
+            <input type="button" id="btnfiles" class="btn btn-info btn-default" value="@TnT.LangResource.GlobalRes.SettingDatabaseShwFiles" />
+        </div>
+        <div style="margin-right:15px; float:right">
+            <input id="btnRestore" type="button" value="@TnT.LangResource.GlobalRes.DatabseRestoreDbbackupreq" class="btn btn-info btn-default" />
+        </div>
+        <div class="col-lg-12 scrollPCTable" style="margin-top:5px; border:1px solid #ebebeb">
+            <table class="table table-bordered dataTable" id="tblDB">
+                <thead>
+                <th>@TnT.LangResource.GlobalRes.SettingsRestoreDbFilename</th>
+                <th>@TnT.LangResource.GlobalRes.UsersIndexCreatedDate</th>
+                <th></th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        var CurrentDate = new Date();
+        var day = CurrentDate.getDate();
+        var month = CurrentDate.getMonth() + 1;
+        var year = CurrentDate.getFullYear();
+
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+
+        var today = day + "/" + month + "/" + year;
+
+        $("#date").val(today);
+        getFile(today);
+    });
+
+    $("#btnfiles").click(function () {
+       
+        var tdate = $("#date").val();
+        getFile(tdate);
+    });
+
+    function getFile(tdate)
+    {
+        debugger;
+          $.ajax({
+            url: 'GetDBFiles',
+            type: "POST",
+            dataType: 'json',
+            data: { "date": tdate },
+            success: function (data) {
+
+                $("#tblDB tbody tr").remove();
+                if (data != null) {
+                    var files = data;
+                    for (var i = 0; i <= files.length; i++) {
+                        var rows = $("<tr><td>" + files[i].Filename + "</td><td>" + files[i].CreatedDate + "</td><td style='text-align: center;'><input type='radio' name='files' value='File" + i + "'></td>")
+                        $("#tblDB tbody").append(rows);
+                    }
+                }
+            }
+        });
+    }
+    $("#btnRestore").click(function () {
+        var $ele = $('input[name="files"]:checked');
+        if ($ele.length) {
+               $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+                $("#showDigitalBx").trigger("click");
+        }
+        else {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrSettingRestoreDbSelectFile");
+        }
+    });
+
+    function postData() {
+
+        var $ele = $('input[name="files"]:checked');
+        if ($ele.length) {
+            $(".loading").show();
+            var filename = $('input[name="files"]:checked').closest("tr")[0].childNodes[0].innerHTML;
+            var createddate = $('input[name="files"]:checked').closest("tr")[0].childNodes[1].innerHTML
+            $.ajax({
+                url: "SaveRestoreDbRequest",
+                type: "POST",
+                data: { "FileName": filename, "createddate": createddate },
+                dataType: 'json',
+                success: function (data) {
+                    toastr.warning(data);
+
+                    if (data == "@TnT.LangResource.GlobalRes.toastrSettingRestoreDbReqGeratedSuccesssfuly") {
+                        $('input[name="files"]:checked').closest("tr").remove();
+                    }
+                    $(".loading").hide();
+                },
+                error: function () {
+                    $(".loading").hide();
+                }
+            });
+        }
+        else {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrSettingRestoreDbSelectFile");
+
+        }
+    }
+</script>

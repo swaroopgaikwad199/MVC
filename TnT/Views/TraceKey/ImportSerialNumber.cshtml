@@ -1,0 +1,136 @@
+﻿@model TnT.Models.TraceKey.TraceKeyImportUIDViewModel
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Import SerialNumber";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.TRacekeyImportSerialNo</h2>
+
+@using (Html.BeginForm("ImportSerialNumber", "TraceKey", FormMethod.Post, new { @id = "frmImportSerialNumber" }))
+{
+
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-md-6">
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PAID, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.TracekeyImportProdcttyp, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.PAID, new SelectList(ViewBag.Products, "PAID", "Name"), "Select Product", new { @class = "form-control", @id = "drpProduct", @validate = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GTIN, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkGTIN, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.GTIN, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.GTIN, new SelectList(ViewBag.GTIN, "GTIN", "PackageTypeCode"), TnT.LangResource.GlobalRes.ProductGTIN, new { @class = "form-control", @id = "drpGTIN", @validate = "true" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkGTIN, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.GTIN, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.Customer, new SelectList(ViewBag.Customer, "Id", "CompanyName"),"Select Customer", new { @class = "form-control", @id = "drpCustomer", @validate = "true" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkQuantity, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @id = "txtQuantity", @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10 col-md-offset-4">
+                        <button type="button" id="btnSubmit" class="btn btn-info" onclick="ValidateForm();">
+                            @TnT.LangResource.GlobalRes.ImporterTracelinkRequest
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <script>
+
+    function ValidateForm() {
+
+        $(".loading").show();
+        var PAID = $("#drpProduct").val();
+        var gtin = $("#drpGTIN").val();
+        var qty = $("#txtQuantity").val();
+        var cust = $("#drpCustomer").val();
+        if ((PAID > 0) == false) {
+            toastr.warning("@TnT.LangResource.GlobalRes.ImporterTacelinkSelectProName");
+        } else if ((gtin.length > 10) == false) {
+            toastr.warning("@TnT.LangResource.GlobalRes.TRacekeyImportselectGTIN");
+        } else if ((cust > 0) == false) {
+            toastr.warning("@TnT.LangResource.GlobalRes.ImporterCustomerUID");
+        }
+        else if ((qty > 0 && qty <= 10000) == false) {
+            toastr.warning("@TnT.LangResource.GlobalRes.tostrTarckeyIMportvalidQty");
+        }
+
+        else {
+            $(".loading").show();
+            //$("#showProgressBar").trigger("click");
+            document.getElementById('frmImportSerialNumber').submit();
+
+        }
+
+
+    }
+
+
+
+
+
+    $("#drpProduct").change(function () {
+        var PAID = $("#drpProduct").val();
+        var IsPPN = false;
+        debugger
+        $.ajax({
+            url: '@Url.Action("getProductData", "TraceKey")',
+            type: "POST",
+            dataType: 'json',
+            data: { "PAID": PAID, "IsPPN": IsPPN },
+            success: function (data) {
+                debugger;
+
+                if ($.type(data) == "string") {
+                    toastr.warning(data);
+                }
+
+                if (data != null) {
+
+                    var packAsso = data[0];
+                    var packAssoDetails = data[1];
+
+                    var strSel = "<option value=''>@TnT.LangResource.GlobalRes.JobsGTIN</option>";
+
+                    for (i = 0; i < packAssoDetails.length; i++) {
+                        strSel += "<option value='" + packAssoDetails[i].GTIN + "'>" + (packAssoDetails[i].GTIN + '-' + packAssoDetails[i].PackageTypeCode) + "</option>";
+                    }
+
+                    $('#drpGTIN').html(strSel);
+                    $("#drpGTIN").removeAttr("disabled");
+
+                }
+
+            },
+            error: function (data) {
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+                $("#drpGTIN").attr("disabled", true);
+            }
+        });
+    });
+
+
+
+
+    </script>

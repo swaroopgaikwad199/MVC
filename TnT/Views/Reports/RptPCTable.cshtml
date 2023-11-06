@@ -1,0 +1,315 @@
+﻿@model TnT.Models.Reports.Jobs.RptPCRelationshipViewModel
+
+
+<div id="rptLoaded">
+
+    <style>
+        /*@@media print {*/
+        .scrollprint {
+            overflow-y: inherit;
+            max-height: none;
+        }
+        /*}*/
+        .tbFont {
+            font-size: 9px;
+        }
+
+        .tdWidth {
+            width: 30%;
+        }
+
+        .tdWidthBig {
+            width: 40%;
+        }
+
+        .tblWidth {
+            width: 100%;
+        }
+
+        .scrollPCTable {
+            overflow-y: auto;
+            max-height: 500px;
+        }
+    </style>
+
+    <div class="row" style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptPCRelationships</b></h4>
+    </div>
+
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 5px; padding-bottom:5px;font-family: 'Courier New';">
+        <table class="@ViewBag.tbFont">
+            <tr>
+                <td class="col-md-4" style="width:500px"><label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName:</label><b> @Html.DisplayFor(model => model.jbDetails.JD_ProdName)</b></td>
+                <td class="col-md-4" style="width:500px"><label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label><b> @Html.DisplayFor(model => model.Job.MfgDate)</b></td>
+                <td class="col-md-5" style="width:500px"><label>@TnT.LangResource.GlobalRes.RptcmnGTINTertiary:</label><b> @Html.DisplayFor(model => model.TertiaryGTIN)</b></td>
+            </tr>
+            <tr>
+                <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo:</label> <b>@Html.DisplayFor(model => model.Job.BatchNo)</b></td>
+                <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptcmnJobType:</label><b> @Html.DisplayFor(model => model.Jobtype)</b></td>
+                <td class="col-md-5" style="width:500px"><label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label><b> @Html.DisplayFor(model => model.Job.ExpDate)</b></td>
+            </tr>
+            <tr>
+                <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersLocationCode:</label><b>@Html.DisplayFor(model => model.LineDetails.LocationCode)</b></td>
+                <td class="col-md-4"></td>
+                <td class="col-md-5" style="width:500px"><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode:</label><b>@Html.DisplayFor(model => model.LineDetails.DivisionCode)</b></td>
+            </tr>
+            <tr>
+                <td class="col-md-5"><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode:</label><b>@Html.DisplayFor(model => model.LineDetails.PlantCode)</b></td>
+                <td class="col-md-4"></td>
+                <td class="col-md-5" style="width:500px"><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersLineCode:</label><b> @Html.DisplayFor(model => model.LineDetails.LineCode)</b></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row scrollPCTable @ViewBag.scrollprint" style="border: 1px solid;margin: 10px;padding-top: 9px; padding-left:1px;font-family: 'Courier New';">
+        <table class="table table-bordered responsive @ViewBag.tbFont" id="PCRela" style="padding:1px;">
+            <tr style="font-weight:bold;">
+
+                @foreach (var item in Model.PkgLevels)
+                {
+                    
+                        <td style="text-align: center;">SN</td>
+
+                    
+                    <td style="text-align: center;">@item</td>
+                }
+            </tr>
+            <tbody>
+                @{
+                    int count = 0;
+                    int count1 = 0;
+                    int count2 = 0;
+                    int count3 = 0;
+                    int count4 = 0;
+                    string lastLvlData = "";
+                    string OSHLvlData = "";
+                    string ISHLvlData = "";
+                    string OBXLvlData = "";
+                    string MOCLvlData = "";
+                    string lastfirstleveldata = "";
+                }
+
+                @foreach (var item in Model.PCRela)
+                {
+
+                    //int rowspan = 0;
+
+                    //rowspan = rowspan + 1;
+
+                    <tr class="pgbreak">
+                        @if (!string.IsNullOrEmpty(item.PALCode))
+                        {
+                            if (lastLvlData != item.SSCC)
+                            {
+                                if (!string.IsNullOrEmpty(item.ISHCode) && !string.IsNullOrEmpty(item.MOCCode) && !string.IsNullOrEmpty(item.OBXCode))
+                                {
+                                    count1 = 0;
+                                }
+                                count++;
+                                lastLvlData = @item.SSCC;
+                            }
+                            <td style="text-align:center;">@count</td>
+
+
+
+                            <td class="tbl" style="font-family: courier; font-size: 14px;">
+                                @*@item.PALCode <br />*@
+                                @if (Model.TertiaryLevel == "PAL")
+                                {
+                                    <bold> @item.SSCC</bold>
+
+                                }
+                            </td>
+                        }
+                        @if (!string.IsNullOrEmpty(item.OSHCode))
+                        {
+
+                            if (OSHLvlData != item.OSHCode)
+                            {
+                                if (!string.IsNullOrEmpty(item.ISHCode) && !string.IsNullOrEmpty(item.MOCCode))
+                                {
+                                    count2 = 0;
+                                }
+                                count1++;
+                                OSHLvlData = @item.OSHCode;
+                            }
+                            <td style="text-align:center;">@count1</td>
+
+                            <td class="tbl" style="font-family: courier; font-size: 14px;">
+                                @*@item.ISHCode<br />*@
+                                @if (Model.TertiaryLevel == "OSH")
+                                {
+
+                                    <bold> @item.SSCC</bold>
+
+                                }
+                                else
+                                {
+                                    @item.OSHCode
+                                }
+                            </td>
+                        }
+                        @if (!string.IsNullOrEmpty(item.ISHCode))
+                        {
+                            if (ISHLvlData != item.ISHCode)
+                            {
+                                if (!string.IsNullOrEmpty(item.ISHCode) && !string.IsNullOrEmpty(item.MOCCode) && !string.IsNullOrEmpty(item.OBXCode))
+                                {
+                                    count3 = 0;
+                                }
+
+                                if (lastLvlData != item.SSCC && Model.PkgLevels.Count == 2)
+                                {
+                                    lastLvlData = @item.SSCC;
+                                    count2++;
+                                }
+
+                                if (ISHLvlData != item.ISHCode && Model.PkgLevels.Count == 3)
+                                {
+                                    count2++;
+                                }
+
+                                ISHLvlData = @item.ISHCode;
+
+
+                            }
+
+                            <td style="text-align:center;">@count2</td>
+
+
+                            <td class="tbl" style="font-family: courier; font-size: 14px;">
+                                @*@item.ISHCode<br />*@
+                                @if (Model.TertiaryLevel == "ISH")
+                                {
+
+                                    <bold> @item.SSCC</bold>
+
+                                }
+                                else
+                                {
+                                    @item.ISHCode
+                                }
+                            </td>
+                        }
+                        @if (!string.IsNullOrEmpty(item.OBXCode))
+                        {
+                            if (OBXLvlData != item.OBXCode)
+                            {
+
+                                count3++;
+                                OBXLvlData = @item.OBXCode;
+                            }
+                            <td style="text-align:center;">@count3</td>
+
+                            <td class="tbl" style="font-family: courier; font-size: 14px;">
+                                @*@item.OBXCode <br />*@
+                                @if (Model.TertiaryLevel == "OBX")
+                                {
+                                    <bold> @item.SSCC</bold>
+
+                                }
+                                else
+                                {
+                                    @item.OBXCode
+                                }
+                            </td>
+                        }
+                        @if (!string.IsNullOrEmpty(item.MOCCode))
+                        {
+                            if (MOCLvlData != item.MOCCode)
+                            {
+
+
+                                count4++;
+                                MOCLvlData = @item.MOCCode;
+                            }
+                            if (lastfirstleveldata != item.SSCC && Model.PkgLevels.Count == 2)
+                            {
+                                count4 = 1;
+                                lastfirstleveldata = item.SSCC;
+                            }
+                            if (lastfirstleveldata != item.ISHCode && Model.PkgLevels[1]=="ISH" && Model.PkgLevels.Count==3)
+                            {
+                                count4 = 1;
+                                lastfirstleveldata = item.ISHCode;
+                            }
+                            //if (lastfirstleveldata != item.OBXCode && Model.PkgLevels[1] == "OBX" && Model.PkgLevels.Count == 3)
+                            //{
+                            //    count4 = 1;
+                            //    lastfirstleveldata = item.OBXCode;
+                            //}
+                            <td style="text-align:center;">@count4</td>
+
+                            <td style="font-family: courier; font-size: 14px;">@item.MOCCode </td>
+                        }
+
+
+
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%; " class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="padding-right:10px; text-align:right">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    @if (ViewBag.scrollprint == null)
+    {
+        <div style="text-align:center">
+            <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                @TnT.LangResource.GlobalRes.cmnBtnClose
+                <i class="entypo-cancel"></i>
+            </button>
+            @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFPCTable" })
+        </div>
+    }
+
+
+</div>
+@if (ViewBag.scrollprint != null)
+{
+    <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+    <script src="@Server.MapPath("~/Content/assets/js/jquery-1.11.3.min.js")"></script>
+    <script src="@Server.MapPath("~/Content/assets/js/jquery.rowspanizer.js")"></script>
+
+    <script>
+        $("#PCRela").rowspanizer({ vertical_align: 'middle' });
+    </script>
+}
+
+
+<script>
+
+    $(document).on("click", "#btnGenaratePDFPCTable", function (e) {
+
+        e.preventDefault();
+
+        $("#PCRela").rowspanizer({ vertical_align: 'middle' });
+        var newUrl = "@Url.Action("getPCRelationshipReportPDF", "Reports")?JID=" +@Model.Job.JID ;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+
+</script>

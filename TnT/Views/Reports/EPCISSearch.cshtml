@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "EPCISSearch";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@Html.Label(@TnT.LangResource.GlobalRes.cmnMenuItemEPCSearch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISIndexSelectBatch, @data_original_title = "Field Information" })</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <div>
+                @using (Html.BeginForm("EPCISReport", "Reports", FormMethod.Post, new { @id = "frmEPCISSearch" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.TextBox("txtEPCISuid");
+                    <button type="button" id="btnSubmit" class="btn btn-info btn-default">@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch</button>
+                }
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#btnSubmit").click(function () {
+
+        var txtEPCISuid = $("#txtEPCISuid").val();
+        var msgPOST = "";
+        if(txtEPCISuid=="")
+        {
+            showMessage("txtEPCISuid", "@TnT.LangResource.GlobalRes.ShwMsgRptEPCISSerchEnterUID");
+            msgPOST += "@TnT.LangResource.GlobalRes.ShwMsgRptEPCISSerchEnterUID";
+        } else {
+            clearColor("txtEPCISuid");
+        }
+
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    })
+
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+
+    function formSubmit() {
+        debugger;
+        document.getElementById("frmEPCISSearch").submit();
+    }
+</script>

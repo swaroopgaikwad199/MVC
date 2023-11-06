@@ -1,0 +1,1013 @@
+﻿@model TnT.Models.Job.Job
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2></h2>
+<h2>
+    @TnT.LangResource.GlobalRes.JobsDecommisioned @Html.DisplayFor(model => model.JobName)
+
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index", "Jobs")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+
+
+
+
+
+
+</h2>
+@{
+            var duallabel = Convert.ToBoolean(Utilities.getAppSettings("DualLabel"));
+
+}
+<div style="border: 4px solid #636161; border-radius: 9px;">
+    @using (Html.BeginForm("DecommisionedConfirmed", "Jobs", FormMethod.Post, new { @class = "f1", @id = "frmBatch" }))
+    {
+        @Html.HiddenFor(m => m.JID)
+        <div class="f1-steps" style="margin-left: 17%;">
+            <div class="f1-progress" style="width: 62%">
+                <div class="f1-progress-line" data-now-value="17" data-number-of-steps="4" style="width: 10%;"></div>
+            </div>
+            <div class="f1-step active">
+                <div class="f1-step-icon">1</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardProductInfo</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon">2</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardAggregationInfo</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon">3</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardBatchSettings</p>
+            </div>
+            @*<div class="f1-step">
+                    <div class="f1-step-icon">4</div>
+                    <p>Save Product</p>
+                </div>*@
+            <div class="f1-step">
+                <div class="f1-step-icon">4</div>
+                <p>@TnT.LangResource.GlobalRes.JobsDecommisionedBtnDecommission</p>
+            </div>
+        </div>
+        <fieldset>
+            <div class="row">
+                <div class="col-md-6">
+                    @*<fieldset>*@
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TID, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.TID, new SelectList(ViewBag.Types, "TID", "Job_Type"), "Select Type", new { @class = "form-control", @validate = "true", @disabled = "true" })
+                            @Html.ValidationMessageFor(model => model.TID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PAID, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchFGCode, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.PAID, new SelectList(ViewBag.FPCodes, "PAID", "FGCode"), "Select Code", new { @onchange = "Action(this.value);", @class = "form-control", @validate = "true", @id = "ddProd", @disabled = "true" })
+                            @Html.ValidationMessageFor(model => model.PAID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPONumber, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.Label(@TnT.LangResource.GlobalRes.JobsProductName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchProductName, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.TextBox("txtProductName", null, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label(@TnT.LangResource.GlobalRes.JobsProductCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.TooTipBatchProductCode, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.TextBox("txtProductCode", null, new { @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PackagingLvlId, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPackagingLvl, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.PackagingLvlId, new SelectList(ViewBag.PackLvls, "Id", "Level"), "Select Product Code", new { @onchange = "Action(this.value);", @class = "form-control", @validate = "true", @id = "ddProdLevel", @disabled = "true" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchCustomerId, @data_original_title = "Field Information" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.Customer, "Id", "CompanyName"), "Select CustomerId", new { @onchange = "Action(this.value);", @class = "form-control", @validate = "true", @id = "ddCustId", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div id="divPPNCodes" style="display:none">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PPNCountryCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPPNCountry, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PPNCountryCode, new { htmlAttributes = new { @class = "form-control PPNText", @disabled = "true" } })
+                                @Html.ValidationMessageFor(model => model.PPNCountryCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PPNPostalCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPPNPostal, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PPNPostalCode, new { htmlAttributes = new { @class = "form-control PPNText", @disabled = "true" } })
+                                @Html.ValidationMessageFor(model => model.PPNPostalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-next btn-orange" id="btnNxtFirst">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset id="fieldLEVLS">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table width="90%" id="packagingGrid" style="text-align: center; margin-top: 5px;" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;"></th>
+                                <th class="PPB" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobPPB</th>
+                                <th class="MOC" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobMOC</th>
+                                <th class="OBX" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobOBX</th>
+                                <th class="ISH" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobISH</th>
+                                <th class="OSH" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobOSH</th>
+                                <th class="PAL" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobPAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="trPPN">
+                                <th>@TnT.LangResource.GlobalRes.ProductPPN</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsGTIN</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.ImporterTacelinkNTIN</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsMRP</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsPCMAP</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsBundlingQTY</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsBatchQty</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@TnT.LangResource.GlobalRes.JobsUIDstoPrint</th>
+                                <td class="PPB"><input disabled class="form-control" type="text" name="PPB[]" /></td>
+                                <td class="MOC"><input disabled class="form-control" type="text" name="MOC[]" /></td>
+                                <td class="OBX"><input disabled class="form-control" type="text" name="OBX[]" /> </td>
+                                <td class="ISH"><input disabled class="form-control" type="text" name="ISH[]" /> </td>
+                                <td class="OSH"><input disabled class="form-control" type="text" name="OSH[]" /> </td>
+                                <td class="PAL"><input disabled class="form-control" type="text" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelName, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelName, @data_original_title = "Field Information" })</th>
+
+                                <td class="PPB">
+                                    @*<input class="form-control" type="text" name="PPB[]" />*@
+                                    <select class="form-control required" data-val-required="The Label field is required." id="ddPPBLable" name="PPB[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel </option>
+                                    </select>
+                                    <br />
+                                    @*<a href="#" onclick="loadPreview('PPB');">Preview</a>*@
+                                </td>
+                                <td class="MOC">
+                                    @*<input class="form-control" type="text" name="MOC[]" />*@
+                                    <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddMOCLable" name="MOC[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                    </select>
+                                    <br />
+                                    @if (duallabel)
+                                    {
+                                        <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPartialMOCLable" name="PartialMOC[]" disabled>
+                                            <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                        </select>
+                                    }
+                                    @*<a href="#" onclick="loadPreview('MOC');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>*@
+                                </td>
+                                <td class="OBX">
+                                    @*<input class="form-control" type="text" name="OBX[]" />*@
+                                    <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddOBXLable" name="OBX[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                    </select>
+                                    <br />
+                                    @if (duallabel)
+                                    {
+                                        <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPartialOBXLable" name="PartialOBX[]" disabled>
+                                            <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                        </select>
+                                    }
+                                    @*<a href="#" onclick="loadPreview('OBX');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>*@
+                                </td>
+                                <td class="ISH">
+                                    @*<input class="form-control" type="text" name="ISH[]" />*@
+                                    <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddISHLable" name="ISH[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                    </select>
+                                    <br />
+                                    @if (duallabel)
+                                    {
+                                        <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPartialISHLable" name="PartialISH[]" disabled>
+                                            <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                        </select>
+                                    }
+                                    @*<a href="#" onclick="loadPreview('ISH');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>*@
+                                </td>
+                                <td class="OSH">
+                                    @*<input class="form-control" type="text" name="OSH[]" />*@
+                                    <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddOSHLable" name="OSH[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                    </select>
+                                    <br />
+                                    @if (duallabel)
+                                    {
+                                        <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPartialOSHLable" name="PartialOSH[]" disabled>
+                                            <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                        </select>
+                                    }
+                                    @*<a href="#" onclick="loadPreview('OSH');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>*@
+                                </td>
+                                <td class="PAL">
+                                    @*<input class="form-control" type="text" name="PAL[]" />*@
+                                    <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPALLable" name="PAL[]" disabled>
+                                        <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                    </select>
+                                    <br />
+                                    @if (duallabel)
+                                    {
+                                        <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPartialPALLable" name="PartialPAL[]" disabled>
+                                            <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                        </select>
+                                    }
+                                    @*<a href="#" onclick="loadPreview('PAL');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelFilter, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelFilter, @data_original_title = "Field Information" })</th>
+
+                                <td class="PPB"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="PPB[]" id="lblPPB" /></td>
+                                <td class="MOC"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="MOC[]" id="lblMOC" /></td>
+                                <td class="OBX"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="OBX[]" id="lblOBX" /> </td>
+                                <td class="ISH"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="ISH[]" id="lblISH" /> </td>
+                                <td class="OSH"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="OSH[]" id="lblOSH" /> </td>
+                                <td class="PAL"><input class="form-control" disabled value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="PAL[]" id="lblPAL" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="ForExport">@TnT.LangResource.GlobalRes.JobsAcceptedQty</label>
+                        <div class="col-md-6">
+                            @*<div class="checkbox">*@
+                            @ViewBag.goodCount
+                            @*</div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="ForExport">@TnT.LangResource.GlobalRes.JobsRejectedQty</label>
+                        <div class="col-md-6">
+                            @*<div class="checkbox">*@
+                            @ViewBag.badCount
+
+                            @*</div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchQty, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "AgQty", @disabled = "true", @min = "0", @onChange = "updateAggrigationLevelsOnLoad();" } })
+                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SurPlusQty, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchSurplusUID, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.SurPlusQty, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @min = "0", @id = "txtSurPlus" } })
+                            @Html.ValidationMessageFor(model => model.SurPlusQty, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" class="btn btn-next btn-orange" id="BtnNxtAgg">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+
+
+
+        <fieldset>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LineCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchProductLine, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.LineCode, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @*@Html.DropDownListFor(model => model.LineCode, new SelectList(ViewBag.LineCode, "ID", "Fullname"), "Select Line", new { @class = "form-control", @validate = "true" })*@
+                            @Html.ValidationMessageFor(model => model.LineCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PrimaryPCMapCount, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPrimaryPCMAP, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.PrimaryPCMapCount, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @Value = " " + Convert.ToInt32(Model.PrimaryPCMapCount) + "" } })
+                            @Html.ValidationMessageFor(model => model.PrimaryPCMapCount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BatchNo, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchNo, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*</fieldset>*@
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="">
+                            @Html.LabelFor(model => model.ExpDateFormat, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchExpDateformat, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.ExpDateFormat, new SelectList(ViewBag.DateFormats, "Format", "Format"), "Select Format", new { @class = "form-control", @validate = "true", @disabled = "true" })
+                                @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.UseExpDay, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductUseExpDay, @data_original_title = "Field Information" })
+                            @*<div class="col-md-1">
+                                <div class="checkbox">*@
+                            @Html.DisplayFor(model => model.UseExpDay)
+                            @Html.ValidationMessageFor(model => model.UseExpDay, "", new { @class = "text-danger" })
+                            @*</div>
+                                </div>*@
+                        </div>
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.JobWithUID, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchPrintwithUID, @data_original_title = "Field Information" })
+                            @*<div class="col-md-6">
+                                <div class="checkbox">*@
+                            @Html.DisplayFor(model => model.JobWithUID)
+                            @Html.ValidationMessageFor(model => model.JobWithUID, "", new { @class = "text-danger" })
+                            @*</div>
+                                </div>*@
+                        </div>
+
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.ForExport, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchForExport, @data_original_title = "Field Information" })
+                            @*<div class="col-md-6">
+                                <div class="checkbox">*@
+                            @Html.DisplayFor(model => model.ForExport)
+                            @Html.ValidationMessageFor(model => model.ForExport, "", new { @class = "text-danger" })
+                            @*</div>
+                                </div>*@
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.AutomaticBatchCloser, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchAutomaticBatchClosure, @data_original_title = "Field Information" })
+                            @*<div class="col-md-6">
+                                <div class="checkbox">*@
+                            @Html.DisplayFor(model => model.AutomaticBatchCloser)
+                            @Html.ValidationMessageFor(model => model.AutomaticBatchCloser, "", new { @class = "text-danger" })
+                            @*</div>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MfgDate, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchManufacturingDate, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.MfgDate, new { htmlAttributes = new { @class = "form-control ", @disabled = "true" } })
+                                @Html.ValidationMessageFor(model => model.MfgDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ExpDate, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipBatchExpDateformat, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ExpDate, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                                @Html.ValidationMessageFor(model => model.ExpDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="f1-buttons">
+                    <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                    <button type="button" class="btn btn-next btn-orange" id="BtnNxtAgg">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+                </div>
+        </fieldset>
+        <fieldset>
+            <div class="row ">
+
+                <div class="col-md-12" style="text-align:center;">
+                    <label for="Remarks">@TnT.LangResource.GlobalRes.UserRemark</label>
+                    @if (Model.JobStatus != 4)
+                    {
+                        <input class="form-control  text-box single-line" id="MLNO" name="MLNO" required value="" type="text" />
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.MLNO, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                    }
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <br /><br />
+                <br />
+                <div class="col-lg-7">
+                    @if (Model.JobStatus != 4)
+                {
+                        <button id="btnSubmit" type="button" style="float: right; margin-right: 5px;" class="btn btn-danger btn-icon icon-left">@TnT.LangResource.GlobalRes.JobsDecommisionedBtnDecommission <i class="fa fa-close"></i></button>
+
+
+                    }
+
+                </div>
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous" id="btnAggPre">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+
+            </div>
+        </fieldset>
+        <style>
+            .form-group {
+                margin-bottom: 36px;
+            }
+
+            .PPNText {
+                margin-bottom: 5px;
+                width: 280px;
+            }
+        </style>
+
+    }
+</div>
+
+
+
+@if (ViewBag.SelectedJobType == "PPN")
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#divPPNCodes").show();
+        });
+    </script>
+}
+
+
+<script type="text/javascript">
+    var aggrigatonLevels;
+    $(document).ready(function () {
+        var edate = $("#ExpDate").val();
+        var date = edate.replace(/\-/g, '/');
+        $("#ExpDate").val(date);
+
+        var mdate = $("#MfgDate").val();
+        var date1 = mdate.replace(/\-/g, '/');
+        $("#MfgDate").val(date1);
+        var ddVal = $('#ddProd').val();
+
+        if (ddVal != "") {
+            Action(ddVal);
+        }
+        //updateAggrigationLevelsOnLoad();
+        $('#dtls input[type=text]').attr("disabled", true);
+        var dual = JSON.parse('@Html.Raw(Json.Encode(duallabel))');
+        var jid =@Model.JID;
+        $('#ddPPBLable').html('');
+        $('#ddMOCLable').html('');
+        $('#ddOBXLable').html('');
+        $('#ddISHLable').html('');
+        $('#ddOSHLable').html('');
+        $('#ddPALLable').html('');
+        $('#ddPartialPPBLable').html('');
+        $('#ddPartialMOCLable').html('');
+        $('#ddPartialOBXLable').html('');
+        $('#ddPartialISHLable').html('');
+        $('#ddPartialOSHLable').html('');
+        $('#ddPartialPALLable').html('');
+        $.ajax({
+            url: 'GetLabelDesignerFilesOfJob',
+            type: "POST",
+            dataType: 'json',
+            data: { "jid": jid },
+            success: function (data) {
+
+                strSel = "<option value=''>@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>";
+                for (i = 0; i < data[0].length; i++) {
+                    strSel += "<option value='" + data[0][i] + "'>" + data[0][i] + "</option>";
+                }
+
+
+
+
+                $('#ddMOCLable').html(strSel);
+                $('#ddOBXLable').html(strSel);
+                $('#ddISHLable').html(strSel);
+                $('#ddOSHLable').html(strSel);
+                $('#ddPALLable').html(strSel);
+                $('#ddPPBLable').html(strSel);
+                $('#ddPartialPPBLable').html(strSel);
+                $('#ddPartialMOCLable').html(strSel);
+                $('#ddPartialOBXLable').html(strSel);
+                $('#ddPartialISHLable').html(strSel);
+                $('#ddPartialOSHLable').html(strSel);
+                $('#ddPartialPALLable').html(strSel);
+                var LabelList = data[1];
+                for (var i = 0; i < LabelList.length; i++) {
+                    if (LabelList[i].JD_Deckcode == "PPB") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddPartialPPBLable').val(labelname[1]);
+                            $('#ddPPBLable').val(labelname[0]);
+                        }
+                        else {
+                            $('#ddPPBLable').val(LabelList[i].LabelName);
+                        }
+
+                        $('#lblPPB').val(LabelList[i].Filter)
+                    }
+                    if (LabelList[i].JD_Deckcode == "MOC") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddMOCLable').val(labelname[0]);
+                            $('#ddPartialMOCLable').val(labelname[1]);
+                        }
+                        else {
+                            $('#ddMOCLable').val(LabelList[i].LabelName);
+                        }
+                        $('#lblMOC').val(LabelList[i].Filter)
+
+                    }
+                    if (LabelList[i].JD_Deckcode == "OBX") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddOBXLable').val(labelname[0]);
+                            $('#ddPartialOBXLable').val(labelname[1]);
+                        }
+                        else {
+                            $('#ddOBXLable').val(LabelList[i].LabelName);
+                        }
+                        $('#lblOBX').val(LabelList[i].Filter)
+
+                    }
+                    if (LabelList[i].JD_Deckcode == "ISH") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddISHLable').val(labelname[0]);
+                            $('#ddPartialISHLable').val(labelname[1]);
+                        }
+                        else {
+                            $('#ddISHLable').val(LabelList[i].LabelName);
+                        }
+                        $('#lblISH').val(LabelList[i].Filter)
+
+                    }
+                    if (LabelList[i].JD_Deckcode == "OSH") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddOSHLable').val(labelname[0]);
+                            $('#ddPartialOSHLable').val(labelname[1]);
+                        }
+                        else {
+                            $('#ddOSHLable').val(LabelList[i].LabelName);
+                        }
+                        $('#lblOSH').val(LabelList[i].Filter)
+
+                    }
+                    if (LabelList[i].JD_Deckcode == "PAL") {
+                        if (dual) {
+                            var labelname = LabelList[i].LabelName.split(',');
+                            $('#ddPALLable').val(labelname[0]);
+                            $('#ddPartialPALLable').val(labelname[1]);
+                        }
+                        else {
+                            $('#ddPALLable').val(LabelList[i].LabelName);
+                        }
+                        $('#lblPAL').val(LabelList[i].Filter)
+
+                    }
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+
+    function Action(PAID) {
+        $.ajax({
+            url: '@Url.Action("getProductInfo", "Jobs")',
+            type: "POST",
+            dataType: 'json',
+            data: { "PAID": PAID },
+            success: function (data) {
+
+
+                if (data != null) {
+                    hideLevels();
+                    var vdata = data;
+                    var i;
+                    var pa;
+                    $("#txtProductName").val(vdata[0].Name);
+                    $("#txtProductCode").val(vdata[0].ProductCode);
+
+                    var Level = vdata[1];
+                    aggrigatonLevels = Level;
+                    var packAssoData = vdata[2];
+
+                    for (i = 0; i < Level.length; i++) {
+                        var packAssoDetails = vdata[2][i];
+                        $('input[name="' + Level[i] + '[]"]').eq(0).val(packAssoDetails.PPN);
+                        $('input[name="' + Level[i] + '[]"]').eq(1).val(packAssoDetails.GTIN);
+                        $('input[name="' + Level[i] + '[]"]').eq(2).val(packAssoDetails.NTIN);
+                        $('input[name="' + Level[i] + '[]"]').eq(3).val(packAssoDetails.MRP);
+                        $('input[name="' + Level[i] + '[]"]').eq(4).val(packAssoDetails.Size);
+                        $('input[name="' + Level[i] + '[]"]').eq(5).val(packAssoDetails.BundleQty);
+                        $('.' + Level[i]).show();
+                    }
+                    updateAggrigationLevelsOnLoad();
+
+                    PPBPPN = $('input[name="PPB[]"]').eq(0).val();
+                    MOCPPN = $('input[name="MOC[]"]').eq(0).val();
+                    OBXPPN = $('input[name="OBX[]"]').eq(0).val();
+                    ISHPPN = $('input[name="ISH[]"]').eq(0).val();
+                    OSHPPN = $('input[name="OSH[]"]').eq(0).val();
+                    PALPPN = $('input[name="PAL[]"]').eq(0).val();
+
+                    if (PPBPPN == "" && MOCPPN == "" && OBXPPN == "" && ISHPPN == "" && OSHPPN == "" && PALPPN == "") {
+                        $('.trPPN').hide();
+                    } else {
+                        $('.trPPN').show();
+                    }
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    }
+
+    function updateAggrigationLevelsOnLoad() {
+        AgQtyChange();
+        surPlusChange();
+    }
+    $("#AgQty").change(function () {
+
+        var initialPCMap = aggrigatonLevels[0];
+        var currentBatchQty = $("#AgQty").val();
+
+        $('input[name="' + initialPCMap + '[]"]').eq(6).val(currentBatchQty);
+        $('input[name="' + initialPCMap + '[]"]').eq(7).val(currentBatchQty);
+
+        var firstMap = $('input[name="' + aggrigatonLevels[1] + '[]"]').eq(4).val();
+        var counter = 1;
+        for (k = 1; k < aggrigatonLevels.length; k++) {
+            var PCM = $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(4).val();
+            var cnt = parseInt($('input[name="' + aggrigatonLevels[k - 1] + '[]"]').eq(6).val()) / parseInt(PCM);
+            cnt = Math.ceil(cnt);
+            if (cnt == 0) {
+                cnt = 1;
+            }
+            $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(6).val(cnt);
+
+
+            if ($("#txtSurPlus").val() != 0 || $("#txtSurPlus").val() != "") {
+
+                if (counter == 1) {
+                    var olCount = $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val();
+                    var newCnt = parseInt(olCount) + parseInt($("#txtSurPlus").val());
+
+                    $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val(newCnt);
+                }
+            }
+
+            counter++;
+            $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(7).val(cnt);
+            if (counter == aggrigatonLevels.length) {
+                counter = 0;
+            }
+
+            $("#txtSurPlus").attr("max", parseInt($("#AgQty").val()));
+        }
+
+    });
+
+    $("#txtSurPlus").change(function () {
+
+        var iniQty = $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(6).val();
+        var newQty = parseInt(iniQty) + parseInt($("#txtSurPlus").val());
+
+        $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val(newQty);
+    });
+
+    function hideLevels() {
+
+        $(".PPB").hide();
+        $(".MOC").hide();
+        $(".OBX").hide();
+        $(".ISH").hide();
+        $(".OSH").hide();
+        $(".PAL").hide();
+    }
+
+    function AgQtyChange() {
+
+        var initialPCMap = aggrigatonLevels[0];
+        var currentBatchQty = $("#AgQty").val();
+
+        $('input[name="' + initialPCMap + '[]"]').eq(6).val(currentBatchQty);
+        $('input[name="' + initialPCMap + '[]"]').eq(7).val(currentBatchQty);
+
+        var firstMap = $('input[name="' + aggrigatonLevels[1] + '[]"]').eq(4).val();
+        var counter = 1;
+        for (k = 1; k < aggrigatonLevels.length; k++) {
+            var PCM = $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(4).val();
+            var cnt = parseInt($('input[name="' + aggrigatonLevels[k - 1] + '[]"]').eq(6).val()) / parseInt(PCM);
+            cnt = Math.ceil(cnt);
+            if (cnt == 0) {
+                cnt = 1;
+            }
+            $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(6).val(cnt);
+
+
+            if ($("#txtSurPlus").val() != 0 || $("#txtSurPlus").val() != "") {
+
+                if (counter == 1) {
+                    var olCount = $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val();
+                    var newCnt = parseInt(olCount) + parseInt($("#txtSurPlus").val());
+
+                    $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val(newCnt);
+                }
+            }
+
+            counter++;
+            $('input[name="' + aggrigatonLevels[k] + '[]"]').eq(7).val(cnt);
+            if (counter == aggrigatonLevels.length) {
+                counter = 0;
+            }
+
+            $("#txtSurPlus").attr("max", parseInt($("#AgQty").val()));
+        }
+
+    }
+
+    function surPlusChange() {
+
+        var iniQty = $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(6).val();
+        var newQty = parseInt(iniQty) + parseInt($("#txtSurPlus").val());
+        if (isNaN(newQty)) {
+            var newQty = iniQty;
+        }
+        $('input[name="' + aggrigatonLevels[0] + '[]"]').eq(7).val(newQty);
+
+        for (ks = 1; ks < aggrigatonLevels.length; ks++) {
+            var PCMs = $('input[name="' + aggrigatonLevels[ks] + '[]"]').eq(4).val();
+            var cntj = parseInt($('input[name="' + aggrigatonLevels[ks - 1] + '[]"]').eq(7).val()) / parseInt(PCMs);
+            cntj = Math.ceil(cntj);
+
+
+
+            if (cntj == 0) {
+                cntj = 1;
+            }
+            //alert(cntj);
+            $('input[name="' + aggrigatonLevels[ks] + '[]"]').eq(7).val(cntj);
+        }
+    }
+</script>
+
+<script>
+
+
+    $("#PPB").change(function () {
+        if (this.checked) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+    });
+    $("#MOC").change(function () {
+        if (this.checked) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+    });
+    $("#OBX").change(function () {
+        if (this.checked) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+    });
+    $("#ISH").change(function () {
+        if (this.checked) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+    });
+    $("#OSH").change(function () {
+        if (this.checked) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+    });
+    $("#PAL").change(function () {
+        if (this.checked) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+    });
+
+
+    $("#btnSubmit").click(function () {
+
+        document.getElementById('frmBatch').submit();
+    });
+
+    $(document).ready(function () {
+        if ($('#PPB').is(':checked') == true) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+
+        if ($('#MOC').is(':checked') == true) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+
+        if ($('#OBX').is(':checked') == true) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+
+        if ($('#ISH').is(':checked') == true) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+
+        if ($('#OSH').is(':checked') == true) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+
+        if ($('#PAL').is(':checked') == true) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+
+        $('#frmJob input[type=text]').attr("disabled", true);
+        $('#btnFirst').click(function () {
+            $("#AgQty").trigger("change");
+        });
+
+    });
+
+    $(document).ready(function (e) {
+        $('select option').each(function () {
+            if ($(this).text() == 'DGFT') {
+                $(this).text('India-DGFT');
+            }
+            if ($(this).text() == 'CIP') {
+                $(this).text('France-CIP');
+            }
+            if ($(this).text() == 'PPN') {
+                $(this).text('Germany-PPN');
+            }
+            if ($(this).text() == 'DSCSA') {
+                $(this).text('USA-DSCSA');
+            }
+            if ($(this).text() == 'SOUTH_KOREA') {
+                $(this).text('SOUTH KOREA');
+            }
+            if ($(this).text() == 'SAUDI_ARABIA') {
+                $(this).text('SAUDI ARABIA');
+            }
+        });
+    });
+
+</script>
+

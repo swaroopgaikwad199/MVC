@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"portrait"},{"x":206,"y":158,"type":"twoD","name":"GS1 DataMatrix 1","matrixType":"GS1_DataMatrix","text":"(01)03453120000011(17)120508(10)ABCD1234(21)9501101020917","width":"26","height":"26"}]}

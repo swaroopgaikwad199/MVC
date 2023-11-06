@@ -1,0 +1,670 @@
+﻿@model TnT.Models.Reports.JobsReportViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="~/Content/assets/js/icheck/skins/minimal/_all.css">
+<link rel="stylesheet" href="~/Content/assets/js/icheck/skins/square/_all.css">
+<link rel="stylesheet" href="~/Content/assets/js/icheck/skins/flat/_all.css">
+<link rel="stylesheet" href="~/Content/assets/js/icheck/skins/futurico/futurico.css">
+<link rel="stylesheet" href="~/Content/assets/js/icheck/skins/polaris/polaris.css">
+
+<style>
+    .ddCSS {
+        width: 128px;
+        float: right;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: none;
+    }
+
+    .dataTables_length {
+        display: none;
+    }
+
+    .panel {
+        margin-bottom: 10px;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 0 !important;
+    }
+
+    .dataTables_scrollBody {
+        overflow-x: hidden !important;
+    }
+
+    .icheckbox_minimal-orange {
+        border: 1px solid #000;
+    }
+
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border: 1px solid #bbb;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 2px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #bbb;
+    }
+
+    h4 {
+        font-weight: bold;
+    }
+
+</style>
+<div class="row">
+   <input type="hidden" id="DivCode" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectDivision" />
+    <input type="hidden" id="PCode" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectPlant" />
+    <input type="hidden" id="LCode" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectLine" />
+    <input type="hidden" id="PName" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectProduct" />
+    <input type="hidden" id="BStatus" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectStatus" />
+    <input type="hidden" id="BNumber" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectBatch" />
+    <input type="hidden" id="BName" value="@TnT.LangResource.GlobalRes.RptJobFilterSelectBatch" />
+    <div style="min-height:597px; background-color:#DDDDDD; border:1px solid #ccc;" class="col-sm-3">
+        <div>
+            <h3 style="text-align:center;">@TnT.LangResource.GlobalRes.ReportsJobsFilters</h3>
+            @*<div class="form-group">
+                    @Html.EditorFor(model => model.DecommisionJobs, new { @class = "icheck-2", @id = "decommission_jobs" })
+                    <label for="decommission_jobs" style="margin-left: 5px;">Decommission Batches</label>
+                </div>*@
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersLocationCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportLocationCode, @data_original_title = "Field Information" })
+           
+                @*@Html.DropDownListFor(model => model.LocationId, null , "Select Code", new { @class = "ddCSS", @onchange = "getDivisionCodes(this.value);" })*@
+                @Html.DropDownList("LocationCode", null, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportDivisionCode, @data_original_title = "Field Information" })
+              
+                @Html.DropDownListFor(m => m.DivisionCode, new SelectList(Enumerable.Empty<SelectListItem>(), "DivisionCode", "DivisionCode"), TnT.LangResource.GlobalRes.RptJobFilterSelectDivision, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportPlantCode, @data_original_title = "Field Information" })
+                
+                @Html.DropDownListFor(model => model.PlantCode, new SelectList(Enumerable.Empty<SelectListItem>(), "PlantCode", "PlantCode"), TnT.LangResource.GlobalRes.RptJobFilterSelectPlant, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersLineCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportLineCode, @data_original_title = "Field Information" })
+               
+                @Html.DropDownListFor(model => model.LineCode, new SelectList(Enumerable.Empty<SelectListItem>(), "LineCode", "LineCode"), TnT.LangResource.GlobalRes.RptJobFilterSelectLine, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersProductName, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportProductName, @data_original_title = "Field Information" })
+                
+                @Html.DropDownListFor(model => model.ProductName, new SelectList(Enumerable.Empty<SelectListItem>(), "PAID", "Name"), TnT.LangResource.GlobalRes.RptJobFilterSelectProduct, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersBatchStatus, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportBatchStatus, @data_original_title = "Field Information" })
+                
+                @Html.DropDownListFor(model => model.JobStatus, new SelectList(Enumerable.Empty<SelectListItem>(), "Status", "Status"), TnT.LangResource.GlobalRes.RptJobFilterSelectStatus, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersBatchNumber, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportBatchNumber, @data_original_title = "Field Information" })
+               
+                @Html.DropDownListFor(model => model.IdBatchNo, new SelectList(Enumerable.Empty<SelectListItem>(), "JID", "BatchNo"), TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, new { @class = "ddCSS", @disabled = "true" })
+
+            </div>
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersBatchName, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportBatchName, @data_original_title = "Field Information" })
+      
+                @Html.DropDownListFor(model => model.IdJobName, new SelectList(Enumerable.Empty<SelectListItem>(), "JID", "JobName"), TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, new { @class = "ddCSS", @disabled = "true" })
+            </div>
+            <div class="panel panel-dark" data-collapsed="0">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input tabindex="5" name="MFG_OR_EXP_wise" type="radio" class="icheck" value="ddp_mfg" id="MFG_date_wise" disabled>
+                        @*<input tabindex="5" name="MFG_OR_EXP_wise" type="radio" class="icheck-2" id="MFG_date_wise">*@
+                        @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersMFGDateWise, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportMFGDateWise, @data_original_title = "Field Information" })
+                        @*<label style="margin-left: 5px;" for="MFG_date_wise"></label>*@
+                    </div>
+                    <div class="form-group" id="ddp_mfg" style="display:none;">
+                        <div id="errmsg" style="color:red"></div>
+                        <div class="form-group">
+                            @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersFrom, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportMFGFrom, @data_original_title = "Field Information" })
+                           
+                            @Html.EditorFor(model => model.MfgDateWiseFrom, new { htmlAttributes = new { @class = "datepicker", @style = "float:right;width:144px;", @name = "mfgFrom", @disabled = "true" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersTo, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportMFGTo, @data_original_title = "Field Information" })
+                           
+                            @Html.EditorFor(model => model.MfgDateWiseTo, new { htmlAttributes = new { @class = "datepicker", @style = "float:right;width:144px;", @name = "mfgTo", @disabled = "true" } })
+                        </div>
+                        <input type="button" id="btnMfgWise" value="@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch" class="btn btn-info" style="margin-left: 4%;" disabled/>
+                    </div>
+                    <div class="form-group">
+                        @*<input tabindex="5" name="EXP_date_wise" type="checkbox" class="icheck-2" id="EXP_date_wise">*@
+                        <input tabindex="5" name="MFG_OR_EXP_wise" type="radio" value="ddp_exp" class="icheck" id="EXP_date_wise" disabled>
+                        @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersEXPDateWise, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportEXPDateWise, @data_original_title = "Field Information" })
+                        
+                    </div>
+
+                    <div class="form-group" id="ddp_exp" style="display:none;">
+                        <div id="errmsg2" style="color:red"></div>
+                        <div class="form-group">
+                           
+                            @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersFrom, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportEXPFrom, @data_original_title = "Field Information" })
+                            @Html.EditorFor(model => model.ExpDateWiseFrom, new { htmlAttributes = new { @class = "datepicker", @style = "float:right;width:144px;", @name = "expFrom", @disabled = "true" } })
+                        </div>
+                        <div class="form-group">
+                            
+                            @Html.Label(@TnT.LangResource.GlobalRes.ReportsJobsFiltersTo, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipReportExpTo, @data_original_title = "Field Information" })
+                            @Html.EditorFor(model => model.ExpDateWiseTo, new { htmlAttributes = new { @class = "datepicker", @style = "float:right;width:144px;", @name = "expTo", @disabled = "true" } })
+                        </div>
+                        <input type="button" id="btnExpWise" value="@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch" class="btn btn-info" style="margin-left: 4%;" disabled/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="min-height:597px; padding-top:10px; background-color:#bbb" class="col-sm-6">
+        <div>
+            <div class="panel panel-dark" data-collapsed="0">
+                <!-- panel head -->
+                <div class="panel-heading">
+                    <div class="panel-title"><strong>@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDate</strong></div>
+                    <div class="panel-options">
+                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                    </div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div id="errmsg3" style="color:red"></div>
+                        <label for="minimal-checkbox-1-2">@TnT.LangResource.GlobalRes.ReportsJobsFiltersFrom</label>
+                        @Html.EditorFor(model => model.JobFromCreatedDate, new { htmlAttributes = new { @class = "datepicker", @style = "width:28%;", @name = "JexpFrom" } })
+                        <label for="minimal-checkbox-1-2" style="margin-left: 1%;">@TnT.LangResource.GlobalRes.ReportsJobsFiltersTo</label>
+
+                        @Html.EditorFor(model => model.JobToCreatedDate, new { htmlAttributes = new { @class = "datepicker", @style = "width:28%;", @name = "JexpTo" } })
+                        <input type="button" id="btnCreatedWise" value="@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch" class="btn btn-info" style="margin-left: 4%;" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel panel-dark" data-collapsed="0">
+                <div class="panel-heading">
+                    <div class="panel-title"><strong>@TnT.LangResource.GlobalRes.ReportsJobsBatches</strong></div>
+                    <div class="panel-options">
+                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body" id="FilteredJob">
+
+                </div>
+            </div>
+
+            <div class="panel panel-dark" data-collapsed="0">
+                <div class="panel-body">
+                    <h3 style="text-align:center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReports</h3>
+                    <div class="row" id="ReportLink">
+                        <div class="col-lg-6">
+                            <ul>
+                                <li>
+                                    @TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsBatchesRelatedInformation
+                                    <ul>
+                                        <li><a href="javascript:void(0);" onclick="genReport('RptProductWise');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsProductWise</a></li>
+                                        <li><a href="javascript:void(0);" onclick="genReport('RptSummary');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsSummary</a></li>
+                                        <li><a href="javascript:void(0);" onclick="genReport('RptDetail');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsDetail</a></li>
+                                        <li><a href="javascript:void(0);" onclick="genReport('RptDetailWithOperator');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsDetailwithOperator</a></li>
+                                        <li><a href="javascript:void(0);" onclick="genReport('RptOperatorStatistics');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsOperatorStatistics</a></li>
+                                        @*<li><a href="@Url.Action("DavaStatus","Reports")">@TnT.LangResource.GlobalRes.RptJobsDavaReport</a></li>*@
+                                       
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul>
+                                <li id="UIDRPT"><a href="javascript:void(0);" onclick="genReport('RptUIDList');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsUIDList</a></li>
+                                <li id="BadUIDRPT"><a href="javascript:void(0);" onclick="genReport('RptBadUIDList');">@TnT.LangResource.GlobalRes.RptBadUIDList</a></li>
+                                <li><a href="javascript:void(0);" onclick="genReport('RptDetailedJobInfo');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsDetailedBatchInformation</a></li>
+                                <li id="ParentChildRPT"><a href="javascript:void(0);" onclick="genReport('RptParentChildRelationships');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsParentChildRelationship</a></li>
+                                <li><a href="javascript:void(0);" onclick="genReport('RptJobWiseSSCC');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsBatchwiseSSCC</a></li>
+                                <li id="DecomUIDRPT"><a href="javascript:void(0);" onclick="genReport('RptDecommisionedUID');">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsDecommissionedUID</a></li>
+                                <li id="UIDValReport"><a href="@Url.Action("UIdDetails","Reports")">@TnT.LangResource.GlobalRes.RptfrmUidValidationUIDval</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div style="min-height:597px; padding-top:10px; background-color:#DDDDDD" class="col-sm-3">
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body">
+                <table style="background-color:#fff; width:100%;">
+                    <thead style="border-bottom:1px solid #ccc;">
+                        <tr>
+                            <th style="font-weight:bold; text-align: center;"></th>
+                            <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsValues</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody id="recFeatures">
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.JobsProductName</th>
+                            <td id="dataProductName" width="30px">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.JobsGTIN</th>
+                            <td id="dataGTIN" width="30px">-</td>
+                        </tr>
+                        <tr>
+                            <th >@TnT.LangResource.GlobalRes.JobsManufacturingDate</th>
+                            <td id="dataMFG" >-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.JobsExpiryDate</th>
+                            <td id="dataEXP">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.JobsBatchQuantity</th>
+                            <td id="dataBQty">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.ReportsJobsValuesGoodCount</th>
+                            <td id="dataGoodCount">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.ReportsJobsValuesBadCount</th>
+                            <td id="dataBadCount">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.ReportsJobsValuesTotal</th>
+                            <td id="dataTotal">-</td>
+                        </tr>
+                        <tr>
+                            <th>@TnT.LangResource.GlobalRes.ReportsJobsValuesDecommissioned</th>
+                            <td id="dataDecomm">-</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body">
+                <span style="float:left; font-weight:bold;">@TnT.LangResource.GlobalRes.ReportsJobsValuesPieChart</span>
+                <center><span class="chart"></span></center>
+            </div>
+        </div>
+
+        <div class="panel panel-dark" data-collapsed="0">
+            <div class="panel-body">
+                <span style="float:left; font-weight:bold;">@TnT.LangResource.GlobalRes.ReportsJobsValuesBarChart</span>
+                <div id="chart3" style="height: 180px"></div>
+                <div id="chart2" style="display:none;"></div>
+                <div id="chart1" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<input type="button" id="UpdateCharts" style="display:none;" name="UpdateCharts" value="Update Charts" />
+<input type="text" id="ChartsValue" style="display:none;" name="ChartsValue" value="" />
+<input type="text" id="JidVAL" style="display:none;" name="JidVAL" value="" />
+
+<script src="~/Content/assets/js/icheck/icheck.min.js"></script>
+<script src="~/Content/assets/js/neon-charts.js"></script>
+
+<script src="~/Content/assets/js/RptJobHelper.js"></script>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+      
+        var CurrentDate = new Date();
+        var day = CurrentDate.getDate();
+        var month = CurrentDate.getMonth() + 1;
+        var year = CurrentDate.getFullYear();
+
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+
+        var today = day + "/" + month + "/" + year;
+        $('#JobFromCreatedDate').val(today);
+        $('#JobToCreatedDate').val(today);
+       
+        var $table1 = jQuery('#tableRpt');
+
+        // Initialize DataTable
+        $table1.DataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "bFilter": false,
+            "sScrollY": "150px"
+        });
+
+        $('input[name="MFG_OR_EXP_wise"]').on('ifChecked', function () {
+            selcVal = this.value;
+            if (selcVal == "ddp_mfg") {
+                $("#ddp_mfg").show();
+                $("#ddp_exp").hide();
+            } else {
+                $("#ddp_mfg").hide();
+                $("#ddp_exp").show();
+            }
+        });
+
+
+
+
+        $('input.icheck').iCheck({
+            checkboxClass: 'icheckbox_minimal',
+            radioClass: 'iradio_minimal'
+        });
+
+        $('input.icheck-2').iCheck({
+            checkboxClass: 'icheckbox_minimal-orange',
+            radioClass: 'iradio_minimal-orange'
+        });
+    });
+
+
+    jQuery(document).ready(function ($) {
+        var icheck_skins = $(".icheck-skins a");
+
+        icheck_skins.click(function (ev) {
+            ev.preventDefault();
+
+            icheck_skins.removeClass('current');
+            $(this).addClass('current');
+
+            updateiCheckSkinandStyle();
+        });
+
+        $("#icheck-style").change(updateiCheckSkinandStyle);
+    });
+
+    function updateiCheckSkinandStyle() {
+        var skin = $(".icheck-skins a.current").data('color-class'),
+            style = $("#icheck-style").val();
+
+        var cb_class = 'icheckbox_' + style + (skin.length ? ("-" + skin) : ''),
+            rd_class = 'iradio_' + style + (skin.length ? ("-" + skin) : '');
+
+        if (style == 'futurico' || style == 'polaris') {
+            cb_class = cb_class.replace('-' + skin, '');
+            rd_class = rd_class.replace('-' + skin, '');
+        }
+
+        $('input.icheck-2').iCheck('destroy');
+        $('input.icheck-2').iCheck({
+            checkboxClass: cb_class,
+            radioClass: rd_class
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+        $("#ReportLink").show();
+        //$(".chart").sparkline([25, 25, 25, 25], {
+        $(".chart").sparkline([25, 25, 25], {
+            type: 'pie',
+            barColor: '#485671',
+            height: '110px',
+            barWidth: 10,
+            barSpacing: 2
+        });
+        $(function () {
+            $("#UpdateCharts").click(function () {
+                
+                var valD = $(ChartsValue).val();
+                
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'getJobChartDetails',
+                    dataType: 'json',
+                    aysync: true,
+                    data: { "JID": valD },
+                    success: function (data) {
+                        debugger;
+                        console.log(data);
+                        if (data[4] == "CIP") {
+                            $("#UIDRPT").hide();
+                            $("#BadUIDRPT").hide();
+                            $("#ParentChildRPT").hide();
+                            $("#DecomUIDRPT").hide();
+                            $("#ReportLink").show();
+                            $("#UIDValReport").hide();
+                        } else {
+                            $("#UIDRPT").show();
+                            $("#BadUIDRPT").show();
+                            $("#ParentChildRPT").show();
+                            $("#DecomUIDRPT").show();
+                            $("#ReportLink").show();
+                            $("#UIDValReport").show();
+                        } if (data == "@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData") {
+                            $("#ReportLink").hide();
+                            $("#dataProductName").html('-');
+                            $("#dataGTIN").html('-');
+                            $("#dataGoodCount").html('-');
+                            $("#dataTotal").html('-');
+                            $("#dataDecomm").html('-');
+                            $("#dataEXP").html('-');
+                            $("#dataBQty").html('-');
+                            $("#dataBadCount").html('-');
+                            $("#dataMFG").html('-');
+                        }
+
+                        if (data == '@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData') {
+                            $('.chart').hide();
+                            $('#chart3').hide();
+                            return false;
+                        } else {
+                            $('.chart').show();
+                            $('#chart3').show();
+                        }
+
+                        $('.chart').sparkline(data[0], {
+                            type: 'pie',
+
+                            height: '110px',
+                            barWidth: 10,
+                            barSpacing: 2,
+                            tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                            tooltipValueLookups: {
+                                'offset': {
+                                    0: 'Good',
+                                    1: 'Bad',
+                                    2: 'Decomm'
+                                    //3: 'Not Verified'
+                                }
+                            }
+
+                        });
+                        var strData = data[0];
+                        var arrayL = new Array();
+                        var arrayL = strData.toString().split(',');
+                        
+                        //bChart.setData([{ x: 'Job Stats', y: arrayL[0], z: arrayL[1], a: arrayL[2], b: arrayL[3] }]);
+                        bChart.setData([{ x: BatchStat, y: arrayL[0], z: arrayL[1], a: arrayL[2] }]);
+                       
+                        if (data != '@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData') {
+                            if (data[2]['Name']) {
+                                $("#dataProductName").html(data[2]['Name']);
+                            } else if (!data[2]['Name']) {
+                                $("#dataProductName").html('-');
+                            }
+
+                            if (data[1]) {
+                                $("#dataGTIN").html(data[1]);
+
+                            } else if (!data[1]) {
+                                $("#dataGTIN").html('-');
+
+                            }
+
+                            if (arrayL[0]) {
+                                $("#dataGoodCount").html(arrayL[0]);
+                            } else if (!arrayL[0]) {
+                                $("#dataGoodCount").html('-');
+                            }
+
+                            if (arrayL[1]) {
+                                $("#dataBadCount").html(arrayL[1]);
+                                var totalQty = parseInt(arrayL[1]) + parseInt(arrayL[0]);
+                                $("#dataTotal").html(totalQty);
+                            } else if (!arrayL[1]) {
+                                $("#dataBadCount").html('-');
+                                $("#dataTotal").html('-');
+                            }
+
+
+                            if (arrayL[2]) {
+                                $("#dataDecomm").html(arrayL[2]);
+                            } else if (!arrayL[2]) {
+                                $("#dataDecomm").html('-');
+                            }
+
+                            if (data[3]['MfgDate']) {
+                                var Mdate = ConvertJsonDateString(data[3]['MfgDate']);
+                                $("#dataMFG").html(Mdate);
+                            } else if (!data[3]['MfgDate']) {
+                                $("#dataEXP").html('-');
+                            }
+                            if (data[3]['ExpDate']) {
+                                var Edate = ConvertJsonDateString(data[3]['ExpDate']);
+                                $("#dataEXP").html(Edate);
+                            } else if (!data[3]['ExpDate']) {
+                                $("#dataEXP").html('-');
+                            }
+                            if (data[3]['Quantity']) {
+                                $("#dataBQty").html(data[3]['Quantity']);
+                            } else if (!data[3]['Quantity']) {
+                                $("#dataBQty").html('-');
+                            }
+
+                        }
+                        else {
+
+                            $("#dataProductName").html('-');
+                            $("#dataGTIN").html('-');
+                            $("#dataGoodCount").html('-');
+                            $("#dataTotal").html('-');
+                            $("#dataDecomm").html('-');
+                            $("#dataEXP").html('-');
+                            $("#dataEXP").html('-');
+                            $("#dataBQty").html('-');
+
+                        }
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+            }).change();
+
+
+            var date = new Date();
+            var lastDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            var firstDay = new Date(date.getFullYear(), date.getMonth() + 3, 0);
+
+            var lastDayWithSlashes = (lastDay.getDate()) + '/' + (lastDay.getMonth() + 1) + '/' + (lastDay.getFullYear() + 1);
+            var firstDayWithSlashes = (firstDay.getDate()) + '/' + (firstDay.getMonth() + 1) + '/' + firstDay.getFullYear();
+
+            if ($(this).is(':checked')) {
+
+
+                $('#JobFromCreatedDate').datepicker('update', firstDayWithSlashes);
+                $('#JobToCreatedDate').datepicker('update', lastDayWithSlashes);
+                $('#JobFromCreatedDate').attr("disabled", true);
+                $('#JobToCreatedDate').attr("disabled", true);
+            } else {
+
+
+                $('#JobFromCreatedDate').prop("disabled", false);
+                $('#JobToCreatedDate').prop("disabled", false);
+                $('#JobFromCreatedDate').datepicker('update', firstDayWithSlashes);
+                $('#JobToCreatedDate').datepicker('update', lastDayWithSlashes);
+
+            }
+        });
+        var bChart = Morris.Bar({
+            element: 'chart3',
+            axes: true,
+            data: [
+                //{ x: 'Job Stats', y: 0, z: 0, a: 0, b: 0 }
+                { x: BatchStat, y: 0, z: 0, a: 0 }
+                 
+            ],
+            xkey: 'x',
+            //ykeys: ['y', 'z', 'a', 'b'],
+            ykeys: ['y', 'z', 'a'],
+            labels: [Good, Bad, Decomm],
+            barColors: ['#36C', '#DC3912', '#F90']
+            //labels: ['Good', 'Bad', 'Decomm', 'Not Verified'],
+            //barColors: ['#36C', '#DC3912', '#F90', '#109618']
+        });
+    });
+
+    $("#btnLoadSampleRpt").click(function () {
+        var k = "1";
+        $.ajax({
+
+            url: 'getData',
+            type: "POST",
+            dataType: 'json',
+            data: { "k": k },
+            success: function (data) {
+                $('#modal-rpt-data').html(data);
+                $("#showRPTBx").trigger("click");
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    function ConvertJsonDateString(jsonDate) {
+        var shortDate = null;
+        if (jsonDate) {
+            var regex = /-?\d+/;
+            var matches = regex.exec(jsonDate);
+            var dt = new Date(parseInt(matches[0]));
+            var month = dt.getMonth() + 1;
+            var monthString = month > 9 ? month : '0' + month;
+            var day = dt.getDate();
+            var dayString = day > 9 ? day : '0' + day;
+            var year = dt.getFullYear();
+            shortDate = dayString + '-' + monthString + '-' + year;
+        }
+        return shortDate;
+    };
+</script>

@@ -1,0 +1,192 @@
+﻿@model TnT.Models.EPCIS.M_Transporter
+
+@{
+    ViewBag.Title = "TransporterCreate";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.UsersCreate
+    <a style="float:right; margin-right:5px;" href='@Url.Action("TransporterIndex", "EPCIS")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+
+@using (Html.BeginForm("TransporterCreate", "EPCIS", FormMethod.Post, new { @id = "frmEPCISTransporter" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISTransporterAgencyName, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISTransporterAgencyContactNumber, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control NumbersOnly", @maxlength = "13" } })
+                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISEmailId, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipEPCISTransporterAgencyAddress, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-10">
+                        <input id="btnSubmit" type="button" value="@TnT.LangResource.GlobalRes.UsersCreate" class="btn btn-info btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
+
+         <script>
+             $("#btnSubmit").click(function () {
+                 var Name = $("#Name").val();
+                 var ContactNo = $("#ContactNo").val();
+                 var EmailId = $("#EmailId").val();
+                 var Address = $("#Address").val();
+
+                 var msgPOST = "";
+                 if (Name == "") {
+                     showMessage("Name", "@TnT.LangResource.GlobalRes.showMsgEpcisTransporterName");
+                     msgPOST += "@TnT.LangResource.GlobalRes.showMsgEpcisTransporterName";
+                 } else {
+                     clearColor("Name");
+                 }
+                 if (ContactNo == "") {
+                     showMessage("ContactNo", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactNumber");
+                     msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactNumber";
+                 } else {
+                     clearColor("ContactNo");
+                 }
+                 if (EmailId == "") {
+                     showMessage("EmailId", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateEmail");
+                     msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateEmail";
+                 } else {
+                     clearColor("EmailId");
+                 }
+                 if (Address == "") {
+                     showMessage("Address", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateAddress");
+                     msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateAddress";
+                 } else {
+                     clearColor("Address");
+                 }
+                 if (msgPOST == "") {
+                     formSubmit();
+                 }
+             });
+             function formSubmit() {
+                 document.getElementById("frmEPCISTransporter").submit();
+             }
+             $(".NumbersOnly").keydown(function (e) {
+                 // Allow: backspace, delete, tab, escape, enter and .
+                 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                     // Allow: Ctrl+A, Command+A
+                     (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                     // Allow: home, end, left, right, down, up
+                     (e.keyCode >= 35 && e.keyCode <= 40)) {
+                     // let it happen, don't do anything
+                     return;
+                 }
+                 // Ensure that it is a number and stop the keypress
+                 if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                     e.preventDefault();
+                 }
+             });
+
+             $("#EmailId").blur(function () {
+                 var customerEmail = $("#EmailId").val();
+
+                 if (!isValidEmailAddress(customerEmail)) {
+                     toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreatevalidemail");
+                     $("#EmailId").val("");
+                     $("#EmailId").css("border", "red 1px solid");
+                 } else {
+                     $("#EmailId").css("border", "green 1px solid");
+                 }
+
+             });
+             $("#Name").blur(function () {
+                 var name = $("#Name").val();
+                 if(name!=null)
+                 {
+                     $.ajax({
+                         url: '@Url.Action("getTranspoterName", "EPCIS")',
+                         type: "POST",
+                         dataType: 'json',
+                         data: { "name": name },
+                         success: function (data) {
+
+                             if (data != null) {
+                                 
+                                 if (data == false) {
+                                     toastr.warning("@TnT.LangResource.GlobalRes.toastrEPCISReceiverTranspoterNameAlreadyExist");
+                                     $("#Name").val("");
+                                     $("#Name").css("border", "red 1px solid");
+
+                                 } else {
+                                     $("#Name").css("border", "green 1px solid");
+                                 }
+                             }
+                         },
+                         error: function (data) {
+
+                             toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                         }
+                     });
+                 }
+                 else
+                 {
+                     $("#Name").css("border", "red 1px solid");
+                 }
+             });
+             function showMessage(elementID, msg) {
+                 toastr.warning(msg);
+                 $("#" + elementID).val("");
+                 $("#" + elementID).css("border", "red 1px solid");
+                 return false;
+             }
+             function clearColor(elementID) {
+                 $("#" + elementID).css("border", "green 1px solid");
+             }
+             function isValidEmailAddress(emailAddress) {
+                 var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+                 return pattern.test(emailAddress);
+             };
+
+         </script>
+            @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

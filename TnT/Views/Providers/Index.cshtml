@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TnT.Models.Providers.M_Providers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.ProviderMasterCreate
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Create","Providers")' class="btn btn-info btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.ProviderCreate
+        <i class="fa fa-server"></i>
+    </a>
+</h2>
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+
+        <th></th>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        @TnT.LangResource.GlobalRes.RolesIndexAction <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexView" href='@Url.Action("Details","Providers",  new {id = item.Id})'> <i class="entypo-doc-text-inv"></i> @TnT.LangResource.GlobalRes.SOMIndexView</a>
+                        </li>
+                        <li>
+                            <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexEdit" href='@Url.Action("Edit","Providers",  new {id = item.Id})'> <i class="entypo-pencil"></i> @TnT.LangResource.GlobalRes.SOMIndexEdit</a>
+                        </li>
+                    </ul>
+                </div>
+               
+            </td>
+        </tr>
+    }
+
+</table>

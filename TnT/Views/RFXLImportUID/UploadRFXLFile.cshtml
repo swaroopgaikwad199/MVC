@@ -1,0 +1,35 @@
+﻿@model TnT.Models.RFXLImport.RFXLImportViewModel
+@{
+    ViewBag.Title = "UploadRFXLFile";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.RFXLUploadFile</h2>
+
+@using (Html.BeginForm("UploadRFXLFile", "RFXLImportUID", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="padding-top:20px;">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "col-sm-3 control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipImportProductUpload, @data_original_title = "Field Information", style = "font-size:16px;text-align:right; padding-top:5px" })
+            <div class="col-sm-5">
+                @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.Customer, "Id", "CompanyName"), @TnT.LangResource.GlobalRes.LblLytSelect, new { @class = "form-control col-sm-5", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top:20px;">
+
+        <div class="form-group">
+            @*<label for="field-1" class="col-sm-3 control-label" style="font-size:16px;text-align:right; padding-top:5px"> @TnT.LangResource.GlobalRes.ProductImportProductsFile </label>*@
+            @Html.Label(@TnT.LangResource.GlobalRes.ProductImportProductsFile, htmlAttributes: new { @class = "col-sm-3 control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipImportProductUpload, @data_original_title = "Field Information", style = "font-size:16px;text-align:right; padding-top:5px" })
+            <div class="col-sm-5">
+                @Html.TextBox("file", "", new { type = "file", @class = "form-control", @required = "required", @id = "uploadField" })
+            </div>
+            @Html.Hidden("FileType", "SOM")
+            <input type="submit" value="@TnT.LangResource.GlobalRes.cmnBtnUpload" class="btn btn-info btn-default" onclick="Import()" AutoPostback=false />
+        </div>
+
+    </div>
+
+}

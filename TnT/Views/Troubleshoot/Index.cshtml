@@ -1,0 +1,536 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<div style="border: 4px solid #636161; border-radius: 9px; ">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <fieldset>
+                <br />
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <div class="form-group">
+                            @Html.Label("PONumber", htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("JobName", new SelectList(ViewBag.Jobs, "JobName", "JobName"), "Select PO Number", new { @class = "form-control", @id = "JobName", @validate = "true" })
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6">
+                                             <div class="form-group">
+                                                  <div class="col-md-8">
+                                                 @Html.DropDownList("SearchType", new List < SelectListItem >
+                        { new SelectListItem { Text = "Batch Create", Value = "1"},new SelectListItem { Text = "Batch Verify", Value = "2"},
+                          new SelectListItem { Text = "Additional Batch Quantity", Value = "3"},new SelectListItem { Text = "UID Exhaust", Value = "4"}
+                         }, "Select Search Type", new { @class = "form-control", @id = "SearchType", @validate = "true" })
+                                                 </div>
+                                             </div>
+                                         </div>*@
+                    <div class="col-md-6">
+                        <button type="button" id="btninfo" class="btn btn-next btn-orange">Submit</button>
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </div>
+    }
+</div>
+<br />
+<br />
+
+<div id="divtblname" class="col-md-6 col-md-offset-3 hidden">
+    <div class="row">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Table Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        PackagingAsso
+                    </td>
+                    <td>
+                        <span id="Pgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Pred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PackagingAsso Details
+                    </td>
+                    <td>
+                        <span id="PDgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="PDred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Job
+                    </td>
+                    <td>
+                        <span id="Jgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Jred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Job Details
+                    </td>
+                    <td>
+                        <span id="JDgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="JDred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        M_identity
+                    </td>
+                    <td>
+                        <span id="Mgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Mred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        X_Identity
+                    </td>
+                    <td>
+                        <span id="Xgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Xred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PackagingDetails
+                    </td>
+                    <td>
+                        <span id="Packgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Packred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Additional Batch Quantity
+                    </td>
+                    <td>
+                        <span id="Addgreen" class="fa fa-check-circle fa-3x hidden" style="color:green">  </span>
+                        <span id="Addred" class="fa fa-times-circle fa-3x hidden" style="color:red">  </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <button type="button" id="tblinfo" class="btn btn-next btn-orange">Tables</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="dvMain" class="col-md-12 hidden">
+    <h2>Product</h2>
+    @*<i id="Pgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </i>
+        <i id="Pred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </i>*@
+    <table id="tblProduct" border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="10%">Product ID</th>
+                <th>Product Name</th>
+                <th>Product Code</th>
+                <th>FG-CODE</th>
+
+            </tr>
+        </thead>
+        <tbody id="Productbody"></tbody>
+    </table>
+    <br />
+    <br />
+    <h2>Product Details</h2>
+    @*<span id="PDgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+        <span id="PDred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+    <table id="tblProductDetails" border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="10%">Product ID</th>
+                <th>Package TypeCode</th>
+                <th>PC MAPPING</th>
+                <th>GTIN</th>
+            </tr>
+        </thead>
+        <tbody id="ProductDtlbody"></tbody>
+    </table>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <h2>JOB</h2>
+            @*<span id="Jgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+                <span id="Jred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+            <table id="tblJob" border="1" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="25%">JobName</th>
+                        <th>BatchNo</th>
+                        <th>Quantity</th>
+                        <th>SurPlus Quantity</th>
+                        <th>JobStatus</th>
+                        <th>Provider ID</th>
+                    </tr>
+                </thead>
+                <tbody id="Jobbody"></tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <h2 width="10%">Job Details</h2>
+            @*<span id="JDgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+                <span id="JDred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+            <table id="tblJobDetails" border="1" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="10%">PackageTypeCode</th>
+                        <th>GTIN</th>
+                        <th>PC MAPPING</th>
+                    </tr>
+                </thead>
+                <tbody id="JobDtlbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <h2>PC Mapping</h2>
+    @*<span id="PCgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+        <span id="PCred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+    <table id="tblPCMap" border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="50%">Deck Code</th>
+                <th>UIDS To Print</th>
+
+            </tr>
+        </thead>
+        <tbody id="PCbody"></tbody>
+    </table>
+    <br />
+    <br />
+
+    <h2>M_Identity</h2>
+    @*<span id="Mgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+        <span id="Mred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+    <table id="tblMIdentity" border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="10%">Customer ID</th>
+                <th>PackageTypeCode</th>
+                <th>GTIN</th>
+                <th>IS Extra</th>
+            </tr>
+        </thead>
+        <tbody id="Mbody"></tbody>
+    </table>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>X_Identity</h2>
+            @*<span id="Xgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 425px;">  </span>
+                <span id="Xred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 425px;">  </span>*@
+            <table id="tblXIdentity" border="1" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="50%">PackageTypeCode</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody id="Xbody"></tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Packaging Details</h2>
+            @*<span id="Packgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 425px;">  </span>
+                <span id="Packred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 425px;">  </span>*@
+            <table id="tblPackData" border="1" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="50%">PackageTypeCode</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody id="PackDatabody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <h2>Additional Batch Quantity</h2>
+    @*<span id="Addgreen" class="fa fa-check-circle fa-3x hidden" style="color:green;padding-left: 925px;">  </span>
+        <span id="Addred" class="fa fa-times-circle fa-3x hidden" style="color:red;padding-left: 925px;">  </span>*@
+    <table id="tblAdditional" border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="30%">Job ID</th>
+                <th>Current Batch Quantity</th>
+                <th>Required Batch Quantity</th>
+
+            </tr>
+        </thead>
+        <tbody id="Additionalbody"></tbody>
+    </table>
+    <br />
+    <br />
+</div>
+@*<script src="~/scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+
+            $(function () {
+
+                var progressNotifier = $.connection.progressHub;
+                debugger;
+                progressNotifier.client.sendMessageToPage = function (message, count, batchProg) {
+                    debugger;
+                    toastr.success(message);
+
+                };
+
+                $.connection.hub.start().done(function () {
+
+                });
+            });
+
+        </script>*@
+
+<script>
+    $(document).ready(function () {
+        $('#btninfo').click(function () {
+            debugger;
+            //var green = "<span id='PDgreen' class='fa fa-check-circle fa-3x hidden' style='color:green;padding-left: 925px;'>  </span>";
+            //var red ="<span id='PDgreen' class='fa fa-check-circle fa-3x hidden' style='color:red;padding-left: 925px;'>  </span>";
+
+            $('#Productbody').html("");
+            $('#ProductDtlbody').html("");
+            $('#Jobbody').html("");
+            $('#JobDtlbody').html("");
+            $('#Mbody').html("");
+            $('#Xbody').html("");
+            $('#PackDatabody').html("");
+            $('#Additionalbody').html("");
+            $('#PCbody').html("");
+
+
+            $('#Pgreen').addClass("hidden");
+            $('#Pred').addClass("hidden");
+            $('#PDgreen').addClass("hidden");
+            $('#PDred').addClass("hidden");
+            $('#Jgreen').addClass("hidden");
+            $('#Jred').addClass("hidden");
+            $('#JDgreen').addClass("hidden");
+            $('#JDred').addClass("hidden");
+            $('#Mgreen').addClass("hidden");
+            $('#Mred').addClass("hidden");
+            $('#Xgreen').addClass("hidden");
+            $('#Xred').addClass("hidden");
+            $('#Packgreen').addClass("hidden");
+            $('#Packred').addClass("hidden");
+            $('#PCgreen').addClass("hidden");
+            $('#PCred').addClass("hidden");
+            $('#Addgreen').addClass("hidden");
+            $('#Addred').addClass("hidden");
+            var PONumber = $("#JobName option:selected").text();
+            // var SearchType = $("#SearchType option:selected").val();
+            //if (SearchType == 1) {
+             $.ajax({
+            url: '@Url.Action("Create", "Troubleshooting")',
+            type: "POST",
+            dataType: 'json',
+            data: { "PONumber": PONumber },
+                success: function (data) {
+                    debugger;
+                    $("#dvMain").addClass("hidden");
+
+                    $("#divtblname").removeClass("hidden");
+
+                    $.each(data.Table, function (i, item) {
+                        $('#tblProduct').append('<tr><td>' + item.PAID + '</td><td>' + item.Name + '</td><td>' + item.ProductCode + '</td><td>' + item.FGCode + '</td></tr > ').DataTable();
+                    });
+                    if ($('#Productbody').find('tr').length != 0) {
+                         $('#Pgreen').removeClass("hidden");
+                        $('#tblProduct').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Pred').removeClass("hidden");
+                        $('#tblProduct').css({ 'border': '2px solid red' });
+
+                    }
+                    $.each(data.Table1, function (i, item) {
+                        $('#tblProductDetails').append('<tr><td>' + item.PAID + '</td><td>' + item.PackageTypeCode + '</td><td>' + item.Size + '</td><td>' + item.GTIN + '</td></tr > ').DataTable();
+                    });
+                    if ($('#ProductDtlbody').find('tr').length != 0) {
+                        $('#PDgreen').removeClass("hidden");
+                        $('#tblProductDetails').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#PDred').removeClass("hidden");
+                        $('#tblProductDetails').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table2, function (i, item) {
+                        $('#tblJob').append('<tr><td>' + item.JobName + '</td><td>' + item.BatchNo + '</td><td>' + item.Quantity + '</td><td>' + item.SurPlusQty + '</td><td>' + item.JobStatus + '</td><td>' + item.ProviderId + '</td></tr > ').DataTable();
+                    });
+                    if ($('#Jobbody').find('tr').length != 0) {
+                        $('#Jgreen').removeClass("hidden");
+                        $('#tblJob').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Jred').removeClass("hidden");
+                        $('#tblJob').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table3, function (i, item) {
+                        $('#tblJobDetails').append('<tr><td>' + item.JD_Deckcode + '</td><td>' + item.JD_GTIN + '</td><td>' + item.JD_DeckSize + '</td></tr > ').DataTable();
+                    });
+                    if ($('#JobDtlbody').find('tr').length != 0) {
+                        $('#JDgreen').removeClass("hidden");
+                        $('#tblJobDetails').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#JDred').removeClass("hidden");
+                        $('#tblJobDetails').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table4, function (i, item) {
+                        $('#tblMIdentity').append('<tr><td>' + item.CustomerId + '</td><td>' + item.PackageTypeCode + '</td><td>' + item.GTIN + '</td><td>' + item.IsExtra + '</td></tr > ').DataTable();
+                    });
+                    if ($('#Mbody').find('tr').length != 0) {
+                        $('#Mgreen').removeClass("hidden");
+                        $('#tblMIdentity').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Mred').removeClass("hidden");
+                        $('#tblMIdentity').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table5, function (i, item) {
+                        $('#tblXIdentity').append('<tr><td>' + item.PackageTypeCode + '</td><td>' + item.CNT + '</td></tr > ').DataTable();
+                    });
+                    if ($('#Xbody').find('tr').length != 0) {
+                        $('#Xgreen').removeClass("hidden");
+                        $('#tblXIdentity').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Xred').removeClass("hidden");
+                        $('#tblXIdentity').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table6, function (i, item) {
+                        $('#tblPackData').append('<tr><td>' + item.PackageTypeCode + '</td><td>' + item.CNT + '</td></tr > ').DataTable();
+                    });
+                    if ($('#PackDatabody').find('tr').length != 0) {
+                        $('#Packgreen').removeClass("hidden");
+                        $('#tblPackData').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Packred').removeClass("hidden");
+                        $('#tblPackData').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table7, function (i, item) {
+                        $('#tblAdditional').append('<tr><td>' + item.JID + '</td><td>' + item.CurrentBatchQty + '</td><td>' + item.RequiredBatchQty + '</td></tr > ').DataTable();
+                    });
+                    if ($('#Additionalbody').find('tr').length != 0) {
+                        $('#Addgreen').removeClass("hidden");
+                        $('#tblAdditional').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#Addred').removeClass("hidden");
+                        $('#tblAdditional').css({ 'border': '2px solid red' });
+                    }
+                    $.each(data.Table8, function (i, item) {
+                        $('#tblPCMap').append('<tr><td>' + item.DeckCode + '</td><td>' + item.UIDSToPrint + '</td></tr > ').DataTable();
+                    });
+                    if ($('#PCbody').find('tr').length != 0) {
+                        $('#PCgreen').removeClass("hidden");
+                        $('#tblPCMap').css({ 'border': '2px solid green' });
+                    }
+                    else {
+                        $('#PCred').removeClass("hidden");
+                        $('#tblPCMap').css({ 'border': '2px solid red' });
+                    }
+                }
+            });
+            // }
+            //else if (SearchType == 2) {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: '/TableDependency/Verify',
+            //        data: { "PONumber": PONumber },
+            //        //contentType: "application/json; charset=utf-8",
+            //        dataType: 'json',
+            //        success: function (data) {
+            //            debugger;
+            //            var trHTML = '';
+            //            $.each(data, function (i, item) {
+            //                trHTML += '<tr><td>' + item.PackageTypeCode + '</td><td>' + item.CNT + '</td></tr > ';
+            //            });
+            //            $('#tblinfo').append(trHTML).DataTable();
+
+
+
+            //        }
+            //    });
+            //}
+            //else if (SearchType == 3) {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: '/TableDependency/Create',
+            //        data: { "PONumber": PONumber },
+            //        //contentType: "application/json; charset=utf-8",
+            //        dataType: 'json',
+            //        success: function (data) {
+            //            debugger;
+            //            var trHTML = '';
+            //            $.each(data, function (i, item) {
+            //                trHTML += '<tr><td>' + item.PackageTypeCode + '</td><td>' + item.CNT + '</td></tr > ';
+            //            });
+            //            $('#tblinfo').append(trHTML).DataTable();
+
+
+
+            //        }
+            //    });
+            //}
+
+
+            //var table = $('#tblinfo').DataTable({
+            //    "ajax": {
+            //        "type": "POST",
+            //        "url": "/TableDependency/Create",
+            //        "data": { "PONumber": PONumber },
+            //        "dataSrc": "",
+            //        "success": function (Data) {
+            //            alert("Done!");
+            //        }
+            //    },
+            //    "columns": [
+            //        { "data": "PackageTypeCode" },
+            //        { "data": "CNT" }
+            //    ]s
+            //});
+
+
+        });
+        $("#tblinfo").click(function () {
+
+            $("#dvMain").removeClass("hidden");
+            $("#divtblname").addClass("hidden");
+        });
+    });
+
+
+</script>

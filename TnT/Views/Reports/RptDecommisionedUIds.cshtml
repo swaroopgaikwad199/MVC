@@ -1,0 +1,92 @@
+﻿@model TnT.Models.Reports.Jobs.RptUIDsViewModel
+
+<div class="container">
+    <div class="row" style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesReportsUIDList</h4>
+    </div>
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table style="width:100%">
+           <tr>
+        <td class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.JobsBatchManagerProductName:</label><b>@Html.DisplayFor(model => model.jbDetails.JD_ProdName)</b><br />
+            <label>@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatch:</label><b> @Html.DisplayFor(model => model.job.BatchNo)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label><b>@Html.DisplayFor(model => model.job.MfgDate)</b><br />
+    <label>@TnT.LangResource.GlobalRes.LineLocationLocationCode</label><b>@Html.DisplayFor(model => model.job.LineCode)</b><br />
+    <label>@TnT.LangResource.GlobalRes.LineLocationPlantCode</label><b> @Html.DisplayFor(model => model.job.PlantCode)</b><br />
+</td>
+        <td class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.JobsProductCode:</label><b>@Html.DisplayFor(model => model.jbDetails.JD_ProdCode)</b> <br />
+            <label>@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatchQty:</label><b>@Html.DisplayFor(model => model.job.Quantity)</b><br />
+            <label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label><b>@Html.DisplayFor(model => model.job.ExpDate)</b><br />
+</td>
+        <td class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.JobsGTIN:</label><b> @Html.DisplayFor(model => model.jbDetails.JD_GTIN)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptcmnDeck:</label> <b>@Html.DisplayFor(model => model.packagingAsso.PackageTypeCode)</b><br />
+    <label>@TnT.LangResource.GlobalRes.LineLocationDivisionCode:</label><b> @Html.DisplayFor(model => model.DivisionCode)</b> <br />
+    <label>@TnT.LangResource.GlobalRes.LineLocationLineCode:</label><b> @Html.DisplayFor(model => model.job.LineCode)</b><br />
+</td>
+            </tr>
+            </table>
+    </div>
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table class="table" style="text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnCode</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnPackagingDate</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnStatus</td>
+                </tr>
+            <tbody>
+
+                @{ int i = 1; }
+                @foreach (var item in Model.packagingDetails)
+                {
+                    string status;
+                    if (item.IsRejected == false )
+                    {
+                        status = "Good";
+                    }
+                    else if(item.IsRejected == true )
+                    {
+                        status = "Bad";
+                    }
+                    else
+                    {
+                        status = "NR/NU";
+                    }
+
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.Code</td>
+                        <td>@item.MfgPackDate</td>
+                        <td>@status</td>
+                    </tr>
+
+                    i++;
+                }
+                          
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table style="width:100%;">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="float:right; padding-right:10px">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>	

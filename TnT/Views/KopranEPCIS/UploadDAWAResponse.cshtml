@@ -1,0 +1,293 @@
+﻿@model TnT.Models.TraceLinkImporter.TracelinkViewModel
+@{
+    ViewBag.Title = "UploadDAWAResponse";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Upload DAWA Response</h2>
+
+@using (Html.BeginForm("UploadResponseXML", "KopranEPCIS", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+      
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkCustomer, @data_original_title = "Field Information" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.Customer, "Id", "CompanyName"), "Select", new { @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+
+                <div id="divInfo" style="display:none">
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorContactPerson : </label><label id="lblContPerson" class="Bold"> </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorContactNo : </label><label id="lblContNo" class="Bold"></label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorEmail :</label><label id="lblContEmail" class="Bold"></label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorAddress :</label><label id="lblAddress" class="Bold"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorAPIURL : </label><label id="lblAPIUrl" class="Bold"> </label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorProvider : </label><label id="lblProvider" class="Bold"></label>
+                        </div>
+
+                        @*<div class="col-lg-3">
+                            <label>Address:</label><label id="lblAddress" class="Bold"></label>
+                        </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>@TnT.LangResource.GlobalRes.M_VendorProvidingSSCC  :</label><label id="lblSSCCAvailable" class="Bold"></label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+        <div class="form-group">
+            <div    >
+                <label for="GTIN" class="control-label col-md-2">Type</label>
+            </div>
+            <div class="col-md-10">
+                <label>@Html.RadioButtonFor(model => model.SrnoType, "GTIN", new { @class = "GTIN" }) GTIN</label>&nbsp;&nbsp;
+                <label>@Html.RadioButtonFor(model => model.SrnoType, "NTIN", new { @class = "NTIN" }) NTIN</label>&nbsp;&nbsp;
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-10">
+
+            <label for="uploadFile" class="control-label col-md-2">File:</label> <input type="file" name="file" class="control-label col-md-4"/>
+           
+            <input type="submit" value="Upload" class="btn btn-info btn-default"/>
+        </div>
+
+    </div>
+
+
+}
+
+
+<script>
+
+            $('input[type=radio][name=SrnoType]').change(function () {
+
+                var type = $('input[name=SrnoType]:checked').val();
+                if (type == "NTIN") {
+                    $("#lblGtin").text("NTIN");
+                    $("#divFilter").hide();
+                }
+                else if (type == "GTIN") {
+                    $("#lblGtin").text("GTIN");
+                    $("#divFilter").hide();
+                } else {
+                    $("#lblGtin").text("GTIN");
+                    $("#divFilter").show();
+                }
+            });
+            $("#GTIN").blur(function () {
+
+                var gtin = $("#GTIN").val();
+                if (parseInt(gtin) < 14) {
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrtracelinkInvalidGTIN");
+                    $("#GTIN").css("border", "red 1px solid");
+                }
+                else {
+                    if (gtin != "")
+                        $("#GTIN").css("border", "green 1px solid");
+                }
+            });
+            $(".NumbersOnly").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                    // Allow: Ctrl+A, Command+A
+                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $('#CustomerId').change(function () {
+
+                CusId = $('#CustomerId').val();
+
+                if (CusId == 0) {
+                    $('#divInfo').hide();
+                    return;
+                }
+
+                $.ajax({
+                    url: 'getCustomerData',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "CId": CusId },
+                    success: function (data) {
+
+                        if (data != null) {
+                            $('#divInfo').show();
+                            $('#lblContPerson').html(data[0].ContactPerson);
+                            $('#lblContNo').html(data[0].ContactNo);
+                            $('#lblContEmail').html(data[0].Email);
+                            $('#lblAddress').html(data[0].Address);
+                            if (data.IsSSCC == 'true') {
+                                $('#lblSSCCAvailable').html("Yes");
+                            } else {
+                                $('#lblSSCCAvailable').html("No");
+                            }
+
+                            $('#lblProvider').html(data[0].Proivder.Name);
+                            $('#lblAPIUrl').html(data[0].APIUrl);
+
+
+                            strSel = "<option value=''>Select</option>";
+                            for (i = 0; i < data[1].length; i++) {
+                                strSel += "<option value='" + data[1][i].PAID + "'>" + data[1][i].Name + "</option>";
+                            }
+                            $('#PAID').html(strSel);
+                            //$('#').val();
+                            //$('#').val();
+                        }
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            });
+
+            $('#PAID').change(function () {
+
+
+                PAID = $('#PAID').val();
+
+                if (PAID == '') {
+                    toastr.warning('Please Select Product');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'getGTIN',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "PAID": PAID },
+                    success: function (data) {
+
+                        if (data != null) {
+
+
+                            strSel = "<option value=''>Select</option>";
+                            for (i = 0; i < data[0].length; i++) {
+                                strSel += "<option value='" + data[0][i] + "'>" + data[0][i] + "</option>";
+                            }
+                            $('#GTIN').html(strSel);
+                            //$('#').val();
+                            //$('#').val();
+                            if(data[1]=="NTIN")
+                            {
+                                $(".NTIN").prop('checked', true);
+                                $("#lblGtin").text("NTIN");
+                            }
+                            else
+                            {
+                                $(".GTIN").prop('checked', true);
+                                $("#lblGtin").text("GTIN");
+                            }
+
+                        }
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            });
+            $("#BtnSubmit").click(function () {
+                var CustomerId = $("#CustomerId").val();
+                var Quantity = $("#Quantity").val();
+                var GTIN = $("#GTIN").val();
+                var PAID = $("#PAID").val();
+                var SrnoType = $('input[name=SrnoType]:checked').val();
+                var filterValue = $("#filterValue").val();
+                var msgPOST = "";
+                if (CustomerId == "") {
+                    showMessage("CustomerId", "Please Select Customer")
+                    msgPOST += "Please Select Customer";
+                } else {
+                    clearColor("CustomerId");
+                }
+                if (Quantity == "") {
+                    showMessage("Quantity", "@TnT.LangResource.GlobalRes.toastrTracelinkQuantity")
+                    msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkQuantity";
+                } else {
+                    clearColor("Quantity");
+                }
+                if (GTIN == "") {
+                    showMessage("GTIN", "Please Select " + SrnoType)
+                    msgPOST += "Please Select " + SrnoType
+                    ;
+                } else {
+                    clearColor("GTIN");
+                }
+
+                if (PAID == "") {
+                    showMessage("PAID", "Please Select Product")
+                    msgPOST += "Please Select Product";
+                } else {
+                    clearColor("PAID");
+                }
+
+
+
+                if (SrnoType == "SSCC" || SrnoType == "LSSCC")
+                {
+                    if (filterValue == "") {
+                        showMessage("filterValue", "Please Select Filter Value")
+                        msgPOST += "Please Select Filter Value";
+                    } else {
+                        clearColor("filterValue");
+                    }
+                }
+
+                if (msgPOST == "") {
+                    formSubmit();
+                }
+            });
+            function showMessage(elementID, msg) {
+                toastr.warning(msg);
+                $("#" + elementID).val("");
+                $("#" + elementID).css("border", "red 1px solid");
+                return false;
+            }
+            function clearColor(elementID) {
+                $("#" + elementID).css("border", "green 1px solid");
+            }
+            function formSubmit() {
+                document.getElementById("frmTLRequest").submit();
+            }
+
+            $(document).ready(function () {
+
+                $(".GTIN").prop('checked', true);
+            });
+</script>

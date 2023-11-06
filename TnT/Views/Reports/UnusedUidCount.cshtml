@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TnT.Models.Reports.TKeyUnusedSrNoCount>
+
+@{
+    ViewBag.Title = "Unused Serial Numbers";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+@if (ViewData["Message"] != null)
+{   <div><h4> @TnT.LangResource.GlobalRes.MsgLblLytDsgFileSaveed </h4></div> }
+
+
+<h2>
+    @TnT.LangResource.GlobalRes.headerUnusedSerialNumbersQuantity
+</h2>
+
+
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GTIN)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+
+            <th>
+                @TnT.LangResource.GlobalRes.JobsIndexAction
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GTIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        @TnT.LangResource.GlobalRes.JobsIndexAction <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="@TnT.LangResource.GlobalRes.SOMIndexView" onclick="showUnusedSrNoReport('@item.GTIN')"> <i class="entypo-doc-text-inv"></i> @TnT.LangResource.GlobalRes.SOMIndexView</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+<script type="text/javascript">
+    function showUnusedSrNoReport(GTIN) {
+        $.ajax({
+            url: 'TKeyUnusedSrNoReport',
+            type: "POST",
+            dataType: 'json',
+            data: { "GTIN": GTIN },
+            success: function (data) {
+                $(".loading").hide();
+                if (data === "No Data") {
+                    $('#modal-msg').html(NodataAvilable);
+                    $("#showMSGBx").trigger("click");
+                }
+                else {
+                    $('#modal-rpt-data').html(data);
+                    $("#showRPTBx").trigger("click");
+                }
+            },
+            error: function (data) {
+                $(".loading").hide();
+                toastr.warning(ErrorOccr);
+            }
+        });
+    }
+</script>

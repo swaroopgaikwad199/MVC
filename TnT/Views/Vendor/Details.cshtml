@@ -1,0 +1,52 @@
+﻿@model TnT.Models.Vendor.M_Vendor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    LLC Details
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","Vendor")' class="btn btn-danger btn-icon icon-left">
+        Back to List
+        <i class="fa fa-reply"></i>
+    </a>
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Edit","Vendor", new { id = Model.Id })' class="btn btn-info btn-icon icon-left">
+        Edit
+        <i class="fa fa-pencil"></i>
+    </a>
+    
+   
+</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <blockquote class="blockquote-blue">
+            <table class="table">
+                <tr>
+                    <td colspan="2"><strong>@Html.DisplayNameFor(model => model.CompanyName)</strong> : @Html.DisplayFor(model => model.CompanyName)</td>
+                    
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ContactPerson)</strong> : @Html.DisplayFor(model => model.ContactPerson)</td>
+                    <td><strong>Contact Number</strong> : @Html.DisplayFor(model => model.ContactNo)</td>
+                    
+                </tr>
+                <tr>
+                    <td><strong>Email</strong> : @Html.DisplayFor(model => model.Email)</td>
+                    <td><strong>API Key</strong> : @Html.DisplayFor(model => model.ServiceKey)</td>
+
+                </tr>
+                <tr><td colspan="2"><strong>@Html.DisplayNameFor(model => model.Address)</strong> : @Html.DisplayFor(model => model.Address)</td></tr>
+
+            </table>    
+
+           
+        </blockquote>
+
+    </div>
+    
+      
+</div>
+

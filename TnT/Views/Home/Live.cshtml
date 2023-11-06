@@ -1,0 +1,230 @@
+﻿@model IEnumerable<TnT.Models.Home.LiveLinesViewModel>
+
+@{
+    ViewBag.Title = "Live Status";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.HomeLiveExecution</h2>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table style="margin-left:40px" width="100%">
+            <tr>
+                <td>
+                    <div class="glossySmall statusYellow">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    Ready for Serialization
+                </td>
+                <td>
+                    <div class="glossySmall statusGreen">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    Serialization in progress 
+                </td>
+                <td>
+                    <div class="glossySmall statusRed">&nbsp;</div>
+                </td>
+                <td style="vertical-align: bottom;">
+                    Not Ready for Serialization
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-default panel-shadow" data-collapsed="0">
+            <!-- to apply shadow add class "panel-shadow" -->
+            <!-- panel body -->
+            <div class="panel-body">
+               
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-6">
+                            <div class="tile-stats tile-gray" style="padding: 5px;background: #fff;border: 2px double #000;min-height: 165px;">
+
+                                @if (item.Status == 404)
+                                {
+
+                                    <table class="table">
+                                        <thead>
+                                        <th colspan="2" style="text-align:center;color:red "><strong>@Html.DisplayFor(modelItem => item.LineName) </strong></th>
+
+                                        </thead>
+
+                                        <tr>
+                                            <th><strong style="color:red">Error Details</strong></th>
+                                            <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                        </tr>
+
+                                    </table>
+                                }
+                                else
+                                {
+
+                                    <div class="col-sm-2">
+                                        @if (item.Status == 1)
+                                        {
+                                            <div class="glossy statusGreen">&nbsp;</div>
+
+                                        }
+                                        else if (item.Status == 0)
+                                        {
+                                            <div class="glossy statusYellow">&nbsp;</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="glossy statusRed">&nbsp;</div>
+
+                                        }
+                                    </div>
+
+
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-12">
+                                            
+                                                <table class="table">
+                                                    <thead>
+                                                    <th colspan="2" style="text-align:center;"><strong>@Html.DisplayFor(modelItem => item.LineName) </strong></th>
+
+                                                    </thead>
+
+                                                    <tr>
+                                                        <td><strong>Product:</strong></td>
+                                                        <td colspan="3">@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Job:</strong></td>
+                                                        <td colspan="3">@Html.DisplayFor(modelItem => item.OrderName)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Batch:</strong></td>
+                                                        <td>@Html.DisplayFor(modelItem => item.BatchNo)</td>
+                                                        <td><strong>Quantity:</strong></td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                                                    </tr>
+                                                </table>
+</div>
+                                        <div class="col-sm-12">
+                                            <strong>Status:</strong>
+                                            <table class="table">
+                                                <tr>
+                                                    @if (item.printingDetails != null)
+                                                    {
+                                                        foreach (var lvl in item.printingDetails)
+                                                        {
+                                                            string lvlCOde = lvl.PackagingTypeCode;
+                                                            @*<th>
+                                                                @((lvlCOde == "PPB") ? "Primary Pack Box" : "")
+                                                                @((lvlCOde == "MOC") ? "Mono Carton" : "")
+                                                                @((lvlCOde == "OBX") ? "Outer Box" : "")
+                                                                @((lvlCOde == "ISH") ? "Inner Shipper" : "")
+                                                                @((lvlCOde == "OSH") ? "Outer Shipper" : "")
+                                                                @((lvlCOde == "PAL") ? "Pallet" : "")
+                                                            </th>*@
+                                                            <th><strong>@Html.DisplayFor(lvlItem => lvl.PackagingTypeCode) </strong>   </th>
+                                                        }
+                                                    }
+                                                </tr>
+                                                <tr>
+                                                    @if (item.printingDetails != null)
+                                                    {
+                                                        foreach (var lvl in item.printingDetails)
+                                                        {
+
+                                                            <td>@Html.DisplayFor(modelItem => lvl.TotalPrintedQty)</td>
+
+                                                        }
+                                                    }
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                }
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+
+
+            <style>
+                .glossy {
+                    height: 50px;
+                    width: 50px;
+                    margin-top: 45px;
+                    -webkit-border-radius: 25px;
+                    -moz-border-radius: 25px;
+                    border-radius: 25px;
+                    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, .2);
+                }
+
+                .glossySmall {
+                    height: 25px;
+                    width: 25px;
+                    margin-top: 10px;
+                    -webkit-border-radius: 25px;
+                    -moz-border-radius: 25px;
+                    border-radius: 25px;
+                    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, .2);
+                    font-weight: bolder;
+                }
+
+
+                .statusGreen {
+                    border: 1px solid #90CC53;
+                    background: #90CC53;
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#90CC53), color-stop(100%,#EDFFA1));
+                    background: -webkit-linear-gradient(top, #90CC53 31%,#EDFFA1 100%) background: -moz-linear-gradient(top, #90CC53 31%, #EDFFA1 100%);
+                    background: -o-linear-gradient(top, #90CC53 31%,#EDFFA1 100%);
+                    background: -ms-linear-gradient(top, #90CC53 31%,#EDFFA1 100%);
+                    background: linear-gradient(to bottom, #90CC53 31%,#EDFFA1 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#90CC53', endColorstr='#EDFFA1',GradientType=0 );
+                }
+
+                .statusRed {
+                    border: 1px solid rgb(236, 86, 86);
+                    background: rgb(236, 86, 86);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,rgb(236, 86, 86)), color-stop(100%,#fff));
+                    background: -webkit-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%) background: -moz-linear-gradient(top, rgb(236, 86, 86) 31%, #fff 100%);
+                    background: -o-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%);
+                    background: -ms-linear-gradient(top, rgb(236, 86, 86) 31%,#fff 100%);
+                    background: linear-gradient(to bottom, rgb(236, 86, 86) 31%,#fff 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(236, 86, 86)', endColorstr='#fff',GradientType=0 );
+                }
+
+                .statusYellow {
+                    border: 1px solid #fad839;
+                    background: #fad839;
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#fad839), color-stop(97%,#fff));
+                    background: -webkit-linear-gradient(top, #fad839 31%,#fff 97%) background: -moz-linear-gradient(top, #fad839 31%, #fff 97%);
+                    background: -o-linear-gradient(top, #fad839 31%,#fff 97%);
+                    background: -ms-linear-gradient(top, #fad839 31%,#fff 97%);
+                    background: linear-gradient(to bottom, #fad839 10%,#fff 97%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fad839', endColorstr='#fff',GradientType=0 );
+                }
+            </style>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    $(window).load(function () {
+        // Animate loader off screen
+        $(".loading").show();
+        $(".loading").fadeOut("slow");
+    });
+</script>

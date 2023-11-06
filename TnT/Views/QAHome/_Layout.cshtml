@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="icon" href="~/Content/assets/favicon.ico">
+    <title>PACKi TRACKnTRACE Manager  - Propix Technologies PVT. LTD.</title>
+
+    <link rel="stylesheet" href="~/Content/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/font-icons/entypo/css/entypo.css">
+    <link rel="stylesheet" href="~/Content/assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">*@
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/assets/css/neon-core.css">
+    <link rel="stylesheet" href="~/Content/assets/css/neon-theme.css">
+    <link rel="stylesheet" href="~/Content/assets/css/neon-forms.css">
+    <link rel="stylesheet" href="~/Content/assets/css/custom.css">
+    <link rel="stylesheet" href="~/Content/assets/js/datatables/datatables.css">
+
+
+    <script src="~/Content/assets/js/jquery-1.11.3.min.js"></script>
+
+
+    <script src="~/scripts/modernizr-2.6.2.js"></script>
+
+    <script src="~/Content/assets/js/bootstrap.js"></script>
+    <script src="~/Content/assets/js/toastr.js"></script>
+
+
+    <!--[if lt IE 9]><script src="~/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Wiard Screen CSS -->
+    <link rel="stylesheet" href="~/Content/assets/popup/css/form-elements.css">
+    <link rel="stylesheet" href="~/Content/assets/popup/css/style.css">
+    @RenderSection("Scripts", required: false)
+
+
+    <style>
+        .leftAlign {
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body class="page-body">
+    <div class="page-container">
+        <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+        <div class="sidebar-menu">
+            <div class="sidebar-menu-inner">
+                <header class="logo-env">
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="@Url.Action("Index","Home")">
+                            <img src="~/Content/assets/images/CompanyLogo/logo.png" width="120" alt="" />
+                        </a>
+                    </div>
+                    <!-- logo collapse icon -->
+                    <div class="sidebar-collapse">
+                        <a href="#" class="sidebar-collapse-icon">
+                            <!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+                            <i class="entypo-menu"></i>
+                        </a>
+                    </div>
+                    <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+                    <div class="sidebar-mobile-menu visible-xs">
+                        <a href="#" class="with-animation">
+                            <!-- add class "with-animation" to support animation -->
+                            <i class="entypo-menu"></i>
+                        </a>
+                    </div>
+                </header>
+
+
+                <ul id="main-menu" class="main-menu">
+
+                    <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+                    <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">
+                        <a href="@Url.Action("Index","Home")">
+                            <i class="entypo-gauge"></i>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    @*<li class="has-sub root-level @(ViewContext.RouteData.Values["Controller"].ToString() == "Vendor" ? "active opened" : "")">
+                            <a href="@Url.Action("Index","Vendor") ">
+                                <i class="entypo-users"></i>
+                                <span class="title"> LLC Master</span>
+                            </a>
+                            <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Vendor" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+                                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                                    <a href="@Url.Action("Index","Vendor") ">
+                                        <span class="title">LLC</span>
+                                    </a>
+                                </li>
+                                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Notify" ? "active" : "")">
+                                    <a href="@Url.Action("Notify","Vendor") ">
+                                        <span class="title">Notify LLC</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>*@
+                    @if (!User.IsInRole("Administrator")) { 
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Live" ? "active" : "")">
+                                <a href="@Url.Action("Live","Home")">
+                                    <i class="entypo-flow-tree"></i>
+                                    <span class="title">Lineeeeeee Executions</span>
+                                </a>
+                            </li>
+                    }
+
+
+
+                    <li class="has-sub root-level @(ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active opened" : "")">
+                        <a href="@Url.Action("Index","Product")">
+                            <i class="fa fa-server"></i>
+                            <span class="title"> Product Master</span>
+                        </a>
+                        <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Product") && (ViewContext.RouteData.Values["Action"].ToString() == "Index")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Product") ">
+                                    <span class="title">Products</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="@Url.Action("Create","Product") ">
+                                        <span class="title">Create Product</span>
+                                    </a>
+                                </li>*@
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Verification" ? "active" : "")">
+                                <a href="@Url.Action("Verification","Product")">
+                                    <span class="title">Verify Product</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub root-level @(ViewContext.RouteData.Values["Controller"].ToString() == "Jobs" ? "active opened" : "")">
+                        <a href="@Url.Action("Index","Jobs")">
+                            <i class="fa fa-cog"></i>
+                            <span class="title"> Job Master</span>
+                        </a>
+                        <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Jobs" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Jobs") && (ViewContext.RouteData.Values["Action"].ToString() == "Index")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Jobs") ">
+                                    <span class="title">Jobs</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="@Url.Action("Create","Jobs") ">
+                                        <span class="title">Create Job</span>
+                                    </a>
+                                </li>*@
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "Verification") || (ViewContext.RouteData.Values["Action"].ToString() == "Verify")  ? "active" : "")">
+                                <a href="@Url.Action("Verification","Jobs")">
+                                    <span class="title">Verify Job</span>
+                                </a>
+                            </li>
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "Closing") || (ViewContext.RouteData.Values["Action"].ToString() == "CloseJob")  ? "active" : "")">
+                                <a href="@Url.Action("Closing","Jobs")">
+                                    <span class="title">Close Job</span>
+                                </a>
+                            </li>
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "Decommisioned") || (ViewContext.RouteData.Values["Action"].ToString() == "DecommisionedLst")  ? "active" : "")">
+                                <a href="@Url.Action("DecommisionedLst","Jobs")">
+                                    <span class="title">View Decommissioned Jobs</span>
+                                </a>
+                            </li>
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "BatchManager") || (ViewContext.RouteData.Values["Action"].ToString() == "BatchManager")  ? "active" : "")">
+
+                                <a href="@Url.Action("BatchManager","Jobs")">
+                                    <span class="title">Manage Jobs</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="@Url.Action("Line","Jobs")">
+                                        <span class="title">Check Line</span>
+                                    </a>
+                                </li>*@
+
+                        </ul>
+                    </li>
+
+                    <li class="has-sub root-level @((ViewContext.RouteData.Values["Controller"].ToString() == "Settings")||(ViewContext.RouteData.Values["Controller"].ToString() == "Users") || (ViewContext.RouteData.Values["Controller"].ToString() == "Roles")|| (ViewContext.RouteData.Values["Controller"].ToString() == "Customer") || (ViewContext.RouteData.Values["Controller"].ToString() == "LblLytDsg") ? "active opened" : "")">
+                        <a href="@Url.Action("Index","Settings")">
+                            <i class="fa fa-gears"></i>
+                            <span class="title">Settings & Utilities</span>
+                        </a>
+                        <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Settings" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Settings")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Settings") ">
+                                    <span class="title">Company Info</span>
+                                </a>
+                            </li>
+
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Customer")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Customer") ">
+                                    <span class="title">Manage Customers</span>
+                                </a>
+                            </li>
+
+
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Roles")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Roles") ">
+                                    <span class="title">Manage Roles</span>
+                                </a>
+                            </li>
+
+
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "Users")  ? "active" : "")">
+                                <a href="@Url.Action("Index","Users") ">
+                                    <span class="title"> Manage Users</span>
+                                </a>
+                            </li>
+
+                            <li class="@((ViewContext.RouteData.Values["Controller"].ToString() == "LblLytDsg")  ? "active" : "")">
+                                <a href="@Url.Action("Index","LblLytDsg") ">
+                                    <span class="title">Label Layout Designer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub root-level @(ViewContext.RouteData.Values["Controller"].ToString() == "Vendor" ? "active opened" : "")">
+                        <a href="@Url.Action("Index","Vendor") ">
+                            <i class="entypo-rocket"></i>
+                            <span class="title"> DAVA</span>
+                        </a>
+                        <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Vendor" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                                <a href="@Url.Action("Index","DAVA") ">
+                                    <span class="title">Generate DAVA</span>
+                                </a>
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Regenerate" ? "active" : "")">
+                                <a href="@Url.Action("Regenerate", "DAVA") ">
+                                    <span class="title">View / Regenerate</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub root-level @(ViewContext.RouteData.Values["Controller"].ToString() == "Reports" ? "active opened" : "")">
+                        <a href="@Url.Action("Index","Report")">
+                            <i class="entypo-doc-text"></i>
+                            <span class="title"> Reports</span>
+                        </a>
+                        <ul @(ViewContext.RouteData.Values["Controller"].ToString() == "Reports" ? "class='visible'" : "style='opacity: 0.2; height: 0px;'") ">
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "Jobs")  ? "active" : "")">
+                                <a href="@Url.Action("Jobs","Reports") ">
+                                    <span class="title">Job Report</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" id="btnNavLoadProductsDetails">
+                                    <span class="title">Product Details </span>
+                                </a>
+                            </li>
+                            <li class="@((ViewContext.RouteData.Values["Action"].ToString() == "Trails")  ? "active" : "")">
+                                <a href="@Url.Action("Trails","Reports") ">
+                                    <span class="title">Audit Trails</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+            </div>
+            <div class="logo" style="bottom:0; text-align:center;">
+
+                <img src="/Content/assets/images/PACKi.png" style="width: 50%;" alt="PACKi Track and Trace" />
+            </div>
+
+        </div>
+
+        <div class="main-content">
+            <div class="row">
+                <div style="float: left; margin-left: 16px;">
+                    <img src="/Content/assets/images/propix_2.png" style="width: 50%;" alt="" />
+                </div>
+                <!-- Profile Info and Notifications -->
+                <div style="float:right">
+                    <ul class="user-info pull-left pull-none-xsm">
+                        <!-- Profile Info -->
+                        <li class="profile-info dropdown">
+                            <!-- add class "pull-right" if you want to place this from right -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!--<img src="~/Content/assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />-->
+                                @if (User == null)
+                                {
+                                    Response.Redirect("~/");
+                                }
+                                else
+                                {
+                                    <label>Welcome @User.FirstName</label>
+                                }
+
+                            </a>
+                        </li>
+                        <li class="sep">| &nbsp;</li>
+                        <li>
+                            @Html.ActionLink("Log off", "LogOut", "Account") <i class="entypo-logout right"></i>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="margin-top:2px; margin-bottom: 2px" />
+            @RenderBody()
+        </div>
+
+
+
+
+    </div>
+
+
+    <!-- Imported styles on this page -->
+    <link rel="stylesheet" href="~/Content/assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="~/Content/assets/js/rickshaw/rickshaw.min.css">
+    <!-- Bottom scripts (common) -->
+    <script src="~/Content/assets/js/gsap/TweenMax.min.js"></script>
+    <script src="~/Content/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+
+
+
+
+    <script src="~/Content/assets/js/joinable.js"></script>
+    <script src="~/Content/assets/js/resizeable.js"></script>
+    <script src="~/Content/assets/js/neon-api.js"></script>
+    <script src="~/Content/assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+
+    <!-- Imported scripts on this page -->
+    <script src="~/Content/assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
+    <script src="~/Content/assets/js/jquery.sparkline.min.js"></script>
+    <script src="~/Content/assets/js/rickshaw/vendor/d3.v3.js"></script>
+    <script src="~/Content/assets/js/rickshaw/rickshaw.min.js"></script>
+    <script src="~/Content/assets/js/raphael-min.js"></script>
+    <script src="~/Content/assets/js/morris.min.js"></script>
+
+
+
+    <!-- JavaScripts initializations and stuff -->
+    <script src="~/Content/assets/js/neon-custom.js"></script>
+
+    @if ((ViewContext.RouteData.Values["Action"].ToString() != "CloseJob"))
+    {
+        <script src="~/Content/assets/js/datatables/datatables.js"></script>
+    }
+    <script src="~/Content/assets/js/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/assets/js/jquery.validate.min.js"></script>
+    <script src="~/Content/assets/js/jquery.inputmask.bundle.js"></script>
+
+
+    <script src="~/Content/assets/js/bootstrap-switch.min.js"></script>
+    <script src="~/Content/assets/js/jquery.multi-select.js"></script>
+
+
+    <!-- Demo Settings -->
+    <script src="~/Content/assets/js/neon-demo.js"></script>
+    <script src="~/Content/assets/popup/js/jquery.backstretch.min.js"></script>
+    <script src="~/Content/assets/popup/js/scripts.js"></script>
+
+    <script src="~/Content/assets/js/jquery.rowspanizer.js"></script>
+
+
+
+
+    @if ((ViewContext.RouteData.Values["Action"].ToString() != "CloseJob"))
+    {
+        <script type="text/javascript">
+
+            jQuery(document).ready(function ($) {
+                var $table1 = jQuery('#table-1');
+                $table1.DataTable({
+                    "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    "bStateSave": true
+                });
+                $table1.closest('.dataTables_wrapper').find('select').select({
+                    minimumResultsForSearch: -1
+                });
+
+                $('.datepicker').datepicker({ format: "dd/mm/yyyy", autoclose: true });
+            });
+
+        </script>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#modal-msg').html('@TempData["Success"]');
+                $("#showMSGBx").trigger("click");
+            });
+        </script>
+        @TempData.Remove("Success");
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#modal-msg').html('@TempData["Error"]');
+
+                $("#showMSGBx").trigger("click");
+            });
+        </script>
+        @TempData.Remove("Success");
+    }
+    <button style="display:none;" id="showMSGBx" class="myBtn" type="button" data-toggle="modal" data-target="#modal-msgBox">test </button>
+    <button style="display:none;" id="showRPTBx" class="myBtn" type="button" data-toggle="modal" data-target="#modal-rpt">RPT </button>
+    <div class="modal fade" id="modal-msgBox">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border: 2px solid #F44336;">
+                <div class="modal-body" style="height: 65px;">
+                    <div>
+                        <div class="col-md-2" style="color: #00BCD4;font-size: 38px;">
+                            <i class="entypo-info-circled"></i>
+                        </div>
+                        <div id="modal-msg" class="col-md-10" style="text-align: left;margin-top: 13px;color: #000;font-size: 20px;">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="text-align: right;border-top: none;">
+                    <button type="button" class="btn btn-red" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade custom-width" id="modal-rpt">
+        <div class="modal-dialog" style="width: 92%;">
+            <div class="modal-content">
+                <div class="modal-body" style="padding: 0;">
+                    <div id="modal-rpt-data" class="col-md-12" style="text-align: left;margin-top: 13px;color: #000;font-size: 12px;">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer" style="text-align:center;">
+                    @*<button type="button" id="btnExportPdf" class="btn btn-default">Export PDF</button>*@
+                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left">
+                        Close
+                        <i class="entypo-cancel"></i>
+                    </button>
+                    <button type="button" id="btnPrintRPT" class="btn btn-blue btn-icon icon-left">
+                        Print
+                        <i class="entypo-print"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:none;" class="loading">Loading&#8230;</div>
+
+    @RenderSection("DocPB", required: false)
+
+    <script src="~/Content/assets/js/printThis.js"></script>
+    <script>
+
+        //Get Report : Product Details
+        $("#btnNavLoadProductsDetails").click(function () {
+            var k = "1";
+
+            //alert("adsf");
+            $.ajax({
+
+                url: '@(Url.Action("ProductDetails", "Reports"))',
+                type: "POST",
+                dataType: 'json',
+                data: { "k": k },
+                success: function (data) {
+                    $('#modal-rpt-data').html(data);
+                    $("#showRPTBx").trigger("click");
+                },
+                error: function (data) {
+
+                    toastr.warning("Error occured while loading data");
+
+                }
+            });
+        });
+
+        $("#btnPrintRPT").click(function () {
+            //var w = window.open();
+            //var html = '<link rel="stylesheet" href="~/">';
+            // html += $("#rptLoaded").html();
+            // var w = $("#rptLoaded").html();
+            //$(w.document.body).html(html);
+            //window.print();
+
+            $("#rptLoaded").printThis({
+                debug: false,
+                importCSS: true,
+                importStyle: false,
+                printContainer: true,
+                loadCSS: "~/Content/assets/css/bootstrap.css",
+                pageTitle: "",
+                removeInline: false,
+                printDelay: 333,
+                header: null,
+                base: false,
+                formValues: true
+            });
+        });
+    </script>
+
+</body>
+
+
+</html>

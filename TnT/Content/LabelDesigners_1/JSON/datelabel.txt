@@ -1,0 +1,1 @@
+{"elements":[{"x":90,"y":63,"type":"Barcode","name":"Barcode 1","text":"BARCODE","barcodeType":"Product_Barcode","height":50,"data":"123456798"},{"x":111,"y":135,"type":"label_text","name":"Textbox 1","text":"12/1/2017","textType":"LabelText","fontSize":14,"fontType":"Arial","width":62.2822265625,"height":20}]}

@@ -1,0 +1,107 @@
+﻿@model TnT.Models.Account.Users
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.RolesDetails</h2>
+
+<div>
+    <h4>@TnT.LangResource.GlobalRes.UsersDetailUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFirstlogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFirstlogin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

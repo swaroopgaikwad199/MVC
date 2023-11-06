@@ -1,0 +1,80 @@
+﻿@model TnT.Models.Job.LineLocation
+
+@{
+    ViewBag.Title = "Line";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Line</h2>
+
+@using (Html.BeginForm("Line", "Jobs", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <h2></h2>
+        <h4>@TnT.LangResource.GlobalRes.cmnMenuItemSetNUtilSubItemLineLoc</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LineCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.LineCode, new SelectList(ViewBag.Lines, "ID", "LineCode"), TnT.LangResource.GlobalRes.RptJobFilterSelectLine, new { @onchange = "getDetails(this.value);", @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.LineCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">  @TnT.LangResource.GlobalRes.JobLineTotalBatches</label> 
+            <div class="col-md-10">
+                <input type="text" id="txtCount" value="" disabled/>
+             <label id="lblCount"></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script>
+    function getDetails(Id) {
+
+        if (Id != "") {
+            $.ajax({
+                url: '@Url.Action("getBatchesofLines", "Jobs")',
+                type: "POST",
+                dataType: 'json',
+                data: { "Id": Id },
+                success: function (data) {
+                    if (data != null) {
+                        var vdata = data;
+
+                        $("#txtCount").val(data);
+
+
+                    }
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        }
+       
+    }
+</script>
+
+
+ 

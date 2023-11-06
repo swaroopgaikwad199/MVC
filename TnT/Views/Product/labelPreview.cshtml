@@ -1,0 +1,157 @@
+﻿
+@model TnT.Models.LblLytDsg.FieldAppearanceViewModel
+
+
+<div class="col-lg-12" style="padding-left: 0; padding-right: 0;">
+
+    <div class="panel panel-info" data-collapsed="0">
+        <!-- panel head -->
+        <div class="panel-heading">
+            <div class="panel-title">Page Settings</div>
+            <div class="panel-options">
+                <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            </div>
+        </div>
+
+        <!-- panel body -->
+        <div class="panel-body" id="panelPageSettings">
+            <div class="row form-group">
+                <div class="col-lg-3">
+                    <label for="field-1" class="col-sm-5 control-label">Paper Size</label>
+
+                    @Html.EditorFor(model => model.PaperSize, new { htmlAttributes = new { @placeholder = "e.g. 4X6", @onchange = "setupPage();", @style = "width:22%;" } })
+                    @*@Html.DropDownListFor(x => x.PaperSize, Model.LstPaperSize, new { @onchange = "setupPage();" })*@
+                </div>
+                <div class="col-lg-3">
+                    <label for="field-1" class="col-sm-5 control-label">Orientation</label>
+                    @Html.DropDownListFor(x => x.OrientationType, Model.LstOrientationTypes, new { @onchange = "setupPage();" })
+                </div>
+                <div class="col-lg-3">
+                    <label for="field-1" class="col-sm-6 control-label">Date Format</label>
+                    @Html.DropDownListFor(x => x.DateFormat, Model.LstDateFormats)
+                </div>
+                <div class="col-lg-3">
+                    <label for="field-1" class="col-sm-5 control-label">DPI</label>
+                    @Html.DropDownListFor(x => x.Dpi, Model.LstDpi)
+                </div>
+            </div>
+
+
+            <div class="row form-group" style="color: black; border-top: 1px solid #a6e8f3; padding: 7px; border-bottom: 1px solid #a6e8f3;">
+                <div class="col-lg-1">
+                    <label for="field-1" class="col-sm-12 control-label">Margins</label>
+                </div>
+                <div class="col-lg-2">
+                    <label for="field-1" class="col-sm-3 control-label">Top</label>
+                    @Html.EditorFor(model => model.TopMargin, new { htmlAttributes = new { @style = "width: 29%;margin-left: 8px;", @onchange = "setupPage();" } })
+                </div>
+                <div class="col-lg-2">
+                    <label for="field-1" class="col-sm-3 control-label">Left</label>
+                    @Html.EditorFor(model => model.LeftMargin, new { htmlAttributes = new { @style = "width: 29%;margin-left: 8px;", @onchange = "setupPage();" } })
+                </div>
+                <div class="col-lg-2">
+                    <label for="field-1" class="col-sm-3 control-label">Bottom</label>
+                    @Html.EditorFor(model => model.BottomMargin, new { htmlAttributes = new { @style = "width: 29%;margin-left: 22%;", @onchange = "setupPage();" } })
+                </div>
+                <div class="col-lg-2">
+                    <label for="field-1" class="col-sm-3 control-label">Right</label>
+                    @Html.EditorFor(model => model.RightMargin, new { htmlAttributes = new { @style = "width: 29%;margin-left: 10%;", @onchange = "setupPage();" } })
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-5">
+                    <label for="field-1" class="col-sm-5 control-label">Font</label>
+                    @*@Html.DropDownListFor(x => x.Font, Model.LstFonts, new { @onchange = "setupPage();" })*@
+                    <select id="Font" name="Font" onchange="setupPage();">
+                        <option value="Select">Select</option>
+                        <option selected="selected" value="Arial Black">Arial Black</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label for="field-1" class="col-sm-5 control-label">ZPL Font</label>
+                    @Html.DropDownListFor(x => x.Zfont, Model.LstZFonts)
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12" style="background-color: aliceblue;padding-top: 17px;margin-bottom: 5px;border: 1px solid #000;padding-bottom: 12px;padding-left:0px; padding-right:0px">
+        <div class="col-sm-12">
+            <lable>New Field</lable>
+            <select name="newField" id="newField">
+                <option value="">Add New Field</option>
+            </select>
+            <button type="button" class="btn btn-info" id="addNewField">Add</button>
+        </div>
+    </div>
+    <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
+        <table class="table table-bordered" id="labelLayoutDesignElem">
+            <thead>
+                <tr>
+                    <th style="text-align:center;">Label Name</th>
+                    <th style="text-align:center;">Left</th>
+                    <th style="text-align:center;">Top</th>
+                    <th style="text-align:center;">Width</th>
+                    <th style="text-align:center;">Font/<br />Height</th>
+                    <th style="text-align:center;">Bold</th>
+                    <th style="text-align:center;">Show</th>
+                    <th style="text-align:center;">Data</th>
+                    <th style="text-align:center;">IsManualData</th>
+                    <th style="text-align:center;">Rotate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Fields)
+                {
+                    string cnm = "cls-" + item.RPTMap;
+                    <tr class="@cnm" style="display:none;">
+                        <td>@item.LabelName</td>
+                        <td>@Html.EditorFor(Model => item.Left, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-Left", @Name = "" + item.RPTMap + "-Left", @onkeyup = "takeAction(this)", @style = "width:50px" } })	</td>
+                        <td>@Html.EditorFor(Model => item.Top, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-Top", @Name = "" + item.RPTMap + "-Top", @onkeyup = "takeAction(this)", @style = "width:50px" } })	</td>
+                        <td>@Html.EditorFor(Model => item.Width, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-Width", @Name = "" + item.RPTMap + "-Width", @onkeyup = "takeAction(this)", @style = "width:50px" } })	</td>
+                        <td>@Html.EditorFor(Model => item.FontSizeOrHeight, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-FontSizeOrHeight", @Name = "" + item.RPTMap + "-FontSizeOrHeight", @onkeyup = "takeAction(this)", @style = "width:50px" } })	</td>
+
+                        <td>@Html.EditorFor(Model => item.IsBold, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-IsBold", @Name = "" + item.RPTMap + "-IsBold", @onchange = "takeAction(this)" } })	</td>
+
+                        <td class="isShow">@Html.EditorFor(Model => item.IsShow, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-IsShow", @Name = "" + item.RPTMap + "-IsShow", @onchange = "takeAction(this)" } })	</td>
+                        <td>@Html.EditorFor(Model => item.Data, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-Data", @Name = "" + item.RPTMap + "-Data", @onkeyup = "takeAction(this)" } })	</td>
+                        <td>@Html.EditorFor(Model => item.IsManualData, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-IsManualData", @Name = "" + item.RPTMap + "-IsManualData", @onchange = "takeAction(this)" } })	</td>
+                        <td>
+                            @Html.EditorFor(Model => item.Rotate, new { htmlAttributes = new { @Id = "" + item.RPTMap + "-Rotate", @Name = "" + item.RPTMap + "-Rotate", @onkeyup = "takeAction(this)" } })
+
+                            <input style="display:none;" type="text" name="@item.RPTMap-DataType" id="@item.RPTMap-DataType" value="@item.DataType">
+                            <input style="display:none;" type="text" name="@item.RPTMap-DataField" id="@item.RPTMap-DataField" value="@item.DataField">
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#addNewField").on('click', function () {
+            var selVal = $("#newField").val();
+            elemParamX = selVal.split('-');
+            elemFieldX = elemParamX[0];
+            elemTypeX = elemParamX[1];
+
+            $('#' + selVal).prop('checked', true);
+            $('.cls-' + elemFieldX).show();
+
+            redrawLbl();
+        });
+
+
+        setPaperSizeSel('@Model.PaperSize');
+    });
+
+</script>

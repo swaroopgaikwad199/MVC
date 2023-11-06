@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<form name="form1" method="post" action="api/docfile" enctype="multipart/form-data">
+    <div>
+        <label>
+            Brows File
+        </label>
+        <input name="myFile" type="file" />
+    </div>
+    <div>
+        <input type="submit" value="Upload" />
+    </div>
+</form>

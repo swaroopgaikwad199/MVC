@@ -1,0 +1,54 @@
+﻿@model TnT.Models.Home.LineChartViewModel
+
+<div id="line-chart-demo_@Model.LineName" class="morrischart" ></div>
+
+@{
+    if (Model.printingDetails != null)
+    {
+        string jsnLst = "[";
+        foreach (var asdffsd in Model.printingExecutionDetails)
+        {
+            var printpkdtls = asdffsd.packDetails;
+            string strPksDtls = "";
+            foreach (var itempkdtls in printpkdtls)
+            {
+                strPksDtls += itempkdtls.PackagingTypeCode + ":" + itempkdtls.TotalPrintedQty + ",";
+            }
+
+            jsnLst += "{ PDt: '" + asdffsd.printDT.ToString("yyyy-MM-dd HH:mm:ss") + "' , " + strPksDtls + " },";
+        }
+        jsnLst += "]";
+
+        //var jsonCD = @Html.Raw(Json.Encode(item.printingExecutionDetails));
+        var ykes = Model.printingDetails.Select(x => x.PackagingTypeCode).Distinct().ToArray();
+        string ykeysList = "[" + string.Join(",", ykes.Select(x => string.Format("'{0}'", x)).ToList()) + "]";
+
+        <script type="text/javascript">
+            var lineName = "@Model.LineName";
+            lineName = lineName.replace("-", "_");
+            var varMorrise = "line_chart_demo_" + lineName;
+            jQuery(document).ready(function ($) {
+
+
+                // Line Chartshref="#line-chart-HINJ-SPD-EP10-Kiran"
+                varMorrise = $("#line-chart-demo_" + lineName);
+
+                var line_chart = Morris.Line({
+                    element: 'line-chart-demo_@Model.LineName',
+                    data : @Html.Raw(jsnLst),
+                    xkey: 'PDt',
+                    ykeys: @Html.Raw(ykeysList),
+                    labels:  @Html.Raw(ykeysList),
+                    redraw: true
+                });
+
+                varMorrise.parent().attr('style', '');
+
+            });
+        </script>
+    }
+
+
+}
+
+

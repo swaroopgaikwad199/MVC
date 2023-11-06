@@ -1,0 +1,127 @@
+﻿@model TnT.Models.Reports.RptDavaViewModel
+
+@{
+    ViewBag.Title = "DavaStatus";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.DavaStatusRpt</h2>
+
+<div class="row" style="padding-top:10px">
+   <div class="col-md-12" >
+        <label class="col-lg-5" style="text-align: right; padding-top:7px;">@TnT.LangResource.GlobalRes.DavaGenerationType</label>
+        <div class="col-lg-5">
+        <select class="form-control required" data-val="true" id="RptType" name="ReportType" validate="true" >
+            <option value=''>@TnT.LangResource.GlobalRes.RptDavaStatusReportTyp</option>
+            <option value='@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionProduct'>@TnT.LangResource.GlobalRes.ImporterTracelinkProduct</option>
+            <option value='Batch'>@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionBatch</option>
+        </select>
+</div>
+    </div>
+
+</div>
+
+<div class="row"  style="padding-top:30px">
+
+
+    <div class="col-md-12">
+        <div class="col-md-12" style="text-align: left;">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <input type="radio" name="GeneratedStatus" class="trailType" id="RdoGenerated" value="Generated">
+                <label for="RdoGenerated">
+                    @TnT.LangResource.GlobalRes.DavaGenerated
+                </label>
+                </div>
+            </div>
+        <div class="col-md-12" style="text-align:left">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <input type="radio" name="GeneratedStatus" class="trailType" id="RdoNotGenerated" value="NotGenerated">
+                <label for="RdoNotGenerated">
+                    @TnT.LangResource.GlobalRes.DavaNotGenerated
+                </label>
+                </div>
+            </div>
+    
+        <div class="col-md-12" style="text-align:left" id="partial">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <input type="radio" name="GeneratedStatus" class="trailType" id="RdoPartialGenerated" value="Partial">
+                <label for="RdoPartialGenerated">
+                    @TnT.LangResource.GlobalRes.DavaPartialGenerated
+                </label>
+                </div>
+            </div>
+        <br />
+        <br />
+    </div>
+</div>
+
+
+<div class="row" style="text-align:center; padding-top:10px;">
+    <input type="button" id="btnViewRpt" value="@TnT.LangResource.GlobalRes.ReportsTrailsViewReport" class="btn btn-info" style="margin-left: 4%;" />
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#partial').hide();
+    });
+    $("#RptType").change(function () {
+        var rptType = $("#RptType").val();
+        if (rptType == "Product") {
+            $('#partial').hide();
+        }
+        else {
+            $('#partial').show();
+        }
+    });
+    $("#btnViewRpt").click(function () {
+        debugger;
+        var Status = $('input[name=GeneratedStatus]:checked').val();
+        var rptType = $("#RptType").val();
+       
+        if (Status != undefined) {
+            if (rptType != "") {
+                $.ajax({
+                    url: 'RptDavaStatus',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "status": Status, "rpttype": rptType },
+                    success: function (data) {
+                        $(".loading").hide();
+                     
+                        if (data == "No Data") {
+
+                            $('#modal-msg').html('@TnT.LangResource.GlobalRes.TempDataDavaNoData');
+                            $("#showMSGBx").trigger("click");
+
+                        } else {
+                            $('#modal-rpt-data').html(data);
+                            $("#showRPTBx").trigger("click");
+                        }
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+            }
+            else
+            {
+
+                $('#modal-msg').html('@TnT.LangResource.GlobalRes.ShwMsgRptDavaStatusSelectReportType');
+                $("#showMSGBx").trigger("click");
+            }
+        }
+        else {
+
+            $('#modal-msg').html('@TnT.LangResource.GlobalRes.ShwMsgRptDavaStatusSelectUsrStatus');
+            $("#showMSGBx").trigger("click");
+        }
+    });
+
+</script>
+

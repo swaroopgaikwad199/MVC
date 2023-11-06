@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"203","Orientation":"portrait"},{"x":132,"y":69,"type":"label_text","name":"v","text":"Textbox 1","textType":"UIDBARCODETEXT","fontSize":14,"fontType":"Arial","width":100,"height":20,"lineSpacing":24},{"x":286,"y":82,"type":"rectangle","name":"Rectangle 1","width":1,"height":1}]}

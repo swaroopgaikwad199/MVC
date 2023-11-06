@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TnT.Models.TraceKey.M_TkeySerialRequest>
+@{
+    ViewBag.Title = "TraceKeyList";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<h2>
+    @TnT.LangResource.GlobalRes.TracekeyReqstListTitle
+
+    @*@if (User.permissions.Contains("Create Batch"))
+        {*@
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("ImportSerialNumber", "TraceKey")' class="btn btn-info btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.btnJobCreateAdditionalBatchQtyCreReq
+        @*Create Request*@
+        <i class="fa fa-server"></i>
+    </a>
+    @*}*@
+</h2>
+
+
+<table class="table table-bordered datatable" id="table-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GTIN)
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                Status
+            </th>
+
+            <th>
+                @TnT.LangResource.GlobalRes.JobsIndexAction
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GTIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @{
+                    TnT.Models.TraceKey.TKEY_SERIAL_REQUEST_STATUS REQUEST_STATUS;
+
+                    Enum.TryParse(item.Status.ToString(), out REQUEST_STATUS);
+
+                    <span>@REQUEST_STATUS.ToString()</span>
+                }
+            </td>
+            <td>
+                @if (item.Status == (int)TnT.Models.TraceKey.TKEY_SERIAL_REQUEST_STATUS.REQUEST_ADDED)
+                {
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="top" id="btnsubmit1"
+                       data-original-title="@TnT.LangResource.GlobalRes.SOMIndexView" href='@Url.Action("TraceKeyGetStatus", "TraceKey", new { id = item.ID })'>
+                        @TnT.LangResource.GlobalRes.TracekeyListGetstatus
+                    </a>
+                }
+                else
+                {
+                    <a class="btn btn-success" data-toggle="tooltip" data-placement="top" id="btnsubmit"
+                       data-original-title="@TnT.LangResource.GlobalRes.SOMIndexView" href='@Url.Action("TraceKeyGetDownloadNo", "TraceKey", new { id = item.ID })'>
+                        @TnT.LangResource.GlobalRes.TracekeyListDownload
+                    </a>
+                }
+            </td>
+        </tr>
+                    }
+
+</table>
+<script>
+    $('#btnsubmit').on('click', function () {
+        $(".loading").show();
+        $(this).val('Please wait ...')
+          .attr('disabled', 'disabled');
+    });
+    $('#btnsubmit1').on('click', function () {
+        $(".loading").show();
+        $(this).val('Please wait ...').attr('disabled', 'disabled');
+    });
+</script>

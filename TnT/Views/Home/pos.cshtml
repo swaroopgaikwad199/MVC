@@ -1,0 +1,169 @@
+﻿@model IEnumerable<TnT.Models.Product.PackagingAsso>
+
+@{
+    ViewBag.Title = "pos";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<h2>pos</h2>
+
+<div class="row" ng-app="">
+    <div class="col-md-4" >
+        <p>Enter your Name: <input type="text" ng-model="name"></p>
+    </div>
+    <p>Hello <span ng-bind="name"></span>!</p>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3 col-xs-6">
+            <div id="101" class="tile-stats tile-red" onclick="Add(this)">
+                <div class="icon"><i class="entypo-users"></i></div>
+                <div class="num" data-start="0" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div>
+
+                <h3>Registered users</h3>
+                <h4>100</h4>
+                <p>so far in our blog, and our website.</p>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+
+        <div padding-top:10px; background-color:#bbb" class="col-md-8">
+            <div>
+
+                <div class="panel panel-dark" data-collapsed="0">
+
+                    <!-- panel head -->
+                    <div class="panel-heading">
+                        <div class="panel-title"><strong>Rows</strong></div>
+                        <div class="panel-options">
+                            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                        </div>
+                    </div>
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        <div class="form-group">
+
+                            <table class="table" id="tableRpt" style="background-color:#fff; text-align: center; overflow-x:hidden;">
+                                <thead>
+                                    <tr>
+                                        <th style="font-weight:bold; text-align: center;">Id</th>
+                                        <th style="font-weight:bold; text-align: center;">Item</th>
+                                        <th style="font-weight:bold; text-align: center;">Qty</th>
+                                        <th style="font-weight:bold; text-align: center;">Price</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>101</td>
+                                        <td>Registered users</td>
+                                        <td>
+                                            1
+                                            @*<div class="input-spinner">
+                                                    <button class="btn btn-success btn-sm" type="button">-</button>
+                                                    <input style="width:20px " value="1" type="text">
+                                                    <button class="btn btn-success btn-sm" type="button">+</button>
+                                                </div>*@
+                                        </td>
+                                        <td>100</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>Sum: <span id="sum"></span></div>
+                <div class="glyphicon glyphicon-plus-sign"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<br />
+
+<script>
+
+
+
+
+    $("#tableRpt tbody tr").click(function () {
+        alert("hello");
+        $(this).remove();
+        calculateSUM();
+    });
+
+
+
+    function calculateSUM() {
+        var table = document.getElementById('tableRpt');
+        var count = table.getElementsByTagName('tr').length;
+        var total = 0;
+        if (count > 0) {
+
+            for (var i = 1; i < count; i++) {
+                var qty = table.rows[i].cells[2].innerHTML;
+                var price = table.rows[i].cells[3].innerHTML;
+                total += qty * price;
+            }
+        }
+
+        $("#sum").html(total);
+        //alert(total);
+    }
+    function Add(obj) {
+        var id = obj.id;
+        var name = $("#" + id).find("h3").html();
+        var price = $("#" + id).find("h4").html();
+        var qty = 1;
+
+        AddRow(id, name, qty, price);
+        calculateSUM();
+    }
+
+    function calculateQty(obj) {
+
+    }
+
+    function AddRow(id, name, qty, price) {
+        //var table = document.getElementById("tableRpt").getElementsByTagName('tbody')[0];
+        //var row = table.insertRow();
+        //var cell1 = row.insertCell(0);
+        //var cell2 = row.insertCell(1);
+        //var cell3 = row.insertCell(2);
+        //var cell4 = row.insertCell(3);
+
+        //cell1.innerHTML = id;
+        //cell2.innerHTML = name;
+        //cell3.innerHTML = qty;
+        //cell4.innerHTML = price;
+
+
+        var markup = "<tr><td>" + id + "</td><td>" + name + "</td><td>" + qty + "</td><td>" + price + "</td> </tr>";
+        $("#tableRpt tbody").append(markup);
+
+    }
+</script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>

@@ -1,0 +1,149 @@
+﻿@model TnT.Models.TraceLinkImporter.M_SOM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>M_SOM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+      
+
+    
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StateOrRegion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateOrRegion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityId_GLN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityId_GLN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityId_SGLN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityId_SGLN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_BusinessName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_BusinessName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_Street1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_Street1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_StateOrRegion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_StateOrRegion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFLI_Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFLI_Country)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

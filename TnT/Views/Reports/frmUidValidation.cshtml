@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "IdChecker";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2> @TnT.LangResource.GlobalRes.RptfrmUidValidationUIDval</h2>
+
+
+<div class="container">
+    <div class="row">
+        <hr />
+        @using (Html.BeginForm("Search", "Reports", FormMethod.Post, new { @class = "form-horizontal form-groups-bordered" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@TnT.LangResource.GlobalRes.RptUidSearchBy</label>
+                    <div class="col-sm-5">
+                        <select name="IdType" class="form-control">
+                            <option value="0">@TnT.LangResource.GlobalRes.RptUidSelect</option>
+                            <option value="UID">@TnT.LangResource.GlobalRes.RptBadUIDListUID</option>
+                            <option value="SSCC">@TnT.LangResource.GlobalRes.RptcmnSSCC</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtSSCC" class="col-sm-3 control-label">@TnT.LangResource.GlobalRes.RptfrmUidValSSCCtoSrch</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" id="txtSSCC" placeholder="Enter with '00' as leading character" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="field-1" class="col-sm-3 control-label">@TnT.LangResource.GlobalRes.RptfrmUidValUIDToSrch</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" id="txtUID" placeholder="Enter UID with '21' as leading character" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="field-1" class="col-sm-3 control-label">@TnT.LangResource.GlobalRes.RptfrmUidValSrchBatch</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" id="txtBatch" placeholder="Leave emty, to search entire database" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-5">
+                        <button type="submit" class="btn btn-default">@TnT.LangResource.GlobalRes.ReportsJobsBatchCreatedDateSearch</button>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>

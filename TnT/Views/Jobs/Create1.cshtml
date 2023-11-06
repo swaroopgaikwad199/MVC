@@ -1,0 +1,395 @@
+﻿@model LL_Core.Models.Job.Job
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Job</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TID, new SelectList(ViewBag.Types, "TID", "Job_Type"), "Select Type", new { @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.TID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PAID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PAID, new SelectList(ViewBag.FPCodes, "PAID", "FGCode"), "Select Code", new { @onchange = "Action(this.value);", @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.PAID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Product Name</label>
+            <div class="col-md-10">
+                @Html.TextBox("txtProductName", null, new { @class = "form-control", @disabled = "true" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Product Code</label>
+            <div class="col-md-10">
+                @Html.TextBox("txtProductCode", null, new { @class = "form-control", @disabled = "true" })
+
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+
+            <table width="90%" id="packagingGrid" style="text-align: center; margin-top: 5px;" class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;"></th>
+                        <th class="PPB" style="width: 10%; text-align: center;">PPB</th>
+                        <th class="MOC" style="width: 10%; text-align: center;">MOC</th>
+                        <th class="OBX" style="width: 10%; text-align: center;">OBX</th>
+                        <th class="ISH" style="width: 10%; text-align: center;">ISH</th>
+                        <th class="OSH" style="width: 10%; text-align: center;">OSH</th>
+                        <th class="PAL" style="width: 10%; text-align: center;">PAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>GTIN</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+                    <tr>
+                        <th>MRP</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+                    <tr>
+                        <th>PC MAP</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+                    <tr>
+                        <th>Bundling QTY</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+                    <tr>
+                        <th>Batch Qty</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+                    <tr>
+                        <th>UIDs to Print</th>
+                        <td class="PPB"><input class="form-control" type="text" name="PPB[]" /></td>
+                        <td class="MOC"><input class="form-control" type="text" name="MOC[]" /></td>
+                        <td class="OBX"><input class="form-control" type="text" name="OBX[]" /> </td>
+                        <td class="ISH"><input class="form-control" type="text" name="ISH[]" /> </td>
+                        <td class="OSH"><input class="form-control" type="text" name="OSH[]" /> </td>
+                        <td class="PAL"><input class="form-control" type="text" name="PAL[]" /> </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BatchNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ForExport, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.ForExport)
+                    @Html.ValidationMessageFor(model => model.ForExport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MfgDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MfgDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MfgDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExpDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SurPlusQty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SurPlusQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SurPlusQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AutomaticBatchCloser, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.AutomaticBatchCloser)
+                    @Html.ValidationMessageFor(model => model.AutomaticBatchCloser, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobWithUID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.JobWithUID)
+                    @Html.ValidationMessageFor(model => model.JobWithUID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LineCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.LineCode, new SelectList(ViewBag.LineCode, "ID", "PCLC"), "Select Line", new { @class = "form-control", @validate = "true" })
+                @Html.ValidationMessageFor(model => model.LineCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrimaryPCMapCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrimaryPCMapCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrimaryPCMapCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script type="text/javascript">
+    function Action(PAID) {
+        $.ajax({
+            url: '@Url.Action("getProductData", "Jobs")',
+            type: "POST",
+            dataType: 'json',
+            data: { "PAID": PAID },
+            success: function (data) {
+                if (data != null) {
+                    hideLevels();
+                    var vdata = data;
+                    var i;
+                    var pa;
+                    $("#txtProductName").val(vdata[0].Name);
+                    $("#txtProductCode").val(vdata[0].FGCode);
+
+                    var Level = vdata[1];
+                    var t = Level.slice(1, -1);
+                    var packAssoData = vdata[2];
+                    console.log(packAssoData);
+                    for (i = 0; i < Level.length; i++) {
+                        var packAssoDetails = vdata[2][i];
+                        $('input[name="' + Level[i] + '[]"]').eq(0).val(packAssoDetails.GTINCTI);
+                        $('input[name="' + Level[i] + '[]"]').eq(1).val(packAssoDetails.MRP);
+                        $('input[name="' + Level[i] + '[]"]').eq(2).val(packAssoDetails.Size);
+                        $('input[name="' + Level[i] + '[]"]').eq(3).val(packAssoDetails.BundleQty);
+                        $('.' + Level[i]).show();
+                    }
+
+                }
+            }
+        });
+    }
+
+    function hideLevels() {        
+        
+        $(".PPB").hide();
+        $(".MOC").hide();
+        $(".OBX").hide();
+        $(".ISH").hide();
+        $(".OSH").hide();
+        $(".PAL").hide();       
+    }
+
+    
+</script>
+<div style="display:none">
+    @{
+        List<string> level = ViewBag.PackagingLevel;
+    }
+    @if (level != null)
+    {
+        <input disabled type="checkbox" @Html.Raw(level.Contains("PPB") ? "checked='checked'" : "") name="chkPPB" id="PPB">
+        <input disabled type="checkbox" @Html.Raw(level.Contains("MOC") ? "checked='checked'" : "") name="chkMOC" id="MOC"><label for="MOC"> MOC [ Mono Carton ]</label>
+        <input disabled type="checkbox" @Html.Raw(level.Contains("OBX") ? "checked='checked'" : "") name="chkOBX" id="OBX"><label for="OBX"> OBX [ Outer Box ]</label>
+                <input disabled type="checkbox" @Html.Raw(level.Contains("ISH") ? "checked='checked'" : "") name="chkISH" id="ISH"><label for="ISH"> ISH [ Inner Shipper]</label>
+                <input disabled type="checkbox" @Html.Raw(level.Contains("OSH") ? "checked='checked'" : "") name="chkOSH" id="OSH"><label for="OSH"> OSH [ Outer Shipper ]</label>
+                <input disabled type="checkbox" @Html.Raw(level.Contains("PAL") ? "checked='checked'" : "") name="chkPAL" id="PAL"><label for="PAL"> PAL [ Pallet ]</label>
+    }
+
+</div>
+<script>
+
+
+    $("#PPB").change(function () {
+        if (this.checked) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+    });
+    $("#MOC").change(function () {
+        if (this.checked) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+    });
+    $("#OBX").change(function () {
+        if (this.checked) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+    });
+    $("#ISH").change(function () {
+        if (this.checked) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+    });
+    $("#OSH").change(function () {
+        if (this.checked) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+    });
+    $("#PAL").change(function () {
+        if (this.checked) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+    });
+
+
+    $("#btnSubmit").click(function () {
+
+        document.getElementById('frmProduct').submit();
+    });
+
+    $(document).ready(function () {
+        if ($('#PPB').is(':checked') == true) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+
+        if ($('#MOC').is(':checked') == true) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+
+        if ($('#OBX').is(':checked') == true) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+
+        if ($('#ISH').is(':checked') == true) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+
+        if ($('#OSH').is(':checked') == true) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+
+        if ($('#PAL').is(':checked') == true) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+
+        $('#frmProduct input[type=text]').attr("disabled", true);
+    });
+
+
+
+</script>

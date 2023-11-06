@@ -1,0 +1,1 @@
+{"elements":[{"x":33,"y":96,"type":"label_text","name":"","text":"","textType":"MFGDATE","fontSize":14,"fontType":"Arial","width":0,"height":20},{"x":69,"y":138,"type":"label_text","name":"Textbox 2","text":"Textbox 2","textType":"LabelText","fontSize":14,"fontType":"Arial","width":59.923828125,"height":20}]}

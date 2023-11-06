@@ -1,0 +1,112 @@
+﻿@model TnT.Models.Reports.RptAvailableSerialNo
+
+<link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+<style>
+    /*@@media print {*/
+    .scrollprint {
+        overflow-y: inherit;
+        max-height: none;
+    }
+    /*}*/
+    .tbFont {
+        font-size: 9px;
+    }
+
+    .tdWidth {
+        width: 30%;
+    }
+
+    .tdWidthBig {
+        width: 40%;
+    }
+
+    .tblWidth {
+        width: 100%;
+    }
+
+    .pgbreak {
+        page-break-inside: avoid;
+    }
+</style>
+<div class="container" id="rptLoaded">
+    <div class="row" style="border: 1px solid; margin:10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptGTINWiseAvailableTracelinkSerialNumber </b></h4>
+    </div>
+
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table class="table @ViewBag.tbFont" style="text-align: center;">
+            <tr style="font-weight:bold;">
+                <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnSrNo</td>
+                <td style="text-align: center;">@TnT.LangResource.GlobalRes.JobsGTIN</td>
+                <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptAvailableSerialNumber</td>
+
+            </tr>
+            <tbody>
+
+                @{
+                    if (Model.SrNoCount.Count > 0)
+                    {
+                        int counter = 0;
+
+                        foreach (var item in Model.SrNoCount)
+                        {
+                            counter++;
+
+                            <tr>
+                                <td>@counter</td>
+                                <td>@item.GTIN</td>
+                                <td>@item.SerailNoCount</td>
+
+                            </tr>
+
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                </td>
+                <td style="padding-left:35%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+@if (ViewBag.scrollprint == null)
+{
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFAvailableSrNo" })
+    </div>
+}
+<script>
+    $(document).on("click", "#btnGenaratePDFAvailableSrNo", function (e) {
+
+        e.preventDefault();
+
+        var newUrl = "@Url.Action("genePDFSerailNoCount", "Reports")";
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+</script>

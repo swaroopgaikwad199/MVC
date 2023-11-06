@@ -1,0 +1,38 @@
+TNT_AGIO Updation For Propix and Non_Propix Batches
+
+1.Add validation for SSCC NullorEmpty & LooseExt also.
+
+2.Replace one new parameter with Previous one.
+Previous paramemter : String LoosExt
+Latest Parameter : bool IsLoos
+
+3.Add "PublicKey (nvarchar(50),null)" column in three table and 
+  Add "string PublicKey{get;set;}" property  in three Classes.
+1) PackagingDetails
+2) X_Identities
+3) X_TracelinkUIDStore 
+
+4.Add folder "crypto" in Model folder.Inside folder,there are two classes named:
+1) CryptoGenerator.cs
+2) M_CryptOrder.cs 
+
+5.Add one stored procedure in database named as "sp_UPDATE-XTL-ISUSE-STATUS".
+
+6.Remove "PublicKey" column from PackagingAsso table and 
+  also Remove from PackagingAsso.cs class.
+
+7.Remove @htmlLabel where PublicKey is used in Procudt's => Create ViewPage
+
+TNT_AGIO Updation For verify Batch (Transaction)
+
+1.Add "DBSync" class inside Models folder.
+
+2.Add AllowMultipleBatchesOnLine inside "LineLocation class" as well as "LineLocation table" .
+
+3.Comment "AllowMultipleBatchesOnLine" that comes from Appsetting.
+
+4.Add "bool AllowMultipleBatchesOnLine = SelectedLine.AllowMultipleBatchesOnLine ;
+
+5.Add one Method called "ConvertToPackagingDetailsV2" in Job Controller.
+
+6.Add Stored Procedure called "sp_VERIFYJOB" in Server Database.

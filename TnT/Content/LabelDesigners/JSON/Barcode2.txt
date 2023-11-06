@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"portrait"},{"x":83,"y":69,"type":"Barcode","name":"Barcode 1","text":"BARCODE","barcodeType":"NDC_BARCODE","height":60,"data":"123456798"}]}

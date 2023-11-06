@@ -1,0 +1,33 @@
+﻿@model TnT.Models.Job.Job
+@{
+    ViewBag.Title = "CSVFile";
+}
+
+<h2>CSVFile</h2>
+
+<div class="form-horizontal">
+<fieldset>
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.JobName, new SelectList(ViewBag.JobName, "JID", "JobName"), "Select JobName", new { @class = "form-control", @validate = "true", @id = "JID" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BatchNo, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.JobName, new SelectList(ViewBag.BatchNo, "JID", "BatchNo"), "Select JobName", new { @class = "form-control", @validate = "true", @id = "JID" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+</div>

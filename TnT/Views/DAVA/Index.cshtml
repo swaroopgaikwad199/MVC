@@ -1,0 +1,752 @@
+﻿@model TnT.Models.DAVAPortal.GenerateDAVAViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2> </h2>
+
+
+
+<button style="display:none;" id="showProgressBar" class="myBtn" type="button" data-toggle="modal" data-target="#modal-progress">test </button>
+<div class="container col-sm-12">
+    @using (Html.BeginForm("Create", "DAVA", FormMethod.Post, new { @id = "frmDAVA" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BtcNo)
+
+        <div class="row" style="margin-bottom:5px">
+            <div class="col-sm-12 text-right">
+                @*<button type="button" class="btn btn-info" id="btnGenerate" > @TnT.LangResource.GlobalRes.DAVAIndexGenerateDavaFile</button>*@
+                <button id="popup" type="button" style="float: right; margin-right: 5px;" class="btn btn-info btn-icon icon-left"> @TnT.LangResource.GlobalRes.DAVAIndexGenerateDavaFile</button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" style="border:1px solid #000; min-height: 650px;">
+                <div class="row" style="border-right: 1px solid #fff;">
+                    <h4 style="background-color:#000; color:#fff; text-align:center;padding: 11px;margin: 0;font-weight: bold;font-size: 14px;">@TnT.LangResource.GlobalRes.DAVAIndexSelectOption</h4>
+                </div>
+                <div class="row" style="border-bottom:1px solid #000;">
+                    <div class="form-group" style="margin-top: 15px; margin-left: 21px;">
+
+                        @*  <input type="radio" onclick="selectOption('Product');" checked name="davaOption" id="optionProduct" />*@
+                        @Html.RadioButtonFor(model => model.IsProductSelected, true, new { @onclick = "selectOption('Product');", @checked = "checked", @style = "float:left; margin-top:3px" })&nbsp;&nbsp;
+                        @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionProduct, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAProduct, @data_original_title = "Field Information" })
+                       
+                    </div>
+                    <div class="form-group" style="margin-left: 21px;">
+                        @*     <input type="radio" onclick="selectOption('Batch');" name="davaOption" id="optionBatch" />&nbsp;&nbsp;<label for="optionBatch">Batch</label>*@
+                        @Html.RadioButtonFor(model => model.IsProductSelected, false, new { @onclick = "selectOption('Batch');", @style = "float:left;margin-top:1px" }) &nbsp;&nbsp;
+                        @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVABatch, @data_original_title = "Field Information" })
+                    </div>
+                </div>
+
+
+                <div class="row" id="subOption" style="display:none;text-align: center;margin-top: 22px;">
+                    @*<input type="radio" onclick="selectSubOption('all');" checked name="davaSubOption" id="optionAllBatch" />&nbsp;&nbsp;<label for="optionAllBatch">All Batches</label>*@
+                    @*<input type="radio" onclick="selectSubOption('single');" name="davaSubOption" id="optionSingleBatch" />&nbsp;&nbsp;<label for="optionSingleBatch">Single Batch</label>*@
+                    @Html.RadioButtonFor(model => model.IsAllBatchSelected, true, new { @onclick = "selectSubOption('all');", @checked = "checked" ,@style = "float:left;margin-top:1px;margin-left:37px" })&nbsp;&nbsp;
+                    @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionAllBatches, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAAllBatch, @data_original_title = "Field Information" })
+                    @Html.RadioButtonFor(model => model.IsAllBatchSelected, false, new { @onclick = "selectSubOption('single');", @style = "float:left;margin-top:1px" })&nbsp;&nbsp;
+                    @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionSingleBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVASingleBatch, @data_original_title = "Field Information" })
+
+
+                    <div class="row" id="subOptionSingle" style="display:none; text-align: center;">
+                        <div class="col-lg-12">
+                            <table class="table bordered">
+                                <tr>
+                                    <th>@Html.LabelFor(m => m.BatchNo, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVABatchNo, @data_original_title = "Field Information" })</th>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.BatchNo, (IEnumerable<SelectListItem>)ViewBag.Batches, @TnT.LangResource.GlobalRes.EPCISIndexSelectBatch)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionBatchType, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVABatchType, @data_original_title = "Field Information" })</th>
+                                  
+                                    <td id="batchTypeTxt">
+                                       @TnT.LangResource.GlobalRes.DAVAIndexSelectOptionBatchType
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionExemptionCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAExemptForBarcode, @data_original_title = "Field Information" })</th>
+                                    <td>
+                                        @Html.EditorFor(x => x.IsExemptedBarcode)
+                                        @*<input type="checkbox" name="exemptFromBarcoding">*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.LabelFor(m => m.ExemptedCountryCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAExemptCode, @data_original_title = "Field Information" })</th>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.ExemptedCountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, new { @style = "width: 130px", @disabled = "disabled" })
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionActualBatchQuantity, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAActualBatchQty, @data_original_title = "Field Information" })</th>
+                             
+
+                                    <td id="lblActualBatchQty">
+                                        00
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionExportedBatchQuantity, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAExportedBatchQy, @data_original_title = "Field Information" })</th>
+                                    
+
+                                    <td id="lblExportedBatchQty">
+                                        00
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionRemainingBatchQuantity, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVARemainingBatchQty, @data_original_title = "Field Information" })</th>
+                                   
+
+                                    <td id="lblRemainingBatchQty">
+                                        00
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexExemptionDate, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVARemainingBatchQty, @data_original_title = "Field Information" })</th>
+                                    <td>
+                                       @Html.EditorFor(model => model.EXEMPTION_NOTIFICATION_AND_DATE, new { htmlAttributes = new { @class = "form-control datepicker", validate = "true", @name = "ENot" } })
+                                   
+
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                            @Html.RadioButtonFor(model => model.IsProductionSelected, true, new { @onclick = "prodTertiary('Production');", @checked = "checked", @style = "float:left;margin-top:1px;margin-left: 17px;" })&nbsp;&nbsp;
+                            @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionProductionDetails, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVARemainingBatchQty, @data_original_title = "Field Information",@style="float:left;" })
+                            @Html.RadioButtonFor(model => model.IsProductionSelected, false, new { @onclick = "prodTertiary('Tertiary');", @style = "float:left;margin-top:1px;margin-left: 14px;" })&nbsp;&nbsp;
+                            @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionTertiaryPacksExempted, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVARemainingBatchQty, @data_original_title = "Field Information", @style = "float:left;" })
+
+                            @*<input type="radio" disabled="disabled" onclick="prodTertiary('Production');" checked name="davaProductionPack" id="davaProductionDetails" />&nbsp;&nbsp;<label for="davaProductionDetails">Production Details</label> &nbsp;&nbsp;
+                                <input type="radio" disabled="disabled" onclick="prodTertiary('Tertiary');" name="davaProductionPack" id="davaTertiaryPacksExempted" />&nbsp;&nbsp;<label for="davaTertiaryPacksExempted">Tertiary Packs Exempted</label>*@
+                            <div class="row" id="exemptionCode" style="display:none;text-align: center; margin-top: 5px;">
+                                @Html.LabelFor(m => m.ExempCode, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAExemptCode, @data_original_title = "Field Information" })
+
+                                @Html.DropDownListFor(m => m.ExempCode, (IEnumerable<SelectListItem>)ViewBag.ExempCodes, new { @style = "margin-bottom: 5px;", @onchange = "showDescription(this);" })
+
+                              
+
+                                <div style="text-align:center; padding-left:8px; padding-right:8px; font-style: italic; margin-bottom: 5px;" id="descHere">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+
+                            <div class="row" id="subSectionSelection" style="display:none; text-align: center;">
+                                <div class="col-lg-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td width="50%">
+                                                @*@Html.RadioButtonFor(model => model.IsWholeBatch, true, new { @onclick = "batchSection('wholeBatch');", @checked = "checked" })&nbsp;&nbsp;<label for="optionBatch">Whole Batch</label>*@
+                                                @*<input type="radio" checked selected name="IsWholeBatch" value="True" id="IsWholeBatch" onchange="batchSection('wholeBatch');" />&nbsp;&nbsp;<label for="wholeBatch">Whole Batch</label>*@
+                                                @Html.RadioButtonFor(model => model.IsWholeBatch, true, new { @onclick = "batchSection('wholeBatch');", @checked = "checked" })&nbsp;&nbsp;
+                                                @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionWholeBatch, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAWholeBatch, @data_original_title = "Field Information" })
+
+                                                <br />
+                                                @Html.RadioButtonFor(model => model.IsWholeBatch, false, new { @onclick = "batchSection('Partial');" })&nbsp;&nbsp;
+                                                @Html.Label(@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionsPartialBatch, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAPartialBatch, @data_original_title = "Field Information" })
+
+                                                @*@Html.RadioButtonFor(model => model.IsWholeBatch, true, new { @onclick = "batchSection('Partial');" })&nbsp;&nbsp;<label for="optionBatch">Partial Batch</label>*@
+                                                @* <input type="radio" name="IsWholeBatch" value="False" onchange="batchSection('Partial');" id="IsWholeBatch" />&nbsp;&nbsp;<label for="partialBatch">Partial Batch</label>*@
+                                            </td>
+
+                                            <td width="50%">
+                                                <input type="radio" selected name="HomogenousTertiary" id="HomogenousTertiary" />&nbsp;&nbsp;<label id="lblHomogenousTertiary" for="HomogenousTertiary">@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionsHomogenousTertiary</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="row" id="SSCCSection" style="display:none; border-bottom: 1px solid #000;text-align: center;">
+
+                                        <div class="col-md-9">
+                                            @Html.Label(@TnT.LangResource.GlobalRes.DavaIndexPleaseScan, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipDAVAScanSSCC, @data_original_title = "Field Information" })
+                                           
+                                            <textarea class="col-md-12" name="SSCCArea" id="SSCCArea"></textarea>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="button" class="btn col-md-12" id="btnSSCC" value="@TnT.LangResource.GlobalRes.RptcmnSSCC" style="margin-bottom: 5px;" /><br /><br />
+                                            <input type="button" class="btn btn-black col-md-12" id="totalSSCCCount" value="0" style="margin-bottom: 5px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col-sm-8" style=" height:250px;min-height: 650px; overflow-y:auto">
+                <div class="row" style="border-left: 1px solid #fff;"><h4 id="XMLPan" style="background-color:#000; color:#fff; text-align:center;padding: 11px;margin: 0;font-weight: bold;font-size: 14px;">@TnT.LangResource.GlobalRes.DAVAIndexSelectOptionProductExp</h4></div>
+                <table id="tblSSCCs" class="table table-bordered" style="width:100%; display:none;">
+                    <thead>
+                    <th style="text-align: center;font-weight: bold;color: #000;">@TnT.LangResource.GlobalRes.RptcmnSSCC</th>
+                    <th style="text-align: center;font-weight: bold;color: #000;">@TnT.LangResource.GlobalRes.DAVAIndexPrimaryPckQnt</th>
+                    <th style="text-align: center;font-weight: bold;color: #000;"></th>
+                    </thead>
+                    <tbody id="tblSSCCsBody"></tbody>
+                </table>
+
+                <div id="ssccCountDiv" class="row" style="background-color:#000; bottom:0; position:relative;width: 100%; display:none;">
+                    <div class="col-md-4" style="color:#fff; text-align:center; font-weight:bold; height: 25px;padding-top: 5px;">@TnT.LangResource.GlobalRes.DAVAIndexTotalBatchScn</div>
+                    <div class="col-md-8" style="color:#fff; text-align:center; font-weight:bold;background-color: #aaa;height: 25px;padding-top: 5px;" id="scannedSSCCCount"></div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal fade" id="modal-progress">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">@TnT.LangResource.GlobalRes.DAVAIndexdavaFile </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="CJobMessage">
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="float:right">@TnT.LangResource.GlobalRes.JobsClosingBtnClose</button>
+
+                        <button type="submit" onclick="validate();" class="btn btn-info">@TnT.LangResource.GlobalRes.cmnBtnConfirm</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+<script>
+    var selbatch, selSingle, selPartial;
+    $("#btnGenerate").click(function () {
+       
+        var sscc = $("#SSCCArea").val();
+        var batchno = $("#BatchNo").val();
+        var chk = $("#tblSSCCsBody").find('input[type="checkbox"]:checked').length;
+        var msgPOST = "";
+        if (selbatch == "Batch") {
+            if (selSingle == "single") {
+                if (batchno != "") {
+                    if (selPartial == "Partial") {
+
+                        if (sscc == "") {
+                            showMessage("SSCCArea", "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber");
+                            msgPOST += "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber";
+                        } else {
+                            clearColor("SSCCArea");
+                        }
+
+                    }
+                    if (chk == 0) {
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber");
+                        msgPOST += "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber";
+                    }
+                }
+                else {
+                    toastr.warning("@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch");
+                    msgPOST += "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch";
+                }
+            }
+        }
+        if (msgPOST == "") {
+            formSubmit();
+        }
+    });
+    function showMessage(elementID, msg) {
+        toastr.warning(msg);
+        $("#" + elementID).val("");
+        $("#" + elementID).css("border", "red 1px solid");
+        return false;
+    }
+    function clearColor(elementID) {
+        $("#" + elementID).css("border", "green 1px solid");
+    }
+    function formSubmit() {
+        document.getElementById("frmDAVA").submit();
+    }
+    function selectOption(sel) {
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        $("#XMLPan").html('@TnT.LangResource.GlobalRes.DAVAIndexExpXML ' + sel);
+        if (sel == "Batch") {
+            selbatch = "Batch";
+            $("#subOption").show();
+        } else {
+            selbatch = "Product";
+            $("#subOption").hide(); $("#subOptionSingle").hide();
+        }
+    }
+
+    function selectSubOption(selOption) {
+
+        $("#btnSSCC").css("background-color", "buttonface");
+        $("#SSCCArea").val('');
+
+        $("#totalSSCCCount").val('0');
+        $("#btnSSCC").css("background-color", "buttonface");
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        if (selOption == "single") {
+            $("#subOptionSingle").show();
+            selSingle = "single";
+        } else {
+            selSingle = "All"
+            prodTertiary("");
+            $("#batchTypeTxt").html('-');
+            $("#lblActualBatchQty").html('-');
+            $("#lblExportedBatchQty").html('-');
+            $("#lblRemainingBatchQty").html('-');
+            $("#BatchNo").val("");
+            $('#IsExemptedBarcode').prop('checked', false);
+            $('#IsExemptedBarcode').attr("disabled", "disabled");
+            $('#ExemptedCountryCode').val("0");
+            $("#subOptionSingle").hide();
+            $("#subSectionSelection").hide();
+        }
+
+    }
+
+    function prodTertiary(obj) {
+        debugger;
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        if (obj == "Production") {
+            $("#partialBatch").attr('checked', 'checked');
+            $("#HomogenousTertiary").attr('checked', 'checked');
+            $("#exemptionCode").hide();
+        } else if (obj == "Tertiary") {
+            $("#wholeBatch").attr('checked', 'checked');
+
+            $("#wholeBatch").trigger("change");
+            $("#exemptionCode").show();
+
+        }
+
+    }
+
+    function batchSection(section) {
+        
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        if (section == "wholeBatch") {
+            selPartial = "Whole";
+            $("#HomogenousTertiary").hide();
+            $("#lblHomogenousTertiary").hide();
+            $("#SSCCArea").val('');
+            $("#totalSSCCCount").val('0');
+            $("#btnSSCC").css("background-color", "buttonface");
+            $("#SSCCSection").hide();
+            $("#IsWholeBatch").val("True");
+
+            $("#ssccCountDiv").hide();
+            $("#tblSSCCs").hide();
+            var JbId = $("#BatchNo").val().trim();
+            var BatchNo = $("#BatchNo option:selected").text();
+            $("#BtcNo").val(BatchNo);
+
+            if (BatchNo != "Select Batch") {
+                $(".loading").show();
+                $.ajax({
+                    url: 'getDAVASSCCs',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JobId": JbId, "BatchNo": BatchNo },
+                    success: function (data) {
+                        $(".loading").hide();
+                        //$('#rptLoaded').html(data);
+                        if (data != null) {
+                            console.log(data);
+                            $("#IsExemptedBarcode").removeAttr("disabled");
+                            $("#ssccCountDiv").show();
+                            $("#tblSSCCs").show();
+                            $("#tblSSCCsBody").html("");
+                            for (var i = 0; i < data.SSCCs.length; i += 1) {
+
+                                var chkBx = (data.SSCCs[i].Active === 'true') ? '<input type="checkbox" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  />' : '<input type="checkbox" checked="checked" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  disabled="disabled" id="Chk"/>';
+                                console.log(chkBx);
+                                $("#tblSSCCs").append("<tr><td>" + data.SSCCs[i].SSCC + "</td><td>" + data.SSCCs[i].PrimaryPackQty + "</td><td style='text-align:center;'>" + chkBx + "</td></tr>");
+                            }
+                            console.log(data);
+                            $("#lblActualBatchQty").text(data.ActualBatchQty);
+                            $("#lblExportedBatchQty").text(data.ExportBatchQty);
+                            $("#lblRemainingBatchQty").text(data.RemainingBatchQty);
+
+                            $("#scannedSSCCCount").text(data.BatchQuatityScanned);
+                        } else {
+                            alert("@TnT.LangResource.GlobalRes.TempDataDavaNoData");
+                        }
+
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+
+                $.ajax({
+                    url: 'getJobType',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "JobId": JbId },
+                    success: function (data) {
+                        $("#batchTypeTxt").html(data);
+                    },
+                    error: function (data) {
+
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                    }
+                });
+
+            } else {
+                $('#IsExemptedBarcode').prop('checked', false);
+                $("#IsExemptedBarcode").trigger("change");
+                $("#IsExemptedBarcode").attr("disabled", true);
+                $('#ExemptedCountryCode').val("0");
+                $("#ExemptedCountryCode").attr("disabled", true);
+            }
+        } else if (section == "Partial") {
+            selPartial = "Partial";
+            $("#HomogenousTertiary").show();
+            $("#lblHomogenousTertiary").show();
+            $("#SSCCSection").show();
+            $("#IsWholeBatch").val("Partial")
+        }
+    }
+    $("#BatchNo").change(function () {
+
+        var batchVal = $("#BatchNo").val();
+        $("#SSCCArea").val('');
+        $("#totalSSCCCount").val('0');
+        $("#btnSSCC").css("background-color", "buttonface");
+        if (batchVal == "") {
+            $("#batchTypeTxt").html('-');
+            $("#lblActualBatchQty").html('-');
+            $("#lblExportedBatchQty").html('-');
+            $("#lblRemainingBatchQty").html('-');
+        }
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        //$("#IsProductionSelected").removeAttr('disabled');
+        //$("#IsProductionSelected").removeAttr('disabled');
+        //$("#davaProductionDetails").attr('checked', 'checked');
+
+        $("#partialBatch").attr('checked', 'checked');
+        $("#HomogenousTertiary").attr('checked', 'checked');
+        $("#SSCCSection").hide();
+        $("#subSectionSelection").show();
+        $("#HomogenousTertiary").hide();
+        $("#lblHomogenousTertiary").hide();
+
+    });
+    function showDescription(obj) {
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+
+
+        var e21 = "CASE: Consignments containing drugs/devices for export purposes to countries eligible for exemption from  bar-coding as per rule 21 of “Drugs and Cosmetic Act” with specific notification number.";
+        var eme = "CASE: Merchant exporter’s consignment containing drugs/devices from multiple manufacturers.";
+        var ell = "@TnT.LangResource.GlobalRes.DAVAIndexCASEELL.";
+      
+        var ecode = $('option:selected', obj).text();
+        var exemDescription = "";
+        if (ecode == "E21") {
+            exemDescription = e21;
+        } else if (ecode == "EME") {
+            exemDescription = eme;
+        } else if (ecode == "ELL") {
+            exemDescription = ell;
+        } else {
+            exemDescription = "";
+        }
+  
+        $('#descHere').html(exemDescription);
+        batchSection('wholeBatch');
+        var $radios = $('input:radio[name=IsWholeBatch]');
+
+        $radios.filter('[value=True]').prop('checked', true);
+    }
+</script>
+
+
+<script>
+    $("#BatchNo").change(function () {
+        
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        var JbId = $("#BatchNo").val().trim();
+        var BatchNo = $("#BatchNo option:selected").text();
+        $("#BtcNo").val(BatchNo);
+
+        if (BatchNo != "Select Batch") {
+            $(".loading").show();
+            $.ajax({
+                url: 'getDAVASSCCs',
+                type: "POST",
+                dataType: 'json',
+                data: { "JobId": JbId, "BatchNo": BatchNo },
+                success: function (data) {
+                    $(".loading").hide();
+                    //$('#rptLoaded').html(data);
+                    if (data != null) {
+                        console.log(data);
+
+                        //$("#IsExemptedBarcode").removeAttr("disabled");
+                        $("#ssccCountDiv").show();
+                        $("#tblSSCCs").show();
+                        $("#tblSSCCsBody").html("");
+                        for (var i = 0; i < data.SSCCs.length; i += 1) {
+
+                            var chkBx = (data.SSCCs[i].Active === 'true') ? '<input type="checkbox" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  />' : '<input type="checkbox" checked="checked" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  disabled="disabled" id="Chk"/>';
+                            console.log(chkBx);
+                            $("#tblSSCCs").append("<tr><td>" + data.SSCCs[i].SSCC + "</td><td>" + data.SSCCs[i].PrimaryPackQty + "</td><td style='text-align:center;'>" + chkBx + "</td></tr>");
+                        }
+                        console.log(data);
+                        $("#lblActualBatchQty").text(data.ActualBatchQty);
+                        $("#lblExportedBatchQty").text(data.ExportBatchQty);
+                        $("#lblRemainingBatchQty").text(data.RemainingBatchQty);
+
+                        $("#scannedSSCCCount").text(data.BatchQuatityScanned);
+                    } else {
+                        alert("No Data found");
+                    }
+
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+
+            $.ajax({
+                url: 'getJobType',
+                type: "POST",
+                dataType: 'json',
+                data: { "JobId": JbId },
+                success: function (data) {
+       
+                    $("#batchTypeTxt").html(data);
+                  
+                    if (data != 'DGFT') {
+                        $("#IsExemptedBarcode").prop('checked', true);
+                        $("#ExemptedCountryCode").removeAttr("disabled");
+                        $("#IsProductionSelected").prop('checked', true);
+                        var $radios = $('input:radio[name=IsProductionSelected]');
+
+                        $radios.filter('[value=False]').prop('checked', true);
+                        prodTertiary('Tertiary');
+                        var $radios = $('input:radio[name=IsWholeBatch]');
+
+                        $radios.filter('[value=True]').prop('checked', true);
+                        $("#IsWholeBatch").val("True");
+                        batchSection('wholeBatch')
+
+                    } else {
+                        $("#IsExemptedBarcode").prop('checked', false);
+                        $("#ExemptedCountryCode").attr("disabled", true);
+                        var $radios = $('input:radio[name=IsProductionSelected]');
+
+                        $radios.filter('[value=True]').prop('checked', true);
+                        prodTertiary('Production');
+
+                        var $radios = $('input:radio[name=IsWholeBatch]');
+                        $radios.filter('[value=True]').prop('checked', true);
+                        $("#IsWholeBatch").val("True");
+                        batchSection('wholeBatch')
+                    }
+
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+
+        } else {
+            $('#IsExemptedBarcode').prop('checked', false);
+            $("#IsExemptedBarcode").trigger("change");
+            $("#IsExemptedBarcode").attr("disabled", true);
+            $('#ExemptedCountryCode').val("0");
+            $("#ExemptedCountryCode").attr("disabled", true);
+        }
+    });
+</script>
+<script>
+    $("#IsExemptedBarcode").attr("disabled", true);
+    $("#btnGenerateDavaFile").click(function () {
+        $('#tblSSCCsBody').find('input[type="checkbox"]:checked').each(function () {
+            console.log(this.value);
+        });
+    });
+    $("#IsExemptedBarcode").change(function (event) {
+        if (this.checked) {
+            $("#ExemptedCountryCode").removeAttr("disabled");
+        } else {
+            $("#ExemptedCountryCode").attr("disabled", true);
+        }
+    });
+
+    $("#SSCCArea").blur(function (event) {
+        $("#ssccCountDiv").hide();
+        $("#tblSSCCs").hide();
+        var JbId = $("#BatchNo").val().trim();
+        var SSCC = $("#SSCCArea").val().trim();
+        var BatchNo = $("#BatchNo option:selected").text();
+
+        if (BatchNo != "Select Batch" && SSCC != "") {
+            $(".loading").show();
+            $.ajax({
+                url: 'CheckSSCC',
+                type: "POST",
+                dataType: 'json',
+                data: { "SSCC": SSCC, "JobId": JbId, "BatchNo": BatchNo },
+                success: function (data) {
+
+                    $(".loading").hide();
+                    //$('#rptLoaded').html(data);
+                    if (data != null) {
+                        if (data == "Invalid") {
+
+                            $("#ssccCountDiv").hide();
+                            $("#tblSSCCs").hide();
+                            $("#tblSSCCsBody").html("");
+                            $("#totalSSCCCount").val('0');
+                            $("#btnSSCC").css("background-color", "red");
+                            $("#scannedSSCCCount").html('0');
+                            //$('#modal-msgBox').html("Invalid SSCC");
+                            //$("#showMSGBx").trigger("click");
+                            //event.preventDefault();
+                        }
+                        if (data == "Invalid Input") {
+                            $("#ssccCountDiv").hide();
+                            $("#tblSSCCs").hide();
+                            $("#tblSSCCsBody").html("");
+                            $("#totalSSCCCount").val('0');
+                            $("#btnSSCC").css("background-color", "red");
+                            //$('#modal-msgBox').html("Invalid SSCC");
+                            //$("#showMSGBx").trigger("click");
+                            //event.preventDefault();
+                        }
+                        //console.log(data.SSCCs);
+
+                        $("#ssccCountDiv").show();
+                        $("#tblSSCCs").show();
+                        $("#tblSSCCsBody").html("");
+                        $("#totalSSCCCount").val(data.SSCCs.length);
+                        $("#btnSSCC").css("background-color", "green");
+                        for (var i = 0; i < data.SSCCs.length; i += 1) {
+                            if (data.SSCCs[i].SSCC == $("#SSCCArea").val()) {
+                                var chkBx = (data.SSCCs[i].Active === 'true') ? '<input type="checkbox" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  />' : '<input type="checkbox" name="GENSSCC[]" checked="checked" value="' + data.SSCCs[i].SSCC + '" />';
+                            }
+                            else {
+                                var chkBx = (data.SSCCs[i].Active === 'true') ? '<input type="checkbox" name="GENSSCC[]" value="' + data.SSCCs[i].SSCC + '"  />' : '<input type="checkbox" name="GENSSCC[]"  value="' + data.SSCCs[i].SSCC + '" />';
+                            }
+
+                            $("#tblSSCCs").append("<tr><td>" + data.SSCCs[i].SSCC + "</td><td>" + data.SSCCs[i].PrimaryPackQty + "</td><td style='text-align:center;'>" + chkBx + "</td></tr>");
+                        }
+
+                        $("#lblActualBatchQty").text(data.ActualBatchQty);
+                        $("#lblExportedBatchQty").text(data.ExportBatchQty);
+                        $("#lblRemainingBatchQty").text(data.RemainingBatchQty);
+
+                        $("#scannedSSCCCount").text(data.BatchQuatityScanned);
+                    } else {
+                        alert("No Data found");
+                    }
+
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        }
+    });
+    $('input[type=radio][name=IsProductionSelected]').change(function () {
+       
+        var $radios = $('input:radio[name=IsWholeBatch]');
+
+        $radios.filter('[value=True]').prop('checked', true);
+        $("#IsWholeBatch").val("True");
+        batchSection('wholeBatch')
+
+    });
+    $(function () {
+
+        $("#popup").on("click", function () {
+           
+            var sscc = $("#SSCCArea").val();
+            var batchno = $("#BatchNo").val();
+            var chk = $("#tblSSCCsBody").find('input[type="checkbox"]:checked').length;
+            var msgPOST = "";
+            if (selbatch == "Batch") {
+                if (selSingle == "single") {
+                    if (batchno != "") {
+                        if (selPartial == "Partial") {
+
+                            if (sscc == "") {
+                                showMessage("SSCCArea", "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber");
+                                msgPOST += "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber";
+                            } else {
+                                clearColor("SSCCArea");
+                            }
+
+                        }
+                        if (chk == 0) {
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber");
+                            msgPOST += "@TnT.LangResource.GlobalRes.toastrDavaSSCCNumber";
+                        }
+                    }
+                    else {
+                        toastr.warning("@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch");
+                        msgPOST += "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch";
+                    }
+                }
+            }
+            if (msgPOST == "") {
+                $("#CJobMessage").html("@TnT.LangResource.GlobalRes.DAVAIndexGeneratexml");
+                $("#showProgressBar").trigger("click");
+            }
+
+
+        });
+    });
+    function validate() {
+     
+        $("#showProgressBar").trigger("click");
+    }
+</script>

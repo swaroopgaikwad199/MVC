@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"6","lblWidth":"6","DPI":"203","Orientation":"landscape"},{"x":50,"y":35,"type":"Barcode","name":"Barcode 1","text":"BARCODE","barcodeType":"Product_Barcode","height":54,"data":"123456798"},{"x":268,"y":50,"type":"label_text","name":"testset","text":"TEST","textType":"LabelText","fontSize":14,"fontType":"Arial","width":35.779296875,"height":20}]}

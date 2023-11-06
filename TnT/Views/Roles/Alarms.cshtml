@@ -1,0 +1,102 @@
+﻿@model TnT.Models.SettingsNUtility.AlarmsViewModel
+
+@{
+    ViewBag.Title = "Alarms";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.RolesEdit
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","Roles")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+
+</h2>
+
+@using (Html.BeginForm("Alarms/" + Model.ID, "Roles", FormMethod.Post, new { @id = "frmAlarms" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Roles_Name)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles_Name, htmlAttributes: new { @class = "control-label col-md-2 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipRoleName, @data_original_title = "Field Information" })
+            <div class="col-md-10" style="padding-top: 8px;">
+                @Html.DisplayFor(model => model.Roles_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Roles_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Alarms, htmlAttributes: new { @class = "control -label col-md-2 popover-default", style = "margin-left: 75px;", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipRolePermission, @data_original_title = "Field Information" })
+            <div class="col-md-10" style="margin-left: 164px;margin-top: -27px;">
+                <div>
+                    @if (ViewData.ModelState.IsValidField("NOAlams") == false)
+                    {
+                        <div class="text-danger bold">@TnT.LangResource.GlobalRes.AddModuleErrorRolesAlarms</div>
+                    }
+
+                </div>
+
+                @for (int i = 0; i < Model.Alarms.Count(); i++)
+                {
+                    var role = Model.Alarms[i];
+                    @Html.HiddenFor(model => model.Alarms[i].ID)
+                    @Html.HiddenFor(model => model.Alarms[i].Aname)
+                    <div class="col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(model => model.Alarms[i].IsChecked)
+                                @Html.DisplayFor(model => model.Alarms[i].Aname, role.Aname)
+                            </label>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" id="btnSubmit" value="@TnT.LangResource.GlobalRes.cmnBtnSave" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                var Roles_Name = $("#Roles_Name").val();
+                var count = $("[type='checkbox']:checked").length;
+                var mss = "";
+                if (Roles_Name == "") {
+                    mss = "@TnT.LangResource.GlobalRes.toastrRoleCreateRName";
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrRoleCreateRName.");
+                    $("#Roles_Name").css("border", "red 1px solid");
+                    return false;
+                }
+
+                if (count == 0) {
+                    mss = "@TnT.LangResource.GlobalRes.toastrRoleCreateSelectPermission";
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrRolesSelectAlrm");
+                    return false;
+                }
+
+                if (mss == "") {
+                    document.getElementById("frmAlarms").submit();
+                }
+
+            });
+            $("#Roles_Name").change(function () {
+                $("#Roles_Name").css("border", "green 1px solid");
+            });
+        });
+    </script>
+}
+

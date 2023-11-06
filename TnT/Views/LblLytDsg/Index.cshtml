@@ -1,0 +1,609 @@
+﻿
+@{
+    ViewBag.Title = "Label Designer";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2> @TnT.LangResource.GlobalRes.LblLytDsgIndex </h2>
+@using (Html.BeginForm("SaveLabelFile", "LblLytDsg", FormMethod.Post, new { @Id = "frmFieldSets" }))
+{
+    <div class="row" style="background-color: aliceblue;padding-top: 17px;margin-bottom: 5px;border: 1px solid #000;">
+
+        <div class="col-lg-5">
+            <div class="form-group">
+                <lable class="col-lg-5 control-label">@TnT.LangResource.GlobalRes.LblLytDsgIndexLayoutRecipe</lable>
+                @Html.DropDownList("LabelFiles")
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="form-group" style="float:right;">
+                
+                <a  id="btnDownload" target="_blank" class="btn btn-info">@TnT.LangResource.GlobalRes.LblLytDsgIndexBtnDownload</a>
+                <button type="button" id="btnSave" class="btn btn-info">@TnT.LangResource.GlobalRes.cmnBtnSave</button>
+                <button type="button" id="btnSaveAs" class="btn btn-info">@TnT.LangResource.GlobalRes.LblLytDsgIndexBtnSaveAs</button>
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modal-lablePreview" id="btnPreview">@TnT.LangResource.GlobalRes.LblLytDsgIndexBtnPreview </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="FieldSet">
+
+        @*<div class="col-lg-6" style="border:1px solid #000; min-height:195px; border-radius:6px;">
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modal-lablePreview">Preview </button>
+            </div>*@
+
+    </div>
+}
+
+<div class="modal fade" id="modal-lablePreview">
+    <div class="modal-dialog previewBody" style="width:12in; height:12in;">
+        <div class="modal-content">
+            <button type="button" class="close" style="float:right;" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-body previewBody" id="previewModelBody" style="width:12in; height:12in; padding:0px">
+                <div id="pageOuter" style="width:100%; height:100%;">
+
+                    <span style="position:absolute;" id="BatchNo-lbl"></span>
+                    <span style="position:absolute;" id="Mfg-lbl"></span>
+                    <span style="position:absolute;" id="Exp-lbl"></span>
+                    <span style="position:absolute;" id="QtyInCN-lbl"></span>
+                    <span style="position:absolute;" id="CNNo-lbl"></span>
+                    <span style="position:absolute;" id="Product-lbl"></span>
+                    <span style="position:absolute;" id="GTIN-lbl"></span>
+                    <span style="position:absolute;" id="GTINCTI-lbl"></span>
+                    <span style="position:absolute;" id="UID-lbl"></span>
+                    <span style="position:absolute;" id="PPN-lbl"></span>
+                    <span style="position:absolute;" id="PostalCode-lbl"></span>
+                    <span style="position:absolute;" id="CountryCode-lbl"></span>
+                    <img style="position:absolute; display:none;" id="Image2D-lbl" src="~/Content/assets/images/Sample2DCode.png">
+                    <img style="position:absolute; display:none;" id="Prod_Barcode-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <img style="position:absolute; display:none;" id="Prod_Barcode1-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <img style="position:absolute; display:none;" id="Prod_Barcode2-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <img style="position:absolute; display:none;" id="PPNBarcode-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <img style="position:absolute; display:none;" id="PPNBarcode2-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <span style="position:absolute;" id="UID_Barcode-lbl"></span>
+                    <img style="position:absolute; display:none;" id="SSCC_Barcode-lbl" src="~/Content/assets/images/SampleBarCode.png" />
+                    <span style="position:absolute;" id="SwBatchNo-lbl"></span>
+                    <span style="position:absolute;" id="SwMfgDate-lbl"></span>
+                    <span style="position:absolute;" id="SwExpDate-lbl"></span>
+                    <span style="position:absolute;" id="SWSSCC-lbl"></span>
+                    <span style="position:absolute;" id="SWCompanyName-lbl"></span>
+                    <span style="position:absolute;" id="SWCompanyAddress-lbl"></span>
+                    <span style="position:absolute;" id="SWCompanyCode-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo1-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo2-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo3-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo4-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo5-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo6-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo7-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo8-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo9-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo10-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo11-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo12-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo13-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo14-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo15-lbl"></span>
+                    <span style="position:absolute;" id="GenInfo16-lbl"></span>
+                    <span style="position:absolute;" id="TenderText-lbl"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button style="display:none;" id="showSaveAsBx" class="myBtn" type="button" data-toggle="modal" data-target="#modal-lblSaveAs">SaveAsForm </button>
+
+<div class="modal fade" id="modal-lblSaveAs">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="border: 2px solid #F44336;">
+            <div class="modal-body">
+                <div class="form-group">
+                    <h3 style="text-align:center;border-bottom: 1px solid #ccc;padding-bottom: 10px;">@TnT.LangResource.GlobalRes.LblLytDsgIndexSaveAsFileName </h3>
+                    <div id="errMSG" style="text-align:center; color:red;"></div>
+                    <table style="width:100%">
+                        <tr>
+                            <td style="vertical-align: baseline; text-align:center;"><label>@TnT.LangResource.GlobalRes.LblLytDsgIndexFileName :</label></td>
+                            <td>
+                                <input class="form-control" style="width:50%;" id="txtSaveAsName" name="txtSaveAsName" type="text" />
+                                <input id="txtExistingFile" name="txtExistingFile" type="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="text-align: right;border-top: none;">
+                <button type="button" class="btn btn-info" id="btnSaveAsFileName" data-dismiss="modal">
+                    @TnT.LangResource.GlobalRes.cmnBtnSave
+                </button>
+                <button type="button" class="btn btn-red" data-dismiss="modal">
+                    @TnT.LangResource.GlobalRes.cmnBtnClose
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function takeAction(obj) {
+
+        elemParam = obj.id.split('-');
+        elemField = elemParam[0];
+        elemType = elemParam[1];
+
+        if (obj.type == "checkbox") {
+            if (elemType == "IsBold") {
+                if ($("#" + obj.id).is(':checked')) {
+                    $("#" + elemField + "-lbl").css("font-weight", "bold");
+                } else {
+                    $("#" + elemField + "-lbl").css("font-weight", "normal");
+                }
+            } else if (elemType == "IsShow") {
+                if ($("#" + obj.id).is(':checked')) {
+                    $("#" + elemField + "-lbl").show();
+                    var parent_utrA = $(obj).parents('tr');
+                    $(".cls-"+ elemField).find('input[type="text"], input[type="number"]').each(function () {
+                        $(this).removeAttr('readonly');
+                    });
+                } else {
+                    $("#" + elemField + "-lbl").hide();
+                    var parent_utrA = $(obj).parents('tr');
+                    var parentTrClass = parent_utrA.attr("class");
+
+                    $('.' + parentTrClass).hide();
+                    //$(".cls-" + parent_utrA).hide();
+                    $(".cls-" + elemField).find('input[type="text"], input[type="number"]').each(function () {
+                        $(this).attr('readonly', 'readonly');
+                    });
+					redrawLbl();
+                }
+            }
+        }
+
+        InitiateElements(elemField, elemType);
+
+    }
+
+    function InitiateElements(elemField, elemType) {
+
+        var obj = ("#" + elemField + "-" + elemType);
+             $(".cls-" + elemField).find('input[type="text"], input[type="checkbox"], input[type="number"]').each(function () {
+
+            elemParamS = this.id.split('-');
+            elemFieldS = elemParamS[0];
+            elemTypeS = elemParamS[1];
+                if(this.type=="text" || this.type=="number"){
+
+
+
+                    if (elemTypeS == "Data") {
+                        $("#" + elemFieldS + "-lbl").html(this.value);
+                    }
+
+                    if (elemTypeS == "FontSizeOrHeight") {
+                        $("#" + elemFieldS + "-lbl").css("font-size", this.value + 'px');
+                    }
+
+                    if (elemTypeS == "Left") {
+                        if (parseInt(this.value) > 0) {
+                            $("#" + elemFieldS + "-lbl").css("left", this.value + 'cm');
+                        } else {
+                            $("#" + elemFieldS + "-lbl").css("left", '0cm');
+                        }
+                    }
+
+                    if (elemTypeS == "Top") {
+                        $("#" + elemFieldS + "-lbl").css("top", this.value + 'cm');
+                    }
+
+                    if (elemTypeS == "Width") {
+                        $("#" + elemFieldS + "-lbl").css('width', this.value+'cm');
+                    }
+                    if (elemTypeS == "Rotate") {
+                        $("#" + elemFieldS + "-lbl").css("-webkit-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                        $("#" + elemFieldS + "-lbl").css("-moz-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                        $("#" + elemFieldS + "-lbl").css("-ms-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                    }
+
+                } else if (this.type == "checkbox") {
+                    if (elemTypeS == "IsBold"){
+                        if ($("#" + this.id).is(':checked')) {
+                            $("#" + elemFieldS + "-lbl").css("font-weight", "bold");
+                        } else {
+                            $("#" + elemFieldS + "-lbl").css("font-weight", "normal");
+                        }
+                    } else if (elemTypeS == "IsShow") {
+                        if ($("#" + this.id).is(':checked')) {
+                                $("#" + elemFieldS + "-lbl").show();
+                        } else {
+                            $("#" + elemFieldS + "-lbl").hide();
+                        }
+                    }
+                }
+
+
+        });
+
+    }
+    function validate() {
+        location.reload();
+    }
+    
+    $('#btnSaveAs').on('click', function () {
+       
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexSelecLayout");
+            return false;
+        }
+        $("#txtExistingFile").val(lblFile);
+        $("#showSaveAsBx").trigger("click");
+
+    });
+    
+    $('#btnPreview').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexSelecLayout");
+            return false;
+        }
+      
+
+    });
+    $('#btnDownload').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexSelecLayout");
+            return false;
+        }
+
+
+    });
+    $('#btnSaveAsFileName').on('click', function () {
+        var ExistingFileName = $("#txtExistingFile").val();
+        var NewFileName = $("#txtSaveAsName").val();
+        if (NewFileName == ExistingFileName) {
+            $("#errMSG").html("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexNewFileDiffernt");
+            return false;
+        } else {
+            $("#errMSG").html("");
+        }
+        if (NewFileName == "") {
+            $("#errMSG").html("@TnT.LangResource.GlobalRes.MsgLblLytDsgprovideFileName");
+            return false;
+        } else {
+            $("#errMSG").html("");
+        }
+        $.ajax({
+            url: 'SaveAsLabel',
+            type: "POST",
+            data: { FileName: ExistingFileName, NewFileName: NewFileName },
+            success: function (data) {
+  
+                if (data = "Successfully saved !")
+                {
+                    $("#txtSaveAsName").val("")
+                }
+                alert(data);
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+
+
+    $('#btnSave').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+        if (lblFile == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexSelecLayout");
+            return false;
+        }
+        PaperSize = $("#PaperSize").val();
+        if (PaperSize == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytIndexSelecPaperSize");
+            return false;
+        }
+        OrientationType = $("#OrientationType").val();
+        if (OrientationType == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytDsgSelectOrientation");
+            return false;
+        }
+        DateFormat = $("#DateFormat").val();
+        if (DateFormat == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytDsgSelectDteFormat");
+            return false;
+        }
+        Dpi = $("#Dpi").val();
+        if (Dpi == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytDsgSelectDpi");
+            return false;
+        }
+        Font = $("#Font").val();
+        if (Font == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytDsgSelectFont");
+            return false;
+        }
+        Zfont = $("#Zfont").val();
+        if (Zfont == "Select") {
+            fillMSG("@TnT.LangResource.GlobalRes.ShwMsgLblLytDsgSelectZPLFont");
+            return false;
+        }
+
+        x = [];
+        $('#labelLayoutDesignElem tr:gt(0)').each(function () {
+            y = '';
+            SegName = '';
+            var lablName = $(this).find('td').eq(0).text();
+
+            $(this).find('td input[type="text"], input[type="checkbox"], input[type="number"]').each(function () {
+                var LblName = $(this).attr('name');
+                LblName = LblName.split('-');
+                SegName = LblName[0];
+                LblName = LblName[1];
+
+                if (this.type == "checkbox") {
+                    if ($("#" + this.id).is(':checked')) {
+                        y += LblName + ':' + 'true' + ', ';
+                    } else {
+                        y += LblName + ':' + false + ', ';
+                    }
+                } else if (this.type = "text") {
+                    y += LblName + ':' + $(this).val() + ', ';
+                } else if (this.type = "number") {
+                    y += LblName + ':' + $(this).val() + ', ';
+                }
+
+
+            });
+            if (y != '') {
+                x.push('RPTMAP:' + SegName + ', LabelName:' + lablName + ',' + $.trim(y))
+            }
+        });
+        //console.log(x);
+
+        px = [];
+        $('#panelPageSettings').each(function () {
+            py = '';
+            $(this).find('input[type="text"], select, input[type="number"]').each(function () {
+                if ($(this).attr('name') == "PaperSize") {
+                    strPaperSize = $(this).val().split(' X ');
+                    //alert(strPaperSize);
+                    PaperSizeHeight = parseInt(strPaperSize[0]) * 2.54;
+                    PaperSizeWidth = parseInt(strPaperSize[1]) * 2.54;
+
+                    if (isNaN(PaperSizeHeight)) {
+                        PaperSizeHeight = 0;
+                    }
+
+                    if (isNaN(PaperSizeWidth)) {
+                        PaperSizeWidth = 0;
+                    }
+
+                    var orignt = $("#OrientationType").val();
+                    if (orignt == "Portrait") {
+                        PaperHeight = parseInt(PaperSizeHeight) / 2.54;
+                    } else if (orignt = "Landscape") {
+                        PaperHeight = parseInt(PaperSizeWidth) / 2.54;
+                    }
+
+                    //alert(PaperSizeHeight + ' - ' + PaperSizeWidth)
+                    py += 'PaperSizePaperKind:8, ' + $(this).attr('name') + ':' + $(this).val() + ', PaperSizeHeight:' + PaperSizeHeight + ', PaperSizeWidth:' + PaperSizeWidth + ', PaperHeight:' + Math.ceil(PaperHeight) + ', ';
+                } else {
+                    py += $(this).attr('name') + ':' + $(this).val() + ', ';
+                }
+
+            });
+            if (py != '') {
+                px.push($.trim(py))
+            }
+        });
+
+        var fileName = $('#LabelFiles').val();
+        console.log(x);
+        //return false;
+        var string = $('#frmFieldSets input:hidden').serialize();
+        $.ajax({
+            url: 'SaveLabelFile',
+            type: "POST",
+            //dataType: 'json',
+            data: { fieldData: x, pageSettings: px, FileName: fileName },
+            success: function (data) {
+                // sucecss msg
+                fillMSG(data);
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+    function fillMSG(msg) {
+        debugger;
+        $('#modal-msg').html(msg);
+        $("#showMSGBx").trigger("click");
+    }
+</script>
+
+
+<script>
+    $("#LabelFiles option[value='2DCIP.job']").css('display', 'none');
+    $("#LabelFiles option[value='DM-8Field.job']").css('display', 'none');
+    $("#LabelFiles option[value='PPN.job']").css('display', 'none');
+    $("#LabelFiles option[value='DM8-Field.job']").css('display', 'none');
+
+    $('#LabelFiles').on('change', function () {
+         $('#pageOuter > span').removeAttr('style');
+        $('#pageOuter > span').html('');
+        $('#pageOuter > span').css('position', 'absolute');
+        $('#pageOuter > img').css('position', 'absolute');
+        $('#pageOuter > img').css('display', 'none');
+
+        var selIndex = this.selectedIndex;
+        $(".loading").show();
+        if (selIndex != 0) {
+            var FileName = this.value;
+
+            $.ajax({
+                url: 'loadFileContent',
+                type: "POST",
+                dataType: 'json',
+                data: { "FileName": FileName },
+                success: function (data) {
+                    $(".loading").hide();
+                    if (data != null) {
+
+                        if (!(data == "No Data")) {
+                            $("#btnDownload").attr("href", "../Content/LabelDesigners/" + FileName);
+                            $("#FieldSet").html("");
+                            $("#FieldSet").html(data);
+
+                            $('.isShow').find('input[type="checkbox"]:checked').each(function () {
+
+                                var parent_tr = $(this).parents('tr');
+                                var hiddenTrCls = parent_tr.attr("class");
+                                $("." + hiddenTrCls).show();
+                                //alert(hiddenTrCls);
+                                elemParamK = this.id.split('-');
+                                elemFieldK = elemParamK[0];
+                                elemTypeK = elemParamK[1];
+
+                                InitiateElements(elemFieldK, elemTypeK);
+                                var parent_utrS = $(this).parents('tr');
+                                $('.' + parent_utrS.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                                    $(this).removeAttr('readonly');
+                                });
+                            });
+
+                            $('.isShow').find('input[type="checkbox"]:not(:checked)').each(function () {
+                                var parent_utr = $(this).parents('tr');
+                                $('#newField').append($('<option>', {
+                                    value: this.id,
+                                    text: $("." + parent_utr.attr("class")).children("td:first").text()
+                                }));
+                                $('.' + parent_utr.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                                    $(this).attr('readonly', 'readonly');
+                                });
+                            });
+
+                            setupPage();
+                        } else {
+                            alert("@TnT.LangResource.GlobalRes.toastrLblLytDsgNoData");
+                        }
+
+
+                    }
+                },
+                error: function (data) {
+
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                }
+            });
+        } else {
+            $(".loading").hide();
+            $("#FieldSet").html("");
+            //messsage
+
+        }
+    });
+
+    function redrawLbl() {
+        $('.isShow').find('input[type="checkbox"]:checked').each(function () {
+            var parent_tr = $(this).parents('tr');
+            var hiddenTrCls = parent_tr.attr("class");
+            $("." + hiddenTrCls).show();
+
+            elemParamK = this.id.split('-');
+            elemFieldK = elemParamK[0];
+            elemTypeK = elemParamK[1];
+
+            InitiateElements(elemFieldK, elemTypeK);
+            var parent_utrS = $(this).parents('tr');
+            $('.' + parent_utrS.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                $(this).removeAttr('readonly');
+            });
+        });
+
+        $('#newField').html('');
+        $('#newField').html('<option value="">Add New Field</option>');
+        $('#labelLayoutDesignElem .isShow').find('input[type="checkbox"]:not(:checked)').each(function () {
+
+            var parent_utr = $(this).parents('tr');
+
+            $('#newField').append($('<option>', {
+                value: this.id,
+                text: $("." + parent_utr.attr("class")).children("td:first").text()
+            }));
+
+            $('.' + parent_utr.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                $(this).attr('readonly', 'readonly');
+            });
+        });
+    }
+
+    function setupPage() {
+        var paperSize = $("#PaperSize").val();
+        var orientation = $("#OrientationType").val();
+        var PageTopMargin = $("#TopMargin").val();
+        var PageLeftMargin = $("#LeftMargin").val();
+        var PageBottomMargin = $("#BottomMargin").val();
+        var PageRightMargin = $("#RightMargin").val();
+        var FontFamily = $("#Font").val();
+        if (paperSize != "") {
+
+            paras = paperSize.split('X');
+            para1 = paras[0];
+            para2 = paras[1];
+            pWidth = parseInt(para1) * parseFloat(2.54);
+            pHeight = parseInt(para2) * parseFloat(2.54);
+
+            if (orientation == "Landscape") {
+                //alert("Landscape");
+                $(".previewBody").css("height", pWidth + "cm");
+                $(".previewBody").css("width", pHeight + "cm");
+                
+                $("#pageOuter").css("margin-top", PageTopMargin + 'cm');
+                $("#pageOuter").css("margin-right", PageRightMargin + 'cm');
+                $("#pageOuter").css("margin-bottom", PageBottomMargin + 'cm');
+                $("#pageOuter").css("margin-left", PageLeftMargin + 'cm');
+
+                $("#previewModelBody").css("font-family", FontFamily);
+            } else if (orientation == "Portrait") {
+                //alert("Portait");
+                $(".previewBody").css("width", pWidth + "cm");
+                $(".previewBody").css("height", pHeight + "cm");
+
+                $("#previewModelBody").css("margin-top", PageTopMargin + "cm");
+                $("#previewModelBody").css("margin-left", PageLeftMargin + "cm");
+                $("#previewModelBody").css("margin-bottom", PageTopMargin + "cm");
+                $("#previewModelBody").css("margin-right", PageLeftMargin + "cm");
+                $("#previewModelBody").css("font-family", FontFamily);
+            }
+        }
+    }
+
+
+
+    function setPaperSizeSel(selVal) {
+
+        $("#PaperSize option:contains('" + selVal + "')").attr('selected', 'selected');
+    }
+
+</script>

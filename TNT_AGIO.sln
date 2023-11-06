@@ -1,0 +1,181 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB Interface", "DB Interface", "{C5770354-348C-4988-815B-DB3F5D7B0FE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.BLL", "DB Interface\REDTR.DB.BLL\REDTR.DB.BLL.csproj", "{0BC76D00-7D8F-4682-A250-D1F48C81155D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.BusinessObjects", "DB Interface\REDTR.DB.BusinessObjects\REDTR.DB.BusinessObjects.csproj", "{6324A058-82D2-4118-ABD8-E3A05FD471FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.Connection", "DB Interface\REDTR.DB.Connection\REDTR.DB.Connection.csproj", "{04950E9C-9568-4DB4-B2C3-E9A7E7064508}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.DAL", "DB Interface\REDTR.DB.DAL\REDTR.DB.DAL.csproj", "{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.HELPER", "DB Interface\REDTR.DB.HELPER\REDTR.DB.HELPER.csproj", "{4270A834-BC56-4804-83EB-D0240E589763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.DB.Install", "DB Interface\REDTR.DB.Install\REDTR.DB.Install.csproj", "{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REDTR.UTILS", "REDTR.UTILS", "{DD789830-98BF-46AF-89D7-E91B25FFACAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.UTILS", "CORE Interface DLLS\REDTR.UTILS\REDTR.UTILS.csproj", "{FD0ED7B4-650E-4060-97E6-4837B46A1569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.JOB", "DB Interface\REDTR.JOB\REDTR.JOB.csproj", "{F7887697-123E-4092-9DC2-44BF858EC3EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REDTR.CODEMGR", "DB Interface\REDTR.CODEMGR\REDTR.CODEMGR.csproj", "{0523193C-BA67-469D-BE13-A83F8DD1D03B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TnT", "TnT\TnT.csproj", "{84F41098-05F6-4636-8BEE-2367475A243D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Debug|x86.Build.0 = Debug|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Release|x86.ActiveCfg = Release|Any CPU
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D}.Release|x86.Build.0 = Release|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Debug|x86.Build.0 = Debug|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA}.Release|x86.Build.0 = Release|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Debug|x86.Build.0 = Debug|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Release|x86.ActiveCfg = Release|Any CPU
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508}.Release|x86.Build.0 = Release|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Debug|x86.Build.0 = Debug|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}.Release|x86.Build.0 = Release|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Debug|x86.Build.0 = Debug|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Release|x86.ActiveCfg = Release|Any CPU
+		{4270A834-BC56-4804-83EB-D0240E589763}.Release|x86.Build.0 = Release|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Debug|x86.Build.0 = Debug|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Release|x86.ActiveCfg = Release|Any CPU
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9}.Release|x86.Build.0 = Release|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Debug|x86.Build.0 = Debug|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569}.Release|x86.Build.0 = Release|Any CPU
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Debug|x86.ActiveCfg = Debug|x86
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Debug|x86.Build.0 = Debug|x86
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Release|x86.ActiveCfg = Release|x86
+		{F7887697-123E-4092-9DC2-44BF858EC3EE}.Release|x86.Build.0 = Release|x86
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Debug|x86.ActiveCfg = Debug|x86
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Debug|x86.Build.0 = Debug|x86
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Release|x86.ActiveCfg = Release|x86
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B}.Release|x86.Build.0 = Release|x86
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Debug|x86.Build.0 = Debug|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Release|x86.ActiveCfg = Release|Any CPU
+		{84F41098-05F6-4636-8BEE-2367475A243D}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BC76D00-7D8F-4682-A250-D1F48C81155D} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{6324A058-82D2-4118-ABD8-E3A05FD471FA} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{04950E9C-9568-4DB4-B2C3-E9A7E7064508} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{4270A834-BC56-4804-83EB-D0240E589763} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{6426BF84-DA60-46B9-A7F6-A8CCFE2DADB9} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{FD0ED7B4-650E-4060-97E6-4837B46A1569} = {DD789830-98BF-46AF-89D7-E91B25FFACAF}
+		{F7887697-123E-4092-9DC2-44BF858EC3EE} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+		{0523193C-BA67-469D-BE13-A83F8DD1D03B} = {C5770354-348C-4988-815B-DB3F5D7B0FE6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DB4798B-C67B-45C5-9209-C5042FE0C1FE}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://172.20.1.200:8080/tfs/defaultcollection
+		SccProjectUniqueName0 = TnT\\TnT.csproj
+		SccProjectName0 = TnT
+		SccLocalPath0 = TnT
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = CORE\u0020Interface\u0020DLLS\\REDTR.UTILS\\REDTR.UTILS.csproj
+		SccProjectTopLevelParentUniqueName2 = TNT_AGIO.sln
+		SccProjectName2 = CORE\u0020Interface\u0020DLLS/REDTR.UTILS
+		SccLocalPath2 = CORE\u0020Interface\u0020DLLS\\REDTR.UTILS
+		SccProjectUniqueName3 = DB\u0020Interface\\REDTR.CODEMGR\\REDTR.CODEMGR.csproj
+		SccProjectTopLevelParentUniqueName3 = TNT_AGIO.sln
+		SccProjectName3 = DB\u0020Interface/REDTR.CODEMGR
+		SccLocalPath3 = DB\u0020Interface\\REDTR.CODEMGR
+		SccProjectUniqueName4 = DB\u0020Interface\\REDTR.DB.BLL\\REDTR.DB.BLL.csproj
+		SccProjectTopLevelParentUniqueName4 = TNT_AGIO.sln
+		SccProjectName4 = DB\u0020Interface/REDTR.DB.BLL
+		SccLocalPath4 = DB\u0020Interface\\REDTR.DB.BLL
+		SccProjectUniqueName5 = DB\u0020Interface\\REDTR.DB.BusinessObjects\\REDTR.DB.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName5 = TNT_AGIO.sln
+		SccProjectName5 = DB\u0020Interface/REDTR.DB.BusinessObjects
+		SccLocalPath5 = DB\u0020Interface\\REDTR.DB.BusinessObjects
+		SccProjectUniqueName6 = DB\u0020Interface\\REDTR.DB.Connection\\REDTR.DB.Connection.csproj
+		SccProjectTopLevelParentUniqueName6 = TNT_AGIO.sln
+		SccProjectName6 = DB\u0020Interface/REDTR.DB.Connection
+		SccLocalPath6 = DB\u0020Interface\\REDTR.DB.Connection
+		SccProjectUniqueName7 = DB\u0020Interface\\REDTR.DB.DAL\\REDTR.DB.DAL.csproj
+		SccProjectTopLevelParentUniqueName7 = TNT_AGIO.sln
+		SccProjectName7 = DB\u0020Interface/REDTR.DB.DAL
+		SccLocalPath7 = DB\u0020Interface\\REDTR.DB.DAL
+		SccProjectUniqueName8 = DB\u0020Interface\\REDTR.DB.HELPER\\REDTR.DB.HELPER.csproj
+		SccProjectTopLevelParentUniqueName8 = TNT_AGIO.sln
+		SccProjectName8 = DB\u0020Interface/REDTR.DB.HELPER
+		SccLocalPath8 = DB\u0020Interface\\REDTR.DB.HELPER
+		SccProjectUniqueName9 = DB\u0020Interface\\REDTR.DB.Install\\REDTR.DB.Install.csproj
+		SccProjectTopLevelParentUniqueName9 = TNT_AGIO.sln
+		SccProjectName9 = DB\u0020Interface/REDTR.DB.Install
+		SccLocalPath9 = DB\u0020Interface\\REDTR.DB.Install
+		SccProjectUniqueName10 = DB\u0020Interface\\REDTR.JOB\\REDTR.JOB.csproj
+		SccProjectTopLevelParentUniqueName10 = TNT_AGIO.sln
+		SccProjectName10 = DB\u0020Interface/REDTR.JOB
+		SccLocalPath10 = DB\u0020Interface\\REDTR.JOB
+	EndGlobalSection
+EndGlobal

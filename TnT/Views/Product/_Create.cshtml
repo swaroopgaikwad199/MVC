@@ -1,0 +1,2859 @@
+﻿@model TnT.Models.Product.PackagingAsso
+
+@{
+    ViewBag.Title = "Create_";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<h2>
+    @TnT.LangResource.GlobalRes.ProductCreate
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "Product")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+<div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger bold">Validation Error Occured. Please check the data.</div>
+    }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+<div id="validationMsg"></div>
+<div style="border: 4px solid #636161; border-radius: 9px;">
+    @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { @class = "f1", @id = "frmProduct" }))
+    {
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="17" data-number-of-steps="5" style="width: 17%;"></div>
+            </div>
+            <div class="f1-step f1-step6 active">
+                <div class="f1-step-icon">1</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardProductInfo</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">2</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardAggregationLevels</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">3</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardAggregationInfo</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">4</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardComplianceInfo</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">5</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardSaveProduct</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">6</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardVerification</p>
+            </div>
+        </div>
+
+        @Html.AntiForgeryToken()
+
+
+
+
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductType, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(M => M.Type, new SelectList(ViewBag.Types, "TID", "Job_Type"), TnT.LangResource.GlobalRes.JobCreateDrpType, new { @class = "form-control" })
+
+                            @*  @Html.EditorFor(model => model.ExpDateFormat, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        @Html.LabelFor(model => model.ScheduledDrug, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductIsSchedule, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ScheduledDrug)
+                            @Html.ValidationMessageFor(model => model.ScheduledDrug, "", new { @class = "text-danger" })
+                         </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    
+                    
+                        <div>
+                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductActive, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.CheckBoxFor(model => model.IsActive, htmlAttributes: new { @checked = "" })
+                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    
+                    <div>
+                        <div class="form-group" style="display:none;">
+                            @Html.LabelFor(model => model.UseExpDay, htmlAttributes: new { @class = "control-label col-md-6 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductUseExpDay, @data_original_title = "Field Information" })
+
+                            @Html.EditorFor(model => model.UseExpDay, new { @Value = "true", @Checked = "checked" })
+                            @Html.ValidationMessageFor(model => model.UseExpDay, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.ExpDateFormat, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductExpDateFormat, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(M => M.ExpDateFormat, new SelectList(ViewBag.DateFormats, "Format", "Format"), "Select Format", new { @class = "form-control" })
+                            @*  @Html.EditorFor(model => model.ExpDateFormat, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.ExpDateFormat, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+
+                <div></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductName, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control alphaNumSpecial", @validate = "true", @maxlength = "50", @onblur = "minlength3(this)" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GenericName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductGenericName, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.GenericName, new { htmlAttributes = new { @class = "form-control alphaNumSpecial", @validate = "true", @maxlength = "200", @onblur = "minlength3(this)" } })
+                            @Html.ValidationMessageFor(model => model.GenericName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Composition, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductComposition, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Composition, new { htmlAttributes = new { @class = "form-control alphaNumSpecial", @validate = "true", @maxlength = "500", @onblur = "minlength3(this)" } })
+                            @Html.ValidationMessageFor(model => model.Composition, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DoseUsage, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDoseUsage, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.DoseUsage, new { htmlAttributes = new { @class = "form-control alphaNumSpecial", @validate = "true", @maxlength = "100", @onblur = "minlength3(this)" } })
+                            @Html.ValidationMessageFor(model => model.DoseUsage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FGCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFGCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.FGCode, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.FGCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductRemark, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control alphaNumSpecial", @validate = "true", @maxlength = "100" } })
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control NumbersOnly", @validate = "true", @maxlength = "12" } })
+                            @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDescription, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @maxlength = "200" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.InternalMaterialCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductInternalMaterialCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.InternalMaterialCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                            @Html.ValidationMessageFor(model => model.InternalMaterialCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DosageForm, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDosageForm, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.DosageForm, new SelectList(ViewBag.DosageForm, "ID", "DosageName"), TnT.LangResource.GlobalRes.JobCreateDrpFormat, new { @class = "form-control", @validate = "true" })
+                            @Html.ValidationMessageFor(model => model.DosageForm, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.Label("Provider", htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = "Please Select Provider", @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.ProviderId, new SelectList(ViewBag.Provider, "Id", "Name"), TnT.LangResource.GlobalRes.JobCreateDrpFormat, new { @class = "form-control", @validate = "true" })
+                            @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               
+                
+            </div>
+
+            <div class="f1-buttons">
+                <button type="button" id="NxtProdDetails" class="btn btn-next btn-orange btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+
+        <fieldset id="fldAgg">
+
+            <div id="aggErr" style="text-align:center; width:100%; color:red;"></div>
+
+            <table style="width: 90%; text-align: center; margin-top: 1%;" id="aggLevels">
+                <tr>
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/ppb.png" alt="ppb"><br />
+                        <input type="checkbox" disabled="disabled" class="chkbx" onclick="getAggVal(this);" name="chkPPB" id="PPB"><label for="PPB"> @TnT.LangResource.GlobalRes.ProductPPB</label>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/mono.png" alt="mono"><br />
+                        <input type="checkbox" class="chkbx" onclick="getAggVal(this);" name="chkMOC" id="MOC"><label for="MOC"> @TnT.LangResource.GlobalRes.ProductMOC</label>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/obx.png" alt="obx"><br />
+                        <input type="checkbox" class="chkbx" onclick="getAggVal(this);" name="chkOBX" id="OBX"><label for="OBX"> @TnT.LangResource.GlobalRes.ProductOBX</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/content/assets/images/ish.png" alt="ish"><br />
+                        <input type="checkbox" class="chkbx" onclick="getAggVal(this);" name="chkISH" id="ISH"><label for="ISH"> @TnT.LangResource.GlobalRes.ProductISH</label>
+                    </td>
+                    <td>
+                        <img src="~/content/assets/images/osh.png" alt="osh"><br />
+                        <input type="checkbox" class="chkbx" onclick="getAggVal(this);" name="chkOSH" id="OSH"><label for="OSH">@TnT.LangResource.GlobalRes.ProductOSH</label>
+                    </td>
+                    <td>
+                        <img src="~/content/assets/images/pal.png" alt="pal"><input type="text" style="width: 1px; height: 1px; margin-left: -11px; position: absolute; z-index: -2147483648;" id="targetAggTxt" validate="true" name="targetAggTxt" value="" /><br />
+
+                        <input type="checkbox" class="chkbx" onclick="getAggVal(this);" name="chkPAL" id="PAL"><label for="PAL">@TnT.LangResource.GlobalRes.ProductPAL</label>
+
+                    </td>
+                </tr>
+            </table>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" class="btn btn-next btn-orange btn-orange" id="btnNxtAgg">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-12">
+
+                <table width="90%" id="packagingGrid" style="text-align: center; margin-top: 5px;" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;"></th>
+                            <th class="PPB" style="width: 10%; text-align: center;">PPB</th>
+                            <th class="MOC" style="width: 10%; text-align: center;">MOC</th>
+                            <th class="OBX" style="width: 10%; text-align: center;">OBX</th>
+                            <th class="ISH" style="width: 10%; text-align: center;">ISH</th>
+                            <th class="OSH" style="width: 10%; text-align: center;">OSH</th>
+                            <th class="PAL" style="width: 10%; text-align: center;">PAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="trPPN">
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductPPN, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPPN, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="PPB[]" /></td>
+                            <td class="MOC"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="MOC[]" /></td>
+                            <td class="OBX"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="OBX[]" /> </td>
+                            <td class="ISH"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="ISH[]" /> </td>
+                            <td class="OSH"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="OSH[]" /> </td>
+                            <td class="PAL"><input onblur="isValidPPN(this);" maxlength="12" class="form-control NumbersOnly" type="text" name="PAL[]" /> </td>
+                        </tr>
+                        <tr class="trGTIN">
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductGTIN, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductGTIN, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="PPB[]" /></td>
+                            <td class="MOC"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="MOC[]" /></td>
+                            <td class="OBX"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="OBX[]" /> </td>
+                            <td class="ISH"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="ISH[]" /> </td>
+                            <td class="OSH"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="OSH[]" /> </td>
+                            <td class="PAL"><input onblur="isValidGTIN(this);" maxlength="14" class="form-control NumbersOnly" type="text" name="PAL[]" /> </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductMRP, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductMRP, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input value="0" class="form-control NumbersOnly" type="text" name="PPB[]" /></td>
+                            <td class="MOC"><input value="0" class="form-control NumbersOnly" type="text" name="MOC[]" /></td>
+                            <td class="OBX"><input value="0" class="form-control NumbersOnly" type="text" name="OBX[]" /> </td>
+                            <td class="ISH"><input value="0" class="form-control NumbersOnly" type="text" name="ISH[]" /> </td>
+                            <td class="OSH"><input value="0" class="form-control NumbersOnly" type="text" name="OSH[]" /> </td>
+                            <td class="PAL"><input value="0" class="form-control NumbersOnly" type="text" name="PAL[]" /> </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductPCMAP, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPCMAP, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input maxlength="4" class="form-control NumbersOnly" type="text" name="PPB[]" id="PPB_PCMAP" /></td>
+                            <td class="MOC"><input maxlength="4" class="form-control NumbersOnly" type="text" name="MOC[]" id="MOC_PCMAP" /></td>
+                            <td class="OBX"><input maxlength="4" class="form-control NumbersOnly" type="text" name="OBX[]" id="OBX_PCMAP" onblur="greaterThanOne(this, 'PC MAP');" /> </td>
+                            <td class="ISH"><input maxlength="4" onblur="greaterThanOne(this, 'PC MAP');" id="ISH_PCMAP" class="form-control NumbersOnly" type="text" name="ISH[]" /> </td>
+                            <td class="OSH"><input maxlength="4" onblur="greaterThanOne(this, 'PC MAP');" id="OSH_PCMAP" class="form-control NumbersOnly" type="text" name="OSH[]" /> </td>
+                            <td class="PAL"><input maxlength="4" onblur="greaterThanOne(this, 'PC MAP');" id="PAL_PCMAP" class="form-control NumbersOnly" type="text" name="PAL[]" /> </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductBundlingQTY, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductBundlingQty, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input onblur="checkMod(this, 'PPB');" class="form-control NumbersOnly" type="text" name="PPB[]" id="PPB_Bundling" /></td>
+                            <td class="MOC"><input onblur="checkMod(this, 'MOC');" class="form-control NumbersOnly" type="text" name="MOC[]" id="MOC_Bundling" /></td>
+                            <td class="OBX"><input onblur="greaterThanOne(this, 'Bundling Quantity'); checkMod(this, 'OBX');" class="form-control NumbersOnly" type="text" name="OBX[]" id="OBX_Bundling" /> </td>
+                            <td class="ISH"><input onblur="greaterThanOne(this, 'Bundling Quantity'); checkMod(this,'ISH');" class="form-control NumbersOnly" type="text" name="ISH[]" id="ISH_Bundling" /> </td>
+                            <td class="OSH"><input onblur="greaterThanOne(this, 'Bundling Quantity'); checkMod(this, 'OSH');" class="form-control NumbersOnly" type="text" name="OSH[]" id="OSH_Bundling" /> </td>
+                            <td class="PAL"><input onblur="greaterThanOne(this, 'Bundling Quantity'); checkMod(this, 'PAL');" class="form-control NumbersOnly" type="text" name="PAL[]" id="PAL_Bundling" /> </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelName, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelName, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB">
+                                @*<input class="form-control" type="text" name="PPB[]" />*@
+                                <select class="form-control required" data-val-required="The Label field is required." id="ddPPBLable" name="PPB[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel </option>
+                                </select>
+                                <br />
+                                @*<a href="#" onclick="loadPreview('PPB');">Preview</a>*@
+                            </td>
+                            <td class="MOC">
+                                @*<input class="form-control" type="text" name="MOC[]" />*@
+                                <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddMOCLable" name="MOC[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                </select>
+                                <br />
+                                <a href="#" onclick="loadPreview('MOC');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>
+                            </td>
+                            <td class="OBX">
+                                @*<input class="form-control" type="text" name="OBX[]" />*@
+                                <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddOBXLable" name="OBX[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                </select>
+                                <br />
+                                <a href="#" onclick="loadPreview('OBX');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>
+                            </td>
+                            <td class="ISH">
+                                @*<input class="form-control" type="text" name="ISH[]" />*@
+                                <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddISHLable" name="ISH[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                </select>
+                                <br />
+                                <a href="#" onclick="loadPreview('ISH');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>
+                            </td>
+                            <td class="OSH">
+                                @*<input class="form-control" type="text" name="OSH[]" />*@
+                                <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddOSHLable" name="OSH[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                </select>
+                                <br />
+                                <a href="#" onclick="loadPreview('OSH');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>
+                            </td>
+                            <td class="PAL">
+                                @*<input class="form-control" type="text" name="PAL[]" />*@
+                                <select class="form-control required" data-val="true" data-val-required="The Label field is required." id="ddPALLable" name="PAL[]">
+                                    <option value="">@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>
+                                </select>
+                                <br />
+                                <a href="#" onclick="loadPreview('PAL');">@TnT.LangResource.GlobalRes.cmnBtnPreview</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelFilter, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelFilter, @data_original_title = "Field Information" })</th>
+
+                            <td class="PPB"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="PPB[]" /></td>
+                            <td class="MOC"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="MOC[]" /></td>
+                            <td class="OBX"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="OBX[]" /> </td>
+                            <td class="ISH"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="ISH[]" /> </td>
+                            <td class="OSH"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="OSH[]" /> </td>
+                            <td class="PAL"><input class="form-control" value="GS12D1-01-17-10-21|GTIN|EXP|LOT|UID" type="text" name="PAL[]" /> </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" id="NxtAggDetails" class="btn btn-next btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-12">
+                <div class="panel panel-primary" data-collapsed="0">
+				
+					<div class="panel-heading">
+						<div class="panel-title">
+							USA - DSCSA
+						</div>
+					</div>
+					
+					<div class="panel-body">
+                        <div class="col-md-6">
+							<div class="form-group">
+								
+								@Html.Label("National Drug Code", htmlAttributes: new { @class = "control-label col-md-5 popover-default lblNDC", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductNDC, @data_original_title = "Field Information", id = "lblNDC" })
+								<div class="col-md-7">
+								    @Html.EditorFor(model => model.CountryDrugCode, new { htmlAttributes = new { @class = "form-control", id = "txtCountryDrugCode" } })
+                                     @Html.ValidationMessageFor(model => model.CountryDrugCode, "", new { @class = "text-danger" })
+								</div>
+							</div>
+						   </div>	
+						
+					
+					</div>
+				</div>
+                <div class="panel panel-primary" data-collapsed="0">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Russia
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.FEACN, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFeacn, @data_original_title = "Field Information", id = "lblFeacn" })
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.FEACN, new { htmlAttributes = new { @class = "form-control NumbersOnly", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.FEACN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0">
+
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Saudi Arabia
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.Label("Saudi Drug Code", htmlAttributes: new { @class = "control-label col-md-5 popover-default lblNDC", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSDC, @data_original_title = "Field Information", id = "lblSDC" })
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.SaudiDrugCode, new { htmlAttributes = new { @class = "form-control", id = "txtSaudiDrugCode" } })
+                                    @Html.ValidationMessageFor(model => model.SaudiDrugCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0">
+    <div class="panel-heading">
+        <div class="panel-title">
+            China Code
+        </div>
+    </div>
+
+    <div class="panel-body">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SubTypeNo, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubTypeNo, @data_original_title = "Field Information" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SubTypeNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.SubTypeNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AuthorizedNo, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductAuthorizedNo, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.AuthorizedNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.AuthorizedNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SubType, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubType, @data_original_title = "Field Information" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SubType, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.SubType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SubTypeSpec, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubTypeSpec, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SubTypeSpec, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.SubTypeSpec, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PackageSpec, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPackageSpec, @data_original_title = "Field Information" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PackageSpec, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.PackageSpec, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PackUnit, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPackUnit, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PackUnit, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.PackUnit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ResProdCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductResProduct, @data_original_title = "Field Information" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.ResProdCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.ResProdCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Workshop, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductWorkshop, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Workshop, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.Workshop, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+                
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" id="NxtAggDetails" class="btn btn-next btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <div class="form-group">
+                    @*<div>
+                            <button id="btnTest" class="btn btn-blue"> Test</button>
+                        </div>*@
+                    <div class="col-md-12" style="text-align: center;margin-top: 6%;margin-bottom: 6%;">
+                        <div class="row" id="validationMsgDiv" style="color:red;">
+                            <div>
+                                <button type="submit" id="btnSubmit" class="btn btn-lg btn-info btn-icon icon-left">
+                                    @TnT.LangResource.GlobalRes.cmnBtnSave
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="f1-buttons">
+                        <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                    </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <h2>Verify Section</h2>
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">Previous</button>
+                <button type="submit" class="btn btn-submit">Submit</button>
+            </div>
+        </fieldset>
+
+
+
+
+        <style>
+            .PPB {
+                display: none;
+            }
+
+            .MOC {
+                display: none;
+            }
+
+            .OBX {
+                display: none;
+            }
+
+            .ISH {
+                display: none;
+            }
+
+            .OSH {
+                display: none;
+            }
+
+            .PAL {
+                display: none;
+            }
+
+            .dataTables_info {
+                display: none;
+            }
+
+            .dataTables_paginate {
+                display: none;
+            }
+
+            .form-group {
+                margin-bottom: 36px;
+            }
+        </style>
+        <script>
+            $("#PPB").change(function () {
+                if (this.checked) {
+
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="PPB[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="PPB[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="PPB[]"]').eq(1).attr("validate", "true");
+                    //}
+
+                    $('input[name="PPB[]"]').eq(1).addClass("valGTIN");
+                    $('input[name="PPB[]"]').eq(3).attr("readonly", "readonly");
+                    $('input[name="PPB[]"]').eq(4).attr("readonly", "readonly");
+                    $('input[name="PPB[]"]').eq(4).val(0);
+                    $('input[name="PPB[]"]').eq(2).attr("validate", "true");
+                    $('input[name="PPB[]"]').eq(5).attr("validate", "true");
+                    $('input[name="PPB[]"]').eq(2).val(0);
+                    $('select[name="PPB[]"]').eq(0).attr("validate", "true");
+                    $('input[name="PPB[]"]').eq(6).attr("validate", "true");
+                    $(".PPB").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="PPB[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    //    $('input[name="PPB[]"]').eq(1).removeAttr("validate", "");
+                    //}
+                    $('input[name="PPB[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="PPB[]"]').eq(3).removeAttr("readonly", "");
+                    $('input[name="PPB[]"]').eq(4).removeAttr("readonly", "");
+                    $('input[name="PPB[]"]').eq(4).val("");
+                    $('input[name="PPB[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="PPB[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="PPB[]"]').eq(2).val("");
+                    $('select[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PPB[]"]').eq(6).removeAttr("validate", "");
+                    $(".PPB").hide();
+                }
+            });
+            $("#MOC").change(function () {
+
+                if (this.checked) {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="MOC[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="MOC[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="MOC[]"]').eq(1).removeAttr("validate", "");
+                    //}
+                    $('input[name="MOC[]"]').eq(1).addClass("valGTIN");
+                    //$('input[name="MOC[]"]').eq(4).attr("validate", "true");
+                    $('input[name="MOC[]"]').eq(3).attr("readonly", "readonly");
+                    $('input[name="MOC[]"]').eq(4).attr("readonly", "readonly");
+                    $('input[name="MOC[]"]').eq(4).val(0);
+                    $('input[name="MOC[]"]').eq(2).attr("validate", "true");
+                    $('input[name="MOC[]"]').eq(5).attr("validate", "true");
+                    $('input[name="MOC[]"]').eq(3).val(0);
+                    $('select[name="MOC[]"]').eq(0).attr("validate", "true");
+                    $('input[name="MOC[]"]').eq(6).attr("validate", "true");
+                    $(".MOC").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="MOC[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "true");
+                    //    $('input[name="MOC[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="MOC[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="MOC[]"]').eq(4).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(3).removeAttr("readonly", "");
+                    $('input[name="MOC[]"]').eq(4).removeAttr("readonly", "");
+                    $('input[name="MOC[]"]').eq(4).val("");
+                    $('input[name="MOC[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(3).val("");
+                    $('select[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(6).removeAttr("validate", "");
+                    $(".MOC").hide();
+                }
+            });
+            $("#OBX").change(function () {
+
+                if (this.checked) {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="OBX[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="OBX[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="OBX[]"]').eq(1).removeAttr("validate", "");
+                    //}
+                    $('input[name="OBX[]"]').eq(2).attr("validate", "true");
+                    $('input[name="OBX[]"]').eq(5).attr("validate", "true");
+                    $('input[name="OBX[]"]').eq(1).addClass("valGTIN");
+                    $('input[name="OBX[]"]').eq(3).attr("NonZeroVal", "true");
+                    $('input[name="OBX[]"]').eq(4).attr("NonZeroVal", "true");
+
+                    $('input[name="OBX[]"]').eq(3).val(0);
+                    $('input[name="OBX[]"]').eq(4).val(0);
+
+                    $('input[name="OBX[]"]').eq(4).attr("validate", "true");
+                    $('select[name="OBX[]"]').eq(0).attr("validate", "true");
+                    $('input[name="OBX[]"]').eq(6).attr("validate", "true");
+                    $(".OBX").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="OBX[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    //    $('input[name="OBX[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="OBX[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="OBX[]"]').eq(3).removeAttr("NonZeroVal", "");
+                    $('input[name="OBX[]"]').eq(4).removeAttr("NonZeroVal", "");
+
+                    $('input[name="OBX[]"]').eq(3).val("");
+                    $('input[name="OBX[]"]').eq(4).val("");
+                    $('input[name="OBX[]"]').eq(3).removeAttr("readonly", "");
+                    $('input[name="OBX[]"]').eq(4).removeAttr("readonly", "");
+                    $('input[name="OBX[]"]').eq(4).removeAttr("validate", "");
+                    $('select[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(6).removeAttr("validate", "");
+                    $(".OBX").hide();
+                }
+            });
+            $("#ISH").change(function () {
+                if (this.checked) {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="ISH[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="ISH[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="ISH[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="ISH[]"]').eq(1).addClass("valGTIN");
+                    $('input[name="ISH[]"]').eq(2).attr("validate", "true");
+                    $('input[name="ISH[]"]').eq(5).attr("validate", "true");
+                    $('input[name="ISH[]"]').eq(3).val(0);
+                    $('input[name="ISH[]"]').eq(4).val(0);
+                    $('input[name="ISH[]"]').eq(3).attr("NonZeroVal", "true");
+                    $('input[name="ISH[]"]').eq(4).attr("NonZeroVal", "true");
+                    $('input[name="ISH[]"]').eq(4).attr("validate", "true");
+                    $('select[name="ISH[]"]').eq(0).attr("validate", "true");
+                    $('input[name="ISH[]"]').eq(6).attr("validate", "true");
+                    $(".ISH").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="ISH[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "true");
+                    //    $('input[name="ISH[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="ISH[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="ISH[]"]').eq(3).removeAttr("NonZeroVal", "");
+                    $('input[name="ISH[]"]').eq(4).removeAttr("NonZeroVal", "");
+
+                    $('input[name="ISH[]"]').eq(3).val("");
+                    $('input[name="ISH[]"]').eq(4).val("");
+                    $('input[name="ISH[]"]').eq(4).removeAttr("validate", "");
+                    $('select[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(6).removeAttr("validate", "");
+                    $(".ISH").hide();
+                }
+            });
+            $("#OSH").change(function () {
+                if (this.checked) {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="OSH[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="OSH[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="OSH[]"]').eq(1).removeAttr("validate", "");
+                    //}
+                    $('input[name="OSH[]"]').eq(1).addClass("valGTIN");
+                    $('input[name="OSH[]"]').eq(2).attr("validate", "true");
+                    $('input[name="OSH[]"]').eq(5).attr("validate", "true");
+                    $('input[name="OSH[]"]').eq(4).attr("validate", "true");
+                    $('select[name="OSH[]"]').eq(0).attr("validate", "true");
+                    $('input[name="OSH[]"]').eq(6).attr("validate", "true");
+                    $('input[name="OSH[]"]').eq(4).val(0);
+                    $('input[name="OSH[]"]').eq(3).val(0);
+                    $('input[name="OSH[]"]').eq(3).attr("NonZeroVal", "true");
+                    $('input[name="OSH[]"]').eq(4).attr("NonZeroVal", "true");
+
+                    $(".OSH").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="OSH[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "true");
+                    //    $('input[name="OSH[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="OSH[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="OSH[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(4).removeAttr("validate", "");
+                    $('select[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(6).removeAttr("validate", "");
+
+                    $('input[name="OSH[]"]').eq(3).removeAttr("NonZeroVal", "");
+                    $('input[name="OSH[]"]').eq(4).removeAttr("NonZeroVal", "");
+
+                    $('input[name="OSH[]"]').eq(4).val("");
+                    $(".OSH").hide();
+                }
+            });
+            $("#PAL").change(function () {
+                if (this.checked) {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="PAL[]"]').eq(1).attr("validate", "true");
+                    //} else {
+                    //    $('input[name="PAL[]"]').eq(0).attr("validate", "true");
+                    //    $('input[name="PAL[]"]').eq(1).removeAttr("validate", "");
+                    //}
+                    $('input[name="PAL[]"]').eq(1).addClass("valGTIN");
+                    $('input[name="PAL[]"]').eq(2).attr("validate", "true");
+                    $('input[name="PAL[]"]').eq(4).attr("validate", "true");
+                    $('input[name="PAL[]"]').eq(5).attr("validate", "true");
+                    $('select[name="PAL[]"]').eq(0).attr("validate", "true");
+                    $('input[name="PAL[]"]').eq(6).attr("validate", "true");
+                    $('input[name="PAL[]"]').eq(3).val(0);
+                    $('input[name="PAL[]"]').eq(4).val(0);
+
+                    $('input[name="PAL[]"]').eq(3).attr("NonZeroVal", "true");
+                    $('input[name="PAL[]"]').eq(4).attr("NonZeroVal", "true");
+
+                    $(".PAL").show();
+                } else {
+                    //if ($("#Type option:selected").text() != "Germany-PPN") {
+                    //    $('input[name="PAL[]"]').eq(1).removeAttr("validate", "");
+                    //} else {
+                    //    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "true");
+                    //    $('input[name="PAL[]"]').eq(1).removeAttr("validate", "true");
+                    //}
+                    $('input[name="PAL[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="PAL[]"]').eq(2).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(5).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(4).removeAttr("validate", "");
+                    $('select[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(6).removeAttr("validate", "");
+
+                    $('input[name="PAL[]"]').eq(3).removeAttr("NonZeroVal", "");
+                    $('input[name="PAL[]"]').eq(4).removeAttr("NonZeroVal", "");
+                    $('input[name="PAL[]"]').eq(3).val("");
+                    $('input[name="PAL[]"]').eq(4).val("");
+                    $(".PAL").hide();
+                }
+            });
+
+
+
+            $("#btnSubmit").click(function () {
+
+                $('#modal-rpt-data').load('@Url.Action("_Login", "Account")');
+                $("#showRPTBx").trigger("click");               
+            });           
+
+            function postData()
+            {
+               // alert("done!");
+                $('input[name="MOC[]"]').eq(1).removeAttr("disabled");
+                $('input[name="OBX[]"]').eq(1).removeAttr("disabled");
+                $('input[name="ISH[]"]').eq(1).removeAttr("disabled");
+                $('input[name="OSH[]"]').eq(1).removeAttr("disabled");
+                $('input[name="PAL[]"]').eq(1).removeAttr("disabled");
+                $('#txtCountryDrugCode').removeAttr("disabled");
+                document.getElementById('frmProduct').submit();
+            }
+
+
+            function isValidGTIN(obj) {
+                debugger;
+                if (obj.value != "") {
+                    jobtypeId = $("#Type option:selected").val();
+                    jobtype = $("#Type option:selected").text();
+                    if (jobtypeId != 10056) {
+                        x = [];
+                        $(".valGTIN").each(function (index) {
+                            x.push($(this).val());
+
+                        });
+                        var GTINS = x;
+                        var GTINSArray = GTINS.sort();
+
+                        var GTINSDuplicate = [];
+                        for (var i = 0; i < GTINSArray.length - 1; i++) {
+
+                            if (GTINSArray[i + 1] == GTINSArray[i]) {
+                                if (GTINSArray[i] != "") {
+                                    GTINSDuplicate.push(GTINSArray[i]);
+                                }
+                            }
+
+
+                        }
+
+                        if (GTINSDuplicate > 0) {
+                            obj.value = "";
+                            if (jobtypeId != 26) {
+                                obj.focus();
+                                $("#NxtAggDetails").attr("disabled", "disabled");
+                            }
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateProductDuplicateGTIN");
+                            obj.style.border = "red 1px solid";
+
+                        } else {
+
+                            obj.style.border = "green 1px solid";
+                            $("#NxtAggDetails").removeAttr("disabled");
+                        }
+
+
+                        //if (jobtype == "DGFT") {
+                        //$("#NxtAggDetails").attr("disabled", "disabled");
+                        if (obj.value != "") {
+                            var checkSum = eanCheckDigit(obj.value);
+                            lstDigit = obj.value.slice(-1);
+
+                            var GTINLEN = obj.value.length;
+                            var bfrTrimGTINVAL = obj.name;
+                            var aftrTrim = bfrTrimGTINVAL.slice(0, -2);
+
+                            if (parseInt(GTINLEN) < 14) {
+                                toastr.warning("@TnT.LangResource.GlobalRes.toastrtracelinkInvalidGTIN");
+                                obj.style.border = "red 1px solid";
+                                if (jobtypeId != 26) {
+                                    //obj.focus();
+                                    $("#NxtAggDetails").attr("disabled", "disabled");
+                                }
+                                else {
+                                    obj.value = "";
+                                }
+
+                            }
+                            else if (parseInt(checkSum) != parseInt(lstDigit)) {
+                                toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateProductInvalidGTIN " + aftrTrim + "@TnT.LangResource.GlobalRes.toastrCreateProductCheckSum " + parseInt(checkSum));
+                                //obj.value = "";
+                                obj.style.border = "red 1px solid";
+                                if (jobtypeId != 26) {
+                                    //obj.focus();
+                                    $("#NxtAggDetails").attr("disabled", "disabled");
+                                }
+                                else {
+                                    obj.value = "";
+                                }
+
+
+                            }
+                            else {
+                                var productCode = $("#ProductCode").val();
+                                var addedGTIN = obj.value;
+                                var GTINProductCode = addedGTIN.substring(1, addedGTIN.length - 1);
+
+                                if (productCode === GTINProductCode) {
+                                    obj.style.border = "green 1px solid";
+                                    $("#NxtAggDetails").removeAttr("disabled");
+                                    return;
+                                } else {
+                                    obj.value = "";
+                                    if (jobtypeId != 26) {
+                                        obj.focus();
+                                        $("#NxtAggDetails").attr("disabled", "disabled");
+                                    }
+                                    obj.style.border = "red 1px solid";
+                                    toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateInvalidproductCode");
+
+                                }
+                            }
+
+
+                            //if (jobtypeId != 17) {
+                            //    if (parseInt(GTINLEN) < 14) {
+                            //        toastr.warning("Invalid GTIN. It should be 14 Digit");
+                            //        obj.style.border = "red 1px solid";
+                            //        obj.focus();
+                            //        $("#NxtAggDetails").attr("disabled", "disabled");
+                            //    } else if (parseInt(checkSum) != parseInt(lstDigit)) {
+                            //        toastr.warning("Invalid GTIN. Please provide valid GTIN for " + aftrTrim + ". Correct Check Sum: " + parseInt(checkSum));
+                            //        //obj.value = "";
+                            //        obj.style.border = "red 1px solid";
+                            //        obj.focus();
+                            //        $("#NxtAggDetails").attr("disabled", "disabled");
+
+                            //    } else {
+
+                            //        var productCode = $("#ProductCode").val();
+                            //        var addedGTIN = obj.value;
+                            //        var GTINProductCode = addedGTIN.substring(1, addedGTIN.length - 1);
+
+                            //        if (productCode === GTINProductCode) {
+                            //            obj.style.border = "green 1px solid";
+                            //            $("#NxtAggDetails").removeAttr("disabled");
+                            //            return;
+                            //        } else {
+                            //            obj.value = "";
+                            //            obj.focus();
+                            //            obj.style.border = "red 1px solid";
+                            //            toastr.warning("Invalid product code provided, in Product Info step. Please correct it.");
+                            //            $("#NxtAggDetails").attr("disabled", "disabled");
+                            //        }
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    if (parseInt(GTINLEN) < 13) {
+                            //        toastr.warning("Invalid GTIN. It should be 13 Digit");
+                            //        obj.style.border = "red 1px solid";
+                            //        obj.focus();
+                            //        if (jobtype != "Germany-PPN") {
+                            //            $("#NxtAggDetails").attr("disabled", "disabled");
+                            //        }
+                            //    } else {
+                            //        var productCode = $("#ProductCode").val();
+                            //        var addedGTIN = obj.value;
+                            //        var GTINProductCode = addedGTIN.substring(1, addedGTIN.length);
+
+                            //        if (productCode === GTINProductCode) {
+                            //            obj.style.border = "green 1px solid";
+                            //            if (jobtype != "Germany-PPN") {
+                            //                $("#NxtAggDetails").attr("disabled", "disabled");
+                            //            }
+                            //            $("#NxtAggDetails").removeAttr("disabled");
+                            //            return;
+                            //        } else {
+                            //            obj.value = "";
+                            //            obj.focus();
+                            //            obj.style.border = "red 1px solid";
+                            //            toastr.warning("Invalid product code provided, in Product Info step. Please correct it.");
+                            //            $("#NxtAggDetails").attr("disabled", "disabled");
+                            //        }
+                            //    }
+                            //}
+
+                        }
+
+                        else {
+                            obj.style.border = "red 1px solid";
+                            if (jobtypeId != 26) {
+                                //obj.focus();
+                            }
+                        }
+
+                        //} else if (jobtype == "PPN") {
+                        //     var GTINLEN = obj.value.length;
+                        //    if (parseInt(GTINLEN) < 12) {
+                        //        toastr.warning("Invalid PPN. PPN should be 12 Digit");
+                        //        obj.style.border = "red 1px solid";
+                        //        $("#NxtAggDetails").attr("disabled", "disabled");
+                        //    } else {
+                        //        obj.style.border = "green 1px solid";
+                        //        $("#NxtAggDetails").removeAttr("disabled");
+                        //    }
+                        //} else if (jobtype == "CIP") {
+                        //    if (parseInt(GTINLEN) < 13) {
+                        //        toastr.warning("Invalid GTIN. GTIN should be 13 Digit");
+                        //        obj.style.border = "red 1px solid";
+                        //        $("#NxtAggDetails").attr("disabled", "disabled");
+                        //    } else {
+                        //        obj.style.border = "green 1px solid";
+                        //        $("#NxtAggDetails").removeAttr("disabled");
+                        //    }
+                        //}
+
+                    }
+                }
+            }
+
+            function isValidPALGTIN(obj) {
+                if (obj.value != "")
+                    {
+                jobtypeId = $("#Type option:selected").val();
+                jobtype = $("#Type option:selected").text();
+
+                x = [];
+                $(".valGTIN").each(function (index) {
+                    x.push($(this).val());
+
+                });
+                var GTINS = x;
+                var GTINSArray = GTINS.sort();
+
+                var GTINSDuplicate = [];
+                for (var i = 0; i < GTINSArray.length - 1; i++) {
+
+                    if (GTINSArray[i + 1] == GTINSArray[i]) {
+                        if (GTINSArray[i] != "") {
+                            GTINSDuplicate.push(GTINSArray[i]);
+                        }
+                    }
+
+
+                }
+
+                if (GTINSDuplicate > 0) {
+                    obj.value = "";
+                    if (jobtypeId != 26) {
+                        obj.focus();
+                        $("#NxtAggDetails").attr("disabled", "disabled");
+                    }
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateProductDuplicateGTIN");
+                    obj.style.border = "red 1px solid";
+
+                } else {
+
+                    obj.style.border = "green 1px solid";
+                    $("#NxtAggDetails").removeAttr("disabled");
+                }
+
+
+                //if (jobtype == "DGFT") {
+                //$("#NxtAggDetails").attr("disabled", "disabled");
+                    if (obj.value != "") {
+                        var checkSum = eanCheckDigit(obj.value);
+                        lstDigit = obj.value.slice(-1);
+
+                        var GTINLEN = obj.value.length;
+                        var bfrTrimGTINVAL = obj.name;
+                        var aftrTrim = bfrTrimGTINVAL.slice(0, -2);
+
+                        if (parseInt(GTINLEN) < 14) {
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrtracelinkInvalidGTIN");
+                            obj.style.border = "red 1px solid";
+                            if (jobtypeId != 26) {
+                                obj.focus();
+                                $("#NxtAggDetails").attr("disabled", "disabled");
+                            }
+                            else {
+                                obj.value = "";
+                            }
+
+                        }
+                        else if (parseInt(checkSum) != parseInt(lstDigit)) {
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateProductInvalidGTIN " + aftrTrim + "@TnT.LangResource.GlobalRes.toastrCreateProductCheckSum " + parseInt(checkSum));
+                            //obj.value = "";
+                            obj.style.border = "red 1px solid";
+                            if (jobtypeId != 26) {
+                                obj.focus();
+                                $("#NxtAggDetails").attr("disabled", "disabled");
+                            }
+                            else {
+                                obj.value = "";
+                            }
+
+
+                        }
+
+
+                    }
+
+                    else {
+
+                        obj.style.border = "red 1px solid";
+                        if (jobtypeId != 26) {
+                            obj.focus();
+                        }
+                    }
+                }
+            }
+            function isValidLBLName(obj) {
+                if (obj.value != "") {
+                    var LBLName = obj.value;
+                    var bfrTrimGTINVAL = obj.name;
+                    var aftrTrim = bfrTrimGTINVAL.slice(0, -2);
+                    var lastChars = LBLName.substr(LBLName.length - 4);
+                    //alert(lastChars);
+                    if ((lastChars != ".job") || (lastChars != ".bin")) {
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateProductentercorrect '" + aftrTrim + "' @TnT.LangResource.GlobalRes.ProductLabelName");
+                    }
+                }
+
+            }
+
+            function greaterThanOne(obj, valType) {
+
+                var txtLvl = $('#targetAggTxt').val();
+                var lvl = txtLvl.split(",");
+                var firstlvl = lvl[0] + "_PCMAP";
+
+                var objlvl = obj.id.split("_");
+                if (objlvl[0] != lvl[0]) {
+                    if (obj.value <= 0) {
+                        var selPCMAP = obj.name.slice(0, -2);
+                        toastr.warning(valType + " :" + "@TnT.LangResource.GlobalRes.toastrProductCreateInvalidvalue " + selPCMAP);
+                        obj.style.border = "red 1px solid";
+                        $("#NxtAggDetails").attr("disabled", "disabled");
+                    } else {
+                        obj.style.border = "green 1px solid";
+                        $("#NxtAggDetails").removeAttr("disabled");
+                    }
+                }
+                else {
+                    if (valType == "Bundling Quantity") {
+                        $("#" + lvl[0] + "_Bundling").removeAttr("nonzeroval");
+                    }
+                    else {
+
+                        $("#" + firstlvl + "").removeAttr("nonzeroval");
+                    }
+                    obj.style.border = "green 1px solid";
+                    $("#NxtAggDetails").removeAttr("disabled");
+                }
+
+            }
+
+            $("#NxtAggDetails").click(function () {
+                var txtLvl = $('#targetAggTxt').val();
+                var lvl = txtLvl.split(",");
+                $("#" + lvl[0] + "_Bundling").removeAttr("nonzeroval");
+                $("#" + lvl[0] + "_PCMAP").removeAttr("nonzeroval");
+            });
+
+            function checkMod(obj, type) {
+
+
+                var pcMap = $("#" + type + "_PCMAP").val();
+                var bundlingQty = obj.value;
+                //if (bundlingQty > pcMap) {
+                //    obj.value = "";
+                //    obj.focus();
+                //    toastr.warning("Invalid Bundling Quantity. Bundling Quantity needs in proportion of PC MAP");
+                //    obj.style.border = "red 1px solid";
+                //    $("#NxtAggDetails").attr("disabled", "disabled");
+                //} else {
+                //    obj.style.border = "green 1px solid";
+                //    $("#NxtAggDetails").removeAttr("disabled");
+                //}
+
+                if (bundlingQty != 0) {
+                    var bundlingMod = pcMap % bundlingQty;
+                    console.log(bundlingMod);
+                    if (parseInt(bundlingMod) != parseInt(0)) {
+                        obj.value = "";
+                        obj.focus();
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateInvalidBundling");
+                        obj.style.border = "red 1px solid";
+                        $("#NxtAggDetails").attr("disabled", "disabled");
+                    } else {
+                        obj.value = bundlingQty;
+                        obj.style.border = "green 1px solid";
+                        $("#NxtAggDetails").removeAttr("disabled");
+
+                    }
+                }
+
+
+
+            }
+            $(document).ready(function () {
+                $("#ChinaDivs").hide();
+                //$("#FEACN").hide();
+                //$("#lblFeacn").hide();
+                $("#lblNDC").show();
+                ////$("#lblSDC").hide();
+                $('.minlength3').blur(function () {
+
+                    var inputLength = $('.minlength3').val().length;
+                    if (inputLength < 3) {
+                        this.focus();
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreate3charecters");
+                        this.style.border = "red 1px solid";
+                        $("#NxtProdDetails").removeAttr("disabled");
+                    } else {
+                        this.style.border = "green 1px solid";
+                        $("#NxtProdDetails").removeAttr("disabled");
+                    }
+                });
+                $(".NumbersOnly").keydown(function (e) {
+                    // Allow: backspace, delete, tab, escape, enter and .
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                        // Allow: Ctrl+A, Command+A
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: home, end, left, right, down, up
+                        (e.keyCode >= 35 && e.keyCode <= 40)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                });
+
+                $('.alphaNumSpecial').keyup(function () {
+                    var regex = /[^a-zA-Z0-9/&;.\-_`%()!*+,:;=<>\s]/g;
+                    if (this.value.match(regex)) {
+                        this.value = this.value.replace(regex, '');
+                    }
+                });
+
+
+
+                $('#txtCountryDrugCode').keyup(function () {
+
+                    if ($("#Type").val() == 10055) {
+                        if (this.value.match(/[^a-zA-Z0-9 ]/g)) {
+                            this.value = this.value.replace(/[^a-zA-Z0-9 ]/g, '');
+                        }
+                        $('#txtCountryDrugCode').attr('maxlength', '10');
+                    }
+                    else {
+                        $('#txtCountryDrugCode').attr('maxlength', '15');
+                    }
+                });
+
+                $('#Name').keypress(function (e) {
+
+                    if (e.which == 64 || e.which == 94 || e.which == 91 || e.which == 93 || e.which == 92 || e.which == 63) {
+                        e.preventDefault();
+                    }
+
+                });
+                $('#DoseUsage').keypress(function (e) {
+
+                    if (e.which == 64 || e.which == 94 || e.which == 91 || e.which == 93 || e.which == 92 || e.which == 63) {
+                        e.preventDefault();
+                    }
+
+                });
+                $('#Composition').keypress(function (e) {
+                    //e.which == 32 ||
+                    if (e.which == 64 || e.which == 94 || e.which == 91 || e.which == 93 || e.which == 92 || e.which == 63) {
+                        e.preventDefault();
+                    }
+
+                });
+                $('#GenericName').keypress(function (e) {
+
+                    if (e.which == 64 || e.which == 94 || e.which == 91 || e.which == 93 || e.which == 92 || e.which == 63) {
+                        e.preventDefault();
+                    }
+
+                });
+                $('#Remarks').keypress(function (e) {
+
+                    if (e.which == 64 || e.which == 94 || e.which == 91 || e.which == 93 || e.which == 92 || e.which == 63) {
+                        e.preventDefault();
+                    }
+
+                });
+                $('#FGCode').blur(function () {
+
+                    if ($("#FGCode").val() != "") {
+                        $("#NxtProdDetails").removeAttr("disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        $("#FGCode").css("border", "green 1px solid");
+                    }
+                    else {
+                        $("#FGCode").css("border", "red 1px solid");
+                    }
+
+
+
+                });
+                $('#Remarks').blur(function () {
+                    var Remarks = $('#Remarks');
+                     Remarks.val($.trim(Remarks.val()));
+
+                    if ($("#Remarks").val() != "") {
+                        $("#NxtProdDetails").removeAttr("disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        $("#Remarks").css("border", "green 1px solid");
+                    }
+                    else {
+                        $("#Remarks").css("border", "red 1px solid");
+                    }
+                });
+               
+                $('#FEACN').blur(function () {
+                    debugger;
+                    var type = $("#Type").val();
+                    if (type == 58) {
+                        if ($("#FEACN").val() != "") {
+                            
+                            var length = $("#FEACN").val().length;
+                            if (length < 10) {
+                                toastr.warning("Feacn should be 10 digits")
+                                $("#NxtProdDetails").attr("disabled", "disabled");
+                                $("#FEACN").css("border", "red 1px solid");
+                            }
+                            else {
+                                $("#NxtProdDetails").removeAttr("disabled");
+                                $("#btnSubmit").removeAttr("disabled");
+                                $("#FEACN").css("border", "green 1px solid");
+                            }
+                        }
+                        else {
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#FEACN").css("border", "red 1px solid");
+                        }
+
+                    }
+
+                });
+                $('#txtCountryDrugCode').blur(function () {
+
+                    var type = $("#Type").val();
+                    if (type == 10055) {
+                        if ($("#txtCountryDrugCode").val() != "") {
+                            $("#NxtProdDetails").removeAttr("disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                            $("#txtCountryDrugCode").css("border", "green 1px solid");
+                        }
+                        else {
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#txtCountryDrugCode").css("border", "red 1px solid");
+                        }
+
+                    }
+
+                });
+                $('#SubTypeNo').blur(function () {
+
+                    var type = $("#Type").val();
+                    if (type == 10056) {
+                        if ($("#SubTypeNo").val() != "") {
+                            $("#NxtProdDetails").removeAttr("disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                            $("#SubTypeNo").css("border", "green 1px solid");
+                        }
+                        else {
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#SubTypeNo").css("border", "red 1px solid");
+                        }
+
+                    }
+                });
+                $('#PackageSpec').blur(function () {
+
+                    var type = $("#Type").val();
+                    if (type == 10056) {
+                        if ($("#PackageSpec").val() != "") {
+                            $("#NxtProdDetails").removeAttr("disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                            $("#PackageSpec").css("border", "green 1px solid");
+                        }
+                        else {
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#PackageSpec").css("border", "red 1px solid");
+                        }
+
+                    }
+                });
+                $('#Workshop').blur(function () {
+
+                    var type = $("#Type").val();
+                    if (type == 10056) {
+                        if ($("#Workshop").val() != "") {
+                            $("#NxtProdDetails").removeAttr("disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                            $("#Workshop").css("border", "green 1px solid");
+                        }
+                        else {
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#Workshop").css("border", "red 1px solid");
+                        }
+
+                    }
+                });
+                $("#DosageForm").blur(function () {
+
+                    if ($("#DosageForm").val() == "") {
+                        $("#DosageForm").css("border", "red 1px solid");
+                        $("#NxtAggDetails").attr("disabled", "disabled");
+                    }
+                    else {
+                        $("#DosageForm").css("border", "green 1px solid");
+                        $("#NxtAggDetails").removeAttr("disabled");
+                    }
+                });
+                $('#ProductCode').blur(function () {
+                    resetGTIN();
+                   
+                    jobtype = $("#Type option:selected").text();
+                    if (jobtype == "PPN" || jobtype == "CHINACODE") {
+                        this.style.border = "green 1px solid";
+                        $("#NxtProdDetails").removeAttr("disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                       
+                    }
+                    else {
+                        var productCodeLength = $('#ProductCode').val().length;
+                        if (productCodeLength != 12) {
+                            this.style.border = "red 1px solid";
+                            this.focus();
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateInvalidproductCode");
+
+                            //$("#validationMsgDiv").append("Invalid Product Code provided.<br/>");
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#btnSubmit").attr("disabled", "disabled");
+                            //this.focus();
+                        }
+                        else {
+
+                            $("#NxtProdDetails").removeAttr("disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                        }
+                    }
+                    checkProductExists();
+                });
+
+            });
+
+
+            $(document).ready(function () {
+                $('#ddPPBLable').html('');
+                $('#ddMOCLable').html('');
+                $('#ddOBXLable').html('');
+                $('#ddISHLable').html('');
+                $('#ddOSHLable').html('');
+                $('#ddPALLable').html('');
+                $.ajax({
+                    url: 'GetLabelDesignerFiles',
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+
+                        strSel = "<option value=''>@TnT.LangResource.GlobalRes.JobCreateDrpLabel</option>";
+                        for (i = 0; i < data.length; i++) {
+                            strSel += "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                        }
+                        $('#ddMOCLable').html(strSel);
+                        $('#ddOBXLable').html(strSel);
+                        $('#ddISHLable').html(strSel);
+                        $('#ddOSHLable').html(strSel);
+                        $('#ddPALLable').html(strSel);
+                        $('#ddPPBLable').html(strSel);
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            });
+
+            function checkProductExists() {
+                var Name = $('#Name').val();
+                var FGCode = $('#FGCode').val();
+                var ProductCode = $('#ProductCode').val();
+
+                $.ajax({
+                    url: 'IsProductExisting',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { "Name": Name, "FGCode": FGCode, "ProductCode": ProductCode },
+                    success: function (data) {
+
+                        if (data == true) {
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreatePalreadyexists");
+                            $("#Name").css("border", "red 1px solid");
+                            $("#Name").val("");
+
+                            $("#FGCode").css("border", "red 1px solid");
+                            $("#FGCode").val("");
+
+                            $("#ProductCode").css("border", "red 1px solid");
+                            $("#ProductCode").val("");
+
+                            $("#NxtProdDetails").attr("disabled", "disabled");
+                            $("#btnSubmit").attr("disabled", "disabled");
+                        } else {
+                            $("#CountryDrugCode").val($("#ProductCode").val());
+                            if ($("#ProductCode").val() == "") {
+                                $("#ProductCode").css("border", "red 1px solid");
+                            }
+                            else {
+                                $("#ProductCode").css("border", "green 1px solid");
+                            }
+
+                            if ($("#FGCode").val() == "") {
+                                $("#FGCode").css("border", "red 1px solid");
+                                $("#NxtProdDetails").attr("disabled", "disabled");
+                                $("#btnSubmit").attr("disabled", "disabled");
+                            }
+                            else {
+                                $("#FGCode").css("border", "green 1px solid");
+                                $("#NxtProdDetails").removeAttr("disabled");
+                                $("#btnSubmit").removeAttr("disabled");
+                            }
+
+                            //$("#ProductCode").css("border", "green 1px solid");
+
+                        }
+                    },
+                    error: function (data) {
+
+                        toastr.warning("Error occured while loading data");
+
+                    }
+                });
+            }
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+
+                $('#txtGTIN').blur(function () {
+                    var GTINLength = $('#txtGTIN').val().length;
+                    if (GTINLength != 14) {
+                        this.style.border = "red 1px solid";
+                        $("#txt").html('GTIN should be 14 digit.');
+                        //this.focus();
+                    } else {
+
+                    }
+                });
+            });
+            function minlength3(obj) {
+
+                var inputLength = obj.value.length;
+                if (inputLength < 3) {
+                    obj.focus();
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreate3charecters");
+                    obj.style.border = "red 1px solid";
+                    $("#NxtProdDetails").attr("disabled", "disabled");
+                } else {
+                    obj.style.border = "green 1px solid";
+                    if ($('#Name').val().length >= 3 && $('#GenericName').val().length >= 3 && $('#Composition').val().length >= 3 && $('#DoseUsage').val().length >= 3) {
+                        $("#NxtProdDetails").removeAttr("disabled");
+                    }
+                }
+            }
+
+        </script>
+
+
+        <script>
+            function eanCheckDigit(gtin) {
+
+                factor = 3;
+                sum = 0;
+                originalGTIN = gtin;
+                gtin = originalGTIN.slice(0, -1);
+                if (gtin.length != 13) {
+                    cc = 0;
+                    return cc;
+                } else {
+                    for (index = gtin.length; index > 0; --index) {
+                        sum = sum + gtin.substring(index - 1, index) * factor;
+                        factor = 4 - factor;
+                    }
+                    cc = ((1000 - sum) % 10);
+                    return cc;
+                }
+            }
+            $("#btnNxtAgg").click(function () {
+
+                var txtLvl = $('#targetAggTxt').val();
+
+                if (txtLvl == "") {
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateSelectaggregation");
+                }
+
+
+
+
+            });
+          
+            function getAggVal(obj) {
+
+                jobtypeId = $("#Type option:selected").val();
+                var text = "";
+                $('.chkbx:checked').each(function () {
+                    text += this.id + ',';
+                });
+
+                text = text.substring(0, text.length - 1);
+
+                $('#targetAggTxt').val(text);
+
+                @*if (jobtypeId != 10054) {
+                  if (text == "MOC" || text == "OBX" || text == "PAL" || text == "ISH" || text == "OSH") {
+                        $('#btnNxtAgg').attr("disabled", "disabled");
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateAggregationlevel");
+                    } else {
+                        $('#btnNxtAgg').removeAttr("disabled");
+                    }
+                }
+                else {
+                    if (text == "MOC") {
+                        $('#btnNxtAgg').removeAttr("disabled");
+                    }
+                }*@
+
+
+                if (jobtypeId == 20058) {
+                    if ($('#MOC').is(':checked')) {
+                        $('input[name="MOC[]"]').eq(1).val($("#txtCountryDrugCode").val());
+                        $('input[name="MOC[]"]').eq(1).attr("disabled", "disabled");
+                    }
+                    else {
+                        $('input[name="MOC[]"]').eq(1).val('');
+                        $('input[name="MOC[]"]').eq(1).removeAttr("disabled");
+                    }
+
+                    if ($('#OBX').is(':checked')) {
+                        $('input[name="OBX[]"]').eq(1).val($("#txtCountryDrugCode").val());
+                        $('input[name="OBX[]"]').eq(1).attr("disabled", "disabled");
+                    }
+                    else {
+                        $('input[name="OBX[]"]').eq(1).val('');
+                        $('input[name="OBX[]"]').eq(1).removeAttr("disabled");
+                    }
+
+                    if ($('#ISH').is(':checked')) {
+                        $('input[name="ISH[]"]').eq(1).val($("#txtCountryDrugCode").val());
+                        $('input[name="ISH[]"]').eq(1).attr("disabled", "disabled");
+                    }
+                    else {
+                        $('input[name="ISH[]"]').eq(1).val('');
+                        $('input[name="ISH[]"]').eq(1).removeAttr("disabled");
+                    }
+
+                    if ($('#OSH').is(':checked')) {
+                        $('input[name="OSH[]"]').eq(1).val($("#txtCountryDrugCode").val());
+                        $('input[name="OSH[]"]').eq(1).attr("disabled", "disabled");
+                    }
+                    else {
+                        $('input[name="OSH[]"]').eq(1).val('');
+                        $('input[name="OSH[]"]').eq(1).removeAttr("disabled");
+                    }
+
+                    if ($('#PAL').is(':checked')) {
+                        $('input[name="PAL[]"]').eq(1).val($("#txtCountryDrugCode").val());
+                        $('input[name="PAL[]"]').eq(1).attr("disabled", "disabled");
+                    }
+                    else {
+                        $('input[name="PAL[]"]').eq(1).val('');
+                        $('input[name="PAL[]"]').eq(1).removeAttr("disabled");
+                    }
+                }
+                else {
+                    $('input[name="MOC[]"]').eq(1).val('');
+                    $('input[name="MOC[]"]').eq(1).removeAttr("disabled");
+                    $('input[name="OBX[]"]').eq(1).val('');
+                    $('input[name="OBX[]"]').eq(1).removeAttr("disabled");
+                    $('input[name="ISH[]"]').eq(1).val('');
+                    $('input[name="ISH[]"]').eq(1).removeAttr("disabled");
+                    $('input[name="OSH[]"]').eq(1).val('');
+                    $('input[name="OSH[]"]').eq(1).removeAttr("disabled");
+                    $('input[name="PAL[]"]').eq(1).val('');
+                    $('input[name="PAL[]"]').eq(1).removeAttr("disabled");
+                }
+            }
+
+            function triggerChange() {
+
+                if ($('#MOC').is(':checked')) {
+                    $("#MOC").trigger("click");
+                }
+                if ($("#OBX").is(':checked')) {
+                    $("#OBX").trigger("click");
+                }
+                if ($('#ISH').is(':checked')) {
+                    $("#ISH").trigger("click");
+                }
+                if ($("#PPB").is(':checked')) {
+                    $("#PPB").trigger("click");
+                }
+                if ($("#OSH").is(':checked')) {
+                    $("#OSH").trigger("click");
+                }
+                if ($("#PAL").is(':checked')) {
+                    $("#PAL").trigger("click");
+                }
+            }
+
+
+
+            $("#Type").change(function () {
+                ResetFeilds();
+                triggerChange();
+                resetPPN();
+                resetGTIN();
+                jQuery(this).parents('trPPN').find('input').val('');
+
+                jobtype = $("#Type option:selected").text();
+                jobtypeId = $("#Type option:selected").val();
+                $("#Name").addClass("alphaNumSpecial");
+
+                //alert(jobtypeId);
+                //26 = PPN || 4 == DGFT
+                if (jobtypeId == 26) {
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    ////$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    ////$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    ////$("#lblFeacn").hide();
+                    $(".trPPN").show();
+                    setLabelFilterValue('PPN2D1-9N-D-1T-S|PPN|EXP|LOT|UID');
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    //$('input[name="PPB[]"]').eq(1).removeAttr("validate", "");
+                    //$('input[name="MOC[]"]').eq(1).removeAttr("validate", "");
+                    //$('input[name="OBX[]"]').eq(1).removeAttr("validate", "");
+                    //$('input[name="ISH[]"]').eq(1).removeAttr("validate", "");
+                    //$('input[name="OSH[]"]').eq(1).removeAttr("validate", "");
+                    //$('input[name="PAL[]"]').eq(1).removeAttr("validate", "");
+
+
+                } else if (jobtypeId == 4) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    ////$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    setDGFTGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-17-10-21|GTIN|EXP|LOT|UID');
+                    $(".trPPN").hide();
+                } else if (jobtypeId == 17) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    ////$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    setDGFTGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-17-10|GTIN|EXP|LOT');
+                    $(".trPPN").hide();
+                } else if (jobtypeId == 29) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("diabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                   // //$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").attr("validate", "true");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    //setCIPGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-17-10-21|GTIN|EXP|LOT|UID');
+                    $(".trPPN").hide();
+                }
+                else if (jobtypeId == 58) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                   // //$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    $("#FEACN").show();
+                    $("#FEACN").attr("validate", "true");
+                    if ($("#FEACN").val() == "") {
+                        $("#FEACN").css("border", "red 1px solid");
+                    }
+                    else {
+                        $("#FEACN").css("border", "green 1px solid");
+                    }
+                    $("#lblFeacn").show();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    setDGFTGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-21-10-17-240|GTIN|UID|LOT|EXP');
+                    $(".trPPN").hide();
+                }
+                else if (jobtypeId == 10054) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    ////$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    //setCIPGTIN();
+                    $("#OBX").attr("disabled", "disabled");
+                    //$("#ISH").attr("disabled", "disabled");
+                    $("#OSH").attr("disabled", "disabled");
+                    $("#PAL").attr("disabled", "disabled");
+                    setLabelFilterValue('GS12D1-01-17-10-21|GTIN|EXP|LOT|UID');
+                    $(".trPPN").hide();
+                }
+                else if (jobtypeId == 10056) {
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    //$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#Name").removeClass("alphaNumSpecial");
+                    $("#ProductCode").attr("maxlength", "7");
+                    $("#ChinaDivs").show();
+                    $("#SubTypeNo").attr("validate", "true");
+                    $("#PackageSpec").attr("validate", "true");
+                    $("#Workshop").attr("validate", "true");
+                    $("#SubTypeNo").val('');
+                    $("#PackageSpec").val('');
+                    $("#Workshop").val('');
+                    $("#PackageSpec").attr("validate", "true");
+                    $("#Workshop").attr("validate", "true");
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate");
+                    $('input[name="PPB[]"]').eq(1).removeAttr("validate");
+                    $('input[name="MOC[]"]').eq(1).removeAttr("validate");
+                    $('input[name="OBX[]"]').eq(1).removeAttr("validate");
+                    $('input[name="ISH[]"]').eq(1).removeAttr("validate");
+                    $('input[name="OSH[]"]').eq(1).removeAttr("validate");
+                    $('input[name="PAL[]"]').eq(1).removeAttr("validate");
+                    $('input[name="PPB[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="MOC[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="OBX[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="ISH[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="OSH[]"]').eq(1).removeClass("valGTIN");
+                    $('input[name="PAL[]"]').eq(1).removeClass("valGTIN");
+                    //setCIPGTIN();
+                    $("#OBX").attr("disabled", "disabled");
+                    //$("#ISH").attr("disabled", "disabled");
+                    $("#OSH").attr("disabled", "disabled");
+                    $("#PAL").attr("disabled", "disabled");
+                    setLabelFilterValue('GS12D1-21|UID');
+                    $(".trPPN").hide();
+                }
+                else if (jobtypeId == 10055) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                    $(".lblNDC").text("Saudi Drug Code");
+                    $("#lblNDC").hide();
+                    $("#lblSDC").show();
+                    $("#txtCountryDrugCode").attr("validate", "true");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    setDGFTGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-17-10-21|GTIN|EXP|LOT|UID|EXFIELD');
+                    $(".trPPN").hide();
+                }
+                else if (jobtypeId == 20058) {
+                    $("#SubTypeNo").removeAttr("validate");
+                    $("#PackageSpec").removeAttr("validate");
+                    $("#Workshop").removeAttr("validate");
+                    $("#txtCountryDrugCode").attr("disabled", "disabled");
+                    $("#ProductCode").val('');
+                    $(".lblNDC").text("National Drug Code");
+                    $("#lblNDC").show();
+                    //$("#lblSDC").hide();
+                    $("#txtCountryDrugCode").removeAttr("validate");
+                    $("#txtCountryDrugCode").val("");
+                    $("#ProductCode").attr("maxlength", "12");
+                    $("#ChinaDivs").hide();
+                    //$("#FEACN").hide();
+                    $("#FEACN").removeAttr("validate");
+                    $("#FEACN").val("");
+                    //$("#lblFeacn").hide();
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    setDGFTGTIN();
+                    $("#OBX").removeAttr("disabled");
+                    $("#ISH").removeAttr("disabled");
+                    $("#OSH").removeAttr("disabled");
+                    $("#PAL").removeAttr("disabled");
+                    setLabelFilterValue('GS12D1-01-21-17-10|GTIN|UID|EXP|LOT');
+                    $(".trPPN").hide();
+                }
+            });
+
+            function setCIPGTIN() {
+                $('input[name="PPB[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="PPB[]"]').eq(1).attr('maxlength', '13');
+                $('input[name="MOC[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="MOC[]"]').eq(1).attr('maxlength', '13');
+                $('input[name="OBX[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="OBX[]"]').eq(1).attr('maxlength', '13');
+                $('input[name="ISH[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="ISH[]"]').eq(1).attr('maxlength', '13');
+                $('input[name="OSH[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="OSH[]"]').eq(1).attr('maxlength', '13');
+                $('input[name="PAL[]"]').eq(1).removeAttr('maxlength');
+                $('input[name="PAL[]"]').eq(1).attr('maxlength', '13');
+            }
+            function setDGFTGTIN() {
+                $('input[name="PPB[]"]').eq(1).attr('maxlength', '14');
+                $('input[name="MOC[]"]').eq(1).attr('maxlength', '14');
+                $('input[name="OBX[]"]').eq(1).attr('maxlength', '14');
+                $('input[name="ISH[]"]').eq(1).attr('maxlength', '14');
+                $('input[name="OSH[]"]').eq(1).attr('maxlength', '14');
+                $('input[name="PAL[]"]').eq(1).attr('maxlength', '14');
+            }
+            function resetPPN() {
+
+                if ($("#Type option:selected").text() != "Germany-PPN") {
+                    $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                } else {
+                    if ($('#PPB').is(':checked') == true) {
+                        $('input[name="PPB[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="PPB[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                    if ($('#MOC').is(':checked') == true) {
+                        $('input[name="MOC[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="MOC[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                    if ($('#OBX').is(':checked') == true) {
+                        $('input[name="OBX[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="OBX[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                    if ($('#ISH').is(':checked') == true) {
+                        $('input[name="ISH[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="ISH[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                    if ($('#OSH').is(':checked') == true) {
+                        $('input[name="OSH[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="OSH[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                    if ($('#PAL').is(':checked') == true) {
+                        $('input[name="PAL[]"]').eq(0).attr("validate", "true");
+                    }
+                    else {
+                        $('input[name="PAL[]"]').eq(0).removeAttr("validate", "");
+                    }
+
+                }
+                $('input[name="PPB[]"]').eq(0).val('');
+                $('input[name="PPB[]"]').eq(0).css("border", "#ebebeb 1px solid");
+                $('input[name="MOC[]"]').eq(0).val('');
+                $('input[name="MOC[]"]').eq(0).css("border", "#ebebeb 1px solid");
+                $('input[name="OBX[]"]').eq(0).val('');
+                $('input[name="OBX[]"]').eq(0).css("border", "#ebebeb 1px solid");
+                $('input[name="ISH[]"]').eq(0).val('');
+                $('input[name="ISH[]"]').eq(0).css("border", "#ebebeb 1px solid");
+                $('input[name="OSH[]"]').eq(0).val('');
+                $('input[name="OSH[]"]').eq(0).css("border", "#ebebeb 1px solid");
+                $('input[name="PAL[]"]').eq(0).val('');
+                $('input[name="PAL[]"]').eq(0).css("border", "#ebebeb 1px solid");
+            }
+
+            function ResetFeilds() {
+                $("#OBX_PCMAP").css("border", "#ebebeb 1px solid");
+                $("#ISH_PCMAP").css("border", "#ebebeb 1px solid");
+                $("#OSH_PCMAP").css("border", "#ebebeb 1px solid");
+                $("#PAL_PCMAP").css("border", "#ebebeb 1px solid");
+                $('input[name="PPB[]"]').eq(4).css("border", "#ebebeb 1px solid");
+                $('input[name="MOC[]"]').eq(4).css("border", "#ebebeb 1px solid");
+                $('input[name="OBX[]"]').eq(4).css("border", "#ebebeb 1px solid");
+                $('input[name="ISH[]"]').eq(4).css("border", "#ebebeb 1px solid");
+                $('input[name="OSH[]"]').eq(4).css("border", "#ebebeb 1px solid");
+                $('input[name="PAL[]"]').eq(4).css("border", "#ebebeb 1px solid");
+            }
+            function resetGTIN() {
+
+                $('input[name="PPB[]"]').eq(1).val('');
+                $('input[name="PPB[]"]').eq(1).addClass("valGTIN");
+                $('input[name="PPB[]"]').eq(1).css("border", "#ebebeb 1px solid");
+                $('input[name="MOC[]"]').eq(1).val('');
+                $('input[name="MOC[]"]').eq(1).addClass("valGTIN");
+                $('input[name="MOC[]"]').eq(1).css("border", "#ebebeb 1px solid");
+                $('input[name="OBX[]"]').eq(1).val('');
+                $('input[name="OBX[]"]').eq(1).addClass("valGTIN");
+                $('input[name="OBX[]"]').eq(1).css("border", "#ebebeb 1px solid");
+                $('input[name="ISH[]"]').eq(1).val('');
+                $('input[name="ISH[]"]').eq(1).addClass("valGTIN");
+                $('input[name="ISH[]"]').eq(1).css("border", "#ebebeb 1px solid");
+                $('input[name="OSH[]"]').eq(1).val('');
+                $('input[name="OSH[]"]').eq(1).addClass("valGTIN");
+                $('input[name="OSH[]"]').eq(1).css("border", "#ebebeb 1px solid");
+                $('input[name="PAL[]"]').eq(1).val('');
+                $('input[name="PAL[]"]').eq(1).addClass("valGTIN");
+                $('input[name="PAL[]"]').eq(1).css("border", "#ebebeb 1px solid");
+            }
+
+            function setLabelFilterValue(filterValue) {
+                $('input[name="PPB[]"]').eq(5).val(filterValue);
+                $('input[name="MOC[]"]').eq(5).val(filterValue);
+                $('input[name="OBX[]"]').eq(5).val(filterValue);
+                $('input[name="ISH[]"]').eq(5).val(filterValue);
+                $('input[name="OSH[]"]').eq(5).val(filterValue);
+                $('input[name="PAL[]"]').eq(5).val(filterValue);
+            }
+
+
+            $("#Name").change(function () {
+                $("#Name").css("border", "#ebebeb 1px solid");
+            });
+
+            $("#FGCode").change(function () {
+                $("#FGCode").css("border", "#ebebeb 1px solid");
+            });
+
+            $("#ProductCode").change(function () {
+
+                $("#ProductCode").css("border", "#ebebeb 1px solid");
+
+                if ($("#Type").val() == 20058) {
+                    var gt = "0" + $("#ProductCode").val() + "0";
+                    var checkSum = eanCheckDigit(gt);
+                    var gtin = "0" + $("#ProductCode").val() + checkSum;
+                    $("#txtCountryDrugCode").val(gtin);
+                    $("#txtCountryDrugCode").attr("disabled", "disabled");
+
+                }
+                else {
+                    $("#txtCountryDrugCode").removeAttr("disabled");
+                }
+
+                if ($("#ProductCode").val() == "") {
+                    $("#ProductCode").css("border", "red 1px solid");
+                }
+                else {
+                    $("#ProductCode").css("border", "green 1px solid");
+                }
+            });
+
+
+
+
+            $(document).ready(function () {
+                $(window).keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+
+
+                $('#frmProduct')[0].reset();
+            });
+
+            function isValidPPN(ppnOBJ) {
+                if (ppnOBJ.value != "") {
+                    if (ppnOBJ.value.length < 12) {
+                        ppnOBJ.value = "";
+                        ppnOBJ.style.border = "red 1px solid";
+                        toastr.warning("@TnT.LangResource.GlobalRes.toastrProductCreateInvalidPPN");
+                        //ppnOBJ.focus();
+                    } else {
+                        ppnOBJ.style.border = "green 1px solid";
+                    }
+                }
+            }
+
+
+
+            $(document).ready(function (e) {
+                $('select option').each(function () {
+                    if ($(this).text() == 'DGFT') {
+                        $(this).text('India-DGFT');
+                    }
+                    if ($(this).text() == 'CIP') {
+                        $(this).text('France-CIP');
+                    }
+                    if ($(this).text() == 'PPN') {
+                        $(this).text('Germany-PPN');
+                    }
+                    if ($(this).text() == 'DSCSA') {
+                        $(this).text('USA-DSCSA');
+                    }
+                    if ($(this).text() == 'SOUTH_KOREA') {
+                        $(this).text('SOUTH KOREA');
+                    }
+                    if ($(this).text() == 'SAUDI_ARABIA') {
+                        $(this).text('SAUDI ARABIA');
+                    }
+
+                });
+            });
+        </script>
+
+    }
+
+
+</div>
+<div class="modal fade" id="modal-lablePreview" style="width:auto;height:auto;">
+    <div style="display:none;" id="loadTemData"></div>
+    <div class="modal-dialog previewBody" style="width:auto;height:auto;">
+        <div class="modal-content">
+            <button type="button" class="close" style="float:right;" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-body previewBody" id="previewModelBody" style="width:auto;height:auto;">
+                <img src="" alt="" class="lblImage" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<button style="display:none;" id="showPrvwBx" class="myBtn" type="button" data-toggle="modal" data-target="#modal-lablePreview">test </button>
+
+<script>
+    function takeAction(obj) {
+
+        elemParam = obj.id.split('-');
+        elemField = elemParam[0];
+        elemType = elemParam[1];
+
+        if (obj.type == "checkbox") {
+            if (elemType == "IsBold") {
+                if ($("#" + obj.id).is(':checked')) {
+                    $("#" + elemField + "-lbl").css("font-weight", "bold");
+                } else {
+                    $("#" + elemField + "-lbl").css("font-weight", "normal");
+                }
+            } else if (elemType == "IsShow") {
+                if ($("#" + obj.id).is(':checked')) {
+                    $("#" + elemField + "-lbl").show();
+                    var parent_utrA = $(obj).parents('tr');
+                    $(".cls-" + elemField).find('input[type="text"], input[type="number"]').each(function () {
+                        $(this).removeAttr('readonly');
+                    });
+                } else {
+                    $("#" + elemField + "-lbl").hide();
+                    var parent_utrA = $(obj).parents('tr');
+                    var parentTrClass = parent_utrA.attr("class");
+
+                    $('.' + parentTrClass).hide();
+                    //$(".cls-" + parent_utrA).hide();
+                    $(".cls-" + elemField).find('input[type="text"], input[type="number"]').each(function () {
+                        $(this).attr('readonly', 'readonly');
+                    });
+                    redrawLbl();
+                }
+            }
+        }
+
+        InitiateElements(elemField, elemType);
+
+    }
+
+    function InitiateElements(elemField, elemType) {
+
+        var obj = ("#" + elemField + "-" + elemType);
+        $(".cls-" + elemField).find('input[type="text"], input[type="checkbox"], input[type="number"]').each(function () {
+
+            elemParamS = this.id.split('-');
+            elemFieldS = elemParamS[0];
+            elemTypeS = elemParamS[1];
+            if (this.type == "text" || this.type == "number") {
+
+
+
+                if (elemTypeS == "Data") {
+                    $("#" + elemFieldS + "-lbl").html(this.value);
+                }
+
+                if (elemTypeS == "FontSizeOrHeight") {
+                    $("#" + elemFieldS + "-lbl").css("font-size", this.value + 'px');
+                }
+
+                if (elemTypeS == "Left") {
+                    if (parseInt(this.value) > 0) {
+                        $("#" + elemFieldS + "-lbl").css("left", this.value + 'cm');
+                    } else {
+                        $("#" + elemFieldS + "-lbl").css("left", '0cm');
+                    }
+                }
+
+                if (elemTypeS == "Top") {
+                    $("#" + elemFieldS + "-lbl").css("top", this.value + 'cm');
+                }
+
+                if (elemTypeS == "Width") {
+                    $("#" + elemFieldS + "-lbl").css('width', this.value + 'cm');
+                }
+                if (elemTypeS == "Rotate") {
+                    $("#" + elemFieldS + "-lbl").css("-webkit-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                    $("#" + elemFieldS + "-lbl").css("-moz-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                    $("#" + elemFieldS + "-lbl").css("-ms-transform", "rotate(-" + parseInt(this.value) + "deg)");
+                }
+
+            } else if (this.type == "checkbox") {
+                if (elemTypeS == "IsBold") {
+                    if ($("#" + this.id).is(':checked')) {
+                        $("#" + elemFieldS + "-lbl").css("font-weight", "bold");
+                    } else {
+                        $("#" + elemFieldS + "-lbl").css("font-weight", "normal");
+                    }
+                } else if (elemTypeS == "IsShow") {
+                    if ($("#" + this.id).is(':checked')) {
+                        $("#" + elemFieldS + "-lbl").show();
+                    } else {
+                        $("#" + elemFieldS + "-lbl").hide();
+                    }
+                }
+            }
+
+
+        });
+
+    }
+
+
+    $('#btnSaveAs').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("Please Select Layout Recipe.");
+            return false;
+        }
+        $("#txtExistingFile").val(lblFile);
+        $("#showSaveAsBx").trigger("click");
+
+    });
+    $('#btnPreview').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("Please Select Layout Recipe.");
+            return false;
+        }
+
+
+    });
+    $('#btnDownload').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+
+        if (lblFile == "Select") {
+            fillMSG("Please Select Layout Recipe.");
+            return false;
+        }
+
+
+    });
+    $('#btnSaveAsFileName').on('click', function () {
+        var ExistingFileName = $("#txtExistingFile").val();
+        var NewFileName = $("#txtSaveAsName").val();
+        if (NewFileName == ExistingFileName) {
+            $("#errMSG").html("New file name should be different from Orignal.");
+            return false;
+        } else {
+            $("#errMSG").html("");
+        }
+        if (NewFileName == "") {
+            $("#errMSG").html("Please enter file name.");
+            return false;
+        } else {
+            $("#errMSG").html("");
+        }
+        $.ajax({
+            url: 'SaveAsLabel',
+            type: "POST",
+            data: { FileName: ExistingFileName, NewFileName: NewFileName },
+            success: function (data) {
+
+                alert(data);
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+        });
+    });
+
+
+    $('#btnSave').on('click', function () {
+
+        lblFile = $("#LabelFiles").val();
+        if (lblFile == "Select") {
+            fillMSG("Please Select Layout Recipe.");
+            return false;
+        }
+        PaperSize = $("#PaperSize").val();
+        if (PaperSize == "Select") {
+            fillMSG("Please Select Paper Size.");
+            return false;
+        }
+        OrientationType = $("#OrientationType").val();
+        if (OrientationType == "Select") {
+            fillMSG("Please Select Orientation.");
+            return false;
+        }
+        DateFormat = $("#DateFormat").val();
+        if (DateFormat == "Select") {
+            fillMSG("Please Select Date Format.");
+            return false;
+        }
+        Dpi = $("#Dpi").val();
+        if (Dpi == "Select") {
+            fillMSG("Please Select Dpi.");
+            return false;
+        }
+        Font = $("#Font").val();
+        if (Font == "Select") {
+            fillMSG("Please Select Font.");
+            return false;
+        }
+        Zfont = $("#Zfont").val();
+        if (Zfont == "Select") {
+            fillMSG("Please Select ZPL Font.");
+            return false;
+        }
+
+        x = [];
+        $('#labelLayoutDesignElem tr:gt(0)').each(function () {
+            y = '';
+            SegName = '';
+            var lablName = $(this).find('td').eq(0).text();
+
+            $(this).find('td input[type="text"], input[type="checkbox"], input[type="number"]').each(function () {
+                var LblName = $(this).attr('name');
+                LblName = LblName.split('-');
+                SegName = LblName[0];
+                LblName = LblName[1];
+
+                if (this.type == "checkbox") {
+                    if ($("#" + this.id).is(':checked')) {
+                        y += LblName + ':' + 'true' + ', ';
+                    } else {
+                        y += LblName + ':' + false + ', ';
+                    }
+                } else if (this.type = "text") {
+                    y += LblName + ':' + $(this).val() + ', ';
+                } else if (this.type = "number") {
+                    y += LblName + ':' + $(this).val() + ', ';
+                }
+
+
+            });
+            if (y != '') {
+                x.push('RPTMAP:' + SegName + ', LabelName:' + lablName + ',' + $.trim(y))
+            }
+        });
+        //console.log(x);
+
+        px = [];
+        $('#panelPageSettings').each(function () {
+            py = '';
+            $(this).find('input[type="text"], select, input[type="number"]').each(function () {
+                if ($(this).attr('name') == "PaperSize") {
+                    strPaperSize = $(this).val().split(' X ');
+                    //alert(strPaperSize);
+                    PaperSizeHeight = parseInt(strPaperSize[0]) * 2.54;
+                    PaperSizeWidth = parseInt(strPaperSize[1]) * 2.54;
+
+                    if (isNaN(PaperSizeHeight)) {
+                        PaperSizeHeight = 0;
+                    }
+
+                    if (isNaN(PaperSizeWidth)) {
+                        PaperSizeWidth = 0;
+                    }
+
+                    var orignt = $("#OrientationType").val();
+                    if (orignt == "Portrait") {
+                        PaperHeight = parseInt(PaperSizeHeight) / 2.54;
+                    } else if (orignt = "Landscape") {
+                        PaperHeight = parseInt(PaperSizeWidth) / 2.54;
+                    }
+
+                    //alert(PaperSizeHeight + ' - ' + PaperSizeWidth)
+                    py += 'PaperSizePaperKind:8, ' + $(this).attr('name') + ':' + $(this).val() + ', PaperSizeHeight:' + PaperSizeHeight + ', PaperSizeWidth:' + PaperSizeWidth + ', PaperHeight:' + Math.ceil(PaperHeight) + ', ';
+                } else {
+                    py += $(this).attr('name') + ':' + $(this).val() + ', ';
+                }
+
+            });
+            if (py != '') {
+                px.push($.trim(py))
+            }
+        });
+
+        var fileName = $('#LabelFiles').val();
+        console.log(x);
+        //return false;
+        var string = $('#frmFieldSets input:hidden').serialize();
+        $.ajax({
+            url: 'SaveLabelFile',
+            type: "POST",
+            //dataType: 'json',
+            data: { fieldData: x, pageSettings: px, FileName: fileName },
+            success: function (data) {
+                // sucecss msg
+                fillMSG(data);
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+        });
+    });
+    function fillMSG(msg) {
+
+        $('#modal-msg').html(msg);
+        $("#showMSGBx").trigger("click");
+    }
+</script>
+
+
+<script>
+
+    function DisableButtons() {
+        $(".loading").show();
+        var inputs = document.getElementsByTagName("button");
+        for (var i in inputs) {
+            if (inputs[i].type == "button" || inputs[i].type == "submit") {
+                inputs[i].disabled = true;
+            }
+        }
+    }
+    window.onbeforeunload = DisableButtons;
+
+
+    $("#LabelFiles option[value='2DCIP.job']").css('display', 'none');
+    $("#LabelFiles option[value='DM-8Field.job']").css('display', 'none');
+    $("#LabelFiles option[value='PPN.job']").css('display', 'none');
+
+    function loadPreview(lblElementID) {
+        var lblName = $('select[name="' + lblElementID + '[]"]').eq(0).val();
+        if (lblName == "") {
+            $('#modal-msg').html('@TnT.LangResource.GlobalRes.toastrProductCreateselectlabel');
+            $("#showMSGBx").trigger("click");
+            return false;
+        }
+
+
+        if (lblName != "") {
+
+            var FileName = lblName.replace("zpl", "png");
+            $("#showPrvwBx").trigger("click");
+            $(".lblImage").attr("src", "/Content/LabelDesigners/PrintView/" + FileName);
+
+            //$.ajax({
+            //    url: 'loadFileContent',
+            //    type: "POST",
+            //    dataType: 'json',
+            //    data: { "FileName": FileName },
+            //    success: function (data) {
+            //        $(".loading").hide();
+            //        if (data != null) {
+
+            //            if (!(data == "No Data")) {
+            //                //$("#btnDownload").attr("href", "../Content/LabelDesigners/" + FileName);
+            //                $("#loadTemData").html("");
+            //                $("#loadTemData").html(data);
+
+            //                $('.isShow').find('input[type="checkbox"]:checked').each(function () {
+
+            //                    var parent_tr = $(this).parents('tr');
+            //                    var hiddenTrCls = parent_tr.attr("class");
+            //                    $("." + hiddenTrCls).show();
+            //                    //alert(hiddenTrCls);
+            //                    elemParamK = this.id.split('-');
+            //                    elemFieldK = elemParamK[0];
+            //                    elemTypeK = elemParamK[1];
+
+            //                    InitiateElements(elemFieldK, elemTypeK);
+            //                    var parent_utrS = $(this).parents('tr');
+            //                    $('.' + parent_utrS.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+            //                        $(this).removeAttr('readonly');
+            //                    });
+            //                });
+
+            //                $('.isShow').find('input[type="checkbox"]:not(:checked)').each(function () {
+            //                    var parent_utr = $(this).parents('tr');
+            //                    $('#newField').append($('<option>', {
+            //                        value: this.id,
+            //                        text: $("." + parent_utr.attr("class")).children("td:first").text()
+            //                    }));
+            //                    $('.' + parent_utr.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+            //                        $(this).attr('readonly', 'readonly');
+            //                    });
+            //                });
+
+            //                setupPage();
+            //            } else {
+            //                alert("No Data");
+            //            }
+
+
+            //        }
+            //    }
+            //});
+
+        } else {
+            //$(".loading").hide();
+            $("#loadTemData").html("");
+            //messsage
+
+        }
+    }
+
+    function redrawLbl() {
+        $('.isShow').find('input[type="checkbox"]:checked').each(function () {
+            var parent_tr = $(this).parents('tr');
+            var hiddenTrCls = parent_tr.attr("class");
+            $("." + hiddenTrCls).show();
+
+            elemParamK = this.id.split('-');
+            elemFieldK = elemParamK[0];
+            elemTypeK = elemParamK[1];
+
+            InitiateElements(elemFieldK, elemTypeK);
+            var parent_utrS = $(this).parents('tr');
+            $('.' + parent_utrS.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                $(this).removeAttr('readonly');
+            });
+        });
+
+        $('#newField').html('');
+        $('#newField').html('<option value="">Add New Field</option>');
+        $('#labelLayoutDesignElem .isShow').find('input[type="checkbox"]:not(:checked)').each(function () {
+
+            var parent_utr = $(this).parents('tr');
+
+            $('#newField').append($('<option>', {
+                value: this.id,
+                text: $("." + parent_utr.attr("class")).children("td:first").text()
+            }));
+
+            $('.' + parent_utr.attr("class")).find('input[type="text"], input[type="number"]').each(function () {
+                $(this).attr('readonly', 'readonly');
+            });
+        });
+    }
+
+
+
+
+    function setupPage() {
+        var paperSize = $("#PaperSize").val();
+        var orientation = $("#OrientationType").val();
+        var PageTopMargin = $("#TopMargin").val();
+        var PageLeftMargin = $("#LeftMargin").val();
+        var PageBottomMargin = $("#BottomMargin").val();
+        var PageRightMargin = $("#RightMargin").val();
+        var FontFamily = $("#Font").val();
+        if (paperSize != "") {
+
+            paras = paperSize.split('X');
+            para1 = paras[0];
+            para2 = paras[1];
+            pWidth = parseInt(para1) * parseFloat(2.54);
+            pHeight = parseInt(para2) * parseFloat(2.54);
+
+            if (orientation == "Landscape") {
+                //alert("Landscape");
+                $(".previewBody").css("height", pWidth + "cm");
+                $(".previewBody").css("width", pHeight + "cm");
+
+                $("#pageOuter").css("margin-top", PageTopMargin + 'cm');
+                $("#pageOuter").css("margin-right", PageRightMargin + 'cm');
+                $("#pageOuter").css("margin-bottom", PageBottomMargin + 'cm');
+                $("#pageOuter").css("margin-left", PageLeftMargin + 'cm');
+
+                $("#previewModelBody").css("font-family", FontFamily);
+            } else if (orientation == "Portrait") {
+                //alert("Portait");
+                $(".previewBody").css("width", pWidth + "cm");
+                $(".previewBody").css("height", pHeight + "cm");
+
+                $("#previewModelBody").css("margin-top", PageTopMargin + "cm");
+                $("#previewModelBody").css("margin-left", PageLeftMargin + "cm");
+                $("#previewModelBody").css("margin-bottom", PageTopMargin + "cm");
+                $("#previewModelBody").css("margin-right", PageLeftMargin + "cm");
+                $("#previewModelBody").css("font-family", FontFamily);
+            }
+        }
+    }
+
+
+
+    function setPaperSizeSel(selVal) {
+
+        $("#PaperSize option:contains('" + selVal + "')").attr('selected', 'selected');
+    }
+
+    $('#Name').change(function () {
+        var $Name = $('#Name');
+        $Name.val($.trim($Name.val()))
+    });
+    $('#GenericName').change(function () {
+        var $GenericName = $('#GenericName');
+        $GenericName.val($.trim($GenericName.val()))
+    });
+    $('#Composition').change(function () {
+        var $Composition = $('#Composition');
+        $Composition.val($.trim($Composition.val()))
+    });
+    $('#DoseUsage').change(function () {
+        var $DoseUsage = $('#DoseUsage');
+        $DoseUsage.val($.trim($DoseUsage.val()))
+    });
+    $('#FGCode').change(function () {
+        var $FGCode = $('#FGCode');
+        $FGCode.val($.trim($FGCode.val()))
+    });
+</script>

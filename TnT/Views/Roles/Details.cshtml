@@ -1,0 +1,29 @@
+﻿@model TnT.Models.SettingsNUtility.Roles
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.RolesDetails</h2>
+
+<div>
+    <h4>@TnT.LangResource.GlobalRes.RolesIndex</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles_Name)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

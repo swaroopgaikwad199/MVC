@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D7FBEF23-44E9-4824-8DE2-99703DE8EDC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>REDTR.DB.DAL</RootNamespace>
+    <AssemblyName>REDTR.DB.DAL</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PTPLCRYPTORENGINE, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Development\LoanLicensingSystem\Common DLLs\PTPLCRYPTORENGINE.dll</HintPath>
+    </Reference>
+    <Reference Include="REDTR.UTILS">
+      <HintPath>..\..\CORE Interface DLLS\REDTR.UTILS\obj\Debug\REDTR.UTILS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChinaUIDDAO.cs" />
+    <Compile Include="CountryDAO.cs" />
+    <Compile Include="DAO.cs" />
+    <Compile Include="DAVAExportDetailsDAO.cs" />
+    <Compile Include="DAVAExportFileTagsInfoDAO.cs" />
+    <Compile Include="DavaFileRunningSeqNoDAO.cs" />
+    <Compile Include="M_CustomerDAO.cs" />
+    <Compile Include="ProductApplicatorSettingDAO.cs" />
+    <Compile Include="ProductGlueSettingDAO.cs" />
+    <Compile Include="Properties\JobAssoDeckDAO.cs" />
+    <Compile Include="JobDAO.cs" />
+    <Compile Include="JobDetailsDAO.cs" />
+    <Compile Include="JOBTypeDAO.cs" />
+    <Compile Include="LineLocationDAO.cs" />
+    <Compile Include="MLNODAO.cs" />
+    <Compile Include="PackageLabelDAO.cs" />
+    <Compile Include="PackageTypeCodeDAO.cs" />
+    <Compile Include="PackagingAssoDAO.cs" />
+    <Compile Include="PackagingAssoDetailsDAO.cs" />
+    <Compile Include="PackagingDetailsDAO.cs" />
+    <Compile Include="PerformDBSync.cs" />
+    <Compile Include="PermissionsDAO.cs" />
+    <Compile Include="PrimaryPackDummysDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesDAO.cs" />
+    <Compile Include="ROLESPermissionDAO.cs" />
+    <Compile Include="SettingsDAO.cs" />
+    <Compile Include="SSCCLineHolderDAO.cs" />
+    <Compile Include="SupplierDAO.cs" />
+    <Compile Include="UsersDAO.cs" />
+    <Compile Include="DbProviderHelper.cs" />
+    <Compile Include="GenericXmlSerializer.cs" />
+    <Compile Include="UserTrailDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REDTR.DB.BusinessObjects\REDTR.DB.BusinessObjects.csproj">
+      <Project>{6324A058-82D2-4118-ABD8-E3A05FD471FA}</Project>
+      <Name>REDTR.DB.BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\REDTR.DB.Connection\REDTR.DB.Connection.csproj">
+      <Project>{04950E9C-9568-4DB4-B2C3-E9A7E7064508}</Project>
+      <Name>REDTR.DB.Connection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

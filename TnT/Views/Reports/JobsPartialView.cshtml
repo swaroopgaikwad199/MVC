@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TnT.Models.Job.Job>
+
+@if (Model == null)
+{
+    <h3>@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble </h3>
+}
+else
+{
+    <table class="table" id="tableRpt" style="background-color:#fff; text-align: center; overflow-x:hidden;">
+        <thead>
+            <tr>
+                <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.JobsIndexPONumber</th>
+                <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatch</th>
+                <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatchQty</th>
+                <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesCreated</th>
+                <th style="font-weight:bold; text-align: center;">@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatchWithUID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="trCls" JID="@Html.DisplayFor(modelItem => item.JID)" >
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobWithUID)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script>
+   
+    jQuery(document).ready(function ($) {
+        var $table1 = jQuery('#tableRpt');
+
+        // Initialize DataTable
+        $table1.DataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "bFilter": false,
+            "sScrollY": "150px"
+        });
+    });
+
+    $(function () {
+        $(".trCls").click(function () {
+
+            $(".trCls").removeClass('highlight');
+            $('#JidVAL').val("");
+            $(this).toggleClass("highlight");
+            var valD = $(this).attr('JID');
+            var v = valD.split(',');
+            $('#ChartsValue').val(v[0]);
+            $('#JidVAL').val(v[0]);
+            $("#UpdateCharts").trigger("click");
+
+        }).change();
+    });
+
+
+    //$('.trCls').click(function () {
+    //    var val = $(this).attr('JID');
+
+    //    if (val != "") {
+
+    //        $.ajax({
+    //            url: 'getJobChartDetails',
+    //            type: "POST",
+    //            dataType: 'json',
+    //            data: { "JID": val},
+    //            success: function (data) {
+    //                if (data != null) {
+    //                    debugger
+    //                    var JobDetails = data[0];
+    //                    var GTIN = data[1];
+    //                    var productDtls = data[2];
+    //                    alert("Data Recived");
+
+                       
+    //                }
+    //            }
+    //        });
+
+    //    }
+    //});
+
+</script>

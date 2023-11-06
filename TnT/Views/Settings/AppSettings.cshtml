@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TnT.Models.SettingsNUtility.AppSettings>
+
+@{
+    ViewBag.Title = "AppSettings";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.UsersEditAppSetting
+    <a style="float: right; margin-right: 5px;" href='@Url.Action("Index","Users")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+@*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Key)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th></th>
+    </tr>*@
+<br class="clearfix">
+<br class="clearfix">
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-2">
+           @Html.LabelFor(modelItem => item.Value)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayFor(modelItem => item.Value)
+        </div>
+        <div class="col-md-2">
+            <a style="float: right; margin-right: 5px;" href='@Url.Action("EditAppSettings/"+item.Id,"Settings")' class="btn btn-info btn-icon icon-left">
+                @TnT.LangResource.GlobalRes.SOMIndexEdit
+                <i class="fa fa-pencil"></i>
+            </a>
+        </div>
+    </div>
+}

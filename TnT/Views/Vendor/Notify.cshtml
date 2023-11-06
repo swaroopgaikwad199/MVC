@@ -1,0 +1,167 @@
+﻿@model TnT.Models.Vendor.ViewModels.NotifyViewModel
+
+
+@{
+    ViewBag.Title = "Notify";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    Notify
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "Home")' class="btn btn-danger btn-icon icon-left">
+        Back
+        <i class="fa fa-reply"></i>
+    </a>
+
+</h2>
+
+<div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger bold">Validation Error Occured. Please check the data.</div>
+    }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+
+<div style="border: 4px solid #636161; border-radius: 9px;">
+    <br /><br /><br />
+
+    @using (Html.BeginForm("NotifyVendor", "Vendor", FormMethod.Post, new { @class = "f1", @id = "frmNotify" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Id, new SelectList(ViewBag.Vendors, "Id", "CompanyName"), "Select Vendor", new { @onchange = "SetVendor(this.value);", @class = "form-control", @validate = "true" })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.JID, new SelectList(ViewBag.Jobs, "JID", "JobName"), "Select Job", new { @onchange = "SetJob(this.value);", @class = "form-control", @validate = "true" })
+                    @Html.ValidationMessageFor(model => model.JID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Email Id</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtEmail", null, new { @class = "form-control", @disabled = "true" })
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Service Key</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtServiceKey", null, new { @class = "form-control", @disabled = "true" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Product Name</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtProductName", null, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Batch Number</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtBatchNo", null, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Manufacturing Date</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtMfg", null, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Expiry Date</label>
+                <div class="col-md-10">
+                    @Html.TextBox("txtExp", null, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="f1-buttons">
+                <button type="submit" class="btn btn-submit">Notify</button>
+            </div>
+
+        </div>
+
+    }
+
+
+</div>
+
+<script>
+    function SetVendor(Id) {
+        $.ajax({
+            url: '@Url.Action("getVendorData", "Vendor")',
+            type: "POST",
+            dataType: 'json',
+            data: { "Id": Id },
+            success: function (data) {
+                if (data != null) {
+                    var vdata = data;
+                    $("#txtEmail").val(vdata.Email);
+                    $("#txtServiceKey").val(vdata.ServiceKey);
+
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+        });
+    }
+
+    function SetJob(JID) {
+        $.ajax({
+            url: '@Url.Action("getJobData", "Vendor")',
+            type: "POST",
+            dataType: 'json',
+            data: { "JID": JID },
+            success: function (data) {
+                if (data != null) {
+                    var vdata = data;
+
+                    var mdate = new Date(parseInt(vdata[0].MfgDate.substr(6)));
+                    mdate = convert(mdate);
+                    var edate = new Date(parseInt(vdata[0].ExpDate.substr(6)));
+                    edate = convert(edate);
+                    $("#txtProductName").val(vdata[1].Name);
+                    $("#txtBatchNo").val(vdata[0].BatchNo);
+                    $("#txtMfg").val(mdate);
+                    $("#txtExp").val(edate);
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("Error occured while loading data");
+
+            }
+        });
+    }
+
+
+    function convert(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("-");
+    }
+
+</script>
+
+

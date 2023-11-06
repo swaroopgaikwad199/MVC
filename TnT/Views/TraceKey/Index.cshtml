@@ -1,0 +1,133 @@
+﻿@model TnT.Models.TraceKey.TraceKeyViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.TraceKeyIndexTr</h2>
+
+@using (Html.BeginForm("GenerateTraceKey", "TraceKey", FormMethod.Post, new { @id = "frmEPCIS" }))
+{
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.TracekeyIndexSelectCust, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipTracelinkCustomer, @data_original_title = "Field Information" })
+
+                <div class="col-md-8">
+                    @Html.DropDownListFor(M => M.Cid, new SelectList(ViewBag.Customer, "Id", "CompanyName"), TnT.LangResource.GlobalRes.TracekeyIndexSelectCust, new { @class = "form-control", @validate = "true" })
+
+                    @Html.ValidationMessageFor(model => model.Cid, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipExportBatchNo, @data_original_title = "Field Information" })
+
+                <div class="col-md-8">
+                    @Html.DropDownListFor(M => M.JID, new SelectList(ViewBag.Jobs, "JID", "BatchNo"), @TnT.LangResource.GlobalRes.RptJobFilterSelectBatch, new { @class = "form-control", @validate = "true" })
+
+                    @Html.ValidationMessageFor(model => model.JID, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:25px">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label(@TnT.LangResource.GlobalRes.TracekeyIndexSelectTypeVersion, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectTypeVer, @data_original_title = "Field Information" })
+
+                <div class="col-md-8">
+                    <select name="TypeVersion" id="TypeVersion" class="form-control">
+                        <option value="">@TnT.LangResource.GlobalRes.TracekeyIndexSelectVersion</option>
+                        <option value="1.2">1.2</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:25px">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.Label(@TnT.LangResource.GlobalRes.TracekeyIndexSelectProductionDoc, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectdoc, @data_original_title = "Field Information" })
+
+                    <div class="col-md-8">
+                        <select name="ProductionDocument" id="ProductionDocument" class="form-control">
+                            <option value="">@TnT.LangResource.GlobalRes.TracekeyIndexSelectProductionDoc</option>
+                            <option value="ProductionLotDocument">@TnT.LangResource.GlobalRes.TracekeyIndexProdLotDoc</option>
+                            <option value="ProductionOrderDocument">@TnT.LangResource.GlobalRes.TracekeyIndexProdOrderDoc</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <div class="row" style="margin-top:25px">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-info" value="@TnT.LangResource.GlobalRes.cmnBtnGenerate" id="btnSubmit">
+                        </div>
+                    </div>
+                    }
+                    <script>
+                        $("#btnSubmit").click(function () {
+                            $(".loading").show();
+
+                            var Cid = $("#Cid").val();
+                            var JID = $("#JID").val();
+                            var ProductionDocument = $("#ProductionDocument").val();
+                            var TypeVersion = $("#TypeVersion").val();
+                            var msgPOST = "";
+                            if (Cid == "") {
+                                showMessage("Cid", "@TnT.LangResource.GlobalRes.toastrTracelinkCustomerId");
+                                msgPOST += "@TnT.LangResource.GlobalRes.toastrTracelinkCustomerId";
+                            } else {
+                                clearColor("Cid");
+                            }
+
+                            if (JID == "") {
+                                showMessage("JID", "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch");
+                                msgPOST += "@TnT.LangResource.GlobalRes.MsgJobManagerselectbatch";
+                            } else {
+                                clearColor("JID");
+                            }
+
+                            if (ProductionDocument == "") {
+                                showMessage("ProductionDocument", "@TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectdoc");
+                                msgPOST += "@TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectdoc";
+                            } else {
+                                clearColor("ProductionDocument");
+                            }
+
+                            if (ProductionDocument == "") {
+                                showMessage("TypeVersion", "@TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectTypeVer");
+                                msgPOST += "@TnT.LangResource.GlobalRes.toastrTRacekeyIndexplselectTypeVer";
+                            } else {
+                                clearColor("TypeVersion");
+                            }
+
+
+                            if (msgPOST == "") {
+                                formSubmit();
+                            }
+                        });
+                        function showMessage(elementID, msg) {
+                            toastr.warning(msg);
+                            $("#" + elementID).val("");
+                            $("#" + elementID).css("border", "red 1px solid");
+                            return false;
+                        }
+                        function clearColor(elementID) {
+                            $("#" + elementID).css("border", "green 1px solid");
+                        }
+                        function formSubmit() {
+                            document.getElementById("frmEPCIS").submit();
+                        }
+                    </script>

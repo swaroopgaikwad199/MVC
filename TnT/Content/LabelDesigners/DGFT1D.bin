@@ -1,0 +1,680 @@
+<ArrayOfField_Appearance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Field_Appearance>
+    <FieldProps>
+      <Field>
+        <RPTMAP>BatchNo</RPTMAP>
+        <LabelName>Batch No</LabelName>
+        <Left>1</Left>
+        <Top>2.4</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Batch No</Data>
+        <Rotate>0</Rotate>
+        <DATAField>BatchNo</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>Mfg</RPTMAP>
+        <LabelName>Mfg Date</LabelName>
+        <Left>1</Left>
+        <Top>2.9</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_DATE</DataType>
+        <Data>MFG</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Mfg</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>Exp</RPTMAP>
+        <LabelName>Exp Date</LabelName>
+        <Left>1</Left>
+        <Top>1.8</Top>
+        <Width>8</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_DATE</DataType>
+        <Data>Expiry  Date</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Exp</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>QtyInCN</RPTMAP>
+        <LabelName>Qty In Case</LabelName>
+        <Left>10.04</Left>
+        <Top>5.9</Top>
+        <Width>4.02</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>QTY</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Quantity in case</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>CNNo</RPTMAP>
+        <LabelName>Case No</LabelName>
+        <Left>1</Left>
+        <Top>60</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>SerialNo.</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>Product</RPTMAP>
+        <LabelName>Product</LabelName>
+        <Left>1</Left>
+        <Top>1.2</Top>
+        <Width>8</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Product Name</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Product</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>GTIN</RPTMAP>
+        <LabelName>GTIN</LabelName>
+        <Left>0.5</Left>
+        <Top>0.5</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>GTIN</Data>
+        <Rotate>0</Rotate>
+        <DATAField>GTIN</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>GTINCTI</RPTMAP>
+        <LabelName>GTINCTI</LabelName>
+        <Left>9</Left>
+        <Top>5</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>GTIN</Data>
+        <Rotate>0</Rotate>
+        <DATAField>GTINCTI</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>UID</RPTMAP>
+        <LabelName>SRNO/UID</LabelName>
+        <Left>1</Left>
+        <Top>2</Top>
+        <Width>5.7</Width>
+        <FontSizeOrHeight>11</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>UID</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>Image2D</RPTMAP>
+        <LabelName>2D Code</LabelName>
+        <Left>4.5</Left>
+        <Top>3.5</Top>
+        <Width>3</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>Prod_Barcode</RPTMAP>
+        <LabelName>Product Barcode</LabelName>
+        <Left>1</Left>
+        <Top>6.8</Top>
+        <Width>8</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>Prod_Barcode1</RPTMAP>
+        <LabelName>Product Barcode1</LabelName>
+        <Left>0.5</Left>
+        <Top>1.5</Top>
+        <Width>8</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>Prod_Barcode2</RPTMAP>
+        <LabelName>Product Barcode2</LabelName>
+        <Left>0.5</Left>
+        <Top>3.6</Top>
+        <Width>8</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>UID_Barcode</RPTMAP>
+        <LabelName>UID Barcode</LabelName>
+        <Left>1</Left>
+        <Top>2.2</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>SSCC_Barcode</RPTMAP>
+        <LabelName>SSCC_Barcode</LabelName>
+        <Left>1</Left>
+        <Top>4.8</Top>
+        <Width>8.5</Width>
+        <FontSizeOrHeight>4</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>true</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>PPNBarcode</RPTMAP>
+        <LabelName>PPNBarcode</LabelName>
+        <Left>1</Left>
+        <Top>3.5</Top>
+        <Width>8.5</Width>
+        <FontSizeOrHeight>4</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>PPNBarcode2</RPTMAP>
+        <LabelName>PPNBarcode2</LabelName>
+        <Left>1</Left>
+        <Top>6</Top>
+        <Width>8.5</Width>
+        <FontSizeOrHeight>3</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_IMAGE</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>CountryCode</RPTMAP>
+        <LabelName>CountryCode</LabelName>
+        <Left>1</Left>
+        <Top>7</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>6</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Country Code</Data>
+        <Rotate>0</Rotate>
+        <DATAField>CountryCode</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>PostalCode</RPTMAP>
+        <LabelName>PostalCode</LabelName>
+        <Left>1</Left>
+        <Top>8</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>6</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Postal Code</Data>
+        <Rotate>0</Rotate>
+        <DATAField>PostalCode</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>PPN</RPTMAP>
+        <LabelName>PPN</LabelName>
+        <Left>1</Left>
+        <Top>9</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>6</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>PPN</Data>
+        <Rotate>0</Rotate>
+        <DATAField>PPN</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>SwBatchNo</RPTMAP>
+        <LabelName>SW Batch No</LabelName>
+        <Left>7.41</Left>
+        <Top>4.34</Top>
+        <Width>5.7</Width>
+        <FontSizeOrHeight>14</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>SWBNO</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>SwMfgDate</RPTMAP>
+        <LabelName>SW Mfg Date</LabelName>
+        <Left>7.41</Left>
+        <Top>5.51</Top>
+        <Width>5.7</Width>
+        <FontSizeOrHeight>14</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_DATE</DataType>
+        <Data>120720</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>SwExpDate</RPTMAP>
+        <LabelName>SW Exp Date</LabelName>
+        <Left>7.41</Left>
+        <Top>6.68</Top>
+        <Width>5.7</Width>
+        <FontSizeOrHeight>14</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_DATE</DataType>
+        <Data>180720</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>SWSSCC</RPTMAP>
+        <LabelName>SW SSCC</LabelName>
+        <Left>3.2</Left>
+        <Top>2.9</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>2.6</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField>SWSSCC</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>SWCompanyName</RPTMAP>
+        <LabelName>SW CompanyName</LabelName>
+        <Left>6.7</Left>
+        <Top>9.3</Top>
+        <Width>6.2</Width>
+        <FontSizeOrHeight>9</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data />
+        <Rotate>0</Rotate>
+        <DATAField>Company Name</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>SWCompanyAddress</RPTMAP>
+        <LabelName>SW CompanyAddress</LabelName>
+        <Left>1</Left>
+        <Top>3</Top>
+        <Width>7</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Company Address</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Company Address</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>SWCompanyCode</RPTMAP>
+        <LabelName>SW CompanyCode</LabelName>
+        <Left>1</Left>
+        <Top>3.5</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Company Code</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Company Code</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo1</RPTMAP>
+        <LabelName>Product Code</LabelName>
+        <Left>12</Left>
+        <Top>9.7</Top>
+        <Width>4.4</Width>
+        <FontSizeOrHeight>14</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>INDIA</Data>
+        <Rotate>0</Rotate>
+        <DATAField>ProductCode</DATAField>
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo2</RPTMAP>
+        <LabelName>Extra Info 2</LabelName>
+        <Left>1</Left>
+        <Top>2.9</Top>
+        <Width>4.7</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>SSC Code</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo3</RPTMAP>
+        <LabelName>Extra Info 3</LabelName>
+        <Left>2</Left>
+        <Top>7.6</Top>
+        <Width>5</Width>
+        <FontSizeOrHeight>9</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>VMS NO.</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo4</RPTMAP>
+        <LabelName>Extra Info 4</LabelName>
+        <Left>2</Left>
+        <Top>8.1</Top>
+        <Width>7</Width>
+        <FontSizeOrHeight>9</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>C.G. SUPPLY. NOT FOR SALE</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo5</RPTMAP>
+        <LabelName>Extra Info 5</LabelName>
+        <Left>6.7</Left>
+        <Top>8.8</Top>
+        <Width>4.4</Width>
+        <FontSizeOrHeight>9</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Manufactured By</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo6</RPTMAP>
+        <LabelName>Extra Info 6</LabelName>
+        <Left>10.34</Left>
+        <Top>8.8</Top>
+        <Width>4.7</Width>
+        <FontSizeOrHeight>9</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Marketed By</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo7</RPTMAP>
+        <LabelName>Extra Info 7</LabelName>
+        <Left>6.6</Left>
+        <Top>8.3</Top>
+        <Width>8.24</Width>
+        <FontSizeOrHeight>10</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>________________________________________</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo8</RPTMAP>
+        <LabelName>Extra Info 8</LabelName>
+        <Left>7.41</Left>
+        <Top>3</Top>
+        <Width>4.7</Width>
+        <FontSizeOrHeight>14</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Extra Info 8</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo9</RPTMAP>
+        <LabelName>Extra Info 9</LabelName>
+        <Left>1</Left>
+        <Top>8</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>UNIMED SDN BHD.</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo10</RPTMAP>
+        <LabelName>Extra Info 10</LabelName>
+        <Left>1</Left>
+        <Top>7.5</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>SHIPPING MARKS</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo11</RPTMAP>
+        <LabelName>Extra Info 11</LabelName>
+        <Left>1</Left>
+        <Top>8.5</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>PORT KELANG.</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo12</RPTMAP>
+        <LabelName>Extra Info 12</LabelName>
+        <Left>1</Left>
+        <Top>9</Top>
+        <Width>6</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>MALAYSIA</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo13</RPTMAP>
+        <LabelName>Extra Info 13</LabelName>
+        <Left>10</Left>
+        <Top>7.5</Top>
+        <Width>6.5</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>true</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Manufactured in India by</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo14</RPTMAP>
+        <LabelName>Extra Info 14</LabelName>
+        <Left>10</Left>
+        <Top>8</Top>
+        <Width>6.58</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Unique Pharmaceuticals Laboratories</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo15</RPTMAP>
+        <LabelName>Extra Info 15</LabelName>
+        <Left>10</Left>
+        <Top>8.4</Top>
+        <Width>6.5</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>(A Division of J.B. Chemicals &amp;</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>GenInfo16</RPTMAP>
+        <LabelName>Extra Info 16</LabelName>
+        <Left>10</Left>
+        <Top>8.8</Top>
+        <Width>6.5</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>true</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Pharmaceuticals Ltd)</Data>
+        <Rotate>0</Rotate>
+        <DATAField />
+      </Field>
+      <Field>
+        <RPTMAP>TenderText</RPTMAP>
+        <LabelName>Tender Text</LabelName>
+        <Left>11</Left>
+        <Top>9.5</Top>
+        <Width>6.58</Width>
+        <FontSizeOrHeight>12</FontSizeOrHeight>
+        <IsBold>false</IsBold>
+        <IsShow>false</IsShow>
+        <IsManualData>false</IsManualData>
+        <DataType>FDT_TEXT</DataType>
+        <Data>Worli</Data>
+        <Rotate>0</Rotate>
+        <DATAField>Thailand Tender</DATAField>
+      </Field>
+    </FieldProps>
+    <PaperSize>4X6</PaperSize>
+    <PaperSizePaperKind>8</PaperSizePaperKind>
+    <PaperSizeHeight>10.16</PaperSizeHeight>
+    <PaperSizeWidth>0</PaperSizeWidth>
+    <TopMargin>0.1</TopMargin>
+    <LeftMargin>0.1</LeftMargin>
+    <BottomMargin>0.1</BottomMargin>
+    <RightMargin>0.1</RightMargin>
+    <DateFormat>MM/yyyy</DateFormat>
+    <OrientationType>Portrait</OrientationType>
+    <Font>Arial Black</Font>
+    <Zfont>Font R (35 x 31)</Zfont>
+    <Dpi>300 dpi</Dpi>
+    <PaperHeight>4</PaperHeight>
+  </Field_Appearance>
+</ArrayOfField_Appearance>

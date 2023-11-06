@@ -1,0 +1,213 @@
+﻿@model TnT.Models.Home.LiveLinesViewModel
+
+
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <div class="panel panel-primary" id="charts_env">
+
+            <div class="panel-heading">
+                <div class="panel-title">@Model.LineName</div>
+
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class=""><a href="#line-dashboard-@Model.LineName" data-toggle="tab">Stats</a></li>
+                        <li class="active"><a href="#line-chart-@Model.LineName" data-toggle="tab">Line Chart</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="line-chart-@Model.LineName">
+                        <div id="line-chart-demo_@Model.LineName" class="morrischart" style="height: 300px"></div>
+                    </div>
+                    @{
+                            if (Model.printingDetails != null)
+                            {
+                                string jsnLst = "[";
+                                foreach (var asdffsd in Model.printingExecutionDetails)
+                                {
+                                    var printpkdtls = asdffsd.packDetails;
+                                    string strPksDtls = "";
+                                    foreach (var itempkdtls in printpkdtls)
+                                    {
+                                        strPksDtls += itempkdtls.PackagingTypeCode + ":" + itempkdtls.TotalPrintedQty + ",";
+                                    }
+
+                                    jsnLst += "{ PDt: '" + asdffsd.printDT.ToString("yyyy-MM-dd HH:mm:ss") + "' , " + strPksDtls + " },";
+                                }
+                                jsnLst += "]";
+
+                                //var jsonCD = @Html.Raw(Json.Encode(Model.printingExecutionDetails));
+                                var ykes = Model.printingDetails.Select(x => x.PackagingTypeCode).Distinct().ToArray();
+                                string ykeysList = "[" + string.Join(",", ykes.Select(x => string.Format("'{0}'", x)).ToList()) + "]";
+
+                        <script type="text/javascript">
+                                    var lineName = "@Model.LineName";
+                                    lineName = lineName.replace("-", "_");
+                                    var varMorrise = "line_chart_demo_" + lineName;
+                                    jQuery(document).ready(function ($) {
+
+
+                                        // Line Chartshref="#line-chart-HINJ-SPD-EP10-Kiran"
+                                        varMorrise = $("#line-chart-demo_" + lineName);
+
+                                        var line_chart = Morris.Line({
+                                            element: 'line-chart-demo_@Model.LineName',
+                                            data : @Html.Raw(jsnLst),
+                                            xkey: 'PDt',
+                                            ykeys: @Html.Raw(ykeysList),
+                                            labels:  @Html.Raw(ykeysList),
+                                            redraw: true
+                                        });
+
+                                        varMorrise.parent().attr('style', '');
+
+                                    });
+                        </script>
+                            }
+
+
+                    }
+
+                    <div class="tab-pane " id="line-dashboard-@Model.LineName">
+                        <div id="line-dashboard-demo" class="morrischart" style="height: 300px">
+
+                            <div class="tile-stats tile-gray" style="padding: 5px;background: #fff;border: 2px double #000;min-height: 207px;">
+
+                                @if (Model.Status == 404)
+                                    {
+
+                                    <table class="table">
+                                        <thead>
+                                        <th colspan="2" style="text-align:center;color:red "><strong>@Html.DisplayFor(modelItem => Model.LineName) </strong></th>
+
+                                        </thead>
+
+                                        <tr>
+                                            <th><strong style="color:red">Error Details</strong></th>
+                                            <td>@Html.DisplayFor(modelItem => Model.Message)</td>
+                                        </tr>
+
+                                    </table>
+                                    }
+                                    else
+                                    {
+
+                                    <div class="col-sm-2">
+                                        @if (Model.Status == 1)
+                                            {
+                                            <div class="glossy statusGreen">&nbsp;</div>
+
+                                            }
+                                        @if (Model.Status == 2)
+                                            {
+                                            <div class="glossy statusYellow">&nbsp;</div>
+                                            }
+                                        @if (Model.Status == 3)
+                                            {
+                                            <div class="glossy statusRed">&nbsp;</div>
+
+                                            }
+                                        @if (Model.Status == 103)
+                                            {
+                                            <div class="glossy statusRed">&nbsp;</div>
+
+                                            }
+                                    </div>
+
+
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-12">
+
+                                            <table class="table">
+                                                <thead>
+                                                <th colspan="2" style="text-align:center;"><strong>@Html.DisplayFor(modelItem => Model.LineName) </strong></th>
+
+                                                </thead>
+
+                                                <tr>
+                                                    <td><strong> @Html.DisplayNameFor(modelItem => modelItem.ProductName)</strong></td>
+                                                    <td colspan="3">@Html.DisplayFor(modelItem => Model.ProductName)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>@Html.DisplayNameFor(modelItem => modelItem.OrderName)</strong></td>
+                                                    <td colspan="3">@Html.DisplayFor(modelItem => Model.OrderName)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>@Html.DisplayNameFor(modelItem => modelItem.BatchNo)</strong></td>
+                                                    <td>@Html.DisplayFor(modelItem => Model.BatchNo)</td>
+                                                    <td><strong>@Html.DisplayNameFor(modelItem => modelItem.Size)</strong></td>
+                                                    <td>@Html.DisplayFor(modelItem => Model.Size)</td>
+                                                </tr>
+                                                @*@<tr>
+                                                    <td><strong>Idle Time :</strong></td>
+
+                                                    @{
+                                                        string strIdlTime = Model.IdleTime.ToString(@"hh\:mm\:ss\:fff");
+                                                    }
+                                                    @*<td colspan="3">@Html.DisplayFor(modelItem => Model.IdleTime)</td>*@
+                                                @*<td colspan="3"> @strIdlTime</td>
+                                                    </tr>*@
+                                            </table>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <strong>@Html.DisplayNameFor(modelItem => modelItem.Status)</strong>
+                                            <table class="table">
+                                                <tr>
+                                                    @if (Model.printingDetails != null)
+                                                        {
+                                                            var data = (from u in Model.printingDetails select new { PackagingTypeCode = u.PackagingTypeCode, TotalPrintedQty = u.TotalPrintedQty }).OrderByDescending(x => x.TotalPrintedQty);
+                                                            foreach (var lvl in data)
+                                                            {
+                                                                string lvlCOde = lvl.PackagingTypeCode;
+                                                        @*<th>
+                                                                @((lvlCOde == "PPB") ? "Primary Pack Box" : "")
+                                                                @((lvlCOde == "MOC") ? "Mono Carton" : "")
+                                                                @((lvlCOde == "OBX") ? "Outer Box" : "")
+                                                                @((lvlCOde == "ISH") ? "Inner Shipper" : "")
+                                                                @((lvlCOde == "OSH") ? "Outer Shipper" : "")
+                                                                @((lvlCOde == "PAL") ? "Pallet" : "")
+                                                            </th>*@
+                                                        <th><strong>@Html.DisplayFor(lvlItem => lvl.PackagingTypeCode) </strong>   </th>
+                                                            }
+                                                        }
+                                                </tr>
+                                                <tr>
+                                                    @if (Model.printingDetails != null)
+                                                        {
+                                                            var data = (from u in Model.printingDetails select new { PackagingTypeCode = u.PackagingTypeCode, TotalPrintedQty = u.TotalPrintedQty }).OrderByDescending(x => x.TotalPrintedQty);
+                                                            foreach (var lvl in data)
+                                                            {
+
+                                                        <td>@Html.DisplayFor(modelItem => lvl.TotalPrintedQty)</td>
+
+                                                            }
+                                                        }
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+

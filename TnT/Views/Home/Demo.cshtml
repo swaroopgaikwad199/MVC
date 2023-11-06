@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<div id="dummyModal" role="dialog" class="modal fade"  data-url='@Url.Action("VCreate","Vendor")'>  
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+                <h4 class="modal-title">@TnT.LangResource.GlobalRes.HomeDemoVendorRegi</h4>
+            </div>
+            <div class="modal-body">
+                <div id='gameContainer'>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
+
+<h2>@TnT.LangResource.GlobalRes.HomeDemo</h2>
+
+<div class="container">
+    <button id="btnTest" class="btn btn-default">Show Modal</button>
+  
+</div>
+<script type="text/javascript">
+      $('document').ready(function () {
+          $('#btnTest').click(function () {
+
+              var url = $('#dummyModal').data('url');
+
+              $.get(url, function (data) {
+                  $('#gameContainer').html(data);
+
+                  $('#dummyModal').modal('show');
+              });
+
+            
+        });
+      });
+</script>

@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:t="http://xmlns.rfxcel.com/traceability/3" xmlns:xmime="http://www.w3.org/2004/11/xmlmime" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.rfxcel.com/traceability/3" version="3.1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="xml.xsd" namespace="http://www.w3.org/XML/1998/namespace" />
+  <xs:import schemaLocation="xmlmime.xsd" namespace="http://www.w3.org/2004/11/xmlmime" />
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+            rfXcel Traceability Foundational Data Types
+            Copyright 2015 rfXcel Corporation. All rights reserved.
+        </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="VoidType" />
+  <xs:simpleType name="EnumMemberType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="EnumMemberListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="em" type="t:EnumMemberType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="NamedValueNameType">
+    <xs:restriction base="t:EnumMemberType" />
+  </xs:simpleType>
+  <xs:complexType name="EnumNameEnumValueType">
+    <xs:simpleContent>
+      <xs:extension base="t:EnumMemberType">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="EnumNameEnumValueListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="enev" type="t:EnumNameEnumValueType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OptionallyVersionedEnumType">
+    <xs:simpleContent>
+      <xs:extension base="t:EnumMemberType">
+        <xs:attribute name="ver" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BinaryBase64Type">
+    <xs:simpleContent>
+      <xs:restriction base="xmime:base64Binary">
+        <xs:attribute ref="xmime:contentType" use="required" />
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BinaryHexType">
+    <xs:simpleContent>
+      <xs:restriction base="xmime:hexBinary">
+        <xs:attribute ref="xmime:contentType" use="required" />
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="Character">
+    <xs:restriction base="xs:string">
+      <xs:length value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ByteQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:byte">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ShortQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:short">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:int">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LongQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:long">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FloatQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:float">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DoubleQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:double">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StringQuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="uom" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CharacterListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ch" type="t:Character" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BooleanListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="bl" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ByteListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="by" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShortListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="sh" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IntListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="in" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LongListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="lg" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FloatListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="fl" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DoubleListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="db" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StringListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="st" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ByteQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="byQty" type="t:ByteQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="ShortQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="shQty" type="t:ShortQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="IntQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="inQty" type="t:IntQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="LongQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="lgQty" type="t:LongQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="FloatQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="flQty" type="t:FloatQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="DoubleQuantityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbQty" type="t:DoubleQuantityType" />
+    </xs:sequence>
+    <xs:attribute name="uom" />
+  </xs:complexType>
+  <xs:complexType name="LanguageDependentStringType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LanguageDependentStringListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="s" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LanguageDependentStringWithDefaultLanguageType">
+    <xs:simpleContent>
+      <xs:extension base="t:LanguageDependentStringType">
+        <xs:attribute default="false" name="default" type="xs:boolean" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RangeType" abstract="true" />
+  <xs:complexType name="IntRangeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:RangeType">
+        <xs:sequence>
+          <xs:element name="count" type="xs:int" />
+          <xs:element minOccurs="0" name="step" type="xs:int" />
+          <xs:element name="first" type="xs:int" />
+          <xs:element name="last" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LongRangeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:RangeType">
+        <xs:sequence>
+          <xs:element name="count" type="xs:long" />
+          <xs:element minOccurs="0" name="step" type="xs:long" />
+          <xs:element name="first" type="xs:long" />
+          <xs:element name="last" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StringRangeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:RangeType">
+        <xs:sequence>
+          <xs:element name="count" type="xs:long" />
+          <xs:element minOccurs="0" name="step" type="xs:long" />
+          <xs:element minOccurs="0" name="validCharSetId" type="t:EnumMemberType" />
+          <xs:element name="first" type="xs:string" />
+          <xs:element name="last" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocumentUrlType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute ref="xmime:contentType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="QualifiedValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="qlfr" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallyQualifiedValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="qlfr" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallySharedQualifierValueListType">
+    <xs:annotation>
+      <xs:documentation>Generic list used as a container of array of values that all may share the same qualifier and can also have their own qualifiers.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="val" type="t:OptionallyQualifiedValueType" />
+    </xs:sequence>
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="SharedQualifierValueListType">
+    <xs:annotation>
+      <xs:documentation>Generic list used as a container of array of values that all may share the same qualifier.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="val" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="qlfr" type="t:EnumMemberType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DistinctQualifierValueListType">
+    <xs:annotation>
+      <xs:documentation>Generic list used as a container of array of values that all have their own qualifiers.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="val" type="t:QualifiedValueType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SysIdType">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+  <xs:complexType name="SysIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:SysIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SysLongIdType">
+    <xs:restriction base="xs:long" />
+  </xs:simpleType>
+  <xs:complexType name="SysLongIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:SysLongIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="IdType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="IdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:IdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdRangeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:RangeType">
+        <xs:sequence>
+          <xs:element name="count" type="xs:long" />
+          <xs:element minOccurs="0" name="step" type="xs:long" />
+          <xs:element minOccurs="0" name="validCharSetId" type="t:EnumMemberType" />
+          <xs:element name="first" type="t:IdType" />
+          <xs:element name="last" type="t:IdType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallyQualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:IdType">
+        <xs:attribute name="qlfr" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallyQualifiedIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:OptionallyQualifiedIdType" />
+    </xs:sequence>
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="QualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:IdType">
+        <xs:attribute name="qlfr" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TypedQualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:QualifiedIdType">
+        <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallyTypedOptionallyQualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:OptionallyQualifiedIdType">
+        <xs:attribute name="type" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TypedOptionallyQualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:OptionallyQualifiedIdType">
+        <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionalRelationshipOptionallyQualifiedIdType">
+    <xs:simpleContent>
+      <xs:extension base="t:OptionallyQualifiedIdType">
+        <xs:attribute name="relId" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionallyOrganizationQualfiedIdType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="orgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="id" type="t:OptionallyQualifiedIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OptionallyOrganizationQualfiedIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:OptionallyOrganizationQualfiedIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OptionallySharedOrganizationQualfiedIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="orgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="idList" type="t:OptionallyOrganizationQualfiedIdListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypedOptionallyQualifiedIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:OptionallyTypedOptionallyQualifiedIdType" />
+    </xs:sequence>
+    <xs:attribute name="type" type="t:EnumMemberType" />
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="RelatedTypedOptionallyQualifiedIdType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:TypedOptionallyQualifiedIdType">
+        <xs:attribute name="relType" type="t:EnumMemberType" />
+        <xs:attribute name="relAction" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RelatedTypedOptionallyQualifiedIdListType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:TypedOptionallyQualifiedIdListType">
+        <xs:attribute name="relType" type="t:EnumMemberType" />
+        <xs:attribute name="relAction" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LongIdContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sysId" type="t:SysLongIdType" />
+      <xs:element minOccurs="0" name="id" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="altId" type="t:OptionallyQualifiedIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LongIdContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="idCont" type="t:LongIdContainerType" />
+    </xs:sequence>
+    <xs:attribute name="idQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="altIdQlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="LongIdQuantityContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sysId" type="t:SysLongIdType" />
+      <xs:element minOccurs="0" name="id" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="altId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="qty" type="t:DoubleQuantityType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LongIdQuantityContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="idQtyCont" type="t:LongIdQuantityContainerType" />
+    </xs:sequence>
+    <xs:attribute name="idQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="altIdQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="qtyUom" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="IdContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sysId" type="t:SysIdType" />
+      <xs:element minOccurs="0" name="id" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="altId" type="t:OptionallyQualifiedIdType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="idCont" type="t:IdContainerType" />
+    </xs:sequence>
+    <xs:attribute name="idQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="altIdQlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="IdQuantityContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sysId" type="t:SysIdType" />
+      <xs:element minOccurs="0" name="id" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="altId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="qty" type="t:DoubleQuantityType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdQuantityContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="idQtyCont" type="t:IdQuantityContainerType" />
+    </xs:sequence>
+    <xs:attribute name="idQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="altIdQlfr" type="t:EnumMemberType" />
+    <xs:attribute name="qtyUom" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="UserIdWithRoleIdListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="t:OptionalRelationshipOptionallyQualifiedIdType" />
+    </xs:sequence>
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+    <xs:attribute name="relId" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="DocumentContainerType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="docUrl" type="t:DocumentUrlType" />
+        <xs:element name="docId" type="t:QualifiedIdType" />
+        <xs:element name="binaryBase64" type="t:BinaryBase64Type" />
+        <xs:element name="binaryHex" type="t:BinaryHexType" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DocumentContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="doc" type="t:DocumentContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PersonNameType">
+    <xs:sequence>
+      <xs:element name="firstName" type="xs:string" />
+      <xs:element minOccurs="0" name="middleName" type="xs:string" />
+      <xs:element name="lastName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhoneType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="ext" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PhoneWithRelationshipType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:PhoneType">
+        <xs:attribute name="relId" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocationAddressType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="addrLine1" type="xs:string" />
+      <xs:element minOccurs="0" name="addrLine2" type="xs:string" />
+      <xs:element minOccurs="0" name="addrLine3" type="xs:string" />
+      <xs:element minOccurs="0" name="addrLine4" type="xs:string" />
+      <xs:element minOccurs="0" name="addrLine5" type="xs:string" />
+      <xs:element minOccurs="0" name="city" type="xs:string" />
+      <xs:element minOccurs="0" name="region" type="t:OptionallyQualifiedValueType" />
+      <xs:element minOccurs="0" name="postalCode" type="xs:string" />
+      <xs:element minOccurs="0" name="postalOffice" type="xs:string" />
+      <xs:element minOccurs="0" name="country" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LocationAddressWithRelationshipType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:LocationAddressType">
+        <xs:attribute name="relId" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OrganizationLocationUserContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="orgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="orgAddr" type="t:LocationAddressType" />
+      <xs:element minOccurs="0" name="orgUserName" type="t:PersonNameType" />
+      <xs:element minOccurs="0" name="locId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="locAddr" type="t:LocationAddressType" />
+      <xs:element minOccurs="0" name="locAddrAction" type="t:EnumMemberType" />
+      <xs:element minOccurs="0" name="userId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="userName" type="t:PersonNameType" />
+      <xs:element minOccurs="0" name="userNameAction" type="t:EnumMemberType" />
+      <xs:element minOccurs="0" name="bizLocId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="bizLocAddr" type="t:LocationAddressType" />
+      <xs:element minOccurs="0" name="bizLocAddrAction" type="t:EnumMemberType" />
+      <xs:element minOccurs="0" name="bizUserId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="bizUserName" type="t:PersonNameType" />
+      <xs:element minOccurs="0" name="bizUserNameAction" type="t:EnumMemberType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrganizationLocationUserContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="orgLocUserCont" type="t:OrganizationLocationUserContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrganizationLocationUserContainerWithRelationshipType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:OrganizationLocationUserContainerType">
+        <xs:attribute name="relType" type="t:EnumMemberType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OrganizationLocationUserContainerWithRelationshipListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="orgLocUserCont" type="t:OrganizationLocationUserContainerWithRelationshipType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NamedValueMetadataType">
+    <xs:sequence>
+      <xs:element name="name" type="t:EnumMemberType" />
+      <xs:element name="displayName" type="t:LanguageDependentStringType" />
+    </xs:sequence>
+    <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+    <xs:attribute name="qlfr" type="t:EnumMemberType" use="required" />
+    <xs:attribute name="dataType" type="t:EnumMemberType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="NamedValueMetadataListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="valMetadata" type="t:NamedValueMetadataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NamedValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+        <xs:attribute name="type" type="t:EnumMemberType" />
+        <xs:attribute name="qlfr" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NamedValueListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="val" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+    <xs:attribute name="type" type="t:EnumMemberType" />
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="NamedTypedIdType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:TypedOptionallyQualifiedIdType">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NamedTypedIdListType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:TypedOptionallyQualifiedIdListType">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NamedDocumentContainerType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:DocumentContainerType">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NamedDocumentContainerListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="namedDoc" type="t:NamedDocumentContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RelatedNamedTypedIdType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:NamedTypedIdType">
+        <xs:attribute name="relType" type="t:EnumMemberType" />
+        <xs:attribute name="relAction" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RelatedNamedTypedIdListType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="t:NamedTypedIdListType">
+        <xs:attribute name="relType" type="t:EnumMemberType" />
+        <xs:attribute name="relAction" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NamedUriType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute name="name" type="t:NamedValueNameType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NamedUrlListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="url" type="t:NamedUriType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NameValueListType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="id" nillable="true" type="t:NamedTypedIdType" />
+      <xs:element name="idList" nillable="true" type="t:NamedTypedIdListType" />
+      <xs:element name="val" nillable="true" type="t:NamedValueType" />
+      <xs:element name="valList" nillable="true" type="t:NamedValueListType" />
+      <xs:element name="relId" nillable="true" type="t:RelatedNamedTypedIdType" />
+      <xs:element name="relIdList" nillable="true" type="t:RelatedNamedTypedIdListType" />
+      <xs:element name="docCont" nillable="true" type="t:NamedDocumentContainerType" />
+      <xs:element name="nameValList" nillable="true" type="t:NameValueListType" />
+    </xs:choice>
+    <xs:attribute name="name" type="t:NamedValueNameType" />
+    <xs:attribute name="type" type="t:EnumMemberType" />
+    <xs:attribute name="qlfr" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="EventInfoType">
+    <xs:sequence>
+      <xs:element name="eventOrgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="sysEventId" type="t:SysLongIdType" />
+      <xs:element name="eventId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="eventType" type="t:EnumMemberType" />
+      <xs:element name="eventDateTime" type="xs:dateTime" />
+      <xs:element name="eventTimeZoneOffset" type="xs:string" />
+      <xs:element name="eventRecordDateTime" type="xs:dateTime" />
+      <xs:element name="eventStatus" type="t:EnumMemberType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessTransactionInfoType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bizTxnOgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="bizTxnId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="bizTxnDate" type="xs:date" />
+      <xs:element minOccurs="0" name="extAttrList" type="t:NameValueListType" />
+    </xs:sequence>
+    <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="BusinessTransactionInfoListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="bizTxnInfo" type="t:BusinessTransactionInfoType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShipmentCarrierTrackingInfo">
+    <xs:sequence>
+      <xs:element name="carrierOrgId" type="t:OptionallyQualifiedIdType" />
+      <xs:element name="carrierShipmentTrackingId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="expectedDeliveryDate" type="xs:date" />
+      <xs:element minOccurs="0" name="extAttrList" type="t:NameValueListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TradeItemMasterType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="itemId" type="t:OptionallyQualifiedIdType" />
+      <xs:element minOccurs="0" name="manufacturerName" type="xs:string" />
+      <xs:element minOccurs="0" name="itemName" type="t:LanguageDependentStringWithDefaultLanguageType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="itemDescription" type="t:LanguageDependentStringWithDefaultLanguageType" />
+      <xs:element minOccurs="0" name="uom" type="xs:string" />
+      <xs:element minOccurs="0" name="dosageForm" type="xs:string" />
+      <xs:element minOccurs="0" name="strength" type="t:StringQuantityType" />
+      <xs:element minOccurs="0" name="containerSize" type="t:StringQuantityType" />
+      <xs:element minOccurs="0" name="attrList" type="t:NameValueListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="StructureVersionType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="ResultType">
+    <xs:sequence>
+      <xs:element name="code" type="xs:long" />
+      <xs:element minOccurs="0" name="msg" type="t:LanguageDependentStringType" />
+      <xs:element minOccurs="0" name="paramList" type="t:NameValueListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExceptionType">
+    <xs:sequence>
+      <xs:element name="result" type="t:ResultType" />
+      <xs:element minOccurs="0" name="cause" type="t:ExceptionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="exception" type="t:ExceptionType" />
+  <xs:complexType name="NotificationType">
+    <xs:sequence>
+      <xs:element name="notifId" type="t:SysLongIdType" />
+      <xs:element name="exception" type="t:ExceptionType" />
+      <xs:element minOccurs="0" name="eventInfo" type="t:EventInfoType" />
+    </xs:sequence>
+    <xs:attribute name="type" type="t:EnumMemberType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="NotificationListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="notif" type="t:NotificationType" />
+      <xs:element minOccurs="0" name="eventInfo" type="t:EventInfoType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SortOrderFieldType">
+    <xs:simpleContent>
+      <xs:extension base="t:EnumMemberType">
+        <xs:attribute name="order" type="t:EnumMemberType" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SortOrderFieldListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="sortOrderField" type="t:SortOrderFieldType" />
+    </xs:sequence>
+    <xs:attribute name="order" type="t:EnumMemberType" />
+  </xs:complexType>
+  <xs:complexType name="QueryExecutionInfoType">
+    <xs:sequence>
+      <xs:element name="queryId" type="t:QualifiedIdType" />
+      <xs:element minOccurs="0" name="inputParamList" type="t:NameValueListType" />
+      <xs:element minOccurs="0" name="optionList" type="t:NameValueListType" />
+      <xs:element minOccurs="0" name="resultTemplateId" type="t:QualifiedIdType" />
+      <xs:element minOccurs="0" name="resultFieldList" type="t:EnumMemberListType" />
+      <xs:element minOccurs="0" name="resultSortOrderFieldList" type="t:SortOrderFieldListType" />
+      <xs:element minOccurs="0" name="resultGroupByFieldList" type="t:EnumMemberListType" />
+      <xs:element minOccurs="0" name="excludeHeader" type="xs:boolean" />
+      <xs:element minOccurs="0" name="excludeFooter" type="xs:boolean" />
+      <xs:element minOccurs="0" name="resultFormat" type="t:EnumMemberType" />
+      <xs:element minOccurs="0" name="resultCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

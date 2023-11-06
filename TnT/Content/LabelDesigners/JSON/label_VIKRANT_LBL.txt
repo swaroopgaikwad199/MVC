@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"203","Orientation":"portrait"},{"x":129,"y":60,"type":"label_text","name":"Textbox 1","text":"CASE No :","textType":"LabelText","fontSize":14,"fontType":"Arial","width":67.689453125,"height":20}]}

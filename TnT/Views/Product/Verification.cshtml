@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TnT.Models.Product.PackagingAsso>
+
+@{
+            ViewBag.Title = "Products";
+            //if (User.roles == 5)
+            //{
+            Layout = "~/Views/Home/_Layout.cshtml";
+        @*}
+    else if (User.roles == 8)
+    {
+        Layout = "~/Views/QAHome/_Layout.cshtml";
+    }
+    else
+    {
+        FormsAuthentication.SignOut();
+    }*@
+
+}
+
+
+<h2>
+    @TnT.LangResource.GlobalRes.ProductVerification
+  
+</h2>
+
+@if (Model.Count() == 0)
+{
+    <br />
+    <br />
+    <br />
+    <h3 style="color:forestgreen">@TnT.LangResource.GlobalRes.ProductVerificationNoProAvailable</h3>
+}
+else
+{
+    <table class="table table-bordered datatable" id="table-1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FGCode)
+                </th>
+                <th>
+                    @TnT.LangResource.GlobalRes.UsersIndexActions
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.FGCode)
+                </td>
+
+                <td>
+
+                    <a href='@Url.Action("Verify","Product", new {id = item.PAID})' class="btn btn-red btn-icon">@TnT.LangResource.GlobalRes.cmnBtnVerify <i class="entypo-check"></i></a>
+
+                    @*<div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="View" href='@Url.Action("Details","Product",  new {id = item.PAID})'> <i class="entypo-doc-text-inv"></i> View</a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="Edit" href='@Url.Action("Edit","Product",  new {id = item.PAID})'> <i class="entypo-pencil"></i> Edit</a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-primary" data-toggle="tooltip" data-placement="top" title data-original-title="Delete" href='@Url.Action("Delete","Product",  new {id = item.PAID})'> <i class="entypo-trash"></i> Delete</a>
+                                </li>
+                            </ul>
+                        </div>*@
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+
+

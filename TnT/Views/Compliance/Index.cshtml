@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TnT.Models.Product.JOBType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.ComplianceIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Job_Type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job_Type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TID })
+        </td>
+    </tr>
+}
+
+</table>

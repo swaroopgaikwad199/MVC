@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "UIdDetails";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>@TnT.LangResource.GlobalRes.RptUidUIDORSSCCDETAILS</h2>
+
+
+
+<div class="row">
+
+
+    <div class="col-md-9" style="padding-top:30px">
+       
+            <label class="control-label col-md-5" style="text-align:right; padding-top:5px">@TnT.LangResource.GlobalRes.RptUidSearchBy</label>
+            <div class="col-md-6" >
+
+                <select id="drpSearch" class="form-control">
+                    <option>--@TnT.LangResource.GlobalRes.RptUidSelect--</option>
+                    <option value="UID">@TnT.LangResource.GlobalRes.RptUid</option>
+                    <option value="SSCC">@TnT.LangResource.GlobalRes.RptcmnSSCC</option>
+                </select>
+
+         
+        </div>
+
+        <br />
+        <br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9" style="padding-top:5px">
+
+        <label class="control-label col-md-5" style="text-align:right; padding-top:5px">@TnT.LangResource.GlobalRes.RptUid</label>
+        <div class="col-md-6">
+            <input type="text" id="txtUid" class="form-control" />
+        </div>
+
+        <br />
+        <br />
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-md-9" style="padding-top:5px">
+
+        <label class="control-label col-md-5" style="text-align:right; padding-top:5px">@TnT.LangResource.GlobalRes.RptcmnSSCC</label>
+        <div class="col-md-6">
+            <input type="text" id="txtSSCC" class="form-control" />
+        </div>
+
+        <br />
+        <br />
+    </div>
+
+</div>
+    <div class="row" style="text-align:center; padding-top:10px;">
+        <input type="button" id="btnViewRpt" value="@TnT.LangResource.GlobalRes.ReportsTrailsViewReport" class="btn btn-info" style="margin-left: 4%;" />
+    </div>
+
+    <script>
+        $("#drpSearch").change(function () {
+          
+            if ($("#drpSearch").val() == "UID") {
+                $("#txtUid").removeAttr("disabled");
+                $("#txtSSCC").val("");
+                $("#txtSSCC").attr("disabled", "disabled")
+            }
+            else {
+                $("#txtUid").attr("disabled", "disabled");
+                $("#txtUid").val("");
+                $("#txtSSCC").removeAttr("disabled");
+            }
+        });
+
+        $("#txtUid").keypress(function (e) {
+
+            if (e.which == 32) {
+                e.preventDefault();
+            }
+
+        });
+        $("#txtSSCC").keypress(function (e) {
+
+            if (e.which == 32) {
+                e.preventDefault();
+            }
+
+        });
+
+        $("#btnViewRpt").click(function () {
+            $(".loading").show();
+            var detail;
+           
+            if ($("#drpSearch").val() == "UID") {
+                detail = $("#txtUid").val();
+            }
+            else
+            {
+                detail = $("#txtSSCC").val();
+            }
+            
+
+            var type=$("#drpSearch").val();
+            if (type != "") {
+                if (detail != null) {
+                    $.ajax({
+                        url: 'RptUidDetail',
+                        type: "POST",
+                        dataType: 'json',
+                        data: { "detail": detail, "type": type },
+                        success: function (data) {
+                          
+                          
+                            if (data == "@TnT.LangResource.GlobalRes.TempDataDavaNoData") {
+
+                                $('#modal-msg').html('@TnT.LangResource.GlobalRes.TempDataDavaNoData !');
+                                $("#showMSGBx").trigger("click");
+
+                            } else {
+                                if (data == "Please Select type") {
+                                    $('#modal-msg').html('@TnT.LangResource.GlobalRes.RptUidListSelectSrchType !');
+                                    $("#showMSGBx").trigger("click");
+                                }
+                                else {
+                                    if (data == "@TnT.LangResource.GlobalRes.toastrRptuIdDetailsEnterdata") {
+                                        $('#modal-msg').html('@TnT.LangResource.GlobalRes.RptUidListEnterUidOrSscc !');
+                                        $("#showMSGBx").trigger("click");
+                                    }
+                                    else {
+                                        $('#modal-rpt-data').html(data);
+                                        $("#showRPTBx").trigger("click");
+                                    }
+                                }
+                            }
+                            $(".loading").hide();
+                        },
+                        error: function (data) {
+                            $(".loading").hide();
+                            toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+                        }
+                    });
+                }
+                else
+                {
+                    $(".loading").hide();
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrRptuIdDetailsEnterdata")
+                }
+            }
+            else
+            {
+                $(".loading").hide();
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrRptuIdDetailsselectSrchBy")
+            }
+          
+            });
+
+
+    </script>

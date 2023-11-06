@@ -1,0 +1,96 @@
+﻿@model TnT.Models.SettingsNUtility.Roles
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.RolesCreate
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "Roles")' class="btn btn-danger btn-icon icon-left">
+      @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+@using (Html.BeginForm("CreateVM", "Roles", FormMethod.Post, new { @id = "frmUser" }))
+{
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+        <h4>Roles</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Roles_Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.Roles_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @required="required" } })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    
+
+        <div class="col-sm-offset-3 col-sm-5">
+            @foreach (var item in ViewBag.Permissions)
+{
+                <div class="checkbox">
+                    <label>
+                        
+                        @item.IsChecked
+                         @item.Permission
+                    </label>
+                </div>
+            }
+
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnSubmit" value="Create" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $('#Roles_Name').change(function () {
+        var Roles_Name = $('#Roles_Name').val();
+
+
+        $.ajax({
+            url: 'IsRoleExisting',
+            type: "POST",
+            dataType: 'json',
+            data: { "RoleName": Roles_Name },
+            success: function (data) {
+                alert(data);
+                if (data == true) {
+                    toastr.warning("@TnT.LangResource.GlobalRes.toastrCreateRoleAlreadyExist.");
+                    $("#Roles_Name").css("border", "red 1px solid");
+                    $("#Roles_Name").val("");
+
+
+                } else {
+                    $("#Roles_Name").css("border", "green 1px solid");
+
+
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    });
+</script>

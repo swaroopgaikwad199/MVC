@@ -1,0 +1,148 @@
+﻿@model TnT.Models.Reports.Jobs.RptPCRelationshipViewModel
+<div  style="border: 1px dotted;" id="rptLoaded">
+
+    <div class="row" style="border: 1px solid; margin: 10px;">
+        <div class="col-md-12">
+            <h2 style="text-align:center;">-@Html.DisplayFor(model => model.CompanyName)</h2>
+            <p style="text-align:center;">@Html.DisplayFor(model => model.Address)</p>
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center;">Parent-Child Relationships</h4>
+    </div>
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <div class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.JobsBatchManagerProductName:</label> @Html.DisplayFor(model => model.Product.Name)<br />
+            <label>@TnT.LangResource.GlobalRes.ReportsJobsBatchesBatch:</label> @Html.DisplayFor(model => model.Job.BatchNo)<br />
+            <label>@TnT.LangResource.GlobalRes.LineLocationLocationCode</label>@Html.DisplayFor(model => model.LineDetails.LineCode)<br />
+            <label>@TnT.LangResource.GlobalRes.LineLocationPlantCode</label>@Html.DisplayFor(model => model.LineDetails.PlantCode)<br />
+        </div>
+        <div class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.JobsGTIN:</label> 12345678902221<br />
+            <label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label> @Html.DisplayFor(model => model.Job.MfgDate)<br />
+
+        </div>
+        <div class="col-md-4">
+            <label>@TnT.LangResource.GlobalRes.RptPCRelationshipGTINTer:</label> 123256498132134<br />
+            <label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label> @Html.DisplayFor(model => model.Job.ExpDate)<br />
+            <label>@TnT.LangResource.GlobalRes.LineLocationDivisionCode:</label>@Html.DisplayFor(model => model.LineDetails.DivisionCode)<br />
+            <label>@TnT.LangResource.GlobalRes.LineLocationLineCode:</label> @Html.DisplayFor(model => model.LineDetails.LineCode)<br />
+        </div>
+    </div>
+    <div class="row" style="border: 1px solid;margin: 10px;padding-top: 9px;">
+        <table class="table table-bordered responsive">
+            
+                <tr style="font-weight:bold;">
+                    <td style="text-align: center;">#</td>
+                    @foreach (var item in Model.PkgLevels)
+                    {
+                        <th style="text-align: center;">@item</th>
+                    }
+                </tr>
+            
+            <tbody>
+                @{ int count = 0; }
+
+                @foreach (var item in Model.ShipperDetails)
+                {
+
+                    var FirstLvl = Model.PkgLevels.Last();
+                    int rowspan = 0;
+                    if (FirstLvl == "MOC")
+                    {
+                        rowspan = item.PCRelations.MOCCode.Count();
+                    }
+                    if (FirstLvl == "OBX")
+                    {
+                        rowspan = item.PCRelations.OBXCode.Count();
+                    }
+                    if (FirstLvl == "ISH")
+                    {
+                        rowspan = item.PCRelations.ISHCode.Count();
+                    }
+                    if (FirstLvl == "PAL")
+                    {
+                        rowspan = item.PCRelations.PALCode.Count();
+
+                    }
+                    rowspan = rowspan + 1;
+
+                    int MOCCount = 0;
+                    int OBXCount = 0;
+                    int ISHCount = 0;
+                    int PALCount = 0;
+
+                    if (Model.PkgLevels.Contains("PAL"))
+                    {
+                        PALCount = item.PCRelations.PALCode.Count();
+                    }
+                    if (Model.PkgLevels.Contains("ISH"))
+                    {
+                        ISHCount = item.PCRelations.ISHCode.Count();
+                    }
+                    if (Model.PkgLevels.Contains("OBX"))
+                    {
+                        OBXCount = item.PCRelations.OBXCode.Count();
+                    }
+                    if (Model.PkgLevels.Contains("MOC"))
+                    {
+                        MOCCount = item.PCRelations.MOCCode.Count();
+                    }
+
+                    
+                    <tr>
+                        <td rowspan="@rowspan">@count</td>
+                        <td rowspan="@rowspan"   data-type="SSCC" >@item.SSCC</td>
+                    </tr>
+
+                    if (Model.PkgLevels.Contains("PAL") && Model.TertiaryLevel != "PAL")
+                    {
+                        foreach (var PALlvl in item.PCRelations.PALCode)
+                        {                            
+                            <tr>
+                                <td data-type="PAL" > @PALlvl </td>
+                            </tr>
+                        }
+                    }
+                    if (Model.PkgLevels.Contains("ISH") && Model.TertiaryLevel != "ISH")
+                    {
+                        foreach (var ISHlvl in item.PCRelations.ISHCode)
+                        {                           
+                            <tr>
+                                <td  data-type="ISH"> @ISHlvl </td>
+                            </tr>
+                        }
+                    }
+                    if (Model.PkgLevels.Contains("OBX") && Model.TertiaryLevel != "OBX")
+                    {
+                        foreach (var OBXlvl in item.PCRelations.OBXCode)
+                        {
+                          
+                            <tr>
+                                <td   data-type="OBX" > @OBXlvl </td>
+                            </tr>                         
+                        }
+                    }
+                    if (Model.PkgLevels.Contains("MOC") && Model.TertiaryLevel != "MOC")
+                    {
+                        foreach (var MOClvl in item.PCRelations.MOCCode)
+                        {
+                            <tr>
+                                <td data-type="MOC" > @MOClvl </td>
+                            </tr>
+                        }
+                    }
+
+                    count++;
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="text-align:center; border: 1px solid;margin: 10px;padding-top: 9px;">
+        18-11-2016 3:09 PM
+    </div>
+
+</div>
+

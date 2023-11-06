@@ -1,0 +1,910 @@
+﻿@using TnT.Models.Product
+@model TnT.Models.Product.PackagingAsso
+
+@{
+            ViewBag.Title = "Create";
+            //if (User.roles == 5)
+            //{
+            Layout = "~/Views/Home/_Layout.cshtml";
+    @*}
+        else if (User.roles == 8)
+        {
+            Layout = "~/Views/QAHome/_Layout.cshtml";
+        }
+        else
+        {
+            FormsAuthentication.SignOut();
+        }*@
+}
+
+<h2>
+    @TnT.LangResource.GlobalRes.cmnMenuItemProductMasterSubItemVerifyProducts : @Model.Name
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Verification", "Product")' class="btn btn-danger btn-icon icon-left">
+        @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+<div style="border: 4px solid #636161; border-radius: 9px;">
+    @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { @class = "f1", @id = "frmProduct" }))
+    {
+        <div class="f1-steps" style="margin-left: 17%;">
+            <div class="f1-progress" style="width: 62%">
+                <div class="f1-progress-line" data-now-value="17" data-number-of-steps="5"></div>
+            </div>
+            <div class="f1-step f1-step6 active">
+                <div class="f1-step-icon">1</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardProductInfo</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">2</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardAggregationLevels</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">3</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardAggregationInfo</p>
+            </div>
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">4</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardComplianceInfo</p>
+            </div>
+            @*<div class="f1-step">
+                    <div class="f1-step-icon">4</div>
+                    <p>Save Product</p>
+                </div>*@
+            <div class="f1-step f1-step6">
+                <div class="f1-step-icon">5</div>
+                <p>@TnT.LangResource.GlobalRes.cmnWizardVerification</p>
+            </div>
+        </div>
+
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-6">
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ScheduledDrug, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductIsSchedule, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.ScheduledDrug)
+                            @Html.ValidationMessageFor(model => model.ScheduledDrug, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.ExpDateFormat, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductExpDateFormat, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @* @Html.DropDownListFor(M => M.ExpDateFormat, new SelectList(ViewBag.DateFormats, "Format", "Format"), "Select Format", new { @class = "form-control", @validate = "true", @disabled = "true" })*@
+                            @Html.DisplayFor(model => model.ExpDateFormat, new { htmlAttributes = new { @class = "form-control" } })
+                            @*  @Html.EditorFor(model => model.ExpDateFormat, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.ExpDateFormat, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductActive, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group" style="display:none;">
+                            @Html.LabelFor(model => model.UseExpDay, htmlAttributes: new { @class = "control-label col-md-6 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductUseExpDay, @data_original_title = "Field Information" })
+
+                            @Html.DisplayFor(model => model.UseExpDay)
+                            @Html.ValidationMessageFor(model => model.UseExpDay, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductName, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GenericName, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductGenericName, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.GenericName, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.GenericName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Composition, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductComposition, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Composition, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.Composition, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DoseUsage, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDoseUsage, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.DoseUsage, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.DoseUsage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FGCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFGCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.FGCode, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.FGCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductRemark, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDescription, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.InternalMaterialCode, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductInternalMaterialCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.InternalMaterialCode, new { htmlAttributes = new { @class = "form-control", @validate = "true" } })
+                            @Html.ValidationMessageFor(model => model.InternalMaterialCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DosageForm, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductDosageForm, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @{
+                                string dose = string.Empty;
+                                if (ViewBag.DosageForm1 != null)
+                                {
+                                    dose = ViewBag.DosageForm1.DosageName;
+                                }
+                            }
+                            <label class="control-label" style="font-weight:normal">@dose</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.Label(TnT.LangResource.GlobalRes.M_VendorProvider, htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductInternalMaterialCode, @data_original_title = "Field Information" })
+                        <div class="col-md-6">
+                            @Html.DisplayFor(model => model.Proivder.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-4 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductInternalMaterialCode, @data_original_title = "Field Information" })
+                            <div class="col-md-6">
+                                @Html.DisplayFor(model => model.CompType, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>*@
+
+            </div>
+
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-next btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+
+
+            @{
+                List<string> level = ViewBag.PackagingLevel;
+            }
+            <table style="width: 90%; text-align: center; margin-top: 1%;">
+                <tr>
+
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/ppb.png" alt="ppb"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("PPB") ? "checked='checked'" : "") name="chkPPB" id="PPB">
+                        <label for="PPB"> @TnT.LangResource.GlobalRes.ProductPPB</label>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/mono.png" alt="mono"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("MOC") ? "checked='checked'" : "") name="chkMOC" id="MOC"><label for="MOC"> @TnT.LangResource.GlobalRes.ProductMOC</label>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <img src="~/content/assets/images/obx.png" alt="obx"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("OBX") ? "checked='checked'" : "") name="chkOBX" id="OBX"><label for="OBX"> @TnT.LangResource.GlobalRes.ProductOBX</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/content/assets/images/ish.png" alt="ish"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("ISH") ? "checked='checked'" : "") name="chkISH" id="ISH"><label for="ISH">@TnT.LangResource.GlobalRes.ProductISH</label>
+                    </td>
+                    <td>
+                        <img src="~/content/assets/images/osh.png" alt="osh"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("OSH") ? "checked='checked'" : "") name="chkOSH" id="OSH"><label for="OSH"> @TnT.LangResource.GlobalRes.ProductOSH</label>
+                    </td>
+                    <td>
+                        <img src="~/content/assets/images/pal.png" alt="pal"><br />
+                        <input disabled type="checkbox" @Html.Raw(level.Contains("PAL") ? "checked='checked'" : "") name="chkPAL" id="PAL"><label for="PAL"> @TnT.LangResource.GlobalRes.ProductPAL</label>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" class="btn btn-next btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-12">
+
+                @{
+                    var duallabel = Convert.ToBoolean(Utilities.getAppSettings("DualLabel"));
+                    List<PackageLabelMaster> lstPackLabelMaster = ViewBag.PackagingLabelMaster;
+                    PackageLabelMaster ppcPlm, mocPlm, obxPlm, ishPlm, oshPlm, palPlm;
+                    string[] moclbl, obxlbl, ishlbl, oshlbl, pallbl;
+
+                    ppcPlm = lstPackLabelMaster.Where(m => m.Code == "PPC").FirstOrDefault();
+                    mocPlm = lstPackLabelMaster.Where(m => m.Code == "MOC").FirstOrDefault();
+                    obxPlm = lstPackLabelMaster.Where(m => m.Code == "OBX").FirstOrDefault();
+                    ishPlm = lstPackLabelMaster.Where(m => m.Code == "ISH").FirstOrDefault();
+                    oshPlm = lstPackLabelMaster.Where(m => m.Code == "OSH").FirstOrDefault();
+                    palPlm = lstPackLabelMaster.Where(m => m.Code == "PAL").FirstOrDefault();
+
+
+                    List<PackagingAssoDetails> LstPacAssoDetails = ViewBag.PackagingAssoDetails;
+                    PackagingAssoDetails ppcdata, mocdata, obxdata, ishdata, oshdata, paldata;
+                    ppcdata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "PPC").FirstOrDefault();
+                    mocdata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "MOC").FirstOrDefault();
+                    obxdata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "OBX").FirstOrDefault();
+                    ishdata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "ISH").FirstOrDefault();
+                    oshdata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "OSH").FirstOrDefault();
+                    paldata = LstPacAssoDetails.Where(m => m.PackageTypeCode == "PAL").FirstOrDefault();
+
+
+
+                    <table width="90%" id="packagingGrid" style="text-align: center; margin-top: 5px;" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;"></th>
+                                <th class="PPB" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobPPB</th>
+                                <th class="MOC" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobMOC</th>
+                                <th class="OBX" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobOBX</th>
+                                <th class="ISH" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobISH</th>
+                                <th class="OSH" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobOSH</th>
+                                <th class="PAL" style="width: 10%; text-align: center;">@TnT.LangResource.GlobalRes.JobCloseJobPAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@(UIManager.Member == null ? "" : UIManager.Member.Email)*@
+                            <tr class="trPPN">
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductPPN, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPPN, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : ppcdata.PPN)" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : mocdata.PPN)" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : obxdata.PPN)" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : ishdata.PPN)" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : oshdata.PPN)" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : paldata.PPN)" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductGTIN, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductGTIN, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : ppcdata.GTIN)" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : mocdata.GTIN)" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : obxdata.GTIN)" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : ishdata.GTIN)" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : oshdata.GTIN)" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : paldata.GTIN)" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ImporterTacelinkNTIN, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductGTIN, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : ppcdata.NTIN)" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : mocdata.NTIN)" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : obxdata.NTIN)" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : ishdata.NTIN)" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : oshdata.NTIN)" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : paldata.NTIN)" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductMRP, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductMRP, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : (Convert.ToInt32(ppcdata.MRP)).ToString())" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : (Convert.ToInt32(mocdata.MRP)).ToString())" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : (Convert.ToInt32(obxdata.MRP)).ToString())" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : (Convert.ToInt32(ishdata.MRP)).ToString())" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : (Convert.ToInt32(oshdata.MRP)).ToString())" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : (Convert.ToInt32(paldata.MRP)).ToString())" name="PAL[]" /> </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductPCMAP, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPCMAP, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : ppcdata.Size.ToString())" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : mocdata.Size.ToString())" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : obxdata.Size.ToString())" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : ishdata.Size.ToString())" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : oshdata.Size.ToString())" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : paldata.Size.ToString())" name="PAL[]" /> </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductBundlingQTY, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductBundlingQty, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcdata == null ? "" : ppcdata.BundleQty.ToString())" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocdata == null ? "" : mocdata.BundleQty.ToString())" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxdata == null ? "" : obxdata.BundleQty.ToString())" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishdata == null ? "" : ishdata.BundleQty.ToString())" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshdata == null ? "" : oshdata.BundleQty.ToString())" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(paldata == null ? "" : paldata.BundleQty.ToString())" name="PAL[]" /> </td>
+                            </tr>
+                            @if (duallabel)
+                            {
+
+
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelName, htmlAttributes: new { @class = "control-label popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelName, @data_original_title = "Field Information" })</th>
+                                    <td class="PPB"><input disabled class="form-control" type="text" value="@(ppcPlm == null ? "" : ppcPlm.LabelName)" name="PPB[]" /></td>
+                                    <td class="MOC">
+                                        @if (mocPlm != null)
+                                        {
+                                            moclbl = mocPlm.LabelName.Split(',');
+                                            <input disabled class="form-control" type="text" value="@moclbl[0]" name="MOC[]" />
+                                            <input disabled class="form-control" type="text" value="@moclbl[1]" name="MOC[]" />
+
+                                        }
+                                    </td>
+                                    <td class="OBX">
+                                        @if (obxPlm != null)
+                                        {
+                                            obxlbl = obxPlm.LabelName.Split(',');
+                                            <input disabled class="form-control" type="text" value="@(obxlbl[0])" name="OBX[]" />
+                                            <input disabled class="form-control" type="text" value="@(obxlbl[1])" name="OBX[]" />
+                                        }
+                                    </td>
+                                    <td class="ISH">
+                                        @if (ishPlm != null)
+                                        {
+                                            ishlbl = ishPlm.LabelName.Split(',');
+                                            <input disabled class="form-control" type="text" value="@(ishlbl[0])" name="ISH[]" />
+                                            <input disabled class="form-control" type="text" value="@(ishlbl[1])" name="ISH[]" />
+                                        }
+                                    </td>
+
+                                    <td class="OSH">
+                                        @if (oshPlm != null)
+                                        {
+                                            oshlbl = oshPlm.LabelName.Split(',');
+                                            <input disabled class="form-control" type="text" value="@(oshlbl[0])" name="OSH[]" />
+                                            <input disabled class="form-control" type="text" value="@(oshlbl[1])" name="OSH[]" />
+                                        }
+                                    </td>
+                                    <td class="PAL">
+                                        @if (palPlm != null)
+                                        {
+                                            pallbl = palPlm.LabelName.Split(',');
+                                            <input disabled class="form-control" type="text" value="@(pallbl[0])" name="PAL[]" />
+                                            <input disabled class="form-control" type="text" value="@(pallbl[1])" name="PAL[]" />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelName, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelName, @data_original_title = "Field Information" })</th>
+                                    <td class="PPB"><input class="form-control" type="text" value="@(ppcPlm == null ? "" : ppcPlm.LabelName)" name="PPB[]" /></td>
+                                    <td class="MOC"><input class="form-control" type="text" value="@(mocPlm == null ? "" : mocPlm.LabelName)" name="MOC[]" /></td>
+                                    <td class="OBX"><input class="form-control" type="text" value="@(obxPlm == null ? "" : obxPlm.LabelName)" name="OBX[]" /> </td>
+                                    <td class="ISH"><input class="form-control" type="text" value="@(ishPlm == null ? "" : ishPlm.LabelName)" name="ISH[]" /> </td>
+                                    <td class="OSH"><input class="form-control" type="text" value="@(oshPlm == null ? "" : oshPlm.LabelName)" name="OSH[]" /> </td>
+                                    <td class="PAL"><input class="form-control" type="text" value="@(palPlm == null ? "" : palPlm.LabelName)" name="PAL[]" /> </td>
+                                </tr>
+                            }
+                            <tr>
+                                <th>@Html.Label(@TnT.LangResource.GlobalRes.ProductLabelFilter, htmlAttributes: new { @class = "control-label  popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductLabelFilter, @data_original_title = "Field Information" })</th>
+                                <td class="PPB"><input class="form-control" type="text" value="@(ppcPlm == null ? "" : ppcPlm.Filter)" name="PPB[]" /></td>
+                                <td class="MOC"><input class="form-control" type="text" value="@(mocPlm == null ? "" : mocPlm.Filter)" name="MOC[]" /></td>
+                                <td class="OBX"><input class="form-control" type="text" value="@(obxPlm == null ? "" : obxPlm.Filter)" name="OBX[]" /> </td>
+                                <td class="ISH"><input class="form-control" type="text" value="@(ishPlm == null ? "" : ishPlm.Filter)" name="ISH[]" /> </td>
+                                <td class="OSH"><input class="form-control" type="text" value="@(oshPlm == null ? "" : oshPlm.Filter)" name="OSH[]" /> </td>
+                                <td class="PAL"><input class="form-control" type="text" value="@(palPlm == null ? "" : palPlm.Filter)" name="PAL[]" /> </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+
+                }
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" class="btn btn-next  btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-12">
+                <div class="panel panel-primary" data-collapsed="0" style="display:none">
+
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            @TnT.LangResource.GlobalRes.ProductCreateUSA
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                   @Html.Label(@TnT.LangResource.GlobalRes.ProductNationalDrugCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default lblNDC", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductNDC, @data_original_title = "Field Information" })
+                                  <div class="col-md-7">
+                                    @Html.EditorFor(model => model.CountryDrugCode, new { htmlAttributes = new { @class = "form-control", id = "txtCountryDrugCode" } })
+                                    @Html.ValidationMessageFor(model => model.CountryDrugCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            @TnT.LangResource.GlobalRes.ProductCreateRussia
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.FEACN, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductFeacn, @data_original_title = "Field Information", id = "lblFeacn" })
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.FEACN, new { htmlAttributes = new { @class = "form-control NumbersOnly", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.FEACN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.PublicKey, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = "", @data_original_title = "Field Information", id = "lblFeacn" })
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.PublicKey, new { htmlAttributes = new { @class = "form-control", @maxlength = "4" } })
+                                    @Html.ValidationMessageFor(model => model.PublicKey, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0" style="display:none">
+
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                           @TnT.LangResource.GlobalRes.ProductCreateSaudiArabia
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.Label(@TnT.LangResource.GlobalRes.SaudiDrugCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default  ", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSDC, @data_original_title = "Field Information", id = "lblSDC" })
+                              
+                                 <div class="col-md-7">
+                                    @Html.EditorFor(model => model.SaudiDrugCode, new { htmlAttributes = new { @class = "form-control", id = "txtSaudiDrugCode" } })
+                                    @Html.ValidationMessageFor(model => model.SaudiDrugCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0" style="display:none">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            @TnT.LangResource.GlobalRes.ProductCreateChinacode
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SubTypeNo, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubTypeNo, @data_original_title = "Field Information" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.SubTypeNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                                    @Html.ValidationMessageFor(model => model.SubTypeNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AuthorizedNo, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductAuthorizedNo, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.AuthorizedNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.AuthorizedNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SubType, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubType, @data_original_title = "Field Information" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.SubType, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                                    @Html.ValidationMessageFor(model => model.SubType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SubTypeSpec, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSubTypeSpec, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.SubTypeSpec, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.SubTypeSpec, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PackageSpec, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPackageSpec, @data_original_title = "Field Information" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PackageSpec, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                                    @Html.ValidationMessageFor(model => model.PackageSpec, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PackUnit, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductPackUnit, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PackUnit, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.PackUnit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ResProdCode, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductResProduct, @data_original_title = "Field Information" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.ResProdCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" } })
+                                    @Html.ValidationMessageFor(model => model.ResProdCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Workshop, htmlAttributes: new { @class = "control-label col-md-5 popover-default", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductWorkshop, @data_original_title = "Field Information", id = "lblSubTypeNo" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Workshop, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.Workshop, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel panel-primary" data-collapsed="0">
+
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                           @TnT.LangResource.GlobalRes.ProductCreateEuFMD
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @Html.Label(@TnT.LangResource.GlobalRes.ProductImportNHRN, htmlAttributes: new { @class = "control-label col-md-5 popover-default ", @data_toggle = "popover", @data_trigger = "hover", data_placement = "top", @data_content = TnT.LangResource.GlobalRes.ToolTipProductSDC, @data_original_title = "Field Information", id = "lblSDC" })
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.NHRN, new { htmlAttributes = new { @class = "form-control", id = "txtSaudiDrugCode" } })
+                                    @Html.ValidationMessageFor(model => model.NHRN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="f1-buttons">
+                <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+                <button type="button" class="btn btn-next  btn-orange">@TnT.LangResource.GlobalRes.cmnWizardBtnNext</button>
+            </div>
+        </fieldset>
+        @*<fieldset>
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-12" style="text-align: center;margin-top: 6%;margin-bottom: 6%;">
+
+                            <button type="button" class="btn btn-next  btn-orange">Next</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="f1-buttons">
+                    <button type="button" class="btn btn-previous">Previous</button>
+                    <button type="button" class="btn btn-next  btn-orange">Next</button>
+                </div>
+            </fieldset>*@
+                    <fieldset>
+                        <div class="row text-center">
+                            <br /><br />
+                            <br />
+                            <button id="btnDontVerifyPost" onclick="validateFormNotVerified();" type="button" class="btn btn-red">@TnT.LangResource.GlobalRes.ProductVerifyProductNtVerify <i class="entypo-check"></i></button>
+                            @*<h2>Verify Section</h2>*@
+                            @*<button type="submit" class="btn btn-submit">Verify</button>*@
+                            <a id="btnSubmitVerify" class="btn btn-green">@TnT.LangResource.GlobalRes.cmnBtnVerify <i class="entypo-check"></i></a>
+
+                        </div>
+                        <div class="f1-buttons">
+                            <button type="button" class="btn btn-previous">@TnT.LangResource.GlobalRes.cmnWizardBtnPrevious</button>
+
+                        </div>
+                    </fieldset>
+                    }
+</div>
+
+
+
+
+<style>
+    .PPB {
+        display: none;
+    }
+
+    .MOC {
+        display: none;
+    }
+
+    .OBX {
+        display: none;
+    }
+
+    .ISH {
+        display: none;
+    }
+
+    .OSH {
+        display: none;
+    }
+
+    .PAL {
+        display: none;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: none;
+    }
+
+    .form-group {
+        margin-bottom: 36px;
+    }
+</style>
+<script>
+
+    function validateFormNotVerified() {
+
+        var Remark = $("#Remarks").val();
+
+        if (Remark == "") {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrVerifyJobprovideremark");
+            $("#Remarks").css("border", "red 1px solid");
+            return false;
+        } else {
+            $("#Remarks").css("border", "green 1px solid");
+            var PAID = "@Model.PAID";
+            var newUrl = "@Url.Action("NotVerifyProduct", "Product")?PAID=" + PAID + "&Remark=" + Remark;
+            window.location.href = newUrl;
+        }
+    }
+
+    $("input[type=text]").prop('disabled', true);
+
+
+    $("#PPB").change(function () {
+        if (this.checked) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+    });
+    $("#MOC").change(function () {
+        if (this.checked) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+    });
+    $("#OBX").change(function () {
+        if (this.checked) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+    });
+    $("#ISH").change(function () {
+        if (this.checked) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+    });
+    $("#OSH").change(function () {
+        if (this.checked) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+    });
+    $("#PAL").change(function () {
+        if (this.checked) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+    });
+
+    $("#btnSubmitVerify").click(function () {
+
+        $('#modal-Digital-Sign').load('@Url.Action("_Login", "Account")');
+        $("#showDigitalBx").trigger("click");
+    });
+
+    function postData() {
+
+        var url = '@Url.Action("VerifyProduct", "Product", new { id = Model.PAID })';
+        window.location = url;
+    }
+
+
+
+    $(document).ready(function () {
+        if ($("#lbltype").text() == "RUSSIA") {
+            $("#lblFEACN").show();
+            $("#FEACN").show();
+        }
+        else {
+            $("#lblFEACN").hide();
+            //$("#FEACN").hide();
+        }
+        if ($("#lbltype").text() == "CHINACODE") {
+            $("#ChinaDivs").show();
+        }
+        else {
+            $("#ChinaDivs").hide();
+        }
+        if ($("#lbltype").text() == "SAUDI ARABIA") {
+            $(".lblNDC").text("Saudi Drug Code");
+            $("#lblNDC").hide();
+            $("#lblSDC").show();
+
+        }
+        else {
+            //$("#lblSDC").hide();
+            $("#lblNDC").show();
+            $(".lblNDC").text("National Drug Code");
+        }
+        if ($('#PPB').is(':checked') == true) {
+            $(".PPB").show();
+        } else {
+            $(".PPB").hide();
+        }
+
+        if ($('#MOC').is(':checked') == true) {
+            $(".MOC").show();
+        } else {
+            $(".MOC").hide();
+        }
+
+        if ($('#OBX').is(':checked') == true) {
+            $(".OBX").show();
+        } else {
+            $(".OBX").hide();
+        }
+
+        if ($('#ISH').is(':checked') == true) {
+            $(".ISH").show();
+        } else {
+            $(".ISH").hide();
+        }
+
+        if ($('#OSH').is(':checked') == true) {
+            $(".OSH").show();
+        } else {
+            $(".OSH").hide();
+        }
+
+        if ($('#PAL').is(':checked') == true) {
+            $(".PAL").show();
+        } else {
+            $(".PAL").hide();
+        }
+
+        $('#frmProduct input[type=text]').attr("disabled", true);
+
+        PPBPPN = $('input[name="PPB[]"]').eq(0).val();
+        MOCPPN = $('input[name="MOC[]"]').eq(0).val();
+        OBXPPN = $('input[name="OBX[]"]').eq(0).val();
+        ISHPPN = $('input[name="ISH[]"]').eq(0).val();
+        OSHPPN = $('input[name="OSH[]"]').eq(0).val();
+        PALPPN = $('input[name="PAL[]"]').eq(0).val();
+
+        if (PPBPPN == "" && MOCPPN == "" && OBXPPN == "" && ISHPPN == "" && OSHPPN == "" && PALPPN == "") {
+            //$('.trPPN').hide();
+        } else {
+            $('.trPPN').show();
+        }
+    });
+
+    $(document).ready(function (e) {
+        $('select option').each(function () {
+            if ($(this).text() == 'DGFT') {
+                $(this).text('India-DGFT');
+            }
+            if ($(this).text() == 'CIP') {
+                $(this).text('France-CIP');
+            }
+            if ($(this).text() == 'PPN') {
+                $(this).text('Germany-PPN');
+            }
+            if ($(this).text() == 'DSCSA') {
+                $(this).text('USA-DSCSA');
+            }
+
+        });
+    });
+
+</script>
+

@@ -1,0 +1,254 @@
+﻿@model TnT.Models.Reports.RptUIDDetailViewModel
+
+<style>
+    /*@@media print {*/
+    .scrollprint {
+        overflow-y: inherit;
+        max-height: none;
+    }
+    /*}*/
+    .tbFont {
+        font-size: 9px;
+    }
+
+    .tdWidth {
+        width: 30%;
+    }
+
+    .tdWidthBig {
+        width: 40%;
+    }
+
+    .tblWidth {
+        width: 100%;
+    }
+
+    .pgbreak {
+        page-break-inside: avoid;
+    }
+</style>
+<link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+
+
+<div class="container" id="rptLoaded">
+    @if (Model.JID == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>
+    }
+    else
+    {
+        <div class="row" style="border: 1px solid; margin: 10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center; padding-bottom:5px">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            @if (Model.Type == "UID")
+            {
+                <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptUidValProductUIDDetails</b></h4>
+            }
+            else
+            {
+                if (Model.TID != 26)
+                {
+                    <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptUidValProductSSCCDetails</b></h4>
+                }
+                else
+                {
+                    <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.ReportRptUidValProductLpnoDetails</b></h4>
+                }
+
+            }
+        </div>
+        <div class="row rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New'; ">
+            <table style="width: 100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td colspan="3" style="width:100%;font-size: 15px;border-bottom: 1px solid;padding-left:14px"><label style="font-weight:bold;padding-right: 20px;">@TnT.LangResource.GlobalRes.RptUidValBatchDetail:</label></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="col-md-4" style="padding-top: 7px;"><label>@TnT.LangResource.GlobalRes.RptUidValBPRCode : </label>@Model.BPR</td>
+                    <td style="padding-top: 7px;"><label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo : </label>@Model.BatchNo</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.JobsProductName : </label>@Model.ProductName</td>
+                    <td><label>@TnT.LangResource.GlobalRes.JobsProductCode : </label>@Model.ProductCode</td>
+                    <td><label>@TnT.LangResource.GlobalRes.ImporterTracelinkGTIN :</label>@Model.GTIN</td>
+                    
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptcmnMFGDate : </label>@Model.MfgDate.ToString("dd/MM/yyyy")</td>
+                    <td><label>@TnT.LangResource.GlobalRes.RptcmnEXPDate : </label>@Model.ExpDate.ToString("dd/MM/yyyy")</td>
+                    <td><label>@TnT.LangResource.GlobalRes.JobsBatchQty : </label>@Model.BatchQty</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValJobWithUID : </label>@Model.JobWithUid</td>
+                    <td></td>
+                    <td><label>@TnT.LangResource.GlobalRes.RptcmnJobType : </label>@Model.JobType</td>
+
+                </tr>
+                <tr>
+                    <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.LineLocationLocationCode : </label>@Model.LocationCode</td>
+                    <td><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode : </label>@Model.DivCode</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode : </label>@Model.PlantCode</td>
+                    <td><label>@TnT.LangResource.GlobalRes.LineLocationLineCode : </label>@Model.LineCode</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New'; ">
+            <table style="width: 100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td colspan="2" style="width:100%;font-size: 15px;border-bottom: 1px solid;padding-left:14px"><label style="font-weight:bold;padding-right: 20px;">@TnT.LangResource.GlobalRes.RptUidValUIDDetails:</label></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4" style="padding-top: 7px;"><label>@TnT.LangResource.GlobalRes.RptUidValUIDCode : </label>@Model.UIDCode</td>
+                    <td style="padding-top: 7px;"><label>@TnT.LangResource.GlobalRes.RptUidValPackagingType : </label>@Model.PackagingType</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValPackingDate : </label>@Model.PackagingDate</td>
+                    <td><label>@TnT.LangResource.GlobalRes.RptcmnOperator :</label>@Model.Operator</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptcmnStatus : </label>@Model.Status</td>
+
+                    <td>
+                        @if (Model.TID != 26)
+                        {
+                            <label>
+                                @TnT.LangResource.GlobalRes.RptcmnSSCC :
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                @TnT.LangResource.GlobalRes.RptJObwiseSSCCLPNO :
+                            </label>
+                        }
+                        
+                    </td>
+
+
+
+                </tr>
+                @if (Model.FailureReason != "")
+                {
+                    <tr>
+                        <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValFailureReason : </label>@Model.FailureReason</td>
+
+                    </tr>
+                }
+                @if (Model.InspectionSet != "")
+                {
+                    <tr>
+                        <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValInspectionSet : </label>@Model.InspectionSet</td>
+
+                    </tr>
+                }
+                @if (Model.parentCode != "")
+                {
+                    <tr>
+                        <td colspan="2" class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValParentCode : </label>@Model.parentCode</td>
+
+                    </tr>
+                }
+                <tr>
+                    <td class="col-md-4"><label>@TnT.LangResource.GlobalRes.RptUidValCaseNo : </label>@Model.CaseNo</td>
+                    <td>
+                        @if (Model.TID != 26)
+                        {
+                            <label>@TnT.LangResource.GlobalRes.RptUidValSSCCVerifedStatus :</label>
+                        }
+                        else
+                        {
+                            <label>LPNO Verification</label>
+                        } 
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        if (Model.ChildCode != null)
+        {
+            <div class="row rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+                <table style="width: 100%;" class="@ViewBag.tbFont">
+                    <tr>
+                        <td colspan="4" style="width:100%;font-size: 15px;border-bottom: 1px solid;padding-left:14px"><label style="font-weight:bold;padding-right: 20px;">@TnT.LangResource.GlobalRes.RptUidValChildCodes :</label></td>
+                    </tr>
+                    @{int i = 0; }
+
+                    @while (i < Model.ChildCode.Count)
+                    {
+                        <tr class="pgbreak">
+                            <td class="col-md-4" style="padding-top: 7px;">@Model.ChildCode[i].SrNo</td>
+                            @{ i = i + 1;}
+                            @if (i < Model.ChildCode.Count)
+                            {
+                                <td class="col-md-4" style="padding-top: 7px;">@Model.ChildCode[i].SrNo</td>
+                            }
+                            @{ i = i + 1;}
+                            @if (i < Model.ChildCode.Count)
+                            {
+                                <td class="col-md-4" style="padding-top: 7px;">@Model.ChildCode[i].SrNo</td>
+                            }
+                            @{ i = i + 1;}
+                            @if (i < Model.ChildCode.Count)
+                            {
+                                <td class="col-md-4" style="padding-top: 7px;">@Model.ChildCode[i].SrNo</td>
+                            }
+                            @{ i = i + 1;}
+                        </tr>
+                                }
+
+
+                </table>
+            </div>
+                                    }
+                                }
+    <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+        <table style="width:100%;" class="@ViewBag.tbFont">
+            <tr>
+                <td style="width:50%; padding-left:10px;">
+                    @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy  @Model.UserName
+
+                </td>
+                <td style="padding-left:35%">
+                    @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                </td>
+            </tr>
+        </table>
+    </div>
+    @if (ViewBag.scrollprint == null)
+    {
+    <div style="text-align:center">
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+            @TnT.LangResource.GlobalRes.cmnBtnClose
+            <i class="entypo-cancel"></i>
+        </button>
+        @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFUidValidation" })
+    </div>
+    }
+</div>
+
+<script>
+    $(document).on("click", "#btnGenaratePDFUidValidation", function (e) {
+
+        e.preventDefault();
+        var detail;
+        var type = "@Model.Type";
+        if (type == "SSCC")
+        {
+            detail="@Model.SSCC";
+        }
+        else
+        {
+            detail="@Model.UIDCode";
+        }
+        var newUrl = "@Url.Action("genePDUidDetail", "Reports")?detail=" + detail + "&type=" + type;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+</script>

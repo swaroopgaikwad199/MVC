@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"landscape"},{"x":112,"y":55,"type":"label_text","name":"Textbox 1","text":"SAGAR...","textType":"LabelText","fontSize":14,"fontType":"Arial","width":60.6826171875,"height":20}]}

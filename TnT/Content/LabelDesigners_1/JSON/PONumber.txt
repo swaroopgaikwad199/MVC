@@ -1,0 +1,1 @@
+{"elements":[{"lblHeight":"4","lblWidth":"6","DPI":"305","Orientation":"portrait"},{"x":87,"y":81,"type":"label_text","name":"PONumber","text":"PONumber","textType":"LabelText","fontSize":14,"fontType":"Arial","width":71,"height":19}]}

@@ -1,0 +1,574 @@
+﻿@model TnT.Models.Customer.M_Customer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h2>
+   @TnT.LangResource.GlobalRes.EditCustomer
+    <a style="float:right; margin-right:5px;" href='@Url.Action("Index", "Customer")' class="btn btn-danger btn-icon icon-left">
+    @TnT.LangResource.GlobalRes.cmnBtnBackToList
+        <i class="fa fa-reply"></i>
+    </a>
+</h2>
+
+@using (Html.BeginForm("Edit/"+ @Model.Id, "Customer", FormMethod.Post, new { @id = "frmCustomer" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        
+        
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactPerson, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ContactPerson, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactPerson, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control NumbersOnly", @maxlength = "13" } })
+                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Country, (SelectList)ViewBag.Country, new { @class = "form-control", onchange = "Action(this.value);", @id = "Country" })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.stateOrRegion, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.stateOrRegion, (SelectList)ViewBag.StateOrRegion, new { @class = "form-control", @id = "stateOrRegion" })
+                        @Html.ValidationMessageFor(model => model.stateOrRegion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.street1, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.street1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.street1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.street2, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.street2, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.street2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.postalCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.postalCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.postalCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.CompanyCode, new { htmlAttributes = new { @class = "form-control NumbersOnly" } })
+                        @Html.ValidationMessageFor(model => model.CompanyCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.APIKey, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.APIKey, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.APIKey, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.APIUrl, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.APIUrl, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.APIUrl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SenderId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SenderId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SenderId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReceiverId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ReceiverId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ReceiverId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProviderId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ProviderId, new SelectList(ViewBag.Provider, "Id", "Name"), "Select", new { @class = "form-control", @validate = "true" })
+                        @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4"> @TnT.LangResource.GlobalRes.M_VendorProvidingSSCC</label>
+                    <div class="col-md-8" style="padding-top: 7px;">
+                        @Html.EditorFor(model => model.IsSSCC)
+                        @Html.ValidationMessageFor(model => model.IsSSCC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BizLocGLN, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.BizLocGLN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BizLocGLN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BizLocGLN_Ext, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.BizLocGLN_Ext, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BizLocGLN_Ext, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.License, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.License, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.License, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LicenseAgency, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LicenseAgency, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.LicenseAgency, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LicenseState, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LicenseState, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LicenseState, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Host, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Host, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Host, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HostUser, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.HostUser, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.HostUser, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HostPort, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.HostPort, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HostPort, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HostPswd, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.HostPswd, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.HostPswd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.Label("SSCC Ext", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SSCCExt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SSCCExt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.Label("Loos Ext", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LoosExt, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.LoosExt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ToCorpID, TnT.LangResource.GlobalRes.CustomerCreateToCorpId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ToCorpID, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.ToCorpID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FilterValue, TnT.LangResource.GlobalRes.CustomerCreateFilterValue, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.FilterValue, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.ValidationMessageFor(model => model.FilterValue, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnSubmit" value="@TnT.LangResource.GlobalRes.cmnBtnUpdate" class="btn btn-info btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+}
+<script>
+    $(document).ready(function () {
+        debugger;
+        $('#Country').val('@Model.Country');
+        $('#stateOrRegion').val('@Model.stateOrRegion');
+        $("#btnSubmit").click(function () {
+            var CompanyName = $("#CompanyName").val();
+            var ContactPerson = $("#ContactPerson").val();
+            var ContactNo = $("#ContactNo").val();
+            var Email = $("#Email").val();
+            var Address = $("#Address").val();
+            var Country = $("#Country").val();
+            var stateOrRegion = $('#stateOrRegion').val();
+            var LicenseAgency = $('#LicenseAgency').val();
+            var APIUrl = $("#APIUrl").val();
+            var ProviderId = $("#ProviderId").val();
+            var HostPort = $("#HostPort").val();
+            var SSCCExt = $("#SSCCExt").val();
+            var LoosExt = $("#LoosExt").val();
+            var FilterValue = $("#FilterValue").val();
+            var msgPOST = "";
+            if (CompanyName == "") {
+                showMessage("CompanyName", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateCompanyName");
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateCompanyName";
+            } else {
+                clearColor("CompanyName");
+            }
+
+            if (ContactPerson == "") {
+                showMessage("ContactPerson", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactPerson");
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactPerson";
+            } else {
+                clearColor("ContactPerson");
+            }
+
+            if (ContactNo == "") {
+                showMessage("ContactNo", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactNumber");
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateContactNumber";
+            } else {
+                clearColor("ContactNo");
+            }
+
+            if (Email == "") {
+                showMessage("Email", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateEmail");
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateEmail";
+            } else {
+                clearColor("Email");
+            }
+
+            if (Address == "") {
+                showMessage("Address", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateAddress")
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateAddress";
+            } else {
+                clearColor("Address");
+            }
+       
+            if (Country == "") {
+                showMessage("Country", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateCountry")
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateCountry";
+            } else {
+                clearColor("Country");
+            }
+
+            if (stateOrRegion == 0) {
+                showMessage("stateOrRegion", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateState")
+                msgPOST += "@TnT.LangResource.GlobalRes.showMsgCustomerCreateState";
+            } else {
+                clearColor("stateOrRegion");
+            }
+
+            if (LicenseAgency == "") {
+                showMessage("LicenseAgency", "@TnT.LangResource.GlobalRes.showMsgCustomerCreateLicenseAgency")
+                msgPOST +="@TnT.LangResource.GlobalRes.showMsgCustomerCreateLicenseAgency";
+            } else {
+                clearColor("LicenseAgency");
+            }
+
+
+            if (APIUrl == "") {
+                showMessage("APIUrl", "@TnT.LangResource.GlobalRes.CustomerShowMsgProvideAPI")
+                msgPOST += "@TnT.LangResource.GlobalRes.CustomerShowMsgProvideAPI";
+            } else {
+                clearColor("APIUrl");
+            }
+
+            if (ProviderId == "") {
+                showMessage("ProviderId", "@TnT.LangResource.GlobalRes.CustomerShwmsgSelectProvider")
+                msgPOST += "@TnT.LangResource.GlobalRes.CustomerShwmsgSelectProvider";
+            } else {
+                clearColor("ProviderId");
+            }
+            if (HostPort == "") {
+                showMessage("HostPort", "@TnT.LangResource.GlobalRes.CustomerShwmsgProvideSFTPPort")
+                msgPOST += "@TnT.LangResource.GlobalRes.CustomerShwmsgProvideSFTPPort";
+            } else {
+                clearColor("HostPort");
+            }
+            if (FilterValue == "") {
+                showMessage("FilterValue", "@TnT.LangResource.GlobalRes.CustomerShwmsgProvideFilterVal")
+                msgPOST += "@TnT.LangResource.GlobalRes.CustomerShwmsgProvideFilterVal";
+            } else {
+                clearColor("FilterValue");
+            }
+            //if (SSCCExt == "") {
+            //    showMessage("SSCCExt", "Please Provide SSCC Extension")
+            //    msgPOST += "Please Provide SFTP Port";
+            //} else {
+            //    clearColor("SSCCExt");
+            //}
+            //if (LoosExt == "") {
+            //    showMessage("LoosExt", "Please Provide Loose Extension")
+            //    msgPOST += "Please Provide Loose Extension";
+            //} else {
+            //    clearColor("LoosExt");
+            //}
+            if (msgPOST == "") {
+                formSubmit();
+            }
+        });
+
+        function showMessage(elementID, msg) {
+            toastr.warning(msg);
+            $("#" + elementID).val("");
+            $("#" + elementID).css("border", "red 1px solid");
+            return false;
+        }
+        function clearColor(elementID) {
+            $("#" + elementID).css("border", "green 1px solid");
+        }
+
+        $(".NumbersOnly").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+
+    });
+
+    function formSubmit() {
+        document.getElementById("frmCustomer").submit();
+    }
+    $("#Email").blur(function () {
+        var customerEmail = $("#Email").val();
+
+        if (!isValidEmailAddress(customerEmail)) {
+            toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreatevalidemail");
+            $("#Email").val("");
+            $("#Email").css("border", "red 1px solid");
+        } else {
+            $("#Email").css("border", "green 1px solid");
+        }
+
+    });
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    };
+    function Action(ConID) {
+
+        $.ajax({
+            url: '@Url.Action("getStateOrRegion", "Customer")',
+            type: "POST",
+            dataType: 'json',
+            data: { "Conid": ConID },
+            success: function (data) {
+
+                if (data != null) {
+                    debugger;
+                    $("#stateOrRegion").find("option").remove();
+                    var optionhtml1 = '<option value="' +
+               0 + '">' + "--Select State--" + '</option>';
+                    $("#stateOrRegion").append(optionhtml1);
+
+                    //$.each(data, function (i) {
+
+                    for (i = 0; i < data.length; i++) {
+
+                        var optionhtml = '<option value="' +
+                    data[i].ID + '">' + data[i].StateName + '</option>';
+                        $("#stateOrRegion").append(optionhtml);
+                    }
+                    //});
+                }
+            },
+            error: function (data) {
+
+                toastr.warning("@TnT.LangResource.GlobalRes.toastrCustomerCreateError");
+
+            }
+        });
+    }
+</script>

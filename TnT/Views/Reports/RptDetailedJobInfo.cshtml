@@ -1,0 +1,208 @@
+﻿@model TnT.Models.Reports.Jobs.RptDetailedJobInfoViewModel
+
+<div class="container" id="rptLoaded">
+    <style>
+        /*@@media print {*/
+        .scrollprint {
+            overflow-y: inherit;
+            max-height: none;
+        }
+        /*}*/
+        .tbFont {
+            font-size: 9px;
+        }
+
+        .tdWidth {
+            width: 30%;
+        }
+
+        .tdWidthBig {
+            width: 40%;
+        }
+
+        .tblWidth {
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="@Server.MapPath("~/Content/assets/css/bootstrap.css")">
+    @if (Model.ProductionSummary.Count() == 0)
+    {
+        <h3 style="text-align:center; padding-bottom: 50px;">@TnT.LangResource.GlobalRes.RptJObPartialViewNoDataAvailble</h3>
+    }
+    else
+    {
+        <div class="row" style="border: 1px solid; margin:10px;">
+            <div class="col-md-12">
+                <h2 style="text-align:center;">@Html.DisplayFor(model => model.CompanyName)</h2>
+                <p style="text-align:center;padding-bottom: 5px;">@Html.DisplayFor(model => model.Address)</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="text-align:center;"><b>@TnT.LangResource.GlobalRes.RptDetailBatchInformation</b></h4>
+        </div>
+
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid; margin:10px;font-family: 'Courier New';">
+            <br />
+            <table style="width: 100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td class="col-md-4 @ViewBag.tdWidthBig">
+                        <label>@TnT.LangResource.GlobalRes.ReportsJobsValuesProductName:</label><b>@Html.DisplayFor(model => model.jbDetails.JD_ProdName)</b><br />
+                        <label>@TnT.LangResource.GlobalRes.TracelinkExportFilesBatchNo:</label><b> @Html.DisplayFor(model => model.Job.BatchNo)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptcmnMFGDate:</label><b>@Html.DisplayFor(model => model.Job.MfgDate)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptcmnEXPDate:</label><b> @Html.DisplayFor(model => model.Job.ExpDate)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptcmnJobType:</label><b>@Html.DisplayFor(model => model.jobtype)</b><br />
+
+</td>
+                    <td class="col-md-4 @ViewBag.tdWidth">
+                        <br />
+                        <label>@TnT.LangResource.GlobalRes.JobsBatchQty:</label><b>@Html.DisplayFor(model => model.Job.Quantity)</b><br />
+                        <label>@TnT.LangResource.GlobalRes.RptcmnSurplusQty:</label><b>@Html.DisplayFor(model => model.Job.SurPlusQty)</b><br />
+                        <label>Extra Uid Count:</label><b>@Html.DisplayFor(model => model.ExtraCount)</b><br />
+                        <!---<label>No Read:</label>@Html.DisplayFor(model => model.NoReadCount)<br />-->
+                        <label>@TnT.LangResource.GlobalRes.RptcmnCreatedBy :</label><b>@Html.DisplayFor(model => model.CreatedBy)</b> <br />
+                        <label>@TnT.LangResource.GlobalRes.RptcmnVerifiedBy:</label><b>@Html.DisplayFor(model => model.VerifiedBy)</b><br />
+                        <label>&nbsp;</label><br />
+</td>
+                    <td class="col-md-4 @ViewBag.tdWidth">
+                        <label>@TnT.LangResource.GlobalRes.RptcmnStatus :</label><b> @Html.DisplayFor(model => model.Status)</b><br />
+    <label>@TnT.LangResource.GlobalRes.RptAutoBatchClose :</label><b><label id="lblDecklvl"> @Html.Raw((Model.Job.AutomaticBatchCloser) ? "Yes" : "No")</label></b><br />
+    <label>@TnT.LangResource.GlobalRes.ProductDescription :</label> <b>   @Html.DisplayFor(model => model.Product.Description)</b> <br />
+    <label>@TnT.LangResource.GlobalRes.cmnStartTime :</label><b> @Html.DisplayFor(model => model.Job.JobStartTime)</b><br />
+    <label>@TnT.LangResource.GlobalRes.cmnEndTime :</label><b> @Html.DisplayFor(model => model.Job.JobEndTime)</b><br />
+</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid; margin:10px; padding-top:5px; padding-bottom:5px;font-family: 'Courier New'; ">
+            <div class="col-lg-12 @ViewBag.tbFont">
+                <table style="width: 100%;" class="@ViewBag.tbFont">
+                    <tr>
+                        <td class="col-lg-3">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLocationCode : @Html.DisplayFor(m => m.LocationDetails.LocationCode)</td>
+                        <td class="col-lg-3">@TnT.LangResource.GlobalRes.ReportsJobsFiltersDivisionCode : @Html.DisplayFor(m => m.LocationDetails.DivisionCode)</td>
+                        <td class="col-lg-3">@TnT.LangResource.GlobalRes.ReportsJobsFiltersPlantCode: @Html.DisplayFor(m => m.LocationDetails.PlantCode)</td>
+                        <td class="col-lg-3">@TnT.LangResource.GlobalRes.ReportsJobsFiltersLineCode : @Html.DisplayFor(m => m.LocationDetails.LineCode)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row @ViewBag.tbFont rptBox @ViewBag.rptPdfBox" style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+            <table class="table @ViewBag.tbFont" style="text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnDeck</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnGood</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptDetailJobInfoLineRej</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptDetailJobInfoOtherRej</td>
+					<td style="text-align: center;">@TnT.LangResource.GlobalRes.RptDetailJobInfoTotalRej</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnTotalCartons</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptJobBatchInfoDecomm</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnQASample</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnChallengeTest </td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptDetailJobInfoNU </td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptDetailJobInfoTotalUID</td>
+                    <td style="text-align: center;">@TnT.LangResource.GlobalRes.RptcmnPerofRejection</td>
+                </tr>
+                <tbody>
+                    @{
+                        int i = 0;
+                        int NRC = 0;
+                        }
+                    @foreach (var item in Model.ProductionSummary)
+                    {
+
+                        <tr>
+                            <td>@item.Deck</td>
+                            <td>@item.GoodCnt</td>
+                            <td>
+
+                                @item.RejectedCnt
+
+                            </td>
+                            <td>
+                            @if (i == 0)
+                            {
+                            @Html.DisplayFor(model => model.NoReadCount)
+                                NRC = Model.NoReadCount.AsInt();
+                            }else
+                            {
+                                NRC = 0;
+                                 @NRC
+                            }
+                            </td>
+							<td>@{
+                                decimal TotalRejectionCount = item.RejectedCnt + NRC;
+                                }   
+                            @TotalRejectionCount
+                            </td>
+                            <td>@{
+                                decimal TotalUsedCount = item.Total + NRC;
+                                }   
+                            @TotalUsedCount
+                            </td>
+                            <td>@(item.ChallengeTest + item.QASample + item.Decommisioned)</td>
+                            <td>@item.QASample</td>
+                            <td>@item.ChallengeTest</td>
+                            <td>@item.NRNU</td>
+                            <td>@(item.NRNU+ item.ChallengeTest+ item.QASample+ item.Decommisioned + TotalUsedCount)</td>
+                            <td>
+                               
+								@{
+                                    string percent = "";
+                                    if (TotalRejectionCount != 0 || TotalUsedCount != 0)
+                                    {
+                                        percent = Convert.ToDecimal((TotalRejectionCount / TotalUsedCount) * 100).ToString("0.00");
+                                    }
+                                    else
+                                    {
+                                        percent = "0";
+                                    }
+                                }
+                                @percent
+								
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div style="border: 1px solid;margin: 10px;padding-top: 9px;font-family: 'Courier New';">
+            <table style="width:100%;" class="@ViewBag.tbFont">
+                <tr>
+                    <td style="width:50%; padding-left:10px;">
+                        @TnT.LangResource.GlobalRes.RptAuditTrailsGenratedBy @Model.UserName
+
+                    </td>
+                    <td style="padding-left:35%">
+                        @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")
+                    </td>
+                </tr>
+            </table>
+        </div>
+        if (@ViewBag.scrollprint == null)
+        {
+            <div style="text-align:center">
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-icon icon-left" id="btnClose" style="height:28px;">
+                    @TnT.LangResource.GlobalRes.cmnBtnClose
+                    <i class="entypo-cancel"></i>
+                </button>
+                @Html.ActionLink(TnT.LangResource.GlobalRes.RptGeneratePdf, "", "", null, new { @class = "btn btn-blue", @id = "btnGenaratePDFDetailJobInfo" })
+            </div>
+        }
+    }
+</div>
+
+<script>
+    $(document).on("click", "#btnGenaratePDFDetailJobInfo", function (e) {
+
+        e.preventDefault();
+
+
+        var newUrl = "@Url.Action("getDetailedJobInfoPdf", "Reports")?JID=" +@Model.Job.JID;
+        // you can do whatever you want with the new url
+        window.location.href = newUrl;
+
+    });
+
+</script>
